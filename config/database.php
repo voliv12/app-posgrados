@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'Servidor: db4free.net:3306';
+$db['default']['hostname'] = 'db4free.net:3306';
 $db['default']['username'] = 'icsuv';
 $db['default']['password'] = 'ccicsroot';
 $db['default']['database'] = 'posgrados';
