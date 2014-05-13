@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'db4free.net:3306';
-$db['default']['username'] = 'icsuv';
-$db['default']['password'] = 'ccicsroot';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'vogroot';
 $db['default']['database'] = 'posgrados';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
