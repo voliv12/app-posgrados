@@ -41,9 +41,10 @@
             </a>
             <ul class="dropdown-menu">
               <li><a><i class="icon-barcode"> </i> <?php echo "Matricula ".$this->session->userdata('matricula');?></a></li>
-              <li><a href="Alumnos/registroAlumno"><i class="icon-refresh"></i> Actualizar Información</a></li>
+              <li class="divider"></li>
+              <li><a href="Alumnos/registroAlumno"><i class="icon-pencil"></i> Actualizar Información</a></li>
               <li><a href="#"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
-              <li><a href="Alumno"><i class="icon-list-alt"></i> Curriculum Viate Único</a></li>
+              <li><a href="Alumno"><i class="icon-download-alt"></i> Descargar CVU</a></li>
               <li class="divider"></li>
               <li><a href="salir"><i class="icon-off"></i> Cerrar sesión</a></li>
             </ul>
