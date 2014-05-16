@@ -83,7 +83,7 @@
       <h3 class="muted"> &nbsp; </h3>
     <div class="container">
 
-      <form class="form-signin" action="login/validar_usuario" method="POST">
+      <form class="form-signin" action="index.php/login/validar_usuario" method="POST">
 
           <h4 class="form-signin-heading">Autentificación</h4>
         <div class="radio">
