@@ -6,16 +6,13 @@ Class Salir extends CI_controller{
     {
         parent::__construct();
         /* Standard Libraries */
-        $this->load->helper('URL');
+        $this->load->helper('url');
     }
 
     function index()
     {
         $this->session->sess_destroy();
-        //$this->load->helper('cookie');
         redirect('login');
-        //header("Location: salir");
-		//die();
     }
 }
 
