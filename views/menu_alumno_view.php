@@ -10,7 +10,7 @@
     <div class="row">
         <p>
         <div class="span6"><a href="#" class="btn btn-block"><i class="icon-user"></i> Artículos</a></div>
-        <div class="span6"><a href="libro/registroLibro" class="btn btn-block"><i class="icon-tasks"></i> Libros</a></div>
+        <div class="span6"><a href="cvu_alumnos/libro/registroLibro" class="btn btn-block"><i class="icon-tasks"></i> Libros</a></div>
         </p>
     </div>
     <div class="row">

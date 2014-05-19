@@ -23,7 +23,7 @@ class Alumno extends CI_Controller {
         {
             $datos_plantilla['titulo'] = "Información de Posgrados";
             $datos_plantilla['contenido'] = $this->load->view('menu_alumno_view',' ',TRUE);
-            $this->load->view('plantilla_view', $datos_plantilla);
+            $this->load->view('plantilla_alumnos', $datos_plantilla);
 
         }else
         {

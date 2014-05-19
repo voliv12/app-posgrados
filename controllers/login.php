@@ -51,10 +51,10 @@ class Login extends CI_Controller {
                     {
                         $nombre = $row->NombreA." ".$row->ApellidoPA;
                         $newdata = array(
-                                         'matricula' => $row->Matricula,
-                                         'nombre'    => $nombre,
+                                         'matricula'    => $row->Matricula,
+                                         'nombre'       => $nombre,
                                          'tipo_usuario' => $tipo_usuario,
-                                         'logged_in' => TRUE
+                                         'logged_in'    => TRUE
                                         );
                         $this->session->set_userdata($newdata);
 
@@ -63,6 +63,25 @@ class Login extends CI_Controller {
                 }elseif($tipo_usuario == "personal")
                 {
                     $row = $this->usuarios_model->buscar_tabla_personal($usuario, $password);
+                    if(!$row)
+                    {
+                        $datos['mensaje'] = "El usuario ".$datos['usuario'] = $usuario." no está registrado o la contraseña es incorrecta. Intentelo de nuevo!";
+                        $datos_plantilla['contenido'] = $this->load->view('success_login', $datos, true);
+                        $this->load->view('login_view', $datos_plantilla);
+                    }else
+                    {
+                        //$nombre = $row->NombreA." ".$row->ApellidoPA;
+                        $newdata = array(
+                                         'numPersonal'  => $row->NumPersonal,
+                                         'nombre'       => $row->nombre,
+                                         'tipo_usuario' => $tipo_usuario,
+                                         'perfil'       => $row->perfil,
+                                         'logged_in'    => TRUE
+                                        );
+                        $this->session->set_userdata($newdata);
+
+                        redirect('alumno');
+                    }
                 }
             }
     }

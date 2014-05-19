@@ -9,17 +9,18 @@ foreach($css_files as $file): ?>
 <?php foreach($js_files as $file): ?>
 	<script src="<?php echo $file; ?>"></script>
 <?php endforeach; ?>
-<style type='text/css'>
 
-</style>
 </head>
 
 <?php echo validation_errors(); ?>
 
-<div class="container well">
+<div class="container-fluid">
         <h3><a><?php echo $titulo_tabla; ?></a></h3>
 </div>
-<h5><a href="alumno">Regresar a Menú</a></h5>
+
+<ol class="breadcrumb">
+  <li><a href="alumno">Menú principal</a></li>
+</ol>
 
     <div>
 		<?php echo $output; ?>
