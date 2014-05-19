@@ -73,14 +73,25 @@ class Login extends CI_Controller {
                         //$nombre = $row->NombreA." ".$row->ApellidoPA;
                         $newdata = array(
                                          'numPersonal'  => $row->NumPersonal,
-                                         'nombre'       => $row->nombre,
+                                         'nombre'       => $row->Nombre,
                                          'tipo_usuario' => $tipo_usuario,
                                          'perfil'       => $row->perfil,
                                          'logged_in'    => TRUE
                                         );
                         $this->session->set_userdata($newdata);
 
-                        redirect('alumno');
+                        if($row->perfil == "Administrador")
+                        {
+                            redirect('administrador');
+                        }
+                        elseif($row->perfil == "Administrativo")
+                        {
+                            redirect('Administrativo');
+                        }else
+                        {
+                            redirect('Directivo');
+                        }
+
                     }
                 }
             }
