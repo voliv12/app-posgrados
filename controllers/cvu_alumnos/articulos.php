@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Libro extends CI_Controller {
+class Articulos extends CI_Controller {
 
     function __construct()
     {
@@ -14,17 +14,18 @@ class Libro extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroLibro()
+    function registroArticulo()
     {   $crud = new grocery_CRUD();
         $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('libros');
-        $crud->set_subject('Libros');
+        $crud->set_table('articulos');
+        $crud->set_subject('Artículo');
     
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'NumISBN' , 'TituloLib','AutorLib','VolumenLib');
-        $crud->display_as('NumISBN','Número ISBN')->display_as('IdentLib','Indentificador Libro')->display_as('VolumenLib', 'Volumen')
-             ->display_as('EditoriaLib','Editorial')->display_as('NumPagLib','N°. Páginas')->display_as('AutorLib', 'Autor/es')
-             ->display_as('TituloLib','Titulo del Libro')->display_as('AnioLib','Año de Publicación')->display_as('EdicionLib', 'Edición')->display_as('DocLibro', 'Archivo');
+        $crud->columns( 'AnioPublica','Volumen','Titulio','Autor');
+        $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
+             ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
+             ->display_as('Autor','Autor/es')->display_as('DocArt','Archivo');
+
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
         $output = $crud->render();
 

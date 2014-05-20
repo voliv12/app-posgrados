@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Libro extends CI_Controller {
+class Certificacion extends CI_Controller {
 
     function __construct()
     {
@@ -14,17 +14,18 @@ class Libro extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroLibro()
+    function registroCertificacion()
     {   $crud = new grocery_CRUD();
         $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('libros');
-        $crud->set_subject('Libros');
+        $crud->set_table('certifimedica');
+        $crud->set_subject('Certificaciones Medicas');
     
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'NumISBN' , 'TituloLib','AutorLib','VolumenLib');
-        $crud->display_as('NumISBN','Número ISBN')->display_as('IdentLib','Indentificador Libro')->display_as('VolumenLib', 'Volumen')
-             ->display_as('EditoriaLib','Editorial')->display_as('NumPagLib','N°. Páginas')->display_as('AutorLib', 'Autor/es')
-             ->display_as('TituloLib','Titulo del Libro')->display_as('AnioLib','Año de Publicación')->display_as('EdicionLib', 'Edición')->display_as('DocLibro', 'Archivo');
+        $crud->columns( 'NumFolio','Referencia','Especialidad','TipoCert');
+        $crud->display_as('NumFolio','No. de folio por certificación')->display_as('Referencia','Otra Referencia')->display_as('CamRef','')
+             ->display_as('Especialidad','Especialidad')->display_as('consejo','Consejo que Otorga la Certificación')->display_as('finicio','Fecha de Inicio')
+             ->display_as('ffin','Fecha de Finalización')->display_as('TipoCert','Tipo')->display_as('DocCertifiMedi','Archivo');
+
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
         $output = $crud->render();
 
