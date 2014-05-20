@@ -9,19 +9,19 @@
 
     <div class="row">
         <p>
-        <div class="span6"><a href="#" class="btn btn-block"><i class="icon-user"></i> Artículos</a></div>
+        <div class="span6"><a href="cvu_alumnos/articulos/registroArticulo" class="btn btn-block"><i class="icon-user"></i> Artículos</a></div>
         <div class="span6"><a href="cvu_alumnos/libro/registroLibro" class="btn btn-block"><i class="icon-tasks"></i> Libros</a></div>
         </p>
     </div>
     <div class="row">
         <p>
-        <div class="span6"><a href="#" class="btn btn-block"><i class="icon-calendar"></i> Capítulos de Libro</a></div>
+        <div class="span6"><a href="cvu_alumnos/capitulos/registroCapitulos" class="btn btn-block"><i class="icon-calendar"></i> Capítulos de Libro</a></div>
         <div class="span6"><a href="#" class="btn btn-block"><i class="icon-file"></i> </a></div>
     </p>
     </div>
     <div class="row">
         <p>
-        <div class="span6"><a href="#" class="btn btn-block"><i class="icon-th-large"></i> Certificación médica</a></div>
+        <div class="span6"><a href="cvu_alumnos/Certificacion/registroCertificacion" class="btn btn-block"><i class="icon-th-large"></i> Certificación médica</a></div>
         <div class="span6"><a href="#" class="btn btn-block"><i class="icon-book"></i> Congresos</a></div>
     </p>
     </div>
