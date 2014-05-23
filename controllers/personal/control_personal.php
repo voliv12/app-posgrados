@@ -19,6 +19,10 @@ class Control_personal extends CI_Controller {
         $crud = new grocery_CRUD();
         $crud->set_table('personal');
         $crud->set_subject('Personal');
+
+        $crud->callback_before_insert(array($this,'encrypt_password_callback'));
+        $crud->callback_before_update(array($this,'encrypt_password_callback'));
+
         $output = $crud->render();
 
         $this->_example_output($output);
@@ -32,4 +36,14 @@ class Control_personal extends CI_Controller {
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
     }
+
+    function encrypt_password_callback($post_array)
+    {
+        $this->load->library('encrypt');
+
+        $post_array['contrasenia'] = $this->encrypt->sha1($post_array['contrasenia']);
+
+        return $post_array;
+    }
+
 }
