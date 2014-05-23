@@ -21,7 +21,7 @@ class Datos_personales extends CI_Controller {
         $crud->set_table('alumno');
         $crud->set_subject('Alumno');
         $crud-> unset_edit_fields ( 'Matricula' , 'NombreA' , 'ApellidoPA','ApellidoMA', 'Contrasenia' ) ;
-        $crud->columns( 'NombreA' , 'ApellidoPA','ApellidoMA','curp','rfc','Direccion','Telefono');
+        $crud->columns( 'NombreA' , 'ApellidoPA','ApellidoMA','curp','rfc','Correo','Telefono');
         $crud->display_as('NombreA','Nombre')->display_as('ApellidoPA','Apellido Paterno')->display_as('ApellidoMA','Apellido Materno')->display_as('curp','CURP')->display_as('rfc','RFC')->display_as('Direccion','Dirección')->display_as('Telefono', 'Teléfono');
         $crud-> unset_add ( ) ;
         $crud->unset_delete();
@@ -35,6 +35,7 @@ class Datos_personales extends CI_Controller {
 
     {
         $output->titulo_tabla = "Datos personales";
+        $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);
     }

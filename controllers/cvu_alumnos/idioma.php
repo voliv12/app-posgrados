@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Capitulos extends CI_Controller {
+class Idioma extends CI_Controller {
 
     function __construct()
     {
@@ -14,18 +14,15 @@ class Capitulos extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroCapitulos()
+    function registroIdioma()
     {   $crud = new grocery_CRUD();
         $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('caplibros');
-        $crud->set_subject('Capitulos de Libros');
-    
+        $crud->set_table('idioma');
+        $crud->set_subject('Idioma');
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'TituloLibCP','TituloCap','Anio','Autor');
-        $crud->display_as('TituloCap','Titulo del Capitulo')->display_as('Anio','Año de Publicación')->display_as('TituloLibCP','Titulo del Libro')
-             ->display_as('EditoresCL','Editores')->display_as('EditorialCL','Editorial')->display_as('VolumCL','Volumen')
-             ->display_as('NumPagCL','N° Páginas')->display_as('NumCitas','N° Citas')->display_as('AutorCL','Autor/es')
-             ->display_as('Resumen','Resumen')->display_as('DocCapLibro','Archivo');
+        $crud->columns( 'Idioma','tipoI','NivelConv','NivelLec','NivelEsc');
+        $crud->display_as('Idioma','Idioma')->display_as('Descripcion','Descripción')->display_as('tipoI','Tipo')->display_as('NivelConv','Nivel de Conversación')
+             ->display_as('NivelLec','Nivel de Lectura')->display_as('NivelEsc','Nivel de Escritura')->display_as('FechaEvalu','Fecha de Evaluación')->display_as('ExamDoc','Examen/Documento Probatorio')->display_as('Puntos','Puntos/Porcentaje')->display_as('DocIdioma','Archivo');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
         $output = $crud->render();
@@ -36,7 +33,7 @@ class Capitulos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Capitulos de Libros";
+        $output->titulo_tabla = "Registro de Idioma";
         $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);

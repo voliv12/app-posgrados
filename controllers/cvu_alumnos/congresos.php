@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Capitulos extends CI_Controller {
+class Congresos extends CI_Controller {
 
     function __construct()
     {
@@ -14,18 +14,17 @@ class Capitulos extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroCapitulos()
+    function registroCongreso()
     {   $crud = new grocery_CRUD();
         $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('caplibros');
-        $crud->set_subject('Capitulos de Libros');
+        $crud->set_table('congresos');
+        $crud->set_subject('Congreso');
     
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'TituloLibCP','TituloCap','Anio','Autor');
-        $crud->display_as('TituloCap','Titulo del Capitulo')->display_as('Anio','Año de Publicación')->display_as('TituloLibCP','Titulo del Libro')
-             ->display_as('EditoresCL','Editores')->display_as('EditorialCL','Editorial')->display_as('VolumCL','Volumen')
-             ->display_as('NumPagCL','N° Páginas')->display_as('NumCitas','N° Citas')->display_as('AutorCL','Autor/es')
-             ->display_as('Resumen','Resumen')->display_as('DocCapLibro','Archivo');
+        $crud->columns( 'Titulo_trab','NomCongreso','AutoresCon','AnioCon');
+        $crud->display_as('Titulo_trab','Titulo del Trabajo')->display_as('NomCongreso','Nombre del Congreso')->display_as('AutoresCon','Autor/es')
+             ->display_as('TipoTrabajo','Tipo de Trabajo')->display_as('tipo','Tipo')->display_as('Pais','País')
+             ->display_as('AnioCon','Año')->display_as('DocCongre','Archivo');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
         $output = $crud->render();
@@ -36,7 +35,7 @@ class Capitulos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Capitulos de Libros";
+        $output->titulo_tabla = "Registro de Participación en Congresos";
         $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);

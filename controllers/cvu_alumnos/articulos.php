@@ -21,10 +21,10 @@ class Articulos extends CI_Controller {
         $crud->set_subject('Artículo');
     
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'AnioPublica','Volumen','Titulio','Autor');
+        $crud->columns( 'AnioPublica','Volumen','Titulio','AutorArt');
         $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
              ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
-             ->display_as('Autor','Autor/es')->display_as('DocArt','Archivo');
+             ->display_as('AutorArt','Autor/es')->display_as('DocArt','Archivo');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
         $output = $crud->render();
@@ -35,7 +35,8 @@ class Articulos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Libros";
+        $output->titulo_tabla = "Registro de Articulos Públicados";
+        $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);
     }
