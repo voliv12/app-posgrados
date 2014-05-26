@@ -24,9 +24,10 @@ class Certificacion extends CI_Controller {
         $crud->columns( 'NumFolio','Referencia','Especialidad','TipoCert');
         $crud->display_as('NumFolio','No. de folio por certificación')->display_as('Referencia','Otra Referencia')->display_as('CamRef','')
              ->display_as('Especialidad','Especialidad')->display_as('consejo','Consejo que Otorga la Certificación')->display_as('finicio','Fecha de Inicio')
-             ->display_as('ffin','Fecha de Finalización')->display_as('TipoCert','Tipo')->display_as('DocCertifiMedi','Archivo');
+             ->display_as('ffin','Fecha de Finalización')->display_as('TipoCert','Tipo')->display_as('DocCertifiMedi','Doc. comprobatorio');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
+        $crud->set_field_upload('DocCertifiMedi','assets/uploads/alumnos/'.$this->matricula);
         $output = $crud->render();
 
         $this->_example_output($output);

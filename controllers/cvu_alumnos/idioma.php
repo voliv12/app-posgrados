@@ -22,9 +22,10 @@ class Idioma extends CI_Controller {
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
         $crud->columns( 'Idioma','tipoI','NivelConv','NivelLec','NivelEsc');
         $crud->display_as('Idioma','Idioma')->display_as('Descripcion','Descripción')->display_as('tipoI','Tipo')->display_as('NivelConv','Nivel de Conversación')
-             ->display_as('NivelLec','Nivel de Lectura')->display_as('NivelEsc','Nivel de Escritura')->display_as('FechaEvalu','Fecha de Evaluación')->display_as('ExamDoc','Examen/Documento Probatorio')->display_as('Puntos','Puntos/Porcentaje')->display_as('DocIdioma','Archivo');
+             ->display_as('NivelLec','Nivel de Lectura')->display_as('NivelEsc','Nivel de Escritura')->display_as('FechaEvalu','Fecha de Evaluación')->display_as('ExamDoc','Examen/Documento Probatorio')->display_as('Puntos','Puntos/Porcentaje')->display_as('DocIdioma','Doc. comprobatorio');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
+        $crud->set_field_upload('DocIdioma','assets/uploads/alumnos/'.$this->matricula);
         $output = $crud->render();
 
         $this->_example_output($output);
