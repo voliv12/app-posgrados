@@ -16,17 +16,22 @@ class Control_alumnos extends CI_Controller {
 
     function registrar_alumno()
     {
-        $crud = new grocery_CRUD();
-        $crud->set_table('alumno');
-        $crud->set_subject('Alumno');
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('alumno');
+            $crud->set_subject('Alumno');
 
-        $crud->callback_before_insert(array($this,'encrypt_password_callback'));
-        $crud->callback_before_update(array($this,'encrypt_password_callback'));
-        $crud->callback_after_insert(array($this, 'crea_directorio'));
+            $crud->callback_before_insert(array($this,'encrypt_password_callback'));
+            $crud->callback_before_update(array($this,'encrypt_password_callback'));
+            $crud->callback_after_insert(array($this, 'crea_directorio'));
 
-        $output = $crud->render();
+            $output = $crud->render();
 
-        $this->_example_output($output);
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
     }
 
     function _example_output($output = null)

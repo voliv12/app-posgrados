@@ -16,16 +16,21 @@ class Control_personal extends CI_Controller {
 
     function registrar_personal()
     {
-        $crud = new grocery_CRUD();
-        $crud->set_table('personal');
-        $crud->set_subject('Personal');
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('personal');
+            $crud->set_subject('Personal');
 
-        $crud->callback_before_insert(array($this,'encrypt_password_callback'));
-        $crud->callback_before_update(array($this,'encrypt_password_callback'));
+            $crud->callback_before_insert(array($this,'encrypt_password_callback'));
+            $crud->callback_before_update(array($this,'encrypt_password_callback'));
 
-        $output = $crud->render();
+            $output = $crud->render();
 
-        $this->_example_output($output);
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
     }
 
     function _example_output($output = null)
