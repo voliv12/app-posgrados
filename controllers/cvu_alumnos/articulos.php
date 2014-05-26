@@ -21,12 +21,13 @@ class Articulos extends CI_Controller {
         $crud->set_subject('Artículo');
     
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'AnioPublica','Volumen','Titulio','AutorArt');
+        $crud->columns( 'AnioPublica','Volumen','Titulio','AutorArt','DocArt');
         $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
              ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
-             ->display_as('AutorArt','Autor/es')->display_as('DocArt','Archivo');
+             ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
+        $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
         $output = $crud->render();
 
         $this->_example_output($output);

@@ -25,9 +25,10 @@ class Proyecto extends CI_Controller {
         $crud->display_as('TipoProyecto','Tipo de Proyecto')->display_as('PFinicio','Fecha de Inicio')->display_as('PFfin','Fecha de Finalización')
              ->display_as('TituloProyecto','Titulo del Proyecto')->display_as('PSector','Sector')
              ->display_as('POrganizacion','Organización')->display_as('OtrasInstituciones','Otras Instituciones')->display_as('Investigadores','Investigadores Participantes')
-             ->display_as('BecariosParticipantes','Becarios Participantes')->display_as('ProductoFinal','Principales Logros/Producto Final Obtenido')->display_as('DocProyect','Archivo');
+             ->display_as('BecariosParticipantes','Becarios Participantes')->display_as('ProductoFinal','Principales Logros/Producto Final Obtenido')->display_as('DocProyect','Doc. comprobatorio');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
+        $crud->set_field_upload('DocProyect','assets/uploads/alumnos/'.$this->matricula);
         $output = $crud->render();
 
         $this->_example_output($output);

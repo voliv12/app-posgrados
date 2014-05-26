@@ -22,9 +22,10 @@ class Estancias extends CI_Controller {
         $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
         $crud->columns( 'idCatalogoDivulgacion','Dirigido','Titulo','Dependencia');
         $crud->display_as('Sector','Sector')->display_as('Organizacion','Organización')->display_as('EFinicio','Fecha de Inicio')->display_as('Logros','Principales Logros')
-             ->display_as('EFfin','Fechade Finalización')->display_as('EPais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Archivo');
+             ->display_as('EFfin','Fechade Finalización')->display_as('EPais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Doc. comprobatorio');
 
         $crud-> unset_edit_fields ( 'Alumno_Matricula');
+        $crud->set_field_upload('DocEstancia','assets/uploads/alumnos/'.$this->matricula);
         $output = $crud->render();
 
         $this->_example_output($output);
