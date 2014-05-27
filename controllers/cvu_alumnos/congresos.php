@@ -15,22 +15,31 @@ class Congresos extends CI_Controller {
     }
 
     function registroCongreso()
-    {   $crud = new grocery_CRUD();
-        $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('congresos');
-        $crud->set_subject('Congreso');
-    
-        $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'Titulo_trab','NomCongreso','AutoresCon','AnioCon');
-        $crud->display_as('Titulo_trab','Titulo del Trabajo')->display_as('NomCongreso','Nombre del Congreso')->display_as('AutoresCon','Autor/es')
-             ->display_as('TipoTrabajo','Tipo de Trabajo')->display_as('tipo','Tipo')->display_as('Pais','País')
-             ->display_as('AnioCon','Año')->display_as('DocCongre','Doc. comprobatorio');
+    {   
+         if ($this->session->userdata('logged_in'))
+        {
 
-        $crud-> unset_edit_fields ( 'Alumno_Matricula');
-        $crud->set_field_upload('DocCongre','assets/uploads/alumnos/'.$this->matricula);
-        $output = $crud->render();
+                $crud = new grocery_CRUD();
+                $crud->where('Alumno_Matricula', $this->matricula);
+                $crud->set_table('congresos');
+                $crud->set_subject('Congreso');
+            
+                $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+                $crud->columns( 'Titulo_trab','NomCongreso','AutoresCon','AnioCon','DocCongre');
+                $crud->display_as('Titulo_trab','Titulo del Trabajo')->display_as('NomCongreso','Nombre del Congreso')->display_as('AutoresCon','Autor/es')
+                     ->display_as('TipoTrabajo','Tipo de Trabajo')->display_as('tipo','Tipo')->display_as('Pais','País')
+                     ->display_as('AnioCon','Año')->display_as('DocCongre','Doc. comprobatorio');
 
-        $this->_example_output($output);
+                $crud-> unset_edit_fields ( 'Alumno_Matricula');
+                $crud->required_fields('Titulo_trab','NomCongreso','AutoresCon','AnioCon','TipoTrabajo','tipo');
+                $crud->set_field_upload('DocCongre','assets/uploads/alumnos/'.$this->matricula);
+                $output = $crud->render();
+
+                $this->_example_output($output);
+        } 
+        else { 
+                redirect('login');
+                }      
     }
     
 

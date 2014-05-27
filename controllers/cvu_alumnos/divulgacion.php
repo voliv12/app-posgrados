@@ -15,21 +15,30 @@ class Divulgacion extends CI_Controller {
     }
 
     function registroDivulgacion()
-    {   $crud = new grocery_CRUD();
-        $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('divulgacion');
-        $crud->set_subject('Divulgacion y Difusión de Ciencia y Tecnologia');
-        $crud->set_relation('idCatalogoDivulgacion','CatalogoDivulgacion','TipoParticipacion');
-        $crud->columns( 'idCatalogoDivulgacion','Dirigido','Titulo','Dependencia');
-        $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->display_as('idCatalogoDivulgacion','Tipo de Participación')->display_as('Dirigido','Dirigido a')->display_as('Titulo','Titulo')
-             ->display_as('Dependencia','Dependencia responasable')->display_as('Notas','Notas Periodisticas')->display_as('TipoD','Tipo')->display_as('DocDivulga','Doc. comprobatorio');
+    {   
+        if ($this->session->userdata('logged_in'))
+        {
+                $crud = new grocery_CRUD();
+                $crud->where('Alumno_Matricula', $this->matricula);
+                $crud->set_table('divulgacion');
+                $crud->set_subject('Divulgacion y Difusión de Ciencia y Tecnologia');
+                $crud->set_relation('idCatalogoDivulgacion','CatalogoDivulgacion','TipoParticipacion');
+                $crud->columns( 'idCatalogoDivulgacion','Dirigido','Titulo','Dependencia','DocDivulga');
+                $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+                $crud->display_as('idCatalogoDivulgacion','Tipo de Participación')->display_as('Dirigido','Dirigido a')->display_as('Titulo','Titulo')
+                     ->display_as('Dependencia','Dependencia responasable')->display_as('Notas','Notas Periodisticas')->display_as('TipoD','Tipo')->display_as('DocDivulga','Doc. comprobatorio');
 
-        $crud-> unset_edit_fields ( 'Alumno_Matricula');
-        $crud->set_field_upload('DocDivulga','assets/uploads/alumnos/'.$this->matricula);
-        $output = $crud->render();
+                $crud-> unset_edit_fields ( 'Alumno_Matricula');
+                $crud->required_fields('idCatalogoDivulgacion','Dirigido','Titulo','Dependencia');
+                $crud->set_field_upload('DocDivulga','assets/uploads/alumnos/'.$this->matricula);
+                $output = $crud->render();
 
-        $this->_example_output($output);
+                $this->_example_output($output);
+
+        } 
+        else { 
+                redirect('login');
+                }    
     }
     
 

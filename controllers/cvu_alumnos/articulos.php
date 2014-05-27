@@ -15,24 +15,33 @@ class Articulos extends CI_Controller {
     }
 
     function registroArticulo()
-    {   $crud = new grocery_CRUD();
-        $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('articulos');
-        $crud->set_subject('Artículo');
+    {   
+        if ($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->where('Alumno_Matricula', $this->matricula);
+            $crud->set_table('articulos');
+            $crud->set_subject('Artículo');
+        
+            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->columns( 'AnioPublica','Volumen','Titulio','TipoArt','DocArt');
+            $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
+                 ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
+                 ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
+
+            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
+            $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
     
-        $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'AnioPublica','Volumen','Titulio','AutorArt','DocArt');
-        $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
-             ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
-             ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
+           
+            $output = $crud->render();
 
-        $crud-> unset_edit_fields ( 'Alumno_Matricula');
-        $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
-        $output = $crud->render();
-
-        $this->_example_output($output);
+            $this->_example_output($output);
+        }
+             else { redirect('login');
+             }
     }
-    
+     
 
     function _example_output($output = null)
     {

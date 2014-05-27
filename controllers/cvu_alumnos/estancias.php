@@ -15,20 +15,30 @@ class Estancias extends CI_Controller {
     }
 
     function registroEstancias()
-    {   $crud = new grocery_CRUD();
-        $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('estancias');
-        $crud->set_subject('Estancia de Investigación');
-        $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'idCatalogoDivulgacion','Dirigido','Titulo','Dependencia');
-        $crud->display_as('Sector','Sector')->display_as('Organizacion','Organización')->display_as('EFinicio','Fecha de Inicio')->display_as('Logros','Principales Logros')
-             ->display_as('EFfin','Fechade Finalización')->display_as('EPais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Doc. comprobatorio');
+    {   
 
-        $crud-> unset_edit_fields ( 'Alumno_Matricula');
-        $crud->set_field_upload('DocEstancia','assets/uploads/alumnos/'.$this->matricula);
-        $output = $crud->render();
+        if ($this->session->userdata('logged_in'))
+        {
+                $crud = new grocery_CRUD();
+                $crud->where('Alumno_Matricula', $this->matricula);
+                $crud->set_table('estancias');
+                $crud->set_subject('Estancia de Investigación');
+                $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+                $crud->columns( 'Sector','Organizacion','LineaInvestiga','Logros','DocEstancia');
+                $crud->display_as('Sector','Sector')->display_as('Organizacion','Organización')->display_as('EFinicio','Fecha de Inicio')->display_as('Logros','Principales Logros')
+                     ->display_as('EFfin','Fechade Finalización')->display_as('EPais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Doc. comprobatorio');
 
-        $this->_example_output($output);
+                $crud-> unset_edit_fields ( 'Alumno_Matricula');
+                $crud->required_fields('Sector','Organizacion','Titulo','LineaInvestiga','Logros');
+                $crud->set_field_upload('DocEstancia','assets/uploads/alumnos/'.$this->matricula);
+                $output = $crud->render();
+
+                $this->_example_output($output);
+        } 
+        else { 
+                redirect('login');
+                }    
+
     }
     
 

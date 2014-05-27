@@ -15,20 +15,28 @@ class Distincion extends CI_Controller {
     }
 
     function registroDistincion()
-    {   $crud = new grocery_CRUD();
-        $crud->where('Alumno_Matricula', $this->matricula);
-        $crud->set_table('premiodistincion');
-        $crud->set_subject('Distinciones y Premios');
-        $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-        $crud->columns( 'Titulos','Pais','Otorgante','Institucion-otorgante','AnioP');
-        $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('Pais','País')->display_as('Otorgante','Otorgante')
-             ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('Descripcion','Descripcion de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
+    {   
+        if ($this->session->userdata('logged_in'))
+        {
+                $crud = new grocery_CRUD();
+                $crud->where('Alumno_Matricula', $this->matricula);
+                $crud->set_table('premiodistincion');
+                $crud->set_subject('Distinciones y Premios');
+                $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+                $crud->columns( 'Titulos','Pais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
+                $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('Pais','País')->display_as('Otorgante','Otorgante')
+                     ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('Descripcion','Descripcion de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
 
-        $crud-> unset_edit_fields ( 'Alumno_Matricula');
-        $crud->set_field_upload('DocPremio','assets/uploads/alumnos/'.$this->matricula);
-        $output = $crud->render();
+                $crud-> unset_edit_fields ( 'Alumno_Matricula');
+                $crud->required_fields('Titulos','Otorgante','Institucion-otorgante','AnioP');
+                $crud->set_field_upload('DocPremio','assets/uploads/alumnos/'.$this->matricula);
+                $output = $crud->render();
 
-        $this->_example_output($output);
+                $this->_example_output($output);
+        } 
+        else { 
+                redirect('login');
+                }    
     }
     
 
