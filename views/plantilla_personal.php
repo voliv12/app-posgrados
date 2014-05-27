@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo $titulo; ?></title>
+    <title><?php //echo $titulo; ?>SIP Personal</title>
     <meta charset="utf-8"></meta>
     <title>Sistema de Información de Posgrado</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
