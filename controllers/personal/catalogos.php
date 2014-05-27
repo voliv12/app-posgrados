@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Control_personal extends CI_Controller {
+class Catalogos extends CI_Controller {
 
     function __construct()
     {
@@ -14,23 +14,36 @@ class Control_personal extends CI_Controller {
         //$this->matricula = $this->session->userdata('matricula');
     }
 
-    function registrar_personal()
+    function divulgacion() //Catálogo Tipo de Divulgación
     {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->set_table('personal');
-            $crud->set_subject('Personal')
-                 ->required_fields('NumPersonal', 'Nombre', 'perfil', 'contrasenia')
-                 ->display_as('contrasenia', 'Contraseña')
-                 ->change_field_type('contrasenia', 'password')
-                 ->columns('NumPersonal','Nombre','perfil')
+            $crud->set_table('catalogodivulgacion')
+                 ->set_subject('Tipo')
+                 ->display_as('TipoParticipacion','Tipo Participación')
                 ;
 
-            $crud->callback_before_insert(array($this,'encrypt_password_callback'));
-            $crud->callback_before_update(array($this,'encrypt_password_callback'));
+            $output = $crud->render();
+            $output->titulo_tabla = "Catálogo Tipo Participación";
+
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
+    }
+
+     function sub_conacyt() //Catálogo Subprograma CONACYT
+    {
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('subprogconacyt')
+                 ->set_subject('Subprograma')
+                ;
 
             $output = $crud->render();
+            $output->titulo_tabla = "Catálogo Subprograma CONACYT";
 
             $this->_example_output($output);
         }else{
@@ -41,19 +54,8 @@ class Control_personal extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Control de Personal";
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
     }
-
-    function encrypt_password_callback($post_array)
-    {
-        $this->load->library('encrypt');
-
-        $post_array['contrasenia'] = $this->encrypt->sha1($post_array['contrasenia']);
-
-        return $post_array;
-    }
-
 }
