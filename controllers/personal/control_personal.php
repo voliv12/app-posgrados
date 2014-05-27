@@ -20,7 +20,13 @@ class Control_personal extends CI_Controller {
         {
             $crud = new grocery_CRUD();
             $crud->set_table('personal');
-            $crud->set_subject('Personal');
+            $crud->set_subject('Personal')
+                 ->required_fields('NumPersonal', 'Nombre', 'perfil', 'contrasenia')
+                 ->display_as('contrasenia', 'Contraseña')
+                 ->change_field_type('contrasenia', 'password')
+                 ->columns('NumPersonal','Nombre','perfil')
+                ;
+
 
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
             $crud->callback_before_update(array($this,'encrypt_password_callback'));

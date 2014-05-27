@@ -19,8 +19,16 @@ class Control_alumnos extends CI_Controller {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->set_table('alumno');
-            $crud->set_subject('Alumno');
+            $crud->set_table('alumno')
+                 ->set_subject('Alumno')
+                 ->required_fields('Matricula', 'NombreA', 'ApellidoPA', 'ApellidoMA', 'Nivel', 'Contrasenia')
+                 ->display_as('NombreA','Nombre')
+                 ->display_as('ApellidoPA','A Paterno')
+                 ->display_as('ApellidoMA','A Materno')
+                 ->display_as('Contrasenia', 'Contraseña')
+                 ->change_field_type('Contrasenia', 'password')
+                 ->columns('Matricula','NombreA','ApellidoPA','ApellidoMA','Nivel','curp','rfc','Direccion','Telefono','Correo')
+                ;
 
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
             $crud->callback_before_update(array($this,'encrypt_password_callback'));
@@ -62,7 +70,7 @@ class Control_alumnos extends CI_Controller {
     function encrypt_password_callback($post_array)
     {
         $this->load->library('encrypt');
-
+        $post_array['Matricula'] = strtoupper($post_array['Matricula']); //Aprovecho éste callback para convertir a mayúsculas la Matricula
         $post_array['Contrasenia'] = $this->encrypt->sha1($post_array['Contrasenia']);
 
         return $post_array;
