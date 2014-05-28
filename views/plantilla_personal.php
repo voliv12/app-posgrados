@@ -42,7 +42,7 @@
             <ul class="dropdown-menu">
               <li><a><i class="icon-barcode"> </i> <?php echo "Perfil ".$this->session->userdata('perfil');?></a></li>
               <li class="divider"></li>
-              <li><a href="#"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
+              <li><a data-toggle="modal" href="#myModal"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="salir"><i class="icon-off"></i> Cerrar sesión</a></li>
             </ul>
@@ -55,11 +55,28 @@
 <!-- End Topbar
 ================================================== -->
 
+<!--#######################Modal para cambiar contraseña################################-->
+   <div id="myModal" class="modal hide fade in" style="display: none;">
+      <div class="modal-header">
+          <a data-dismiss="modal" class="close">×</a>
+          <h3>Cambio de contraseña</h3>
+       </div>
+       <div class="modal-body">
+           <form action="cambiar_password" method="POST">
+               <!--label for="exampleInputEmail1">Nueva contraseña</label-->
+               <input type="password" class="form-control" name="password" placeholder="Nueva contraseña"> </br>
+               <input type="password" class="form-control" name="passconf" placeholder="Confirme nueva contraseña"></br>
+           <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Cambiar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+           </div>
+          </form>
+      </div>
+  </div>
+<!--#######################################################-->
+
               <div class="container">
                 <?php echo $contenido; ?>
-
-
-
 
 <div class="footer">
 <blockquote>
