@@ -43,6 +43,7 @@ class Proyecto extends CI_Controller {
     }
     
 
+
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Articulos Públicados";
