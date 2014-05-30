@@ -29,6 +29,8 @@ class Articulos extends CI_Controller {
                  ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
 
+            $crud->unset_print();
+            $crud->unset_export();
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
@@ -47,7 +49,7 @@ class Articulos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Articulos Públicados";
+        $output->titulo_tabla = "Registro de Artículo Publicados";
         $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);

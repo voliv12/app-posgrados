@@ -30,6 +30,8 @@ class Libro extends CI_Controller {
                      ->display_as('EditoriaLib','Editorial')->display_as('NumPagLib','N°. Páginas')->display_as('AutorLib', 'Autor/es')
                      ->display_as('TituloLib','Titulo del Libro')->display_as('AnioLib','Año de Publicación')->display_as('EdicionLib', 'Edición')->display_as('DocLibro', 'Doc. comprobatorio');
                 
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('NumISBN' , 'TituloLib','AutorLib','IdentLib','VolumenLib','EditoriaLib');
                 $crud->set_field_upload('DocLibro','assets/uploads/alumnos/'.$this->matricula);

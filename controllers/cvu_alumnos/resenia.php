@@ -29,6 +29,8 @@ class Resenia extends CI_Controller {
                      ->display_as('AnioRe','Año')->display_as('pagInc',' De la Pag')->display_as('pagFin','A la Pag')->display_as('TituloPublica','Titulo de la Publicación')
                      ->display_as('Pais','País')->display_as('autorRese','Autor/es')->display_as('DocRese','Doc. comprobatorio');
                 
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields( 'TituloRese','TituloObra','TipoPublica','TituloPublica');
                 $crud->set_field_upload('DocRese','assets/uploads/alumnos/'.$this->matricula);
