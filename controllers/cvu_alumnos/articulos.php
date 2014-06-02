@@ -29,12 +29,12 @@ class Articulos extends CI_Controller {
                  ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
 
-            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+            $crud->unset_edit_fields ( 'Alumno_Matricula');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
 
             //Mensaje por si hay un error al insertar
-            //$crud->set_lang_string('insert_error', 'El nombre del archivo es demasiado largo. Debe ser máximo de 20 caracteres');
+            $crud->set_lang_string('insert_error', 'El nombre del archivo es demasiado largo. Debe ser máximo de 20 caracteres');
 
             $output = $crud->render();
 
