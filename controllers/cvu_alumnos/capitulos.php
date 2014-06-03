@@ -30,6 +30,8 @@ class Capitulos extends CI_Controller {
                      ->display_as('NumPagCL','N° Páginas')->display_as('NumCitas','N° Citas')->display_as('AutorCL','Autor/es')
                      ->display_as('Resumen','Resumen')->display_as('DocCapLibro','Doc. comprobatorio');
 
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('TituloLibCP','TituloCap','Anio','AutorCL','Resumen');
                 $crud->set_field_upload('DocCapLibro','assets/uploads/alumnos/'.$this->matricula);

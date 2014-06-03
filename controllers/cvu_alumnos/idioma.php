@@ -27,6 +27,9 @@ class Idioma extends CI_Controller {
                 $crud->display_as('Idioma','Idioma')->display_as('Descripcion','Descripción')->display_as('tipoI','Tipo')->display_as('NivelConv','Nivel de Conversación')
                      ->display_as('NivelLec','Nivel de Lectura')->display_as('NivelEsc','Nivel de Escritura')->display_as('FechaEvalu','Fecha de Evaluación')->display_as('ExamDoc','Examen/Documento Probatorio')->display_as('Puntos','Puntos/Porcentaje')->display_as('DocIdioma','Doc. comprobatorio');
 
+               
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Idioma','tipoI','NivelConv','NivelLec','NivelEsc','tipo');
                 $crud->set_field_upload('DocIdioma','assets/uploads/alumnos/'.$this->matricula);

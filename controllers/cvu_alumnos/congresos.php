@@ -30,6 +30,8 @@ class Congresos extends CI_Controller {
                      ->display_as('TipoTrabajo','Tipo de Trabajo')->display_as('tipo','Tipo')->display_as('Pais','País')
                      ->display_as('AnioCon','Año')->display_as('DocCongre','Doc. comprobatorio');
 
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Titulo_trab','NomCongreso','AutoresCon','AnioCon','TipoTrabajo','tipo');
                 $crud->set_field_upload('DocCongre','assets/uploads/alumnos/'.$this->matricula);

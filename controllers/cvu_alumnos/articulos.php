@@ -29,12 +29,17 @@ class Articulos extends CI_Controller {
                  ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
 
+
             $crud->unset_edit_fields ( 'Alumno_Matricula');
+
+            $crud->unset_print();
+            $crud->unset_export();
+            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
 
-            //Mensaje por si hay un error al insertar
-            $crud->set_lang_string('insert_error', 'El nombre del archivo es demasiado largo. Debe ser máximo de 20 caracteres');
+            $crud->callback_add_field('AnioPublica',array($this,'add_field_anio'));
 
             $output = $crud->render();
 
@@ -47,10 +52,22 @@ class Articulos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Articulos Públicados";
+        $output->titulo_tabla = "Registro de Artículo Publicados";
         $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);
+    }
+
+    function add_field_anio()
+    {
+        $options = array(
+                  '2000'  => 'Small Shirt',
+                  '2001'  => 'Medium Shirt',
+                  '2002'  => 'Large Shirt',
+                  '2002'  => 'Extra Large Shirt',
+                );
+
+        return form_dropdown('shirts', $options, '2000');
     }
 }
 
