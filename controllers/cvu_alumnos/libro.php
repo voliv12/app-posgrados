@@ -32,9 +32,11 @@ class Libro extends CI_Controller {
                 
                 $crud->unset_print();
                 $crud->unset_export();
+                $crud->field_type('AnioLib','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('NumISBN' , 'TituloLib','AutorLib','IdentLib','VolumenLib','EditoriaLib');
                 $crud->set_field_upload('DocLibro','assets/uploads/alumnos/'.$this->matricula);
+                $crud->set_rules('DocLibro','Doc. comprobatorio','max_length[26]');
                 $output = $crud->render();
 
                 $this->_example_output($output);

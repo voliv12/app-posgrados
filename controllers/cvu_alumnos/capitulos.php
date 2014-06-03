@@ -32,9 +32,11 @@ class Capitulos extends CI_Controller {
 
                 $crud->unset_print();
                 $crud->unset_export();
+                $crud->field_type('Anio','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('TituloLibCP','TituloCap','Anio','AutorCL','Resumen');
                 $crud->set_field_upload('DocCapLibro','assets/uploads/alumnos/'.$this->matricula);
+                $crud->set_rules('DocCapLibro','Doc. comprobatorio','max_length[26]');
                 $output = $crud->render();
 
                 $this->_example_output($output);

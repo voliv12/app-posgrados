@@ -34,6 +34,7 @@ class Certificacion extends CI_Controller {
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
             $crud->required_fields('NumFolio','Referencia','Especialidad','TipoCert','ffin');
             $crud->set_field_upload('DocCertifiMedi','assets/uploads/alumnos/'.$this->matricula);
+            $crud->set_rules('DocCertifiMedi','Doc. comprobatorio','max_length[26]');
             $output = $crud->render();
 
             $this->_example_output($output);

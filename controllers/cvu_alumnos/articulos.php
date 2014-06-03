@@ -24,7 +24,7 @@ class Articulos extends CI_Controller {
             $crud->set_subject('Artículo');
 
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->columns( 'AnioPublica','Volumen','Titulio','TipoArt','DocArt');
+            $crud->columns( 'AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
             $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
                  ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
@@ -36,12 +36,10 @@ class Articulos extends CI_Controller {
             $crud->unset_export();
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
 
-            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
+            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
-           
-
-            $crud->callback_add_field('AnioPublica',array($this,'add_field_anio'));
-
+            $crud->set_rules('DocArt','Doc. comprobatorio','max_length[26]');
+            $crud->field_type('AnioPublica','dropdown',range(2000, 2030));
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -61,16 +59,5 @@ class Articulos extends CI_Controller {
         $this->load->view('plantilla_alumnos', $datos_plantilla);
     }
 
-    function add_field_anio()
-    {
-        $options = array(
-                  '2000'  => 'Small Shirt',
-                  '2001'  => 'Medium Shirt',
-                  '2002'  => 'Large Shirt',
-                  '2002'  => 'Extra Large Shirt',
-                );
-
-        return form_dropdown('shirts', $options, '2000');
-    }
 }
 

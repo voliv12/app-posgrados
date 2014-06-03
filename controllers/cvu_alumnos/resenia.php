@@ -31,9 +31,11 @@ class Resenia extends CI_Controller {
                 
                 $crud->unset_print();
                 $crud->unset_export();
+                $crud->field_type('AnioRe','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields( 'TituloRese','TituloObra','TipoPublica','TituloPublica');
                 $crud->set_field_upload('DocRese','assets/uploads/alumnos/'.$this->matricula);
+                $crud->set_rules('DocRese','Doc. comprobatorio','max_length[26]');
                 $output = $crud->render();
 
                 $this->_example_output($output);
