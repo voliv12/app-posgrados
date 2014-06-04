@@ -30,6 +30,8 @@ class Datos_personales extends CI_Controller {
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->required_fields('curp','rfc','Correo','Telefono');
+                $crud->set_rules('Correo','Correo','valid_email');
+
                 $crud-> field_type ( 'Contrasenia' , 'password' ) ;
                 $output = $crud->render();
 
