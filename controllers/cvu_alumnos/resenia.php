@@ -37,7 +37,7 @@ class Resenia extends CI_Controller {
                 $crud->set_field_upload('DocRese','assets/uploads/alumnos/'.$this->matricula);
 
                 $crud->unset_texteditor('autorRese','full_text');
-                $output = $crud->render();
+                
 
                 $crud->set_rules('DocRese','Doc. comprobatorio','max_length[26]');
                 

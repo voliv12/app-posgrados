@@ -34,7 +34,7 @@ class Idioma extends CI_Controller {
                 $crud->required_fields('Idioma','tipoI','NivelConv','NivelLec','NivelEsc','tipo');
                 $crud->set_field_upload('DocIdioma','assets/uploads/alumnos/'.$this->matricula);
 
-                $crud->unset_texteditor('idioma','full_text');
+                $crud->unset_texteditor('Descripcion','full_text');
 
                 $crud->set_rules('DocIdioma','Doc. comprobatorio','max_length[26]');
 

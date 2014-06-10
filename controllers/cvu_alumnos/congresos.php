@@ -38,19 +38,14 @@ class Congresos extends CI_Controller {
                 $crud->set_field_upload('DocCongre','assets/uploads/alumnos/'.$this->matricula);
 
                 $crud->unset_texteditor('AutoresCon','full_text');
-                $output = $crud->render();
+                
 
                 $crud->set_rules('DocCongre','Doc. comprobatorio','max_length[26]');
                 //$curd->unset
 
 
-
-<<<<<<< HEAD
-
-                $crud->field_type('Pais','dropdown',array( 
-=======
                 $crud->field_type('Pais','dropdown',array(
->>>>>>> 55dfae360e58472188593730156a4d4b7024f47d
+
                         "México","Afganistan","Africa del Sur","Albania","Alemania","Andorra","Angola",
                         "Antigua y Barbuda","Antillas Holandesas","Arabia Saudita","Argelia","Argentina","Armenia","Aruba",
                         "Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarusia","Belgica",

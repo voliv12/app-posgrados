@@ -36,7 +36,7 @@ class Estancias extends CI_Controller {
 
                 $crud->unset_texteditor('LineaInvestiga','full_text');
                 $crud->unset_texteditor('Logros','full_text');
-                $output = $crud->render();
+                
 
                 $crud->set_rules('DocEstancia','Doc. comprobatorio','max_length[26]');
                 
