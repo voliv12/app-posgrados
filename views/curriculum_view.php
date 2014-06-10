@@ -1147,7 +1147,10 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				<w:rPr>
 					<w:b/>
 				</w:rPr>
-				<w:t>CURP: <?php echo " ".$alumno['curp']; ?></w:t>
+				<w:t>CURP:</w:t>
+			</w:r>
+			<w:r>
+				<w:t><?php echo " ".$alumno['curp']; ?></w:t>
 			</w:r>
 			<w:r wsp:rsidR="00413A6C">
 				<w:rPr>
@@ -1167,7 +1170,10 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				<w:rPr>
 					<w:b/>
 				</w:rPr>
-				<w:t>RFC: <?php echo " ".$alumno['rfc']; ?></w:t>
+				<w:t>RFC:</w:t>
+			</w:r>
+			<w:r>
+				<w:t><?php echo " ".$alumno['rfc']; ?></w:t>
 			</w:r>
 			<w:r wsp:rsidR="00413A6C">
 				<w:rPr>
@@ -1187,7 +1193,10 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				<w:rPr>
 					<w:b/>
 				</w:rPr>
-				<w:t>Dirección: <?php echo " ".$alumno['direccion']; ?></w:t>
+				<w:t>Dirección:</w:t>
+			</w:r>
+			<w:r>
+				<w:t><?php echo " ".$alumno['direccion']; ?></w:t>
 			</w:r>
 			<w:r wsp:rsidR="00413A6C">
 				<w:rPr>
@@ -1207,7 +1216,10 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				<w:rPr>
 					<w:b/>
 				</w:rPr>
-				<w:t>Teléfono: <?php echo " ".$alumno['telefono']; ?></w:t>
+				<w:t>Teléfono:</w:t>
+			</w:r>
+			<w:r>
+				<w:t><?php echo " ".$alumno['telefono']; ?></w:t>
 			</w:r>
 			<w:r wsp:rsidR="00413A6C">
 				<w:rPr>
@@ -1224,7 +1236,10 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				<w:rPr>
 					<w:b/>
 				</w:rPr>
-				<w:t>Correo: <?php echo " ".$alumno['correo']; ?></w:t>
+				<w:t>Correo:</w:t>
+			</w:r>
+			<w:r>
+				<w:t><?php echo " ".$alumno['correo']; ?></w:t>
 			</w:r>
 			<w:r wsp:rsidR="00BD030A" wsp:rsidRPr="00795D9A">
 				<w:t/>
@@ -1295,20 +1310,53 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 			</w:tr>
 		</w:tbl>
 		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
-			<w:r>
-				<w:t>Congresos </w:t>
+			<w:r wsp:rsidRPr="00F31B21">
+				<w:rPr>
+					<w:b/>
+				</w:rPr>
+				<w:t>Congresos:</w:t>
 			</w:r>
 		</w:p>
-		<w:p wsp:rsidR="0065598A" wsp:rsidRDefault="0065598A">
+		<?php $i = 0; $j = 1; foreach ($congresos as $row) { //###############CONGRESOS##################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
 			<w:r>
-				<w:t>Divulgación </w:t>
+				<w:t><?php echo $j.". ".$congresos[$i]['Titulo_trab'].". ".$congresos[$i]['NomCongreso'].". ".$congresos[$i]['AutoresCon'].". ".$congresos[$i]['TipoTrabajo'].". ".$congresos[$i]['tipo'].". ".$congresos[$i]['Pais'].". ".$congresos[$i]['AnioCon'];?></w:t>
 			</w:r>
 		</w:p>
-		<w:p wsp:rsidR="00BD030A" wsp:rsidRDefault="0065598A">
-			<w:r>
-				<w:t>Estancias </w:t>
+		<?php $i++; $j++; } ?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:r wsp:rsidRPr="00F31B21">
+				<w:rPr>
+					<w:b/>
+				</w:rPr>
+				<w:t>Divulgación :</w:t>
 			</w:r>
 		</w:p>
+		<?php $i = 0; $j = 1; foreach ($divulgacion as $row) { //###############DIVULGACIÓN################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
+			<w:r>
+				<w:t><?php echo $j.". Tipo participación: ".$divulgacion[$i]['TipoParticipacion'].". Dirigido a: ".$divulgacion[$i]['Dirigido'].". Titulo: ".$divulgacion[$i]['Titulo'].". Dependencia: ".$divulgacion[$i]['Dependencia'].". Notas periodísticas: ".$divulgacion[$i]['Notas'].". Tipo: ".$divulgacion[$i]['TipoD'];?></w:t>
+			</w:r>
+		</w:p>
+		<?php $i++; $j++; } ?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:r wsp:rsidRPr="00F31B21">
+				<w:rPr>
+					<w:b/>
+				</w:rPr>
+				<w:t>Estancias:</w:t>
+			</w:r>
+		</w:p>
+		<?php $i = 0; $j = 1; foreach ($estancias as $row) { //###############ESTANCIAS##################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
+			<w:r>
+				<w:t><?php echo $j.". Sector: ".$estancias[$i]['Sector'].". Organización: ".$estancias[$i]['Organizacion'].". Fecha de inicio: ".$estancias[$i]['EFinicio'].". Fecha finalización ".$estancias[$i]['EFfin'].". Pais: ".$estancias[$i]['EPais'].". Línea de investigación: ".$estancias[$i]['LineaInvestiga'].". Logros: ".$estancias[$i]['Logros'];?></w:t>
+			</w:r>
+		</w:p>
+		<?php $i++; $j++; } ?>
 		<w:tbl>
 			<w:tblPr>
 				<w:tblW w:w="10632" w:type="dxa"/>

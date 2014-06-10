@@ -25,10 +25,10 @@ class Curriculum_model extends CI_Model
         }
     }
 
-    function get_articulos($matricula)
+    function get_tabla($tabla, $matricula)
     {
         $this->db->select('*');
-        $this->db->from('articulos');
+        $this->db->from($tabla);
         $this->db->where('Alumno_Matricula', $matricula);
         $query = $this->db->get();
 
@@ -41,5 +41,21 @@ class Curriculum_model extends CI_Model
         }
     }
 
+    function get_divulgacion($matricula)
+    {
+        $this->db->select('*');
+        $this->db->from('divulgacion');
+        $this->db->where('Alumno_Matricula', $matricula);
+        $this->db->join('catalogodivulgacion', 'catalogodivulgacion.idCatalogoDivulgacion = divulgacion.idCatalogoDivulgacion');
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->result_array();
+        }
+    }
 }
 

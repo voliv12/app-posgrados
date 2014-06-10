@@ -15,7 +15,7 @@ class Congresos extends CI_Controller {
     }
 
     function registroCongreso()
-    {   
+    {
          if ($this->session->userdata('logged_in'))
         {
 
@@ -23,7 +23,7 @@ class Congresos extends CI_Controller {
                 $crud->where('Alumno_Matricula', $this->matricula);
                 $crud->set_table('congresos');
                 $crud->set_subject('Congreso');
-            
+
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'Titulo_trab','NomCongreso','AutoresCon','AnioCon','DocCongre');
                 $crud->display_as('Titulo_trab','Titulo del Trabajo')->display_as('NomCongreso','Nombre del Congreso')->display_as('AutoresCon','Autor/es')
@@ -32,7 +32,7 @@ class Congresos extends CI_Controller {
 
                 $crud->unset_print();
                 $crud->unset_export();
-                $crud->field_type('AnioCon','dropdown',range(2000, 2030)); 
+                $crud->field_type('AnioCon','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Titulo_trab','NomCongreso','AutoresCon','AnioCon','TipoTrabajo','tipo');
                 $crud->set_field_upload('DocCongre','assets/uploads/alumnos/'.$this->matricula);
@@ -41,11 +41,16 @@ class Congresos extends CI_Controller {
                 $output = $crud->render();
 
                 $crud->set_rules('DocCongre','Doc. comprobatorio','max_length[26]');
+                //$curd->unset
 
 
 
+<<<<<<< HEAD
 
                 $crud->field_type('Pais','dropdown',array( 
+=======
+                $crud->field_type('Pais','dropdown',array(
+>>>>>>> 55dfae360e58472188593730156a4d4b7024f47d
                         "México","Afganistan","Africa del Sur","Albania","Alemania","Andorra","Angola",
                         "Antigua y Barbuda","Antillas Holandesas","Arabia Saudita","Argelia","Argentina","Armenia","Aruba",
                         "Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarusia","Belgica",
@@ -71,15 +76,15 @@ class Congresos extends CI_Controller {
                         "Suiza","Sur Africa","Surinam","Swaziland","Tailandia","Taiwan","Tajikistan","Tanzania","Timor Oriental",
                         "Togo","Tokelau","Tonga","Trinidad & Tobago","Tunisia","Turkmenistan","Turquia","Ucrania","Uganda",
                         "Union Europea","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Yemen","Yugoslavia","Zambia","Zimbabwe"));
-                
+
             $output = $crud->render();
             $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
-                }      
+                }
     }
-    
+
 
     function _example_output($output = null)
     {
@@ -89,7 +94,7 @@ class Congresos extends CI_Controller {
         $this->load->view('plantilla_alumnos', $datos_plantilla);
     }
 
-    
+
 
 
 
