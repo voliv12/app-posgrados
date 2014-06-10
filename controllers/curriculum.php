@@ -28,6 +28,11 @@ Class Curriculum extends CI_controller{
                                     'correo'     => $row->Correo
                                 );
 
+        $datos['congresos'] = $this->curriculum_model->get_tabla('congresos', $this->matricula);
+        $datos['estancias'] = $this->curriculum_model->get_tabla('estancias', $this->matricula);
+        $datos['divulgacion'] = $this->curriculum_model->get_divulgacion($this->matricula);
+
+        // print_r($datos);
 
         $filename = "CVU-".$this->matricula."-".date('dmY').".doc";
         header("Content-Type: application/xml; charset=UTF-8");
