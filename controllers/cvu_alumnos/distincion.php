@@ -23,7 +23,7 @@ class Distincion extends CI_Controller {
                 $crud->set_table('premiodistincion');
                 $crud->set_subject('Distinciones y Premios');
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'Titulos','Pais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
+                $crud->columns( 'Titulos','DPais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
                 $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('DPais','País')->display_as('Otorgante','Otorgante')
                      ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('Descripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
 
@@ -33,41 +33,10 @@ class Distincion extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Titulos','Descripcion','AnioP');
                 $crud->set_field_upload('DocPremio','assets/uploads/alumnos/'.$this->matricula);
+                $crud->set_relation('DPais','paises','nombre');
 
                 $crud->unset_texteditor('Descripcion','full_text');
-                
-
                 $crud->set_rules('DocPremio','Doc. comprobatorio','max_length[26]');
-                
-
-                $crud->field_type('DPais','dropdown',array( 
-                    "México","Afganistan","Africa del Sur","Albania","Alemania","Andorra","Angola",
-                    "Antigua y Barbuda","Antillas Holandesas","Arabia Saudita","Argelia","Argentina","Armenia","Aruba",
-                    "Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarusia","Belgica",
-                    "Belice","Benin","Bermudas","Bolivia","Bosnia","Botswana","Brasil","Brunei Darussulam","Bulgaria",
-                    "Burkina Faso","Burundi","Butan","Camboya","Camerun","Canada","Cape Verde","Chad","Chile","China",
-                    "Chipre","Colombia","Comoros","Congo","Corea del Norte","Corea del Sur","Costa de Marfíl","Costa Rica",
-                    "Croasia","Cuba","Dinamarca","Djibouti","Dominica","Ecuador","Egipto","El Salvador","Emiratos Arabes Unidos",
-                    "Eritrea","Eslovenia","España","Estados Unidos","Estonia","Etiopia","Fiji","Filipinas","Finlandia","Francia",
-                    "Gabon","Gambia","Georgia","Ghana","Granada","Grecia","Groenlandia","Guadalupe","Guam","Guatemala",
-                    "Guayana Francesa","Guerney","Guinea","Guinea-Bissau","Guinea Equatorial","Guyana","Haiti","Holanda",
-                    "Honduras","Hong Kong","Hungria","India","Indonesia","Irak","Iran","Irlanda","Islandia","Islas Caiman",
-                    "Islas Faroe","Islas Malvinas","Islas Marshall","Islas Solomon","Islas Virgenes Britanicas","Islas Virgenes (U.S.)",
-                    "Israel","Italia","Jamaica","Japon","Jersey","Jordania","Kazakhstan","Kenia","Kiribati","Kuwait","Kyrgyzstan",
-                    "Laos","Latvia","Lesotho","Libano","Liberia","Libia","Liechtenstein","Lituania","Luxemburgo","Macao","Macedonia",
-                    "Madagascar","Malasia","Malawi","Maldivas","Mali","Malta","Marruecos","Martinica","Mauricio","Mauritania",
-                    "Micronesia","Moldova","Monaco","Mongolia","Mozambique","Myanmar (Burma)","Namibia","Nepal","Nicaragua",
-                    "Niger","Nigeria","Noruega","Nueva Caledonia","Nueva Zealandia","Oman","Pakistan","Palestina","Panama",
-                    "Papua Nueva Guinea","Paraguay","Peru","Polinesia Francesa","Polonia","Portugal","Puerto Rico","Qatar","Reino Unido",
-                    "Republica Centroafricana","Republica Checa","Republica Democratica del Congo","Republica Dominicana","Republica Eslovaca",
-                    "Reunion","Ruanda","Rumania","Rusia","Sahara","Samoa","San Cristobal-Nevis (St. Kitts)","San Marino",
-                    "San Vincente y las Granadinas","Santa Helena","Santa Lucia","Santa Sede (Vaticano)","Sao Tome & Principe",
-                    "Senegal","Seychelles","Sierra Leona","Singapur","Siria","Somalia","Sri Lanka (Ceilan)","Sudan","Suecia",
-                    "Suiza","Sur Africa","Surinam","Swaziland","Tailandia","Taiwan","Tajikistan","Tanzania","Timor Oriental",
-                    "Togo","Tokelau","Tonga","Trinidad & Tobago","Tunisia","Turkmenistan","Turquia","Ucrania","Uganda",
-                    "Union Europea","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Yemen","Yugoslavia","Zambia","Zimbabwe"));
-
-
 
                 $output = $crud->render();
                 $this->_example_output($output);
