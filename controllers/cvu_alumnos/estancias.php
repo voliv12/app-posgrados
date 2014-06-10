@@ -31,6 +31,8 @@ class Estancias extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Sector','Organizacion','Titulo','LineaInvestiga','Logros');
                 $crud->set_field_upload('DocEstancia','assets/uploads/alumnos/'.$this->matricula);
+                $crud->unset_texteditor('LineaInvestiga','full_text');
+                $crud->unset_texteditor('Logros','full_text');
                 $output = $crud->render();
 
                 $this->_example_output($output);

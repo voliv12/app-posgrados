@@ -32,6 +32,7 @@ class Articulos extends CI_Controller {
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
+            $crud->unset_texteditor('AutorArt','full_text');
 
             //Mensaje por si hay un error al insertar
             //$crud->set_lang_string('insert_error', 'El nombre del archivo es demasiado largo. Debe ser máximo de 20 caracteres');

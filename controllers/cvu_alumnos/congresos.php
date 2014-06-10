@@ -33,6 +33,7 @@ class Congresos extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Titulo_trab','NomCongreso','AutoresCon','AnioCon','TipoTrabajo','tipo');
                 $crud->set_field_upload('DocCongre','assets/uploads/alumnos/'.$this->matricula);
+                $crud->unset_texteditor('AutoresCon','full_text');
                 $output = $crud->render();
 
                 $this->_example_output($output);

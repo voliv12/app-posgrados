@@ -31,6 +31,7 @@ class Divulgacion extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('idCatalogoDivulgacion','Dirigido','Titulo','Dependencia');
                 $crud->set_field_upload('DocDivulga','assets/uploads/alumnos/'.$this->matricula);
+                $crud->unset_texteditor('Notas','full_text');
                 $output = $crud->render();
 
                 $this->_example_output($output);

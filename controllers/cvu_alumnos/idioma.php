@@ -30,6 +30,7 @@ class Idioma extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Idioma','tipoI','NivelConv','NivelLec','NivelEsc','tipo');
                 $crud->set_field_upload('DocIdioma','assets/uploads/alumnos/'.$this->matricula);
+                $crud->unset_texteditor('idioma','full_text');
                 $output = $crud->render();
 
                 $this->_example_output($output);
