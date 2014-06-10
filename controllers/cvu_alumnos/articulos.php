@@ -24,19 +24,27 @@ class Articulos extends CI_Controller {
             $crud->set_subject('Artículo');
 
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->columns( 'AnioPublica','Volumen','Titulio','TipoArt','DocArt');
+            $crud->columns( 'AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
             $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
                  ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
+
 
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
             $crud->unset_texteditor('AutorArt','full_text');
 
-            //Mensaje por si hay un error al insertar
-            //$crud->set_lang_string('insert_error', 'El nombre del archivo es demasiado largo. Debe ser máximo de 20 caracteres');
+            $crud->unset_edit_fields ( 'Alumno_Matricula');
 
+            $crud->unset_print();
+            $crud->unset_export();
+            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+
+            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
+            $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
+            $crud->set_rules('DocArt','Doc. comprobatorio','max_length[20]');
+            $crud->field_type('AnioPublica','dropdown',range(2000, 2030));
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -46,12 +54,15 @@ class Articulos extends CI_Controller {
     }
 
 
+
+
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Articulos Públicados";
+        $output->titulo_tabla = "Registro de Artículos Publicados";
         $output->barra_navegacion = " <li><a href='alumno'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);
     }
+
 }
 

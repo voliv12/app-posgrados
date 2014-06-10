@@ -27,7 +27,11 @@ class Datos_personales extends CI_Controller {
                 $crud->display_as('NombreA','Nombre')->display_as('ApellidoPA','Apellido Paterno')->display_as('ApellidoMA','Apellido Materno')->display_as('curp','CURP')->display_as('rfc','RFC')->display_as('Direccion','Dirección')->display_as('Telefono', 'Teléfono');
                 $crud-> unset_add ( ) ;
                 $crud->unset_delete();
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud->required_fields('curp','rfc','Correo','Telefono');
+                $crud->set_rules('Correo','Correo','valid_email');
+
                 $crud-> field_type ( 'Contrasenia' , 'password' ) ;
                 $output = $crud->render();
 

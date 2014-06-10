@@ -16,13 +16,7 @@
     <div class="row">
         <p>
         <div class="span6"><a href="cvu_alumnos/capitulos/registroCapitulos" class="btn btn-block"><i class="icon-calendar"></i> Capítulos de Libro</a></div>
-        <div class="span6"><a href="#" class="btn btn-block"><i class="icon-file"></i> </a></div>
-    </p>
-    </div>
-    <div class="row">
-        <p>
-        <div class="span6"><a href="cvu_alumnos/certificacion/registroCertificacion" class="btn btn-block"><i class="icon-certificate"></i> Certificación médica</a></div>
-        <div class="span6"><a href="cvu_alumnos/congresos/registroCongreso" class="btn btn-block"><i class="icon-th"></i> Congresos</a></div>
+        <div class="span6"><a href="cvu_alumnos/certificacion/registroCertificacion" class="btn btn-block"><i class="icon-certificate"></i> Certificación médica</a></div>        
     </p>
     </div>
     <div class="row">
@@ -45,9 +39,14 @@
     </div>
     <div class="row">
         <p>
-        <div class="span6"><a href="cvu_alumnos/Conacyt/registroConacyt" class="btn btn-block"><i class="icon-lock"></i> Apoyos CONACYT</a></div>
+        <div class="span6"><a href="cvu_alumnos/congresos/registroCongreso" class="btn btn-block"><i class="icon-th"></i> Congresos</a></div>
         <div class="span6"><a href="cvu_alumnos/Resenia/registroResenia" class="btn btn-block"><i class="icon-check"></i> Reseñas</a></div>
     </p>
+    </div>
+    <div class="row">
+        <p>
+        <div class="span6"><a href="cvu_alumnos/Conacyt/registroConacyt" class="btn btn-block"><i class="icon-lock"></i> Apoyos CONACYT</a></div>   
+        </p>
     </div>
 
 </div></div>

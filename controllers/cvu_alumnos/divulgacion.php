@@ -28,10 +28,16 @@ class Divulgacion extends CI_Controller {
                 $crud->display_as('idCatalogoDivulgacion','Tipo de Participación')->display_as('Dirigido','Dirigido a')->display_as('Titulo','Titulo')
                      ->display_as('Dependencia','Dependencia responasable')->display_as('Notas','Notas Periodisticas')->display_as('TipoD','Tipo')->display_as('DocDivulga','Doc. comprobatorio');
 
+                $crud->unset_print();
+                $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('idCatalogoDivulgacion','Dirigido','Titulo','Dependencia');
                 $crud->set_field_upload('DocDivulga','assets/uploads/alumnos/'.$this->matricula);
+
                 $crud->unset_texteditor('Notas','full_text');
+
+                $crud->set_rules('DocDivulga','Doc. comprobatorio','max_length[26]');
+
                 $output = $crud->render();
 
                 $this->_example_output($output);
