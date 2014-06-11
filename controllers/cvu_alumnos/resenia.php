@@ -38,7 +38,7 @@ class Resenia extends CI_Controller {
 
                 $crud->unset_texteditor('autorRese','full_text');
                 $crud->set_rules('DocRese','Doc. comprobatorio','max_length[26]'); 
-                $crud->set_relation('DPais','paises','nombre');
+                $crud->set_relation('RPais','paises','nombre');
 
                 $output = $crud->render();
                 $this->_example_output($output);

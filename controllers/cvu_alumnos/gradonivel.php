@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Articulos extends CI_Controller {
+class Gradonivel extends CI_Controller {
 
     function __construct()
     {
@@ -14,28 +14,32 @@ class Articulos extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroArticulo()
+    function registroGrado()
     {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
             $crud->where('Alumno_Matricula', $this->matricula);
-            $crud->set_table('articulos');
-            $crud->set_subject('Artículo');
-
+            $crud->set_table('nivelacademic');
+            $crud->set_subject('Nivel o Grado Académico');
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->columns( 'AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
-            $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
-                 ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
-                 ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
+            $crud->columns( 'Cedula','TituloNivel','NFecha','DocTitulo','DocCedula');
+            $crud->display_as('NivelAc','Nivel/Grado Académico')->display_as('Cedula','No. Cédula')->display_as('TituloNivel','Titulo de Nivel/Grado')
+                 ->display_as('NFecha','Fecha de Obtención')->display_as('Estatus','Estatus')->display_as('TituloTesis','Titulo de la Tesis')
+                 ->display_as('NPais','País')->display_as('NSector','Sector')->display_as('NOrganizacion','Organización')->display_as('DocTitulo','Doc. comprobatorio Titulo')->display_as('DocCedula','Doc. comprobatorio Cédula');
+
+            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+            $crud->required_fields('NivelAc','TituloNivel','NSector','NOrganizacion');
+            $crud->set_field_upload('DocTitulo','assets/uploads/alumnos/'.$this->matricula);
+            $crud->set_field_upload('DocCedula','assets/uploads/alumnos/'.$this->matricula);
+
+
             $crud->unset_print();
             $crud->unset_export();
-            $crud-> unset_edit_fields ( 'Alumno_Matricula');
-
-            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
+             $crud->set_relation('NPais','paises','nombre');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
-            $crud->set_rules('DocArt','Doc. comprobatorio','max_length[26]');
-            $crud->field_type('AnioPublica','dropdown',range(2000, 2030));
+            $crud->set_rules('DocCedula','Doc. comprobatorio','max_length[26]');
+            $crud->set_rules('DocTitulo','Doc. comprobatorio','max_length[26]');
             $output = $crud->render();
 
             $this->_example_output($output);
