@@ -40,14 +40,14 @@ class Congresos extends CI_Controller {
 
 
 
-                $crud->field_type('Pais','dropdown',array( 
-                        "México","Afganistan","Africa del Sur","Albania","Alemania","Andorra","Angola",
-                        "Antigua y Barbuda","Antillas Holandesas","Arabia Saudita","Argelia","Argentina","Armenia","Aruba",
-                        "Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarusia","Belgica",
-                        "Belice","Benin","Bermudas","Bolivia","Bosnia","Botswana","Brasil","Brunei Darussulam","Bulgaria",
-                        "Burkina Faso","Burundi","Butan","Camboya","Camerun","Canada","Cape Verde","Chad","Chile","China",
-                        "Chipre","Colombia","Comoros","Congo","Corea del Norte","Corea del Sur","Costa de Marfíl","Costa Rica",
-                        "Croasia","Cuba","Dinamarca","Djibouti","Dominica","Ecuador","Egipto","El Salvador","Emiratos Arabes Unidos",
+                $crud->field_type('Pais','dropdown',array_flip($trans =array( 
+                        "México"=>"México","Afganistan"=>"Afganistan","Africa del Sur"=>"Africa del Sur","Albania"=>,"Alemania"=>,"Andorra"=>,"Angola"=>,
+                        "Antigua y Barbuda"=>,"Antillas Holandesas"=>,"Arabia Saudita"=>,"Argelia"=>,"Argentina"=>,"Armenia"=>,"Aruba"=>,
+                        "Australia"=>,"Austria"=>,"Azerbaijan"=>,"Bahamas"=>,"Bahrain"=>,"Bangladesh"=>,"Barbados"=>,"Belarusia"=>,"Belgica"=>,
+                        "Belice"=>,"Benin"=>,"Bermudas"=>,"Bolivia"=>,"Bosnia"=>,"Botswana"=>,"Brasil"=>,"Brunei Darussulam"=>,"Bulgaria",
+                        "Burkina Faso"=>,"Burundi"=>,"Butan"=>,"Camboya"=>,"Camerun"=>,"Canada"=>,"Cape Verde","Chad","Chile","China",
+                        "Chipre"=>,"Colombia"=>,"Comoros"=>,"Congo"=>,"Corea del Norte"=>,"Corea del Sur"=>,"Costa de Marfíl","Costa Rica",
+                        "Croasia"=>,"Cuba"=>,"Dinamarca"=>,"Djibouti"=>,"Dominica"=>,"Ecuador"=>,"Egipto"=>,"El Salvador"=>,"Emiratos Arabes Unidos",
                         "Eritrea","Eslovenia","España","Estados Unidos","Estonia","Etiopia","Fiji","Filipinas","Finlandia","Francia",
                         "Gabon","Gambia","Georgia","Ghana","Granada","Grecia","Groenlandia","Guadalupe","Guam","Guatemala",
                         "Guayana Francesa","Guerney","Guinea","Guinea-Bissau","Guinea Equatorial","Guyana","Haiti","Holanda",
@@ -65,7 +65,7 @@ class Congresos extends CI_Controller {
                         "Senegal","Seychelles","Sierra Leona","Singapur","Siria","Somalia","Sri Lanka (Ceilan)","Sudan","Suecia",
                         "Suiza","Sur Africa","Surinam","Swaziland","Tailandia","Taiwan","Tajikistan","Tanzania","Timor Oriental",
                         "Togo","Tokelau","Tonga","Trinidad & Tobago","Tunisia","Turkmenistan","Turquia","Ucrania","Uganda",
-                        "Union Europea","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Yemen","Yugoslavia","Zambia","Zimbabwe"));
+                        "Union Europea","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Yemen","Yugoslavia","Zambia","Zimbabwe")));
                 
             $output = $crud->render();
             $this->_example_output($output);

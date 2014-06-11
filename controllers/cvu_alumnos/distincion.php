@@ -25,13 +25,13 @@ class Distincion extends CI_Controller {
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'Titulos','Pais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
                 $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('DPais','País')->display_as('Otorgante','Otorgante')
-                     ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('Descripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
+                     ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('PDescripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
 
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->field_type('AnioP','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
-                $crud->required_fields('Titulos','Descripcion','AnioP');
+                $crud->required_fields('Titulos','PDescripcion','AnioP');
                 $crud->set_field_upload('DocPremio','assets/uploads/alumnos/'.$this->matricula);
                 $crud->set_rules('DocPremio','Doc. comprobatorio','max_length[26]');
                 
