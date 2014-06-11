@@ -43,7 +43,6 @@ class Control_alumnos extends CI_Controller {
     }
 
     function _example_output($output = null)
-
     {
         $output->titulo_tabla = "Control de Alumnos";
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";

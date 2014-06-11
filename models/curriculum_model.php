@@ -1,7 +1,7 @@
 <?php
 //require_once APPPATH.'models/Generic_Dataset_Model.php';
 
-class Usuarios_model extends CI_Model
+class Curriculum_model extends CI_Model
 {
     function __construct()
     {
@@ -9,12 +9,11 @@ class Usuarios_model extends CI_Model
         $this->load->database();
     }
 
-    function buscar_tabla_alumno($usuario, $password)
+    function informacion_personal($matricula)
     {
         $this->db->select('*');
         $this->db->from('alumno');
-        $this->db->where('Matricula', $usuario);
-        $this->db->where('Contrasenia', $password);
+        $this->db->where('Matricula', $matricula);
         $query = $this->db->get();
 
         if ($query->num_rows() == 0)
@@ -26,12 +25,11 @@ class Usuarios_model extends CI_Model
         }
     }
 
-    function buscar_tabla_personal($usuario, $password)
+    function get_tabla($tabla, $matricula)
     {
         $this->db->select('*');
-        $this->db->from('personal');
-        $this->db->where('NumPersonal', $usuario);
-        $this->db->where('Contrasenia', $password);
+        $this->db->from($tabla);
+        $this->db->where('Alumno_Matricula', $matricula);
         $query = $this->db->get();
 
         if ($query->num_rows() == 0)
@@ -39,17 +37,16 @@ class Usuarios_model extends CI_Model
             return FALSE;
         }else
         {
-            return $query->row();
+            return $query->result_array();
         }
     }
 
-    function buscar_en_BD($usuario, $password)
+    function get_divulgacion($matricula)
     {
         $this->db->select('*');
-        $this->db->from('perfil');
-        $this->db->join('academico','academico.noPersonal = perfil.academico_noPersonal');
-        $this->db->where('academico_noPersonal', $usuario);
-        $this->db->where('password', $password);
+        $this->db->from('divulgacion');
+        $this->db->where('Alumno_Matricula', $matricula);
+        $this->db->join('catalogodivulgacion', 'catalogodivulgacion.idCatalogoDivulgacion = divulgacion.idCatalogoDivulgacion');
         $query = $this->db->get();
 
         if ($query->num_rows() == 0)
@@ -57,9 +54,8 @@ class Usuarios_model extends CI_Model
             return FALSE;
         }else
         {
-            return $query->row();
+            return $query->result_array();
         }
-     }
-
+    }
 }
 

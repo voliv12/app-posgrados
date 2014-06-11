@@ -23,7 +23,7 @@ class Cambiar_password extends CI_Controller {
 
                 if ($this->form_validation->run() == FALSE)
                 {
-                    $datos['mensaje'] = "Contraseña muy corta (mínimo 5 carácteres) ó las contraseñas que introdujo no coinciden.";
+                    $datos['mensaje'] = "Contraseña muy corta (mínimo 5 carácteres) ó las contraseñas que introdujo no coinciden. Intentelo de nuevo.";
                     $datos_plantilla['contenido'] = $this->load->view('success_login', $datos, true);
 
                     if ($this->session->userdata('tipo_usuario') == "personal")
@@ -31,7 +31,7 @@ class Cambiar_password extends CI_Controller {
                         $this->load->view('plantilla_personal', $datos_plantilla);
                     }else
                     {
-                        $this->load->view('plantilla_alumno', $datos_plantilla);
+                        $this->load->view('plantilla_alumnos', $datos_plantilla);
                     }
                 }else
                 {

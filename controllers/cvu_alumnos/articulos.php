@@ -30,6 +30,11 @@ class Articulos extends CI_Controller {
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
 
 
+            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt');
+            $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
+            $crud->unset_texteditor('AutorArt','full_text');
+
             $crud->unset_edit_fields ( 'Alumno_Matricula');
 
             $crud->unset_print();
@@ -38,7 +43,7 @@ class Articulos extends CI_Controller {
 
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
-            $crud->set_rules('DocArt','Doc. comprobatorio','max_length[26]');
+            $crud->set_rules('DocArt','Doc. comprobatorio','max_length[20]');
             $crud->field_type('AnioPublica','dropdown',range(2000, 2030));
             $output = $crud->render();
 
@@ -49,7 +54,7 @@ class Articulos extends CI_Controller {
     }
 
 
-    
+
 
     function _example_output($output = null)
     {

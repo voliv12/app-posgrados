@@ -35,7 +35,13 @@ class Reportes extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('TituloRepor','Instancia','Objetivoreport','fechaReport');
                 $crud->set_field_upload('DocRecTec','assets/uploads/alumnos/'.$this->matricula);
+
+                $crud->unset_texteditor('Descripcion','full_text');
+                $crud->unset_texteditor('Objetivoreport','full_text');
+                $crud->unset_texteditor('Autores','full_text');
+
                 $crud->set_rules('DocRecTec','Doc. comprobatorio','max_length[26]');
+
                 $output = $crud->render();
 
                 $this->_example_output($output);

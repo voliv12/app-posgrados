@@ -35,7 +35,14 @@ class Proyecto extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('TipoProyecto','TituloProyecto','Entidad','POrganizacion','ProductoFinal');
                 $crud->set_field_upload('DocProyect','assets/uploads/alumnos/'.$this->matricula);
+
+                $crud->unset_texteditor('OtrasInstituciones','full_text');
+                $crud->unset_texteditor('Investigadores','full_text');
+                $crud->unset_texteditor('BecariosParticipantes','full_text');
+                $crud->unset_texteditor('ProductoFinal','full_text');
+
                 $crud->set_rules('DocProyect','Doc. comprobatorio','max_length[26]');
+
                 $output = $crud->render();
 
                 $this->_example_output($output);

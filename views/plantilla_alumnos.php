@@ -44,7 +44,7 @@
               <li class="divider"></li>
               <li><a href="cvu_alumnos/datos_personales/registroAlumno"><i class="icon-pencil"></i> Actualizar Información</a></li>
               <li><a data-toggle="modal" href="#myModal"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
-              <li><a href="Alumno"><i class="icon-download-alt"></i> Descargar CVU</a></li>
+              <li><a href="curriculum"><i class="icon-download-alt"></i> Descargar CVU</a></li>
               <li class="divider"></li>
               <li><a href="salir"><i class="icon-off"></i> Cerrar sesión</a></li>
             </ul>
