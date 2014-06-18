@@ -25,7 +25,7 @@ class Certificacion extends CI_Controller {
         
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->columns( 'NumFolio','Referencia','Especialidad','TipoCert','DocCertifiMedi');
-            $crud->display_as('NumFolio','No. de Folio')->display_as('Referencia','Otra Referencia')->display_as('CamRef','Específica la Referencia')
+            $crud->display_as('NumFolio','No. de Folio')->display_as('Referencia','Referencia')->display_as('CamRef','Otra Referencia')
                  ->display_as('Especialidad','Especialidad')->display_as('consejo','Consejo que Otorga la Certificación')->display_as('finicio','Fecha de Inicio')
                  ->display_as('ffin','Fecha de Finalización')->display_as('TipoCert','Tipo')->display_as('DocCertifiMedi','Doc. comprobatorio');
 
@@ -35,6 +35,7 @@ class Certificacion extends CI_Controller {
             $crud->required_fields('NumFolio','Referencia','Especialidad','TipoCert','ffin');
             $crud->set_field_upload('DocCertifiMedi','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_rules('DocCertifiMedi','Doc. comprobatorio','max_length[26]');
+            $crud->callback_add_field('CamRef',array($this,'add_field_Cometario'));
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -45,7 +46,10 @@ class Certificacion extends CI_Controller {
         
     }
     
-
+    function add_field_Cometario()
+        {
+            return '<input type="text" maxlength="50" name="programa"> (solo si el campo anterior es igual: otra)';
+        }
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Certificación";
