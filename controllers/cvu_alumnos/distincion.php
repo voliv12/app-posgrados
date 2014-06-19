@@ -34,7 +34,7 @@ class Distincion extends CI_Controller {
                 $crud->required_fields('Titulos','PDescripcion','AnioP');
                 $crud->set_field_upload('DocPremio','assets/uploads/alumnos/'.$this->matricula);
                 $crud->set_relation('DPais','paises','nombre');
-
+                $crud->unset_texteditor('PDescripcion','full_text');
                 $crud->unset_texteditor('Descripcion','full_text');
                 $crud->set_rules('DocPremio','Doc. comprobatorio','max_length[26]');
 

@@ -31,7 +31,7 @@ class Articulos extends CI_Controller {
             $crud->unset_print();
             $crud->unset_export();
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
-
+            $crud->unset_texteditor('AutorArt','full_text');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_rules('DocArt','Doc. comprobatorio','max_length[26]');
