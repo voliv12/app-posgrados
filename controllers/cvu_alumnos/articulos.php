@@ -26,7 +26,7 @@ class Articulos extends CI_Controller {
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->columns( 'AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
             $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
-                 ->display_as('Titulio','Titulo del Artículo')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
+                 ->display_as('Titulio','Titulo del Artículo')->display_as('ISSNAR','ISSN')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
             $crud->unset_print();
             $crud->unset_export();
