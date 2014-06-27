@@ -38,7 +38,7 @@ class Libro extends CI_Controller {
                 $crud->set_field_upload('DocLibro','assets/uploads/alumnos/'.$this->matricula);
 
                 $crud->unset_texteditor('AutorLib','full_text');
-
+                $crud->set_rules('NumISBN','Número ISBN','max_length[17]');
                 $crud->set_rules('DocLibro','Doc. comprobatorio','max_length[26]');
 
                 $output = $crud->render();
