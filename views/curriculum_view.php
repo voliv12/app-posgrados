@@ -1353,7 +1353,7 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
 			<w:spacing w:after="0"/>
 			<w:r>
-				<w:t><?php echo $j.". Sector: ".$estancias[$i]['Sector'].". Organización: ".$estancias[$i]['Organizacion'].". Fecha de inicio: ".$estancias[$i]['EFinicio'].". Fecha finalización ".$estancias[$i]['EFfin'].". Pais: ".$estancias[$i]['EPais'].". Línea de investigación: ".$estancias[$i]['LineaInvestiga'].". Logros: ".$estancias[$i]['Logros'];?></w:t>
+				<w:t><?php echo $j.". Sector: ".$estancias[$i]['Sector'].". Organización: ".$estancias[$i]['Organizacion'].". Fecha de inicio: ".$estancias[$i]['EFinicio'].". Fecha finalización ".$estancias[$i]['EFfin'].". Pais: ".$estancias[$i]['nombre'].". Línea de investigación: ".$estancias[$i]['LineaInvestiga'].". Logros: ".$estancias[$i]['Logros'];?></w:t>
 			</w:r>
 		</w:p>
 		<?php $i++; $j++; } ?>
@@ -1421,16 +1421,14 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				<w:t>Proyectos </w:t>
 			</w:r>
 		</w:p>
-		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="00624E6D" wsp:rsidP="00624E6D">
-			<w:pPr>
-				<w:tabs>
-					<w:tab w:val="left" w:pos="5250"/>
-				</w:tabs>
-			</w:pPr>
+		<?php $i = 0; $j = 1; foreach ($proyectos as $row) { //###############PROYECTOS##################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
 			<w:r>
-				<w:tab/>
+				<w:t><?php echo $j.". Tipo proyecto: ".$proyectos[$i]['TipoProyecto'].". Inicio: ".$proyectos[$i]['PFinicio'].". Fin: ".$proyectos[$i]['PFfin'].". Titulo del proyecto : ".$proyectos[$i]['TituloProyecto'].". Entidad : ".$proyectos[$i]['Entidad'].". Sector : ".$proyectos[$i]['PSector'].". Organización : ".$proyectos[$i]['POrganizacion'].". Otras Instituciones : ".$proyectos[$i]['OtrasInstituciones'].". Investigadores : ".$proyectos[$i]['Investigadores'].". Becarios participantes : ".$proyectos[$i]['BecariosParticipantes'].". Producto Final : ".$proyectos[$i]['ProductoFinal'];?></w:t>
 			</w:r>
 		</w:p>
+		<?php $i++; $j++; } ?>
 		<w:tbl>
 			<w:tblPr>
 				<w:tblW w:w="10632" w:type="dxa"/>
@@ -1485,16 +1483,14 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				</w:tc>
 			</w:tr>
 		</w:tbl>
-		<w:p wsp:rsidR="00BD030A" wsp:rsidRDefault="00795D9A" wsp:rsidP="00F21A2F">
-			<w:pPr>
-				<w:tabs>
-					<w:tab w:val="left" w:pos="6615"/>
-				</w:tabs>
-			</w:pPr>
+		<?php $i = 0; $j = 1; foreach ($idioma as $row) { //###############IDIOMA##################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
 			<w:r>
-				<w:t>Pintar idiomas</w:t>
+				<w:t><?php echo $j.". Idioma : ".$idioma[$i]['Idioma'].". Descripción : ".$idioma[$i]['Descripcion'].". Tipo : ".$idioma[$i]['tipoI'].". Nivel conversación : ".$idioma[$i]['NivelConv'].". Nivel Lectura : ".$idioma[$i]['NivelLec'].". Nivel escritura : ".$idioma[$i]['NivelEsc'].". Fecha evaluación : ".$idioma[$i]['FechaEvalu'].". Puntos : ".$idioma[$i]['Puntos'];?></w:t>
 			</w:r>
 		</w:p>
+		<?php $i++; $j++; } ?>
 		<w:tbl>
 			<w:tblPr>
 				<w:tblW w:w="10632" w:type="dxa"/>
@@ -1559,26 +1555,38 @@ echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 				</w:tc>
 			</w:tr>
 		</w:tbl>
-		<w:p wsp:rsidR="0065598A" wsp:rsidRDefault="0065598A" wsp:rsidP="00F21A2F">
-			<w:pPr>
-				<w:tabs>
-					<w:tab w:val="left" w:pos="6615"/>
-				</w:tabs>
-			</w:pPr>
-			<w:r>
-				<w:t>Artículos </w:t>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:r wsp:rsidRPr="00F31B21">
+				<w:rPr>
+					<w:b/>
+				</w:rPr>
+				<w:t>Artículos:</w:t>
 			</w:r>
 		</w:p>
-		<w:p wsp:rsidR="0065598A" wsp:rsidRDefault="0065598A" wsp:rsidP="00F21A2F">
-			<w:pPr>
-				<w:tabs>
-					<w:tab w:val="left" w:pos="6615"/>
-				</w:tabs>
-			</w:pPr>
+		<?php $i = 0; $j = 1; foreach ($articulos as $row) { //###############ARTICULOS##################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
 			<w:r>
-				<w:t>Capítulos de libros </w:t>
+				<w:t><?php echo $j.". Autor(es) : ".$articulos[$i]['AutorArt'].". Titulo: ".$articulos[$i]['Titulio'].". Revista : ".$articulos[$i]['RevistaPublic'].". Volumen ".$articulos[$i]['Volumen'].". Número : ".$articulos[$i]['NumVoLumen'].". ISSN : ".$articulos[$i]['ISSNAR'].". Tipo : ".$articulos[$i]['TipoArt'].". Año : ".$articulos[$i]['AnioPublica'];?></w:t>
 			</w:r>
 		</w:p>
+		<?php $i++; $j++; } ?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:r wsp:rsidRPr="00F31B21">
+				<w:rPr>
+					<w:b/>
+				</w:rPr>
+				<w:t>Capítulos de Libro:</w:t>
+			</w:r>
+		</w:p>
+		<?php $i = 0; $j = 1; foreach ($capitulos as $row) { //###############CAPITULOS##################?>
+		<w:p wsp:rsidR="00624E6D" wsp:rsidRDefault="0065598A">
+			<w:spacing w:after="0"/>
+			<w:r>
+				<w:t><?php echo $j.". Autor(es) : ".$capitulos[$i]['AutorCL'].". Titulo: ".$capitulos[$i]['TituloCap'].". Titulo Libro : ".$capitulos[$i]['TituloLibCP'].". Volumen ".$capitulos[$i]['VolumCL'].". Páginas : ".$capitulos[$i]['NumPagCL'].". Editores : ".$capitulos[$i]['EditoresCL'].". Editorial : ".$capitulos[$i]['EditorialCL'].". Número Citas : ".$capitulos[$i]['NumCitas'].". Año : ".$capitulos[$i]['Anio'].". Resumen : ".$capitulos[$i]['Resumen'];?></w:t>
+			</w:r>
+		</w:p>
+		<?php $i++; $j++; } ?>
 		<w:p wsp:rsidR="00BD030A" wsp:rsidRDefault="0065598A" wsp:rsidP="00F21A2F">
 			<w:pPr>
 				<w:tabs>

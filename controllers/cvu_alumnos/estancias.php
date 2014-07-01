@@ -15,7 +15,7 @@ class Estancias extends CI_Controller {
     }
 
     function registroEstancias()
-    {   
+    {
 
         if ($this->session->userdata('logged_in'))
         {
@@ -26,8 +26,8 @@ class Estancias extends CI_Controller {
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'Sector','Organizacion','LineaInvestiga','Logros','DocEstancia');
                 $crud->display_as('Sector','Sector')->display_as('Organizacion','Organización')->display_as('EFinicio','Fecha de Inicio')->display_as('Logros','Principales Logros')
-                     ->display_as('EFfin','Fecha de Finalización')->display_as('EPais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Doc. comprobatorio');
-                $crud->set_relation('EPais','paises','nombre');
+                     ->display_as('EFfin','Fecha de Finalización')->display_as('Pais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Doc. comprobatorio');
+                $crud->set_relation('Pais','paises','nombre');
 
                 $crud->unset_print();
                 $crud->unset_export();
@@ -37,19 +37,19 @@ class Estancias extends CI_Controller {
 
                 $crud->unset_texteditor('LineaInvestiga','full_text');
                 $crud->unset_texteditor('Logros','full_text');
-                
+
 
                 $crud->set_rules('DocEstancia','Doc. comprobatorio','max_length[26]');
 
                 $output = $crud->render();
                 $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
-                }    
+                }
 
     }
-    
+
 
     function _example_output($output = null)
     {

@@ -26,7 +26,7 @@ class Gradonivel extends CI_Controller {
             $crud->columns( 'Cedula','TituloNivel','NFecha','DocTitulo','DocCedula');
             $crud->display_as('NivelAc','Nivel/Grado Académico')->display_as('Cedula','No. Cédula')->display_as('TituloNivel','Titulo de Nivel/Grado')
                  ->display_as('NFecha','Fecha de Obtención')->display_as('Estatus','Estatus')->display_as('TituloTesis','Titulo de la Tesis')
-                 ->display_as('NPais','País')->display_as('NSector','Sector')->display_as('NOrganizacion','Organización')->display_as('DocTitulo','Doc. comprobatorio Titulo')->display_as('DocCedula','Doc. comprobatorio Cédula');
+                 ->display_as('Pais','País')->display_as('NSector','Sector')->display_as('NOrganizacion','Organización')->display_as('DocTitulo','Doc. comprobatorio Titulo')->display_as('DocCedula','Doc. comprobatorio Cédula');
 
             $crud-> unset_edit_fields ( 'Alumno_Matricula');
             $crud->required_fields('NivelAc','TituloNivel','NSector','NOrganizacion');
@@ -36,7 +36,7 @@ class Gradonivel extends CI_Controller {
 
             $crud->unset_print();
             $crud->unset_export();
-             $crud->set_relation('NPais','paises','nombre');
+             $crud->set_relation('Pais','paises','nombre');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_rules('DocCedula','Doc. comprobatorio','max_length[26]');
             $crud->set_rules('DocTitulo','Doc. comprobatorio','max_length[26]');

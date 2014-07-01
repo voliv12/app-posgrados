@@ -15,7 +15,7 @@ class Distincion extends CI_Controller {
     }
 
     function registroDistincion()
-    {   
+    {
         if ($this->session->userdata('logged_in'))
         {
                 $crud = new grocery_CRUD();
@@ -24,7 +24,7 @@ class Distincion extends CI_Controller {
                 $crud->set_subject('Distinciones y Premios');
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'Titulos','DPais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
-                $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('DPais','País')->display_as('Otorgante','Otorgante')
+                $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('Pais','País')->display_as('Otorgante','Otorgante')
                      ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('PDescripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
 
                 $crud->unset_print();
@@ -33,19 +33,19 @@ class Distincion extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Titulos','PDescripcion','AnioP');
                 $crud->set_field_upload('DocPremio','assets/uploads/alumnos/'.$this->matricula);
-                $crud->set_relation('DPais','paises','nombre');
+                $crud->set_relation('Pais','paises','nombre');
                 $crud->unset_texteditor('PDescripcion','full_text');
                 $crud->unset_texteditor('Descripcion','full_text');
                 $crud->set_rules('DocPremio','Doc. comprobatorio','max_length[26]');
 
                 $output = $crud->render();
                 $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
-                }    
+                }
     }
-    
+
 
     function _example_output($output = null)
     {

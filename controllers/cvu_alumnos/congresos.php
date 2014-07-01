@@ -39,7 +39,7 @@ class Congresos extends CI_Controller {
                 $crud->unset_texteditor('AutoresCon','full_text');
                 $crud->set_rules('DocCongre','Doc. comprobatorio','max_length[26]');
                 $crud->set_relation('Pais','paises','nombre');
-    
+
                 $output = $crud->render();
                 $this->_example_output($output);
         }
