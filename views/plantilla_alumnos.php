@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#"><strong>Instituto de Ciencias de la Salud - Sistema de Información de Posgrados</strong></a>
-
+          <a class="text-center pull-right" href="assets/uploads/ManualPosgradosics.pdf" target=\"_blank\"><i class="icon-question-sign"></i>  Ayuda</a>
           <div class="btn-group pull-right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="icon-user"></i>
