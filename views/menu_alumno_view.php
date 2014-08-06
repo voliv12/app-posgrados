@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <p>
-        <div class="span6"><a href="cvu_alumnos/Conacyt/registroConacyt" class="btn btn-block"><i class="icon-lock"></i> Apoyos CONACYT</a></div> 
+        <div class="span6"><a href="cvu_alumnos/conacyt/registroConacyt" class="btn btn-block"><i class="icon-lock"></i> Apoyos CONACYT</a></div> 
         <div class="span6"><a href="cvu_alumnos/gradonivel/registroGrado" class="btn btn-block"><i class="icon-lock"></i> Grado/Nivel Académico</a></div>   
         </p>
     </div>
