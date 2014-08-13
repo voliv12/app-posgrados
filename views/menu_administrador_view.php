@@ -17,5 +17,17 @@
        <div class="span6"><a href="personal/catalogos/sub_conacyt" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo Subprograma CONACYT</a></div>
     </p>
     </div>
+    <div class="row">
+        <p>
+        <div class="span6"><a href="personal/nab/registroNab" class="btn btn-block"><i class="icon-list-alt"></i> Control de Personal NAB</a></div>
+        <div class="span6"><a href="personal/documentando/registrodoc" class="btn btn-block"><i class="icon-pencil"></i> Documentando</a></div> 
+        </p>
+    </div>
+    <div class="row">
+        <p>
+        <div class="span6"><a href="personal/cursos/registrocurso" class="btn btn-block"><i class="icon-list-alt"></i> Cursos</a></div>
+        
+        </p>
+    </div>
 </div>
 </div>
