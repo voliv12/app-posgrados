@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Nab extends CI_Controller {
+class Documentando extends CI_Controller {
 
     function __construct()
     {
@@ -14,15 +14,20 @@ class Nab extends CI_Controller {
         //$this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroNab()
+    function registrodoc()
     {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->set_table('nab');
-            $crud->set_subject('Personal');
-            $crud->display_as('numpersonal','Número de Personal')->display_as('nompersonal','Nombre del Personal');
-            $crud->required_fields('numpersonal', 'nompersonal');
+            $crud->set_table('documentando');
+            $crud->set_subject('Registro');
+            $crud->display_as('codigo','Código')
+                 ->display_as('descripcion','Descripción')
+                 ->display_as('nivelacad','Nivel Académico')
+                 ->display_as('creditos','Créditos');
+
+
+            $crud->required_fields('codigo', 'descripcion', 'nivelacad','creditos');
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -34,10 +39,10 @@ class Nab extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Personal NAB";
-        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
+        $output->titulo_tabla = "Registro de Documentando";
+        $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_personal', $datos_plantilla);
+        $this->load->view('plantilla_administrativo', $datos_plantilla);
     }
 
 }

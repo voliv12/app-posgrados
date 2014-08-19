@@ -28,7 +28,7 @@ class Cursos extends CI_Controller {
                  ->display_as('nab_numpersonal','Maestro Interno')
                  ->display_as('personalext','Maestro Externo');
             $crud->required_fields('', 'nompersonal');
-            $crud->set_relation('documentando_codigo','documentando','{descripcion}  -  {nivelacad}');
+            $crud->set_relation('documentando_codigo','documentando','{nivelacad}  -  {descripcion}');
             $crud->set_relation('alumno_Matricula','alumno','NombreA');
             $crud->set_relation('nab_numpersonal','nab','nompersonal');
             
@@ -45,9 +45,9 @@ class Cursos extends CI_Controller {
 
     {
         $output->titulo_tabla = "registro de curso ";
-        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
+        $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_personal', $datos_plantilla);
+        $this->load->view('plantilla_administrativo', $datos_plantilla);
     }
 
 }

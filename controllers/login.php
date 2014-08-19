@@ -86,7 +86,7 @@ class Login extends CI_Controller {
                     }
                     elseif($row->perfil == "Administrativo")
                     {
-                        redirect('Administrativo');
+                        redirect('administrativo');
                     }else
                     {
                         redirect('Directivo');
