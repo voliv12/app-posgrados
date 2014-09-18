@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Documentando extends CI_Controller {
+class Calificaciones extends CI_Controller {
 
     function __construct()
     {
@@ -14,24 +14,19 @@ class Documentando extends CI_Controller {
         //$this->matricula = $this->session->userdata('matricula');
     }
 
-    function registrodoc()
+    function index()
     {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->set_table('documentando');
-            $crud->set_subject('Registro');
-            $crud->display_as('codigo','Código')
-                 ->display_as('descripcion','Descripción')
-                 ->display_as('nivelacad','Nivel Académico')
-                 ->display_as('creditos','Créditos');
-            $crud->unset_print();
-            $crud->unset_export();
-            $crud->unset_add();
-            $crud->unset_edit();
-            $crud->unset_delete();
-
-            $crud->required_fields('codigo', 'descripcion', 'nivelacad','creditos');
+            $crud->set_table('calificaciones');
+            $crud->set_subject('calificación');
+            $crud->display_as('Alumno_Matricula','Nombre del alumno')
+                 ->display_as('boletacalific','Boleta de Calificación');
+            $crud->set_relation('Alumno_Matricula','alumno','NombreA');
+            $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
+            $crud->set_rules('boletacalific','Boleta de Calificación','max_length[40]');
+            $crud->required_fields('alumno_Matricula', 'boletacalific');
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -43,7 +38,7 @@ class Documentando extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Registro de Documentando";
+        $output->titulo_tabla = "registro de curso ";
         $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);

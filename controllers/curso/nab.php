@@ -23,6 +23,8 @@ class Nab extends CI_Controller {
             $crud->set_subject('Personal');
             $crud->display_as('numpersonal','Número de Personal')->display_as('nompersonal','Nombre del Personal');
             $crud->required_fields('numpersonal', 'nompersonal');
+            $crud->unset_print();
+            $crud->unset_export();
             $output = $crud->render();
 
             $this->_example_output($output);

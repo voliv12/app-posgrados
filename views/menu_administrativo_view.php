@@ -20,4 +20,14 @@
         </div>
        
 </div>
+<div class="container well">
+    <h4><a>Registro de Calificaciones</a></h4>
+        <div class="row">
+            <p>
+            <div class="span6"><a href="curso/calificaciones" class="btn btn-block"><i class="icon-list-alt"></i> Calificaciones</a></div>
+            
+            </p>
+        </div>
+       
+</div>
 </div>

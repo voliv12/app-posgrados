@@ -1,6 +1,6 @@
 <div class="row">
 <div class="container well">
-        <h1><a>Menú principal</a></h1>
+        <h1><a>Menú Currículum Vitae Único</a></h1>
         <i class="icon-arrow-down"></i> Seleccione una Opción.
 </div>
 
@@ -49,5 +49,4 @@
         <div class="span6"><a href="cvu_alumnos/gradonivel/registroGrado" class="btn btn-block"><i class="icon-lock"></i> Grado/Nivel Académico</a></div>   
         </p>
     </div>
-
 </div></div>
