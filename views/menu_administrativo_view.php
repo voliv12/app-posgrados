@@ -7,10 +7,10 @@
 <div class="container well">
     <h4><a>Programacion de Cursos</a></h4>
         <div class="row">
-        <p>
-        <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-list-alt"></i> Control de Personal NAB</a></div>
-        <div class="span6"><a href="curso/documentando/registrodoc" class="btn btn-block"><i class="icon-pencil"></i> Documentando</a></div> 
-        </p>
+            <p>
+            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-list-alt"></i> Control de Personal NAB</a></div>
+            <div class="span6"><a href="curso/documentando/registrodoc" class="btn btn-block"><i class="icon-pencil"></i> Documentando</a></div> 
+            </p>
         </div>
         <div class="row">
             <p>
