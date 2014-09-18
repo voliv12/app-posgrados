@@ -3,7 +3,6 @@
         <h1><a>Menú principal</a></h1>
         <i class="icon-arrow-down"></i> Seleccione una Opción.
 </div>
-
 <div class="container well">
     <div class="row">
         <p>
@@ -17,5 +16,6 @@
        <div class="span6"><a href="personal/catalogos/sub_conacyt" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo Subprograma CONACYT</a></div>
     </p>
     </div>
+   
 </div>
 </div>
