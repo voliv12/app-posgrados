@@ -15,14 +15,14 @@ class Certificacion extends CI_Controller {
     }
 
     function registroCertificacion()
-    {  
+    {
          if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
             $crud->where('Alumno_Matricula', $this->matricula);
             $crud->set_table('certifimedica');
             $crud->set_subject('Certificaciones Medicas');
-        
+
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->columns( 'NumFolio','Referencia','Especialidad','TipoCert','DocCertifiMedi');
             $crud->display_as('NumFolio','No. de Folio')->display_as('Referencia','Referencia')->display_as('CamRef','Otra Referencia')
@@ -39,13 +39,13 @@ class Certificacion extends CI_Controller {
             $output = $crud->render();
 
             $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
                 }
-        
+
     }
-    
+
     function add_field_Cometario()
         {
             return '<input type="text" maxlength="50" name="programa"> (solo si el campo anterior es igual: otra)';

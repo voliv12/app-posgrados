@@ -28,13 +28,13 @@ Class Curriculum extends CI_controller{
                                     'correo'     => $row->Correo
                                 );
 
-        $datos['congresos'] = $this->curriculum_model->get_tabla('congresos', $this->matricula);
-        $datos['divulgacion'] = $this->curriculum_model->get_divulgacion($this->matricula);
-        $datos['estancias'] = $this->curriculum_model->get_tabla_paises('estancias', $this->matricula);
-        $datos['proyectos'] = $this->curriculum_model->get_tabla('proyectos', $this->matricula);
-        $datos['idioma'] = $this->curriculum_model->get_tabla('idioma', $this->matricula);
-        $datos['articulos'] = $this->curriculum_model->get_tabla('articulos', $this->matricula);
-        $datos['capitulos'] = $this->curriculum_model->get_tabla('caplibros', $this->matricula);
+        $datos['congresos']     = $this->curriculum_model->get_tabla('congresos', $this->matricula);
+        $datos['divulgacion']   = $this->curriculum_model->get_divulgacion($this->matricula);
+        $datos['estancias']     = $this->curriculum_model->get_tabla_paises('estancias', $this->matricula);
+        $datos['proyectos']     = $this->curriculum_model->get_tabla('proyectos', $this->matricula);
+        $datos['idioma']        = $this->curriculum_model->get_tabla('idioma', $this->matricula);
+        $datos['articulos']     = $this->curriculum_model->get_tabla('articulos', $this->matricula);
+        $datos['capitulos']     = $this->curriculum_model->get_tabla('caplibros', $this->matricula);
 
         // print_r($datos);
 

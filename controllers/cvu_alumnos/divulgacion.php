@@ -15,14 +15,14 @@ class Divulgacion extends CI_Controller {
     }
 
     function registroDivulgacion()
-    {   
+    {
         if ($this->session->userdata('logged_in'))
         {
                 $crud = new grocery_CRUD();
                 $crud->where('Alumno_Matricula', $this->matricula);
                 $crud->set_table('divulgacion');
                 $crud->set_subject('Divulgacion y Difusión de Ciencia y Tecnologia');
-                $crud->set_relation('idCatalogoDivulgacion','CatalogoDivulgacion','TipoParticipacion');
+                $crud->set_relation('idCatalogoDivulgacion','catalogodivulgacion','TipoParticipacion');
                 $crud->columns( 'idCatalogoDivulgacion','Dirigido','Titulo','Dependencia','DocDivulga');
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->display_as('idCatalogoDivulgacion','Tipo de Participación')->display_as('Dirigido','Dirigido a')->display_as('Titulo','Titulo')
@@ -42,12 +42,12 @@ class Divulgacion extends CI_Controller {
 
                 $this->_example_output($output);
 
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
-                }    
+                }
     }
-    
+
 
     function _example_output($output = null)
     {
