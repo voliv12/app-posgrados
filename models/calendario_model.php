@@ -16,7 +16,7 @@ class Calendario_model extends CI_MODEL
             'show_next_prev' => TRUE,
 
             //url de la función que le da los datos al calendario cuando pulsamos next o prev
-            'next_prev_url' => 'http://localhost/calendario_ci/calendario/cal/'
+            'next_prev_url' => 'http://localhost/posgrados/calendario/cal/'
         );
 
         $this->config['template'] = '

@@ -11,11 +11,11 @@ Class Calendario extends CI_CONTROLLER
 		$this->load->library('form_validation');
 
 		//si la fecha a la que queremos acceder es menor que la anterior no dejamos pasar
-		
+
 	}
 
 	public function cal($year = null, $month = null)
-    {    	
+    {
 
         if(!$year)
         {
@@ -27,17 +27,17 @@ Class Calendario extends CI_CONTROLLER
         }
 
         //si el año y el mes al que queremos acceder es menor que el actual no dejamos
-        if($this->uri->segment(3).'/'.$this->uri->segment(4) < date('Y').'/'.date('m'))
+        /*if($this->uri->segment(3).'/'.$this->uri->segment(4) < date('Y').'/'.date('m'))
     	{
     		redirect(base_url('calendario/cal/'.date('Y').'/'.date('m')));
-    	}
-      
+    	}*/
+
       	//como vemos en genera calendario le pasamos el año y el mes para que sepa que debe mostrar
         $data =  array('titulo' => 'Calendario con ci','calendario' => $this->calendario_model->genera_calendario($year, $month));
         $this->load->view('calendario_view', $data);
     }
 
-  /*  public function calen()
+    public function calen()
     {
 
     	//limpiamos el campo comentario y procesamos el formulario para marcar un evento
@@ -48,7 +48,6 @@ Class Calendario extends CI_CONTROLLER
         	$fecha = "$year-$month-$dia";
         	$comentario = $this->input->post('comentario');
 
-
             $evento = $this->calendario_model->insert_calendario($fecha, $comentario);
             if($evento)
             {
@@ -56,7 +55,10 @@ Class Calendario extends CI_CONTROLLER
             }else{
             	echo 'error';
             }
-    }*/
+    }
+
+
+
 }
 
 //end controller
