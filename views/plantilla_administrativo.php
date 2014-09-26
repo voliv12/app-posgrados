@@ -5,15 +5,18 @@
     <meta charset="utf-8"></meta>
     <title>Sistema de Información de Posgrado</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href= "<?php echo $this->config->item('base_url'); ?>">
-
-    <script src="assets/jquery-1.8.2.js" type="text/javascript"></script>
-    <script src="assets/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
-
-    <script src="assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <base href= "<?php echo $this->config->item('base_url'); ?>"/>
+    <link rel="stylesheet" href="assets/calendario_ci/css/estilos.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/south-street/jquery-ui.css" />
     <link href=" assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href=" assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <!--script src="assets/jquery-1.8.2.js" type="text/javascript"></script-->
+    <!--script src="assets/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script-->
+    <script src="assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/calendario_ci/js/funciones.js"></script>
     <style>
       body {
         padding-top: 50px;
