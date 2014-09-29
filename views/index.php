@@ -39,7 +39,7 @@
 		$(".detail").live('click',function(){
 			$(".s_date").html("Detail Event for "+$(this).attr('val')+" <?php echo "$month $year";?>");
 			var day = $(this).attr('val');
-			var add = '<input type="button" name="add" value="Add Event" val="'+day+'" class="add_event"/>';
+			var add = '<input type="button" name="add" value="Agregar Evento" val="'+day+'" class="add_event"/>';
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
@@ -69,7 +69,7 @@
 			if(confirm('Are you sure delete this event ?')){
 				var deleted = $(this).parent().parent();
 				var day =  $(this).attr('day');
-				var add = '<input type="button" name="add" value="Add Event" val="'+day+'" class="add_event"/>';
+				var add = '<input type="button" name="add" value="Agregar Evento" val="'+day+'" class="add_event"/>';
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',

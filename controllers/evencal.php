@@ -65,11 +65,11 @@ class Evencal extends CI_Controller {
 		$this->form_validation->set_rules('day', 'Day', 'trim|required|is_natural_no_zero|less_than[32]|xss_clean');
 
 		if ($this->form_validation->run() == FALSE){
-			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Please insert valid value'));
+			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Por favor, introduzca un valor válido'));
 		}else{
 			$data = $this->evencal->getEvent($this->input->post('year'), $this->input->post('mon'), $this->input->post('day'));
 			if($data == null){
-				echo json_encode(array('status' => false, 'title_msg' => 'No Event', 'msg' => 'There\'s no event in this date'));
+				echo json_encode(array('status' => false, 'title_msg' => 'No Existe Evento', 'msg' => 'No hay eventos en esta fecha'));
 			}else{
 				echo json_encode(array('status' => true, 'data' => $data));
 			}
@@ -97,7 +97,7 @@ class Evencal extends CI_Controller {
 		$this->form_validation->set_rules('event', 'Event', 'trim|required|xss_clean');
 
 		if ($this->form_validation->run() == FALSE){
-			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Please insert valid value'));
+			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Por favor, introduzca un valor válido'));
 		}else{
 			$this->evencal->addEvent($this->input->post('year'),
 											 $this->input->post('mon'),
@@ -122,7 +122,7 @@ class Evencal extends CI_Controller {
 			if($rows > 0){
 				echo json_encode(array('status' => true, 'row' => $rows));
 			}else{
-				echo json_encode(array('status' => true, 'row' => $rows, 'title_msg' => 'No Event', 'msg' => 'There\'s no event in this date'));
+				echo json_encode(array('status' => true, 'row' => $rows, 'title_msg' => 'No Existe Evento', 'msg' => 'No hay eventos en esta fecha'));
 			}
 		}
 	}
