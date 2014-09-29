@@ -34,7 +34,7 @@
     <h4><a>Calendario</a></h4>
         <div class="row">
             <p>
-            <div class="span6"><a href="calendario/cal" class="btn btn-block"><i class="icon-list-alt"></i> Calendario</a></div>
+            <div class="span6"><a href="evencal" class="btn btn-block"><i class="icon-list-alt"></i> Eventos</a></div>
 
             </p>
         </div>

@@ -1,43 +1,46 @@
 <html lang="es">
 <head>
 	<meta charset="utf-8">
-	<title>My Event Calendar (Evencal)</title>
+	<title>Calendario de Eventos</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>../assets/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>../assets/css/colorbox.css"/>
 	<script type="text/javascript" src="<?php echo base_url();?>../assets/js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>../assets/js/jquery.colorbox-min.js"></script>
 </head>
 <body>
+	<h2><a>Calendario de Eventos de Maestría y Doctorado del ICS</a></h2>
+	<div style="width:100%; text-align:center; padding-left: 40%;">
+	<input type="button" value="Menú Principal"  Onclick="history.back()" class="menuprincipal"/></div>
 	<div id="evencal">
 		<div class="calendar">
 			<?php echo $notes?>
 			<!--span>by <a href="http://zawaruddin.blogspot.com"><strong>zawaruddin.blogspot.com</strong></a></span-->
 		</div>
 		<div class="event_detail">
-			<h2 class="s_date">Detalles del Evento <?php echo "$day $month $year";?></h2>
+			<h3 class="s_date">Detalles del Evento <?php echo "$day $month $year";?></h3>
 			<div class="detail_event">
 				<?php
 					if(isset($events)){
 						$i = 1;
 						foreach($events as $e){
 						 if($i % 2 == 0){
-								echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'../assets/css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
+								echo '<div class="info1"><h4>'.$e['time'].'<img src="'.base_url().'../assets/css/images/delete.png" class="delete" alt="" title="Eliminar este evento="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
 							}else{
-								echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'../assets/css/images/delete.png" class="delete" alt="" title="delete this event" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
+								echo '<div class="info2"><h4>'.$e['time'].'<img src="'.base_url().'../assets/css/images/delete.png" class="delete" alt="" title="Eliminar este evento" day="'.$day.'" val="'.$e['id'].'" /></h4><p>'.$e['event'].'</p></div>';
 							}
 							$i++;
 						}
 					}else{
-						echo '<div class="message"><h4>No Event</h4><p>There\'s no event in this date</p></div>';
+						echo '<div class="message"><h4>No Existe Evento</h4><p>No hay eventos en esta fecha</p></div>';
 					}
 				?>
-				<input type="button" name="add" value="Add Event" val="<?php echo $day;?>" class="add_event"/>
+				<input type="button" name="add" value="Agregar Evento" val="<?php echo $day;?>" class="add_event"/>
 			</div>
 		</div>
 	</div>
 	<script>
 		$(".detail").live('click',function(){
-			$(".s_date").html("Detail Event for "+$(this).attr('val')+" <?php echo "$month $year";?>");
+			$(".s_date").html("Detalles del Evento "+$(this).attr('val')+" <?php echo "$month $year";?>");
 			var day = $(this).attr('val');
 			var add = '<input type="button" name="add" value="Agregar Evento" val="'+day+'" class="add_event"/>';
 			$.ajax({
@@ -51,9 +54,9 @@
 						var i = 1;
 						$.each(data.data, function(index, value) {
 						    if(i % 2 == 0){
-								html = html+'<div class="info1"><h4>'+value.time+'<img src="<?php echo base_url();?>../assets/css/images/delete.png" class="delete" alt="" title="delete this event" day="'+day+'" val="'+value.id+'" /></h4><p>'+value.event+'</p></div>';
+								html = html+'<div class="info1"><h4>'+value.time+'<img src="<?php echo base_url();?>../assets/css/images/delete.png" class="delete" alt="" title="Eliminar este evento" day="'+day+'" val="'+value.id+'" /></h4><p>'+value.event+'</p></div>';
 							}else{
-								html = html+'<div class="info2"><h4>'+value.time+'<img src="<?php echo base_url();?>../assets/css/images/delete.png" class="delete" alt="" title="delete this event" day="'+day+'" val="'+value.id+'" /></h4><p>'+value.event+'</p></div>';
+								html = html+'<div class="info2"><h4>'+value.time+'<img src="<?php echo base_url();?>../assets/css/images/delete.png" class="delete" alt="" title="Eliminar este evento" day="'+day+'" val="'+value.id+'" /></h4><p>'+value.event+'</p></div>';
 							}
 							i++;
 						});
@@ -66,7 +69,7 @@
 			});
 		});
 		$(".delete").live("click", function() {
-			if(confirm('Are you sure delete this event ?')){
+			if(confirm('¿Esta seguro de eliminar este evento?')){
 				var deleted = $(this).parent().parent();
 				var day =  $(this).attr('day');
 				var add = '<input type="button" name="add" value="Agregar Evento" val="'+day+'" class="add_event"/>';
@@ -85,7 +88,7 @@
 							}
 							deleted.remove();
 						}else{
-							alert('an error for deleting event');
+							alert('error al eliminar este evento');
 						}
 					}
 				});
