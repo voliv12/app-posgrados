@@ -23,7 +23,7 @@ class Calificaciones extends CI_Controller {
             $crud->set_subject('calificación');
             $crud->display_as('Alumno_Matricula','Nombre del alumno')
                  ->display_as('boletacalific','Boleta de Calificación');
-            $crud->set_relation('Alumno_Matricula','alumno','NombreA');
+            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
             $crud->set_rules('boletacalific','Boleta de Calificación','max_length[40]');
             $crud->required_fields('alumno_Matricula', 'boletacalific');

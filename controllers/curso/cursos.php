@@ -28,7 +28,7 @@ class Cursos extends CI_Controller {
                  ->display_as('nab_numpersonal','Maestro Interno')
                  ->display_as('personalext','Maestro Externo');
             $crud->set_relation('documentando_codigo','documentando','{nivelacad}  -  {descripcion}');
-            $crud->set_relation('alumno_Matricula','alumno','NombreA');
+            $crud->set_relation('alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->set_relation('nab_numpersonal','nab','nompersonal');
             $crud->unset_print();
             $crud->unset_export();
