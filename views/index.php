@@ -1,16 +1,31 @@
 <html lang="es">
 <head>
 	<meta charset="utf-8">
+	<base href= "<?php echo $this->config->item('base_url'); ?>"/>
 	<title>Calendario de Eventos</title>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>../assets/css/style.css"/>
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>../assets/css/colorbox.css"/>
-	<script type="text/javascript" src="<?php echo base_url();?>../assets/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>../assets/js/jquery.colorbox-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="../assets/css/colorbox.css"/>
+	<script type="text/javascript" src="../assets/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery.colorbox-min.js"></script>
+	<style type="text/css">h1{background:#F2F2F2}</style>
 </head>
 <body>
-	<h2><a>Calendario de Eventos de Maestría y Doctorado del ICS</a></h2>
-	<div style="width:100%; text-align:center; padding-left: 40%;">
-	<input type="button" value="Menú Principal"  Onclick="history.back()" class="menuprincipal"/></div>
+	<h1><font color=#6E6E6E face="times new roman">Calendario de Eventos de Maestría y Doctorado del ICS </font></h1>
+	
+	<?php if ($this->session->userdata('tipo_usuario') == 'alumno')
+			{
+			echo '<div style="width:100%; text-align:center; padding-left: 40%;" class="span6"><a href="principal" class="menuprincipal"> Menú Principal</a></div></div>';
+			}
+		  elseif (($this->session->userdata('tipo_usuario') == 'personal') and ($this->session->userdata('perfil') == 'directivo'))
+				{
+				echo '<div style="width:100%; text-align:center; padding-left: 40%;" class="span6"><a href="directivo" class="menuprincipal"> Menú Principal</a></div></div>';
+				}
+				else {
+					 echo '<div style="width:100%; text-align:center; padding-left: 40%;" class="span6"><a href="administrativo" class="menuprincipal"> Menú Principal</a></div></div>';
+					 }
+			   
+	?>
+
 	<div id="evencal">
 		<div class="calendar">
 			<?php echo $notes?>
@@ -38,6 +53,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script>
 		$(".detail").live('click',function(){
 			$(".s_date").html("Detalles del Evento "+$(this).attr('val')+" <?php echo "$month $year";?>");
@@ -68,6 +84,8 @@
 				}
 			});
 		});
+
+<?php if ($this->session->userdata('tipo_usuario') != 'alumno'){ ?>
 		$(".delete").live("click", function() {
 			if(confirm('¿Esta seguro de eliminar este evento?')){
 				var deleted = $(this).parent().parent();
@@ -101,6 +119,8 @@
 					data:{year:<?php echo $year;?>,mon:<?php echo $mon;?>, day: $(this).attr('val')}
 			});
 		});
-</script>
+
+<?php } ?>
+	</script>
 </body>
 </html>
