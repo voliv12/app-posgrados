@@ -16,7 +16,7 @@
 			{
 			echo '<div style="width:100%; text-align:center; padding-left: 40%;" class="span6"><a href="principal" class="menuprincipal"> Menú Principal</a></div></div>';
 			}
-		  elseif (($this->session->userdata('tipo_usuario') == 'personal') and ($this->session->userdata('perfil') == 'directivo'))
+		  elseif (($this->session->userdata('tipo_usuario') == 'personal') || ($this->session->userdata('perfil') == 'directivo' ))
 				{
 				echo '<div style="width:100%; text-align:center; padding-left: 40%;" class="span6"><a href="directivo" class="menuprincipal"> Menú Principal</a></div></div>';
 				}

@@ -7,6 +7,7 @@
     <div class="row">
         <p>
         <div class="span6"><a href="alumnoscvu" class="btn btn-block"><i class="icon-list"></i> Currículum Vitae Único</a></div>
+        <div class="span6"><a href="evencal" class="btn btn-block"><i class="icon-list-alt"></i> Calendario de Eventos</a></div>
         </p>
     </div>
 

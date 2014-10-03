@@ -29,6 +29,9 @@ class Distincion extends CI_Controller {
 
                 $crud->unset_print();
                 $crud->unset_export();
+                $crud->unset_add();
+                $crud->unset_edit();
+                $crud->unset_delete();
                 $crud->field_type('AnioP','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('Titulos','PDescripcion','AnioP');
@@ -50,9 +53,9 @@ class Distincion extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Distinciones y Premios";
-        $output->barra_navegacion = " <li><a href='principal'> Menú principal </a></li> <li> <a href='alumno'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li> <li> <a href='alumnoscvu'> Menú CVU </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_alumnos', $datos_plantilla);
+        $this->load->view('plantilla_directivo', $datos_plantilla);
     }
 }
 

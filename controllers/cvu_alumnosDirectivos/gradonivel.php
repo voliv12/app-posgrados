@@ -32,11 +32,12 @@ class Gradonivel extends CI_Controller {
             $crud->required_fields('NivelAc','TituloNivel','NSector','NOrganizacion');
             $crud->set_field_upload('DocTitulo','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_field_upload('DocCedula','assets/uploads/alumnos/'.$this->matricula);
-
-
             $crud->unset_print();
             $crud->unset_export();
-             $crud->set_relation('Pais','paises','nombre');
+            $crud->unset_add();
+            $crud->unset_edit();
+            $crud->unset_delete();
+            $crud->set_relation('Pais','paises','nombre');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_rules('DocCedula','Doc. comprobatorio','max_length[26]');
             $crud->set_rules('DocTitulo','Doc. comprobatorio','max_length[26]');
@@ -54,9 +55,9 @@ class Gradonivel extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Grado ó Nivel Académico";
-        $output->barra_navegacion = " <li><a href='principal'> Menú principal </a></li> <li> <a href='alumno'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li> <li> <a href='alumnoscvu'> Menú CVU </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_alumnos', $datos_plantilla);
+        $this->load->view('plantilla_directivo', $datos_plantilla);
     }
 
 }
