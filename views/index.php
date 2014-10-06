@@ -14,7 +14,7 @@
 			<!--span>by <a href="http://zawaruddin.blogspot.com"><strong>zawaruddin.blogspot.com</strong></a></span-->
 		</div>
 		<div class="event_detail">
-			<h2 class="s_date">Detalles del Evento <?php echo "$day $month $year";?></h2>
+			<h3 class="s_date">Detalles del Evento <?php echo "$day $month $year";?></h3>
 			<div class="detail_event">
 				<?php
 					if(isset($events)){
