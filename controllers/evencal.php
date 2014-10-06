@@ -21,6 +21,8 @@ class Evencal extends CI_Controller {
 	}
 
 	function index($year = null, $month = null, $day = null){
+		 if($this->session->userdata('logged_in'))
+        {
 		$year  = (empty($year) || !is_numeric($year))?  date('Y') :  $year;
 		$month = (is_numeric($month) &&  $month > 0 && $month < 13)? $month : date('m');
 		$day   = (is_numeric($day) &&  $day > 0 && $day < 31)?  $day : date('d');
@@ -36,10 +38,16 @@ class Evencal extends CI_Controller {
 						'events'=> $cur_event
 					);
 		$this->load->view('index', $data);
+		}else
+        {
+            redirect('login');
+        }
 	}
 
 	// for convert (int) month to (string) month in Indonesian
 	function _month($month){
+		if($this->session->userdata('logged_in'))
+        {
 		$month = (int) $month;
 		switch($month){
 			case 1 : $month = 'Enero'; Break;
@@ -56,28 +64,41 @@ class Evencal extends CI_Controller {
 			case 12 : $month = 'Diciembre'; Break;
 		}
 		return $month;
+		}else
+        {
+            redirect('login');
+        }
 	}
 
 	// get detail event for selected date
 	function detail_event(){
+		if($this->session->userdata('logged_in'))
+        {
 		$this->form_validation->set_rules('year', 'Year', 'trim|required|is_natural_no_zero|xss_clean');
 		$this->form_validation->set_rules('mon', 'Month', 'trim|required|is_natural_no_zero|less_than[13]|xss_clean');
 		$this->form_validation->set_rules('day', 'Day', 'trim|required|is_natural_no_zero|less_than[32]|xss_clean');
 
 		if ($this->form_validation->run() == FALSE){
-			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Please insert valid value'));
+			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Por favor, introduzca un valor válido'));
 		}else{
 			$data = $this->evencal->getEvent($this->input->post('year'), $this->input->post('mon'), $this->input->post('day'));
 			if($data == null){
-				echo json_encode(array('status' => false, 'title_msg' => 'No Event', 'msg' => 'There\'s no event in this date'));
+				echo json_encode(array('status' => false, 'title_msg' => 'No Existe Evento', 'msg' => 'No hay eventos en esta fecha'));
 			}else{
 				echo json_encode(array('status' => true, 'data' => $data));
 			}
 		}
+		}else
+        {
+            redirect('login');
+        }
+
 	}
 
 	// popup for adding event
 	function add_event(){
+		if($this->session->userdata('logged_in'))
+        {
 		$data = array(
 					'day'   => $this->input->post('day'),
 					'mon'   => $this->input->post('mon'),
@@ -85,10 +106,16 @@ class Evencal extends CI_Controller {
 					'year'  => $this->input->post('year'),
 				);
 		$this->load->view('add_event', $data);
+		}else
+        {
+            redirect('login');
+        }
 	}
 
 	// do adding event for selected date
 	function do_add(){
+		if($this->session->userdata('logged_in'))
+        {
 		$this->form_validation->set_rules('year', 'Year', 'trim|required|is_natural_no_zero|xss_clean');
 		$this->form_validation->set_rules('mon', 'Month', 'trim|required|is_natural_no_zero|less_than[13]|xss_clean');
 		$this->form_validation->set_rules('day', 'Day', 'trim|required|is_natural_no_zero|less_than[32]|xss_clean');
@@ -97,7 +124,7 @@ class Evencal extends CI_Controller {
 		$this->form_validation->set_rules('event', 'Event', 'trim|required|xss_clean');
 
 		if ($this->form_validation->run() == FALSE){
-			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Please insert valid value'));
+			echo json_encode(array('status' => false, 'title_msg' => 'Error', 'msg' => 'Por favor, introduzca un valor válido'));
 		}else{
 			$this->evencal->addEvent($this->input->post('year'),
 											 $this->input->post('mon'),
@@ -106,10 +133,17 @@ class Evencal extends CI_Controller {
 											 $this->input->post('event'));
 			echo json_encode(array('status' => true, 'time' => $this->input->post('time'), 'event' => $this->input->post('event')));
 		}
+		}else
+        {
+            redirect('login');
+        }
 	}
 
 	// delete event
 	function delete_event(){
+
+		if($this->session->userdata('logged_in'))
+        {
 		$this->form_validation->set_rules('year', 'Year', 'trim|required|is_natural_no_zero|xss_clean');
 		$this->form_validation->set_rules('mon', 'Month', 'trim|required|is_natural_no_zero|less_than[13]|xss_clean');
 		$this->form_validation->set_rules('day', 'Day', 'trim|required|is_natural_no_zero|less_than[32]|xss_clean');
@@ -122,13 +156,19 @@ class Evencal extends CI_Controller {
 			if($rows > 0){
 				echo json_encode(array('status' => true, 'row' => $rows));
 			}else{
-				echo json_encode(array('status' => true, 'row' => $rows, 'title_msg' => 'No Event', 'msg' => 'There\'s no event in this date'));
+				echo json_encode(array('status' => true, 'row' => $rows, 'title_msg' => 'No Existe Evento', 'msg' => 'No hay eventos en esta fecha'));
 			}
 		}
+		}else
+        {
+            redirect('login');
+        }
 	}
 
 	// same as index() function
 	function detail($year = null, $month = null, $day = null){
+		if($this->session->userdata('logged_in'))
+        {
 		$year  = (empty($year) || !is_numeric($year))?  date('Y') :  $year;
 		$month = (is_numeric($month) &&  $month > 0 && $month < 13)? $month : date('m');
 		$day   = (is_numeric($day) &&  $day > 0 && $day < 31)?  $day : date('d');
@@ -144,10 +184,17 @@ class Evencal extends CI_Controller {
 						'events'=> $cur_event
 					);
 		$this->load->view('index', $data);
+		}else
+        {
+            redirect('login');
+        }
 	}
 
 	// setting for calendar
 	function _setting(){
+		if($this->session->userdata('logged_in'))
+        {
+
 		return array(
 			'start_day' 		=> 'monday',
 			'show_next_prev' 	=> true,
@@ -173,5 +220,9 @@ class Evencal extends CI_Controller {
 								   {cal_cell_end}</td>{/cal_cell_end}
 								   {cal_row_end}</tr>{/cal_row_end}
 								   {table_close}</tbody></table>{/table_close}');
+	}else
+        {
+            redirect('login');
+        }
 	}
 }
