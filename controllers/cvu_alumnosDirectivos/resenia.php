@@ -18,17 +18,18 @@ class Resenia extends CI_Controller {
     {
         if ($this->session->userdata('logged_in'))
         {
+                $this->session->keep_flashdata('matricula');
                 $crud = new grocery_CRUD();
-                $crud->where('Alumno_Matricula', $this->matricula);
+                $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('resenia');
                 $crud->set_subject('Reseña');
 
-                $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'TituloRese','TituloObra','TipoPublica','TituloPublica','DocRese');
-                $crud->display_as('TituloRese','Titulo de la Reseña')->display_as('TituloObra','Titulo de la Obra')->display_as('TipoPublica','Tipo de Publicación')
+                //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+                $crud->columns('Alumno_Matricula', 'TituloRese','TituloObra','TituloPublica','DocRese');
+                $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TituloRese','Titulo de la Reseña')->display_as('TituloObra','Titulo de la Obra')->display_as('TipoPublica','Tipo de Publicación')
                      ->display_as('AnioRe','Año')->display_as('pagInc',' De la Pag')->display_as('pagFin','A la Pag')->display_as('TituloPublica','Titulo de la Publicación')
                      ->display_as('Pais','País')->display_as('autorRese','Autor/es')->display_as('DocRese','Doc. comprobatorio');
-
+                $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->unset_add();
@@ -37,7 +38,7 @@ class Resenia extends CI_Controller {
                 $crud->field_type('AnioRe','dropdown',range(2000, 2030));
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields( 'TituloRese','TipoPublica','autorRese');
-                $crud->set_field_upload('DocRese','assets/uploads/alumnos/'.$this->matricula);
+                $crud->set_field_upload('DocRese','assets/uploads/alumnos/'.$this->session->flashdata('matricula'));
 
                 $crud->unset_texteditor('autorRese','full_text');
                 $crud->set_rules('DocRese','Doc. comprobatorio','max_length[26]');
@@ -55,7 +56,7 @@ class Resenia extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Reseñas";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li> <li> <a href='alumnoscvu'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

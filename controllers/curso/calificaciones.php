@@ -38,7 +38,7 @@ class Calificaciones extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "registro de curso ";
+        $output->titulo_tabla = "Boleta de calificación";
         $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);
