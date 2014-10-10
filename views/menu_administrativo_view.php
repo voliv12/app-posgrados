@@ -5,7 +5,7 @@
 </div>
 
 <div class="container well">
-    <h4><a>Programacion de Cursos</a></h4>
+    <h4><a>Programación de Cursos</a></h4>
         <div class="row">
             <p>
             <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Control de Personal NAB</a></div>

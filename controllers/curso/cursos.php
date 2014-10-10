@@ -23,7 +23,7 @@ class Cursos extends CI_Controller {
             $crud->set_subject('curso');
             $crud->display_as('documentando_codigo','Experiencia Educativa')
                  ->display_as('nrc','NRC')
-                 ->display_as('alumno_Matricula','Nombre del alumno')
+                 ->display_as('Alumno_Matricula','Nombre del alumno')
                  ->display_as('nomcurso','Nombre del Curso')
                  ->display_as('nab_numpersonal','Maestro Interno')
                  ->display_as('personalext','Maestro Externo');
@@ -45,7 +45,7 @@ class Cursos extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "registro de curso ";
+        $output->titulo_tabla = "Registro de Curso ";
         $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);

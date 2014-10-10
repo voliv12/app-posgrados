@@ -43,7 +43,7 @@ class Documentando extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Registro de Documentando";
+        $output->titulo_tabla = "Documentando";
         $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);
