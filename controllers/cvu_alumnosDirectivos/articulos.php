@@ -19,7 +19,7 @@ class Articulos extends CI_Controller {
     {
         if ($this->session->userdata('logged_in'))
         {
-            $this->session->keep_flashdata('matricula');
+            $this->session->keep_flashdata('matricula', 'nombre');
             $crud = new grocery_CRUD();
             $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
             $crud->set_table('articulos');

@@ -24,6 +24,8 @@ class Datos_personales extends CI_Controller {
                 $crud->display_as('NombreA','Nombre')->display_as('ApellidoPA','Apellido Paterno')->display_as('ApellidoMA','Apellido Materno');
                 $crud->add_action('CVU', '../assets/css/images/folderr.png', 'alumnoscvu/menu');
                 $crud->unset_add ( ) ;
+                //$crud-> field_type ( 'Contrasenia' , 'password' ) ;
+                $crud->unset_edit_fields('Contrasenia');
                 $crud->unset_delete();
                 $crud->unset_print();
                 $crud->unset_export();

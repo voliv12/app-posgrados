@@ -23,6 +23,7 @@ class Egresadopifi extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('pifialumno');
             $crud->set_subject('Datos');
+            $crud->required_fields('AnioPifi', 'mesP', 'NEgresado', 'PEgresado', 'NTitulado', 'PTitulado', 'NSatisfaEgresado', 'PorceSatisfaEgresado', 'NOpinion', 'POpinion', 'NSatisfaEmpleador' ,'PSatisfaEmpleador');
             $crud->columns( 'AnioPifi','mesP','NSatisfaEgresado','NSatisfaEmpleador');
             $crud->display_as('AnioPifi','Año')->display_as('mesP','Mes')->display_as('NEgresado','Número de egresados que consiguieron empleo en menos de seis meses después de egresar')
                  ->display_as('PEgresado','Porcentaje de egresados que consiguieron empleo en menos de seis meses después de egresar')->display_as('NTitulado','Número de titulados que realizó alguna actividad laboral después de egresar y que coincidió o tuvo relación con sus estudios')

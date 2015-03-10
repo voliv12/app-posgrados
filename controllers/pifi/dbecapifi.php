@@ -22,6 +22,7 @@ class Dbecapifi extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('becaspifi');
             $crud->set_subject('Datos');
+            $crud->required_fields('idBecasPifi','AnioBP','mesB','NumInstitu','PInstitu','NumProna','PProna','NumOtra','POtra'); 
             $crud->columns( 'AnioBP','mesB','NumInstitu','NumProna');
             $crud->display_as('AnioBP','Año')->display_as('mesB','Mes')->display_as('NumInstitu','Número de becas otorgadas por la institución (U.V)')
                  ->display_as('PInstitu','Porcentaje de becas otorgadas por la institución (U.V)')->display_as('NumProna','Número de becas otorgadas por el PRONABES')->display_as('PProna','Porcentaje de becas otorgadas por el PRONABES')

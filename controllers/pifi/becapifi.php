@@ -28,6 +28,7 @@ class Becapifi extends CI_Controller {
                  ->display_as('NumOtra','Número de becas otorgadas por otros programas o instituciones')->display_as('POtra','Porcentaje de becas otorgadas por otros programas o instituciones');
             $crud->unset_print();
             $crud->unset_export();
+             $crud->required_fields('idBecasPifi','AnioBP','mesB','NumInstitu','PInstitu','NumProna','PProna','NumOtra','POtra'); 
             //$crud->callback_field('PInstitu',array($this,'porcentaje'));
             //$crud->callback_field('PProna',array($this,'porcentaje'));
             //$crud->callback_field('POtra',array($this,'porcentaje'));
