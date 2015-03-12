@@ -11,7 +11,7 @@ class Articulos extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->matricula = $this->session->userdata('matricula');
+        //$this->matricula = $this->session->userdata('matricula');
     }
 
     function registroArticulo()
@@ -19,12 +19,12 @@ class Articulos extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('Alumno_Matricula', $this->matricula);
+            //$crud->where('Alumno_Matricula', $this->matricula);
             $crud->set_table('articulos');
             $crud->set_subject('Artículo');
 
-            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->columns( 'AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
+            //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->columns( 'Alumno_Matricula','AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
             $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
                  ->display_as('Titulio','Titulo del Artículo')->display_as('ISSNAR','ISSN')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
@@ -33,10 +33,10 @@ class Articulos extends CI_Controller {
             $crud->unset_add();
             $crud->unset_edit();
             $crud->unset_delete();
-            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+            $crud->unset_edit_fields ( 'Alumno_Matricula');
             $crud->unset_texteditor('AutorArt','full_text');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
-            $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->matricula);
+            $crud->set_field_upload('DocArt','assets/uploads/alumnos/');
             $crud->set_rules('DocArt','Doc. comprobatorio','max_length[26]');
             $crud->field_type('AnioPublica','dropdown',range(2000, 2030));
             $output = $crud->render();
