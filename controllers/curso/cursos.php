@@ -19,21 +19,40 @@ class Cursos extends CI_Controller {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
+            //$crud->where('');
             $crud->set_table('cursos');
             $crud->set_subject('curso');
+
             $crud->display_as('documentando_codigo','Experiencia Educativa')
                  ->display_as('nrc','NRC')
-                 ->display_as('Alumno_Matricula','Nombre del alumno')
                  ->display_as('nomcurso','Nombre del Curso')
-                 ->display_as('nab_numpersonal','Maestro Interno')
-                 ->display_as('personalext','Maestro Externo');
-            $crud->set_relation('documentando_codigo','documentando','{nivelacad}  -  {descripcion}');
-            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
-            $crud->set_relation('nab_numpersonal','nab','nompersonal');
+                 ->display_as('nab_numpersonal','Académico NAB')
+                 ->display_as('horas','Horas p/semana')
+                 ->display_as('personalext','Académico Externo');
+            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}');
+            $crud->set_relation('academico_NAB','nab','nompersonal');
             $crud->unset_print();
             $crud->unset_export();
+            $crud->field_type('horas','dropdown',range(1,20));
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idnab_cursos', 'nab_numpersonal', 'nompersonal', 'priority');
+          //   $crud->set_relation_n_n('participantes', 'articulo_academico', 'academico', 'idArticulo', 'noPersonal', 'nombre','priority');
+            $crud->field_type('periodo', 'dropdown',  array('201401' => 'Agosto 2013 - Enero 2014',
+                                                            '201451' => 'Febrero - Julio 2014',
+                                                            '201501' => 'Agosto 2014 - Enero 2015' ,
+                                                            '201551' => 'Febrero - Julio 2015',
+                                                            '201601' => 'Agosto 2015 - Enero 2016',
+                                                            '201651' => 'Febrero - Julio 2016',
+                                                            '201701' => 'Agosto 2016 - Enero 2017',
+                                                            '201751' => 'Febrero - Julio 2017',
+                                                            '201801' => 'Agosto 2017 - Enero 2018',
+                                                            '201851' => 'Febrero - Julio 2018',
+                                                            '201901' => 'Agosto 2018 - Enero 2019',
+                                                            '201951' => 'Febrero - Julio 2019',
+                                                            '202001' => 'Agosto 2019 - Enero 2020',
+                                                            '202051' => 'Febrero - Julio 2020'
+                                                            ));
             
-            $crud->required_fields('nrc', 'documentando_codigo','nomcurso','alumno_Matricula', 'nab_numpersonal');
+            $crud->required_fields('documentando_codigo', 'nab_numpersonal');
             $output = $crud->render();
 
             $this->_example_output($output);
