@@ -25,6 +25,7 @@ class Calificacion_alumno extends CI_Controller {
             $crud->display_as('Alumno_Matricula','Nombre del alumno')
                  ->display_as('boletacalific','Boleta de Calificación');
             $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
+            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();

@@ -1,8 +1,11 @@
 <div class="row">
 <div class="container well">
-        <h1><a>Menú Currículum Vitae Único de Alumnos</a></h1>
-        <i class="icon-arrow-down"></i> Seleccione una Opción.
+        <h1><a>Menú Currículum Vitae Único </a></h1>
 </div>
+
+        <ol class="breadcrumb">
+            <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>
+        </ol>
 
 <div class="container well">
 

@@ -21,12 +21,14 @@ class Calificaciones extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('calificaciones');
             $crud->set_subject('calificación');
-            $crud->display_as('Alumno_Matricula','Nombre del alumno')
+            $crud->unset_print();
+            $crud->unset_export();
+            $crud->display_as('Alumno_Matricula','Nilvel - Nombre del alumno')
                  ->display_as('boletacalific','Boleta de Calificación');
-            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
+            $crud->set_relation('Alumno_Matricula','alumno','{Nivel}  -  {NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
             $crud->set_rules('boletacalific','Boleta de Calificación','max_length[40]');
-            $crud->required_fields('alumno_Matricula', 'boletacalific');
+            $crud->required_fields('Alumno_Matricula', 'boletacalific','Semestre');
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -38,7 +40,7 @@ class Calificaciones extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "registro de curso ";
+        $output->titulo_tabla = "Boleta de calificación";
         $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);

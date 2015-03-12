@@ -22,6 +22,7 @@ class Catalogos extends CI_Controller {
             $crud->set_table('catalogodivulgacion')
                  ->set_subject('Tipo')
                  ->display_as('TipoParticipacion','Tipo Participación')
+                 ->required_fields('TipoParticipacion')
                 ;
 
             $output = $crud->render();
@@ -40,6 +41,7 @@ class Catalogos extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('subprogconacyt')
                  ->set_subject('Subprograma')
+                 ->required_fields('subprogconacyt')
                 ;
 
             $output = $crud->render();

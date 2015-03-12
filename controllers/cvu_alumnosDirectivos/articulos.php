@@ -12,35 +12,58 @@ class Articulos extends CI_Controller {
         /* ------------------ */
         $this->load->library('grocery_CRUD');
         //$this->matricula = $this->session->userdata('matricula');
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 99c3932abd2f2de7b89fbeed3ecfd2e9c2548121
     }
 
     function registroArticulo()
     {
         if ($this->session->userdata('logged_in'))
         {
+            $this->session->keep_flashdata('matricula', 'nombre');
             $crud = new grocery_CRUD();
+<<<<<<< HEAD
             //$crud->where('Alumno_Matricula', $this->matricula);
+=======
+            $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
+>>>>>>> 99c3932abd2f2de7b89fbeed3ecfd2e9c2548121
             $crud->set_table('articulos');
             $crud->set_subject('Artículo');
 
             //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+<<<<<<< HEAD
             $crud->columns( 'Alumno_Matricula','AnioPublica','Titulio','TipoArt','RevistaPublic','DocArt');
             $crud->display_as('AnioPublica','Año de Publicación')->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
+=======
+            $crud->columns('Alumno_Matricula','Titulio','TipoArt','RevistaPublic','DocArt');
+            $crud->display_as('AnioPublica','Año de Publicación')->display_as('Alumno_Matricula','Nombre del Alumno')
+                 ->display_as('Volumen','Volumen')->display_as('NumVoLumen','No. de Volumen')
+>>>>>>> 99c3932abd2f2de7b89fbeed3ecfd2e9c2548121
                  ->display_as('Titulio','Titulo del Artículo')->display_as('ISSNAR','ISSN')->display_as('TipoArt','Tipo de Artículo')->display_as('RevistaPublic','Revista Publicación')
                  ->display_as('AutorArt','Autor/es')->display_as('DocArt','Doc. comprobatorio');
+            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_edit();
             $crud->unset_delete();
+<<<<<<< HEAD
             $crud->unset_edit_fields ( 'Alumno_Matricula');
             $crud->unset_texteditor('AutorArt','full_text');
             $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             $crud->set_field_upload('DocArt','assets/uploads/alumnos/');
+=======
+            $crud->set_field_upload('DocArt','assets/uploads/alumnos/'.$this->session->flashdata('matricula'));
+            $crud-> unset_edit_fields ( 'Alumno_Matricula');
+            $crud->unset_texteditor('AutorArt','full_text');
+            $crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
+            
+>>>>>>> 99c3932abd2f2de7b89fbeed3ecfd2e9c2548121
             $crud->set_rules('DocArt','Doc. comprobatorio','max_length[26]');
             $crud->field_type('AnioPublica','dropdown',range(2000, 2030));
             $output = $crud->render();
-
             $this->_example_output($output);
         }
              else { redirect('login');
@@ -53,7 +76,7 @@ class Articulos extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Artículos Publicados";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li> <li> <a href='alumnoscvu'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

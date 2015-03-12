@@ -18,16 +18,17 @@ class Conacyt extends CI_Controller {
     {   
         if ($this->session->userdata('logged_in'))
         {
+                $this->session->keep_flashdata('matricula');
                 $crud = new grocery_CRUD();
-                $crud->where('Alumno_Matricula', $this->matricula);
+                $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('apoyoconacyt');
                 $crud->set_subject('Apoyo CONACYT');
-            
-                $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'idSubProgCONACYT','TipoApoyo','NumApoyo','CFechaFin');
+                //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+                $crud->columns('Alumno_Matricula', 'idSubProgCONACYT','TipoApoyo','NumApoyo','CFechaFin');
                 $crud->set_relation('idSubProgCONACYT','subprogconacyt','Nombre');
-                $crud->display_as('idSubProgCONACYT','Subprograma CONACYT')->display_as('NumApoyo','No. de Apoyo')->display_as('TipoApoyo','Tipo de Apoyo')
+                $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('idSubProgCONACYT','Subprograma CONACYT')->display_as('NumApoyo','No. de Apoyo')->display_as('TipoApoyo','Tipo de Apoyo')
                      ->display_as('CFechaIni','Fecha de Inicio')->display_as('CFechaFin','Fecha de Finalización');
+                $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->unset_add();
@@ -48,7 +49,7 @@ class Conacyt extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Apoyos CONACYT";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li> <li> <a href='alumnoscvu'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

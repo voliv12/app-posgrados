@@ -23,7 +23,7 @@ class Distincion extends CI_Controller {
                 $crud->set_table('premiodistincion');
                 $crud->set_subject('Distinciones y Premios');
                 $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'Titulos','DPais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
+                $crud->columns( 'Titulos','Pais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
                 $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('Pais','País')->display_as('Otorgante','Otorgante')
                      ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('PDescripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
 
@@ -50,7 +50,7 @@ class Distincion extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Distinciones y Premios";
-        $output->barra_navegacion = " <li><a href='principal'> Menú principal </a></li> <li> <a href='alumno'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='principal'> Menú principal </a></li>  |  <li> <a href='alumno'> Menú CVU </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_alumnos', $datos_plantilla);
     }

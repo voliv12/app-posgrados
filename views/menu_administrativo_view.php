@@ -5,10 +5,10 @@
 </div>
 
 <div class="container well">
-    <h4><a>Programacion de Cursos</a></h4>
+    <h4><a>Programación de Cursos</a></h4>
         <div class="row">
             <p>
-            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-list-alt"></i> Control de Personal NAB</a></div>
+            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Control de Personal NAB</a></div>
             <div class="span6"><a href="curso/documentando/registrodoc" class="btn btn-block"><i class="icon-pencil"></i> Documentando</a></div>
             </p>
         </div>
@@ -24,7 +24,7 @@
     <h4><a>Registro de Calificaciones</a></h4>
         <div class="row">
             <p>
-            <div class="span6"><a href="curso/calificaciones" class="btn btn-block"><i class="icon-list-alt"></i> Calificaciones</a></div>
+            <div class="span6"><a href="curso/calificaciones" class="btn btn-block"><i class="icon-ok"></i> Calificaciones</a></div>
 
             </p>
         </div>
@@ -34,8 +34,18 @@
     <h4><a>Calendario</a></h4>
         <div class="row">
             <p>
-            <div class="span6"><a href="evencal" class="btn btn-block"><i class="icon-list-alt"></i> Eventos</a></div>
+            <div class="span6"><a href="evencal" class="btn btn-block"><i class="icon-bullhorn"></i> Eventos</a></div>
 
+            </p>
+        </div>
+
+</div>
+<div class="container well">
+    <h4><a>PIFI</a></h4>
+        <div class="row">
+            <p>
+            <div class="span6"><a href="pifi/becapifi/registrobeca" class="btn btn-block"><i class="icon-list-alt"></i> Becas</a></div>
+            <div class="span6"><a href="pifi/egresadopifi/registroegresado" class="btn btn-block"><i class="icon-user"></i> Egresados</a></div>
             </p>
         </div>
 

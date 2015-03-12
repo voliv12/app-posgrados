@@ -89,7 +89,7 @@ class Login extends CI_Controller {
                         redirect('administrativo');
                     }else
                     {
-                        redirect('Directivo');
+                        redirect('directivo');
                     }
                 }
             }

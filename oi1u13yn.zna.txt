@@ -1,0 +1,74 @@
+﻿Merge branch 'master' of https://github.com/voliv12/app-posgrados
+
+Conflicts:
+	controllers/cvu_alumnosDirectivos/articulos.php
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 3 and 4 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   controllers/alumnoscvu.php
+#	modified:   controllers/curso/calificacion_alumno.php
+#	modified:   controllers/curso/calificaciones.php
+#	modified:   controllers/curso/cursos.php
+#	modified:   controllers/curso/documentando.php
+#	modified:   controllers/curso/nab.php
+#	modified:   controllers/cvu_alumnos/Certificacion.php
+#	modified:   controllers/cvu_alumnos/articulos.php
+#	modified:   controllers/cvu_alumnos/capitulos.php
+#	modified:   controllers/cvu_alumnos/conacyt.php
+#	modified:   controllers/cvu_alumnos/congresos.php
+#	modified:   controllers/cvu_alumnos/datos_personales.php
+#	modified:   controllers/cvu_alumnos/distincion.php
+#	modified:   controllers/cvu_alumnos/divulgacion.php
+#	modified:   controllers/cvu_alumnos/estancias.php
+#	modified:   controllers/cvu_alumnos/gradonivel.php
+#	modified:   controllers/cvu_alumnos/idioma.php
+#	modified:   controllers/cvu_alumnos/libro.php
+#	modified:   controllers/cvu_alumnos/proyecto.php
+#	modified:   controllers/cvu_alumnos/reportes.php
+#	modified:   controllers/cvu_alumnos/resenia.php
+#	modified:   controllers/cvu_alumnosDirectivos/Certificacion.php
+#	modified:   controllers/cvu_alumnosDirectivos/articulos.php
+#	modified:   controllers/cvu_alumnosDirectivos/capitulos.php
+#	modified:   controllers/cvu_alumnosDirectivos/conacyt.php
+#	modified:   controllers/cvu_alumnosDirectivos/congresos.php
+#	modified:   controllers/cvu_alumnosDirectivos/datos_personales.php
+#	modified:   controllers/cvu_alumnosDirectivos/distincion.php
+#	modified:   controllers/cvu_alumnosDirectivos/divulgacion.php
+#	modified:   controllers/cvu_alumnosDirectivos/estancias.php
+#	modified:   controllers/cvu_alumnosDirectivos/gradonivel.php
+#	modified:   controllers/cvu_alumnosDirectivos/idioma.php
+#	modified:   controllers/cvu_alumnosDirectivos/libro.php
+#	modified:   controllers/cvu_alumnosDirectivos/proyecto.php
+#	modified:   controllers/cvu_alumnosDirectivos/reportes.php
+#	modified:   controllers/cvu_alumnosDirectivos/resenia.php
+#	modified:   controllers/login.php
+#	modified:   controllers/personal/catalogos.php
+#	new file:   controllers/pifi/becapifi.php
+#	new file:   controllers/pifi/dbecapifi.php
+#	new file:   controllers/pifi/degresadopifi.php
+#	new file:   controllers/pifi/egresadopifi.php
+#	deleted:    models/calendario_model.php
+#	deleted:    views/calendario_view.php
+#	modified:   views/menu_administrativo_view.php
+#	modified:   views/menu_alumnoscvu_view.php
+#	modified:   views/menu_directivo_view.php
+#	modified:   views/menu_principalalumno_view.php
+#	deleted:    views/plantilla_view.php
+#
+
