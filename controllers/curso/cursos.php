@@ -51,7 +51,7 @@ class Cursos extends CI_Controller {
                                                             '202001' => 'Agosto 2019 - Enero 2020',
                                                             '202051' => 'Febrero - Julio 2020'
                                                             ));
-            
+
             $crud->required_fields('documentando_codigo', 'nab_numpersonal');
             $output = $crud->render();
 
@@ -65,7 +65,7 @@ class Cursos extends CI_Controller {
 
     {
         $output->titulo_tabla = "Registro de Curso ";
-        $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);
     }
