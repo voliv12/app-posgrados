@@ -22,7 +22,7 @@ class Cursos extends CI_Controller {
             //$crud->where('');
             $crud->set_table('cursos');
             $crud->set_subject('curso');
-
+           
             $crud->display_as('documentando_codigo','Experiencia Educativa')
                  ->display_as('nrc','NRC')
                  ->display_as('nomcurso','Nombre del Curso')
@@ -33,9 +33,9 @@ class Cursos extends CI_Controller {
             $crud->set_relation('academico_NAB','nab','nompersonal');
             $crud->unset_print();
             $crud->unset_export();
+            $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idnab_cursos', 'nab_numpersonal', 'nompersonal', 'priority');
-          //   $crud->set_relation_n_n('participantes', 'articulo_academico', 'academico', 'idArticulo', 'noPersonal', 'nombre','priority');
             $crud->field_type('periodo', 'dropdown',  array('201401' => 'Agosto 2013 - Enero 2014',
                                                             '201451' => 'Febrero - Julio 2014',
                                                             '201501' => 'Agosto 2014 - Enero 2015' ,

@@ -26,7 +26,7 @@ class Control_personal extends CI_Controller {
                  ->change_field_type('contrasenia', 'password')
                  ->columns('NumPersonal','Nombre','perfil')
                 ;
-
+            $crud->set_relation('perfil','perfil','nomperfil');
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
             $crud->callback_before_update(array($this,'encrypt_password_callback'));
 
