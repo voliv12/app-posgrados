@@ -75,16 +75,16 @@ class Login extends CI_Controller {
                                      'numPersonal'  => $row->NumPersonal,
                                      'nombre'       => $row->Nombre,
                                      'tipo_usuario' => $tipo_usuario,
-                                     'perfil'       => $row->perfil,
+                                     'perfil'       => $row->nomperfil,
                                      'logged_in'    => TRUE
                                     );
                     $this->session->set_userdata($newdata);
 
-                    if($row->perfil == "Administrador")
+                    if($row->perfil == "1")
                     {
                         redirect('administrador');
                     }
-                    elseif($row->perfil == "Administrativo")
+                    elseif($row->perfil == "2")
                     {
                         redirect('administrativo');
                     }else

@@ -30,6 +30,7 @@ class Usuarios_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('personal');
+        $this->db->join('perfil','personal.perfil = perfil.idperfil');
         $this->db->where('NumPersonal', $usuario);
         $this->db->where('Contrasenia', $password);
         $query = $this->db->get();
