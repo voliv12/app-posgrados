@@ -19,10 +19,9 @@ class Cursos extends CI_Controller {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            //$crud->where('');
+            $crud->where('posgrado', $this->session->userdata('perfil'));
             $crud->set_table('cursos');
             $crud->set_subject('curso');
-           
             $crud->display_as('documentando_codigo','Experiencia Educativa')
                  ->display_as('nrc','NRC')
                  ->display_as('nomcurso','Nombre del Curso')
@@ -30,12 +29,12 @@ class Cursos extends CI_Controller {
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}');
-            $crud->set_relation('academico_NAB','nab','nompersonal');
+
             $crud->unset_print();
             $crud->unset_export();
             $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
-            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idnab_cursos', 'nab_numpersonal', 'nompersonal', 'priority');
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', 'nompersonal', 'priority');
             $crud->field_type('periodo', 'dropdown',  array('201401' => 'Agosto 2013 - Enero 2014',
                                                             '201451' => 'Febrero - Julio 2014',
                                                             '201501' => 'Agosto 2014 - Enero 2015' ,
