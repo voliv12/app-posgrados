@@ -51,9 +51,11 @@ class Login extends CI_Controller {
                 {
                     $nombre = $row->NombreA." ".$row->ApellidoPA;
                     $newdata = array(
-                                     'matricula'    => $row->Matricula,
+
+                                     'matricula'    => $row->matricula,
                                      'nombre'       => $nombre,
                                      'tipo_usuario' => $tipo_usuario,
+                                     'idalumno'     => $row->idalumno,
                                      'logged_in'    => TRUE
                                     );
                     $this->session->set_userdata($newdata);

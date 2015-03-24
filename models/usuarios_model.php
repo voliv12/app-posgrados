@@ -13,7 +13,8 @@ class Usuarios_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('alumno');
-        $this->db->where('Matricula', $usuario);
+        $this->db->join('cat_posgrados_alumno','alumno.idalumno = cat_posgrados_alumno.idalumno');
+        $this->db->where('matricula', $usuario);
         $this->db->where('Contrasenia', $password);
         $query = $this->db->get();
 

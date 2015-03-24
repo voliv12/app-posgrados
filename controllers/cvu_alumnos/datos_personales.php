@@ -11,7 +11,7 @@ class Datos_personales extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->matricula = $this->session->userdata('matricula');
+        $this->idalumno = $this->session->userdata('idalumno');
     }
 
     function registroAlumno()
@@ -19,11 +19,12 @@ class Datos_personales extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
                 $crud = new grocery_CRUD();
-                $crud->where('matricula', $this->matricula);
+                $crud->where('idalumno', $this->idalumno);
                 $crud->set_table('alumno');
                 $crud->set_subject('Alumno');
-                $crud-> unset_edit_fields ( 'Matricula' , 'NombreA' , 'ApellidoPA','ApellidoMA', 'Contrasenia','Nivel' ) ;
-                $crud->columns( 'Nivel','NombreA' , 'ApellidoPA','ApellidoMA','curp','rfc','Correo','Telefono');
+
+                $crud-> unset_edit_fields ('NombreA' , 'ApellidoPA','ApellidoMA', 'Contrasenia','Nivel' ) ;
+                $crud->columns( 'NombreA' , 'ApellidoPA','ApellidoMA','curp','rfc','Correo','Telefono');
                 $crud->display_as('NombreA','Nombre')->display_as('ApellidoPA','Apellido Paterno')->display_as('ApellidoMA','Apellido Materno')->display_as('curp','CURP')->display_as('rfc','RFC')->display_as('Direccion','Dirección')->display_as('Telefono', 'Teléfono');
                 $crud-> unset_add ( ) ;
                 $crud->unset_delete();
@@ -33,7 +34,7 @@ class Datos_personales extends CI_Controller {
                 $crud->set_rules('Correo','Correo','valid_email');
                 $crud->set_rules('curp','CURP','max_length[18]');
                 $crud->set_rules('rfc','RFC','max_length[13]');
-                $crud-> field_type ( 'Contrasenia' , 'password' ) ;
+                //$crud-> field_type ( 'Contrasenia' , 'password' ) ;
                 $output = $crud->render();
 
                 $this->_example_output($output);

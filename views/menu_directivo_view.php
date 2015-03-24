@@ -16,6 +16,7 @@
     <div class="row">
         <p>
         <div class="span6"><a href="curso/cursos/registrocurso" class="btn btn-block"><i class="icon-list-alt"></i> Cursos</a></div>
+        <div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Registro alumnos a curso</a></div>
         </p>
     </div>
 </div>

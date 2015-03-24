@@ -14,6 +14,70 @@
     <link href=" assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href=" assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
 
+
+<script type="text/javascript">
+$(document).ready(function()
+  {
+ 
+ //############## INGRESAR ALUMNOS A CURSO  ###############
+
+
+      $("#otra_beca_field_box").hide();
+      $("#field-beca").change(function () 
+      {
+        if($("#field-beca").val() == "Otra"){ $("#otra_beca_field_box").show(); }
+        else{ $("#otra_beca_field_box").hide(); }
+      });
+
+//******************
+      
+      $("#idcat_posgrados_field_box").hide();
+      $("#field-nivel").change(function () 
+      {
+        if($("#field-nivel").val() == "Maestría"){ 
+       
+          $("#idcat_posgrados_field_box").show(); 
+
+
+          /*$('#field-idcat_posgrados option:contains(' + Maestría + ')').each(function(){
+                  if ($(this).text() == Maestría) {
+                    $(this).attr('selected', 'selected');
+                        return false;
+                                      }
+                                 return true;
+                                                });
+   jQuery("#field-idcat_posgrados option").filter(function(){
+    return $.trim($(this).text()) ==  'Doctorado en Ciencias de la Salud'
+}).remove();
+
+      */
+          //$('#field-idcat_posgrados option').filter(function () { return $(this).html() == Doctorado; }).prop('selected', true);
+          //$("#field-idcat_posgrados").val($("#field-idcat_posgrados" + " option").filter(function() { return this.text == Maestría }).val());
+          //$("#field-idcat_posgrados").val( getValOfText( Maestría) );
+          //$('#idcat_posgrados_input_box option[text="Maestría"]').attr('selected', 'selected'); 
+          //$( "#field-idcat_posgrados :contains(Doctorado)" );
+          //$( 'field-idcat_posgrados[text='Maestría']' ).val();
+          //$('#field-idcat_posgrados').filter(function () { return $(this).html() == "Maestría"; }).val();
+          //$('#field-idcat_posgrados option:[text = 'Maestría']');
+          //$('#field-idcat_posgrados').val(Doctorado);
+          //$('#field-idcat_posgrados').find('option[text="Maestría"]').val();
+jQuery("#field-idcat_posgrados option").filter(function(){
+    return $.trim($(this).text()) ==  'Doctorado en Ciencias de la Salud'
+}).remove();
+
+        }
+        else{ $("#idcat_posgrados_field_box").hide(); }
+      });
+
+
+
+ });
+</script>
+
+
+
+
+
     <style>
       body {
         padding-top: 50px;

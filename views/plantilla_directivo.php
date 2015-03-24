@@ -23,6 +23,31 @@
         /*background-color: #f5f5f5;*/
       }
     </style>
+
+<script type="text/javascript">
+$(document).ready(function()
+  {
+  
+ //############## DONACIONES ###############
+  $("#field-tipo").change(function () {
+    if($("#field-tipo").val() == "Económica"){
+      $("#monto_field_box").show();
+      $("#cantidad_field_box").hide();
+      $("#descripcion_field_box").hide();
+    }else{
+      $("#monto_field_box").hide();
+      $("#cantidad_field_box").show();
+      $("#descripcion_field_box").show();
+    }
+  });
+
+
+
+</script>
+
+
+
+
 </head>
 <body>
 <div class="container">
