@@ -14,11 +14,26 @@
 
 <div class="container well">
     <div class="row">
-        <p>
+        <p>             
         <div class="span6"><a href="curso/cursos/registrocurso" class="btn btn-block"><i class="icon-list-alt"></i> Cursos</a></div>
         <div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Registro alumnos a curso</a></div>
         </p>
     </div>
+    <?php if ($this->session->userdata('perfil') <> 'DCS') { ?>
+               <div class="row">    
+                    <p>             
+                    <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdo" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Maestría</a></div>
+                    </p>
+                </div>
+    <?php } else { ?>
+
+                <div class="row">    
+                    <p>             
+                    <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdod" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Doctorado</a></div>
+                    </p>
+                </div>
+    <?php } ?>
+   
 </div>
 
 <div class="container well">

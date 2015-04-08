@@ -25,7 +25,7 @@ class Congresos extends CI_Controller {
                 $crud->set_subject('Congreso');
 
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'Alumno_Matricula', 'Titulo_trab','NomCongreso','AutoresCon','AnioCon','DocCongre');
+                $crud->columns( 'Titulo_trab','NomCongreso','AutoresCon','AnioCon','DocCongre');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('Titulo_trab','Titulo del Trabajo')->display_as('NomCongreso','Nombre del Congreso')->display_as('AutoresCon','Autor/es')
                      ->display_as('TipoTrabajo','Tipo de Trabajo')->display_as('tipo','Tipo')->display_as('Pais','País')
                      ->display_as('AnioCon','Año')->display_as('Pais','País')->display_as('DocCongre','Doc. comprobatorio');

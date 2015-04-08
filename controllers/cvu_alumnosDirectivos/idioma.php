@@ -24,7 +24,7 @@ class Idioma extends CI_Controller {
                 $crud->set_table('idioma');
                 $crud->set_subject('Idioma');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns('Alumno_Matricula','Idioma','NivelConv','NivelLec','NivelEsc','DocIdioma');
+                $crud->columns('Idioma','NivelConv','NivelLec','NivelEsc','DocIdioma');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('Idioma','Idioma')->display_as('Descripcion','Descripción')->display_as('tipoI','Tipo')->display_as('NivelConv','Nivel de Conversación')
                      ->display_as('NivelLec','Nivel de Lectura')->display_as('NivelEsc','Nivel de Escritura')->display_as('FechaEvalu','Fecha de Evaluación')->display_as('Puntos','Puntos/Porcentaje')->display_as('DocIdioma','Doc. comprobatorio');
                 $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');

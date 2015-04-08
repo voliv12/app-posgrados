@@ -24,7 +24,7 @@ class Distincion extends CI_Controller {
                 $crud->set_table('premiodistincion');
                 $crud->set_subject('Distinciones y Premios');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns(  'Alumno_Matricula','Titulos','Otorgante','Institucion-otorgante','AnioP','DocPremio');
+                $crud->columns(  'Titulos','Otorgante','Institucion-otorgante','AnioP','DocPremio');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('Pais','País')->display_as('Otorgante','Otorgante')
                      ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('PDescripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
                 $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');

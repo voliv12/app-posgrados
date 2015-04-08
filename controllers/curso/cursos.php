@@ -28,7 +28,7 @@ class Cursos extends CI_Controller {
                  ->display_as('nab_numpersonal','Académico NAB')
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo');
-            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}');
+            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
 
             $crud->unset_print();
             $crud->unset_export();

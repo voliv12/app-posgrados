@@ -25,7 +25,7 @@ class Resenia extends CI_Controller {
                 $crud->set_subject('Reseña');
 
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns('Alumno_Matricula', 'TituloRese','TituloObra','TituloPublica','DocRese');
+                $crud->columns('TituloRese','TituloObra','TituloPublica','DocRese');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TituloRese','Titulo de la Reseña')->display_as('TituloObra','Titulo de la Obra')->display_as('TipoPublica','Tipo de Publicación')
                      ->display_as('AnioRe','Año')->display_as('pagInc',' De la Pag')->display_as('pagFin','A la Pag')->display_as('TituloPublica','Titulo de la Publicación')
                      ->display_as('Pais','País')->display_as('autorRese','Autor/es')->display_as('DocRese','Doc. comprobatorio');

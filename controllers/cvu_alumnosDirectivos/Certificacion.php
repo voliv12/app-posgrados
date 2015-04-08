@@ -25,7 +25,7 @@ class Certificacion extends CI_Controller {
             $crud->set_subject('Certificaciones Medicas');
 
             //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->columns( 'Alumno_Matricula','Referencia','Especialidad','TipoCert','DocCertifiMedi');
+            $crud->columns( 'Referencia','Especialidad','TipoCert','DocCertifiMedi');
             $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('NumFolio','No. de Folio')->display_as('Referencia','Referencia')->display_as('CamRef','Otra Referencia')
                  ->display_as('Especialidad','Especialidad')->display_as('consejo','Consejo que Otorga la Certificación')->display_as('finicio','Fecha de Inicio')
                  ->display_as('ffin','Fecha de Finalización')->display_as('TipoCert','Tipo')->display_as('DocCertifiMedi','Doc. comprobatorio');

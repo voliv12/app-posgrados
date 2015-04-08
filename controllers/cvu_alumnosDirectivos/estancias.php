@@ -25,7 +25,7 @@ class Estancias extends CI_Controller {
                 $crud->set_table('estancias');
                 $crud->set_subject('Estancia de Investigación');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'Alumno_Matricula','Organizacion','LineaInvestiga','Logros','DocEstancia');
+                $crud->columns( 'Organizacion','LineaInvestiga','Logros','DocEstancia');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('Sector','Sector')->display_as('Organizacion','Organización')->display_as('EFinicio','Fecha de Inicio')->display_as('Logros','Principales Logros')
                      ->display_as('EFfin','Fecha de Finalización')->display_as('Pais','País')->display_as('LineaInvestiga','Lineas de Investigación')->display_as('DocEstancia','Doc. comprobatorio');
                 $crud->set_relation('Pais','paises','nombre');

@@ -53,7 +53,7 @@ class Control_alumnos extends CI_Controller {
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
     }
-
+/*
     function crea_directorio($post_array, $primary_key)
     {
         $this->load->helper('path');
@@ -69,6 +69,8 @@ class Control_alumnos extends CI_Controller {
 
         return TRUE;
     }
+
+*/
 
     function acciones_callback($post_array)
     {   

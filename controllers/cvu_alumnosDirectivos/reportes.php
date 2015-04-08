@@ -25,7 +25,7 @@ class Reportes extends CI_Controller {
                 $crud->set_subject('Reporte');
             
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'Alumno_Matricula','TituloRepor','Instancia','Objetivoreport','DocRecTec');
+                $crud->columns( 'TituloRepor','Instancia','Objetivoreport','DocRecTec');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TituloRepor','Titulo del Reporte')->display_as('Instancia','Instancia a la que se presenta el Reporte')->display_as('RDescripcion','Descripción del Reporte')
                      ->display_as('NumpagRepor','No. Páginas')->display_as('fechaReport','Fecha')
                      ->display_as('Objetivoreport','Objetivo del reporte')

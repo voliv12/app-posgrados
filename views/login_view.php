@@ -88,18 +88,19 @@
       <form class="form-signin" action="index.php/login/validar_usuario" method="POST">
 
           <h4 class="form-signin-heading">Autentificación</h4>
-        <div class="radio">
-        <label>
-          <input type="radio" name="tipo_usuario" id="optionsRadios1" value="alumno" checked>
-          Alumno
-        </label>
-      </div>
       <div class="radio">
         <label>
-          <input type="radio" name="tipo_usuario" id="optionsRadios2" value="personal">
+          <input type="radio" name="tipo_usuario" id="optionsRadios2" value="personal" checked>
           Personal
         </label>
       </div>
+        <div class="radio">
+        <label>
+          <input type="radio" name="tipo_usuario" id="optionsRadios1" value="alumno" >
+          Alumno
+        </label>
+      </div>
+
         <input type="text" name="usuario" class="input-block-level" placeholder="Usuario">
         <input type="password" name="password" class="input-block-level" placeholder="Contraseña">
         <button class="btn btn-large btn-primary" type="submit">Entrar</button>

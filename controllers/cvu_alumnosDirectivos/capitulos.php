@@ -23,7 +23,7 @@ class Capitulos extends CI_Controller {
                 $crud->set_table('caplibros');
                 $crud->set_subject('Capitulos de Libros');
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
-                $crud->columns( 'Alumno_Matricula','TituloLibCP','TituloCap','AutorCL','DocCapLibro');
+                $crud->columns( 'TituloLibCP','TituloCap','AutorCL','DocCapLibro');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TituloCap','Titulo del Capitulo')->display_as('Anio','Año de Publicación')->display_as('TituloLibCP','Titulo del Libro')
                      ->display_as('EditoresCL','Editores')->display_as('EditorialCL','Editorial')->display_as('VolumCL','Volumen')
                      ->display_as('NumPagCL','No. Páginas')->display_as('NumCitas','No. Citas')->display_as('AutorCL','Autor/es')

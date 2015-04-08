@@ -63,5 +63,22 @@ class Usuarios_model extends CI_Model
         }
      }
 
+    function cosulta_posgrados($nivel)
+    {
+        $this->db->select('nombre_posgrado');
+        $this->db->from('cat_posgrados');
+        $this->db->where('nivel', $nivel);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->row();
+        }
+    }
+
+
 }
 

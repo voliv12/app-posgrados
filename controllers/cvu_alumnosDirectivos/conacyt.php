@@ -24,7 +24,7 @@ class Conacyt extends CI_Controller {
                 $crud->set_table('apoyoconacyt');
                 $crud->set_subject('Apoyo CONACYT');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns('Alumno_Matricula', 'idSubProgCONACYT','TipoApoyo','NumApoyo','CFechaFin');
+                $crud->columns('idSubProgCONACYT','TipoApoyo','NumApoyo','CFechaFin');
                 $crud->set_relation('idSubProgCONACYT','subprogconacyt','Nombre');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('idSubProgCONACYT','Subprograma CONACYT')->display_as('NumApoyo','No. de Apoyo')->display_as('TipoApoyo','Tipo de Apoyo')
                      ->display_as('CFechaIni','Fecha de Inicio')->display_as('CFechaFin','Fecha de Finalización');

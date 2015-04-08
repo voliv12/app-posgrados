@@ -24,7 +24,7 @@ class Gradonivel extends CI_Controller {
             $crud->set_table('nivelacademic');
             $crud->set_subject('Nivel o Grado Académico');
             //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->columns( 'Alumno_Matricula','Cedula','TituloNivel','DocTitulo','DocCedula');
+            $crud->columns( 'Cedula','TituloNivel','DocTitulo','DocCedula');
             $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('NivelAc','Nivel/Grado Académico')->display_as('Cedula','No. Cédula')->display_as('TituloNivel','Titulo de Nivel/Grado')
                  ->display_as('NFecha','Fecha de Obtención')->display_as('Estatus','Estatus')->display_as('TituloTesis','Titulo de la Tesis')
                  ->display_as('Pais','País')->display_as('NSector','Sector')->display_as('NOrganizacion','Organización')->display_as('DocTitulo','Doc. comprobatorio Titulo')->display_as('DocCedula','Doc. comprobatorio Cédula');

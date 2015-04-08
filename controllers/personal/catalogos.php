@@ -53,6 +53,57 @@ class Catalogos extends CI_Controller {
         }
     }
 
+
+
+         function cat_posgrado() //Catálogo posgrados
+    {
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('cat_posgrados')
+                 ->set_subject('Catálogo')
+                 ->display_as('nivelP','Nivel')
+                 ->display_as('nombre_posgrado','Nombre')
+                 ->display_as('abrev_posgrado','Abreviación')
+                 ->required_fields('nivelP', 'nombre_posgrado', 'abrev_posgrado');
+            //$crud->set_relation('abrev_posgrado','perfil','nomperfil');
+
+            $output = $crud->render();
+            $output->titulo_tabla = "Catálogo de Posgrados";
+
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
+    }
+
+
+
+         function cat_perfil() //Catálogo perfil
+    {
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('perfil')
+                 ->set_subject('perfil')
+                 ->display_as('nomperfil','Nombre del Perfil')
+                 ->required_fields('nomperfil');
+           
+
+            $output = $crud->render();
+            $output->titulo_tabla = "Catálogo de perfil";
+
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
+    }
+
+
+
+
+
+
     function _example_output($output = null)
 
     {

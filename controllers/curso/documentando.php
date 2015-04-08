@@ -25,12 +25,13 @@ class Documentando extends CI_Controller {
                  ->display_as('descripcion','Descripción')
                  ->display_as('nivelacad','Nivel Académico')
                  ->display_as('creditos','Créditos');
+            /*
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_edit();
             $crud->unset_delete();
-
+            */
             $crud->required_fields('codigo', 'descripcion', 'nivelacad','creditos');
             $output = $crud->render();
 

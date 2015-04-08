@@ -25,7 +25,7 @@ class Libro extends CI_Controller {
                 $crud->set_table('libros');
                 $crud->set_subject('Libros');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns( 'Alumno_Matricula','NumISBN' , 'TituloLib','AutorLib','VolumenLib','DocLibro');
+                $crud->columns( 'NumISBN' , 'TituloLib','AutorLib','VolumenLib','DocLibro');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('NumISBN','Número ISBN')->display_as('IdentLib','Indentificador Libro')->display_as('VolumenLib', 'Volumen')
                      ->display_as('EditoriaLib','Editorial')->display_as('NumPagLib','No. Páginas')->display_as('AutorLib', 'Autor/es')
                      ->display_as('TituloLib','Titulo del Libro')->display_as('AnioLib','Año de Publicación')->display_as('EdicionLib', 'Edición')->display_as('DocLibro', 'Doc. comprobatorio');

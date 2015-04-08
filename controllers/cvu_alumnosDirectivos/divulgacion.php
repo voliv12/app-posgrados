@@ -24,7 +24,7 @@ class Divulgacion extends CI_Controller {
                 $crud->set_table('divulgacion');
                 $crud->set_subject('Divulgacion y Difusión de Ciencia y Tecnologia');
                 $crud->set_relation('idCatalogoDivulgacion','catalogodivulgacion','TipoParticipacion');
-                $crud->columns( 'Alumno_Matricula','idCatalogoDivulgacion','Titulo','Dependencia','DocDivulga');
+                $crud->columns( 'idCatalogoDivulgacion','Titulo','Dependencia','DocDivulga');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('idCatalogoDivulgacion','Tipo de Participación')->display_as('Dirigido','Dirigido a')->display_as('Titulo','Titulo')
                      ->display_as('Dependencia','Dependencia responasable')->display_as('Notas','Notas Periodisticas')->display_as('TipoD','Tipo')->display_as('DocDivulga','Doc. comprobatorio');

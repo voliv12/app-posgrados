@@ -24,7 +24,7 @@ class Proyecto extends CI_Controller {
                 $crud->set_table('proyectos');
                 $crud->set_subject('Proyectos de Investigacion');
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-                $crud->columns('Alumno_Matricula','TituloProyecto','Entidad','POrganizacion','DocProyect');
+                $crud->columns('TituloProyecto','Entidad','POrganizacion','DocProyect');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TipoProyecto','Tipo de Proyecto')->display_as('PFinicio','Fecha de Inicio')->display_as('PFfin','Fecha de Finalización')
                      ->display_as('TituloProyecto','Titulo del Proyecto')->display_as('PSector','Sector')
                      ->display_as('POrganizacion','Organización')->display_as('OtrasInstituciones','Otras Instituciones')->display_as('Investigadores','Investigadores Participantes')
