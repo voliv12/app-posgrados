@@ -23,9 +23,11 @@ class Calificaciones extends CI_Controller {
             $crud->set_subject('calificación');
             $crud->unset_print();
             $crud->unset_export();
-            $crud->display_as('Alumno_Matricula','Nilvel - Nombre del alumno')
+            $crud->display_as('Alumno_Matricula','Matricula - Nilvel')
                  ->display_as('boletacalific','Boleta de Calificación');
-            $crud->set_relation('Alumno_Matricula','alumno','{Nivel}  -  {NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
+            //$crud->set_relation('Alumno_Matricula','alumno','{Nivel}  -  {NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
+
+            $crud->set_relation('Alumno_Matricula','cat_posgrados_alumno','{matricula} - {Nivel}', array('estatus' => 'Activo'));
             $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
             $crud->set_rules('boletacalific','Boleta de Calificación','max_length[40]');
             $crud->required_fields('Alumno_Matricula', 'boletacalific','Semestre');

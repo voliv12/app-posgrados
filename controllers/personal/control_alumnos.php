@@ -48,10 +48,23 @@ class Control_alumnos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Control de Alumnos";
+        $output->titulo_tabla = "Registro de Alumnos";
+        if($this->session->userdata('perfil') == 'Administrador')
+        {
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
+        } else if($this->session->userdata('perfil') == 'Administrativo')
+                {
+                $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
+                $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+                $this->load->view('plantilla_administrativo', $datos_plantilla);
+                } else {
+
+                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+                        $this->load->view('plantilla_directivo', $datos_plantilla);
+                       }
     }
 /*
     function crea_directorio($post_array, $primary_key)

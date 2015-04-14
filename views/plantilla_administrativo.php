@@ -23,6 +23,53 @@
         /*background-color: #f5f5f5;*/
       }
     </style>
+
+
+
+<script type="text/javascript">
+$(document).ready(function()
+  {
+ 
+ //############## INGRESAR ALUMNOS A CURSO  ###############
+
+
+      $("#otra_beca_field_box").hide();
+      $("#field-beca").change(function () 
+      {
+        if($("#field-beca").val() == "Otra"){ $("#otra_beca_field_box").show(); }
+        else{ $("#otra_beca_field_box").hide(); }
+      });
+//***************************************************************************************
+
+$("#idcat_posgrados_field_box").hide();
+$("#idcat_posgradosD_field_box").hide();
+      $("#field-nivel").change(function () 
+      {
+        if($("#field-nivel").val() == "Maestría")
+        { 
+          $("#idcat_posgradosD_field_box").hide();
+          $("#idcat_posgrados_field_box").show();
+        } 
+          else if($("#field-nivel").val() == "Doctorado")
+            {
+              $("#idcat_posgrados_field_box").hide();
+              $("#idcat_posgradosD_field_box").show();
+            } 
+            else
+                  {
+                    $("#idcat_posgrados_field_box").hide();
+                    $("#idcat_posgradosD_field_box").hide();
+                  }
+      });
+
+
+ });
+</script>
+
+
+
+
+
 </head>
 <body>
 <div class="container">

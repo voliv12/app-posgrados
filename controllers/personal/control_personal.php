@@ -41,7 +41,7 @@ class Control_personal extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Control de Personal";
+        $output->titulo_tabla = "Registro de Personal";
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);

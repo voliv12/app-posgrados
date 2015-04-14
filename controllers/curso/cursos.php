@@ -22,16 +22,18 @@ class Cursos extends CI_Controller {
             $crud->where('posgrado', $this->session->userdata('perfil'));
             $crud->set_table('cursos');
             $crud->set_subject('curso');
-            $crud->display_as('documentando_codigo','Experiencia Educativa')
-                 ->display_as('nrc','NRC')
-                 ->display_as('nomcurso','Nombre del Curso')
+            $crud->display_as('codigo','Experiencia Educativa')
+                 ->display_as('nombre_curso','Nombre del Curso')
                  ->display_as('nab_numpersonal','Académico NAB')
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
-
+            
             $crud->unset_print();
             $crud->unset_export();
+            //$crud->unset_edit_fields();
+            $crud->field_type('NRC', 'hidden');
+            //$crud->field_type('nrc','invisible');
             $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', 'nompersonal', 'priority');
@@ -51,7 +53,7 @@ class Cursos extends CI_Controller {
                                                             '202051' => 'Febrero - Julio 2020'
                                                             ));
 
-            $crud->required_fields('documentando_codigo', 'nab_numpersonal');
+            $crud->required_fields('periodo', 'codigo','nombre_curso','horas','fecha_inicio','fecha_fin');
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -59,14 +61,55 @@ class Cursos extends CI_Controller {
             redirect('login');
         }
     }
-
-    function _example_output($output = null)
-
+    function registrocurso_admin()
     {
-        $output->titulo_tabla = "Registro de Curso ";
-        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            //$crud->where('posgrado', $this->session->userdata('perfil'));
+            $crud->set_table('cursos');
+            $crud->set_subject('curso');
+            $crud->display_as('documentando_codigo','Experiencia Educativa')
+                 ->display_as('nrc','NRC')
+                 ->display_as('nomcurso','Nombre del Curso')
+                 ->display_as('nab_numpersonal','Académico NAB')
+                 ->display_as('horas','Horas p/semana')
+                 ->display_as('personalext','Académico Externo');
+            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+
+            $crud->unset_print();
+            $crud->unset_export();
+            $crud->unset_add();
+            $crud->unset_delete();
+            $crud->edit_fields('NRC');
+            
+            $output = $crud->render();
+
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
+    }
+    function _example_output($output = null)
+    {
+        $output->titulo_tabla = "Registro de Cursos";
+        if($this->session->userdata('perfil') == 'Administrador')
+        {
+        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_administrativo', $datos_plantilla);
+        $this->load->view('plantilla_personal', $datos_plantilla);
+        } else if($this->session->userdata('perfil') == 'Administrativo')
+                {
+              
+                $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
+                $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+                $this->load->view('plantilla_administrativo', $datos_plantilla);
+                } else {
+                        
+                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+                        $this->load->view('plantilla_directivo', $datos_plantilla);
+                       }
     }
 
 }

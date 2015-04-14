@@ -3,6 +3,31 @@
         <h1><a>Menú principal</a></h1>
         <i class="icon-arrow-down"></i> Seleccione una Opción.
 </div>
+
+<div class="container well">
+    <h4><a>Control de Alumnos </a></h4>
+        <div class="row">
+            <p>  
+                <div class="span6"><a href="personal/control_alumnos/registrar_alumno" class="btn btn-block"><i class="icon-pencil"></i> Registro de Alumnos</a></div>
+                <div class="span6"><a href="curso/cursos/registrocurso" class="btn btn-block"><i class="icon-list-alt"></i> Registro de Curso</a></div> 
+                
+            </p>
+
+        </div>
+    
+        <div class="row">
+            <p>             
+            
+            <?php if ($this->session->userdata('perfil') <> 'DCS') { ?>
+                                <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdo" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Maestría</a></div>                           
+            <?php } else { ?>            
+                            <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdod" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Doctorado</a></div>            
+            <?php } ?>
+            <div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div>  
+            </p>
+        </div>
+</div>
+
 <div class="container well">
     <div class="row">
         <p>
@@ -12,29 +37,6 @@
     </div>
 </div>
 
-<div class="container well">
-    <div class="row">
-        <p>             
-        <div class="span6"><a href="curso/cursos/registrocurso" class="btn btn-block"><i class="icon-list-alt"></i> Cursos</a></div>
-        <div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Registro alumnos a curso</a></div>
-        </p>
-    </div>
-    <?php if ($this->session->userdata('perfil') <> 'DCS') { ?>
-               <div class="row">    
-                    <p>             
-                    <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdo" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Maestría</a></div>
-                    </p>
-                </div>
-    <?php } else { ?>
-
-                <div class="row">    
-                    <p>             
-                    <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdod" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Doctorado</a></div>
-                    </p>
-                </div>
-    <?php } ?>
-   
-</div>
 
 <div class="container well">
     <h4><a>PIFI</a></h4>
