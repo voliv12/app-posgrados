@@ -26,6 +26,12 @@
             <div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div>
             </p>
         </div>
+        
+        <div class="row">
+            <p>
+            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Núcleo Académico Básico</a></div>
+            </p>
+        </div>
 </div>
 
 <div class="container well">

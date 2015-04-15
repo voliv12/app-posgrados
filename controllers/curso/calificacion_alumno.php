@@ -11,7 +11,7 @@ class Calificacion_alumno extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->matricula = $this->session->userdata('matricula');
+        $this->idalumno = $this->session->userdata('idalumno');
     }
 
     function index()
@@ -19,13 +19,14 @@ class Calificacion_alumno extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('Alumno_Matricula', $this->matricula);
+            $crud->where('Alumno_Matricula', $this->idalumno);
             $crud->set_table('calificaciones');
             $crud->set_subject('calificación');
             $crud->display_as('Alumno_Matricula','Nombre del alumno')
                  ->display_as('boletacalific','Boleta de Calificación');
             $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
             $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
+            //$crud->set_relation('Alumno_Matricula','alumnoscvu','{matricula}  -  {NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();

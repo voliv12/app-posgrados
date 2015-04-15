@@ -32,11 +32,11 @@
 </div>
 
 <div class="container well">
-    <h4><a>Control de Alumnos </a></h4>
+    <h4><a>Administración de Cursos </a></h4>
         <div class="row">
             <p> 
+                <div class="span6"><a href="curso/cursos/registrocurso_admin" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div> 
                 <div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div>  
-                <div class="span6"><a href="curso/cursos/registrocurso_admin" class="btn btn-block"><i class="icon-list-alt"></i> Registro de Curso</a></div> 
             </p>
 
         </div>
