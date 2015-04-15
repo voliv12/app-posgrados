@@ -15,7 +15,7 @@ class Reportes extends CI_Controller {
     }
 
     function registroReportes()
-    {   
+    {
         if ($this->session->userdata('logged_in'))
         {
                 $this->session->keep_flashdata('matricula');
@@ -23,7 +23,7 @@ class Reportes extends CI_Controller {
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('reportecnico');
                 $crud->set_subject('Reporte');
-            
+
                 //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'TituloRepor','Instancia','Objetivoreport','DocRecTec');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TituloRepor','Titulo del Reporte')->display_as('Instancia','Instancia a la que se presenta el Reporte')->display_as('RDescripcion','Descripción del Reporte')
@@ -49,17 +49,17 @@ class Reportes extends CI_Controller {
                 $output = $crud->render();
 
                 $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
-                }    
+                }
     }
-    
+
 
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Reporte Técnico";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU alumno </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

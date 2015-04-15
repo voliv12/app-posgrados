@@ -11,11 +11,11 @@ class Capitulos extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        
+
     }
 
     function registroCapitulos()
-    {   
+    {
        if ($this->session->userdata('logged_in'))
         {
                 $this->session->keep_flashdata('matricula');
@@ -47,17 +47,17 @@ class Capitulos extends CI_Controller {
                 $output = $crud->render();
 
                 $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
                 }
     }
-    
+
 
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Capitulos de Libros";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU alumno </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

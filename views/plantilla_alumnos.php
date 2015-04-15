@@ -7,12 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href= "<?php echo $this->config->item('base_url'); ?>">
 
-    <script src="assets/jquery-1.8.2.js" type="text/javascript"></script>
-    <script src="assets/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <script type='text/javascript' src="../assets/js/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.ui.draggable.js"></script>
+    <script type="text/javascript" src="../assets/js/DataTables-1.8.1/media/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.jeditable.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="../assets/js/highcharts.js"></script>
+    <script type="text/javascript" src="../assets/js/exporting.js"></script>
+    <script type="text/javascript" src="../assets/js/exporting.src.js"></script>
 
-    <script src="assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-    <link href=" assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href=" assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-responsive.min.css" >
+    <link rel="stylesheet" href="../assets/js/themes/smoothness/jquery-ui-1.8.16.custom.css" type="text/css">
+    <link rel="stylesheet" href="../assets/js/themes/base/jquery.ui.base.css" type="text/css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
       body {

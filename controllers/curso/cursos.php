@@ -28,7 +28,7 @@ class Cursos extends CI_Controller {
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
-            
+
             $crud->unset_print();
             $crud->unset_export();
             //$crud->unset_edit_fields();
@@ -82,7 +82,7 @@ class Cursos extends CI_Controller {
             $crud->unset_add();
             $crud->unset_delete();
             $crud->edit_fields('NRC');
-            
+
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -92,7 +92,7 @@ class Cursos extends CI_Controller {
     }
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Cursos";
+        $output->titulo_tabla = "Programación de Cursos";
         if($this->session->userdata('perfil') == 'Administrador')
         {
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
@@ -100,12 +100,12 @@ class Cursos extends CI_Controller {
         $this->load->view('plantilla_personal', $datos_plantilla);
         } else if($this->session->userdata('perfil') == 'Administrativo')
                 {
-              
+
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
                 $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
-                        
+
                         $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_directivo', $datos_plantilla);

@@ -15,7 +15,7 @@ class Idioma extends CI_Controller {
     }
 
     function registroIdioma()
-    {   
+    {
         if ($this->session->userdata('logged_in'))
         {
                 $this->session->keep_flashdata('matricula');
@@ -28,7 +28,7 @@ class Idioma extends CI_Controller {
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('Idioma','Idioma')->display_as('Descripcion','Descripción')->display_as('tipoI','Tipo')->display_as('NivelConv','Nivel de Conversación')
                      ->display_as('NivelLec','Nivel de Lectura')->display_as('NivelEsc','Nivel de Escritura')->display_as('FechaEvalu','Fecha de Evaluación')->display_as('Puntos','Puntos/Porcentaje')->display_as('DocIdioma','Doc. comprobatorio');
                 $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
-               
+
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->unset_add();
@@ -46,17 +46,17 @@ class Idioma extends CI_Controller {
 
 
                 $this->_example_output($output);
-        } 
-        else { 
+        }
+        else {
                 redirect('login');
-                }    
+                }
     }
-    
+
 
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Idioma";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> lista de Alumnos CVU </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU alumno </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

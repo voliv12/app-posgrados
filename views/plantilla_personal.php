@@ -7,92 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href= "<?php echo $this->config->item('base_url'); ?>">
 
-    <script src="assets/jquery-1.8.2.js" type="text/javascript"></script>
-    <script src="assets/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <script type='text/javascript' src="../assets/js/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.ui.draggable.js"></script>
+    <script type="text/javascript" src="../assets/js/DataTables-1.8.1/media/js/jquery.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.jeditable.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="../assets/js/highcharts.js"></script>
+    <script type="text/javascript" src="../assets/js/exporting.js"></script>
+    <script type="text/javascript" src="../assets/js/exporting.src.js"></script>
 
-    <script src="assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-    <link href=" assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href=" assets/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
-
-
-<script type="text/javascript">
-$(document).ready(function()
-  {
- 
- //############## INGRESAR ALUMNOS A CURSO  ###############
-
-/*
-      $("#otra_beca_field_box").hide();
-      $("#field-beca").change(function () 
-      {
-        if($("#field-beca").val() == "Otra"){ $("#otra_beca_field_box").show(); }
-        else{ $("#otra_beca_field_box").hide(); }
-      });
-//***************************************************************************************
-
-$("#idcat_posgrados_field_box").hide();
-$("#idcat_posgradosD_field_box").hide();
-      $("#field-nivel").change(function () 
-      {
-        if($("#field-nivel").val() == "Maestría")
-        { 
-          $("#idcat_posgradosD_field_box").hide();
-          $("#idcat_posgrados_field_box").show();
-        } 
-          else if($("#field-nivel").val() == "Doctorado")
-            {
-              $("#idcat_posgrados_field_box").hide();
-              $("#idcat_posgradosD_field_box").show();
-            } 
-            else
-                  {
-                    $("#idcat_posgrados_field_box").hide();
-                    $("#idcat_posgradosD_field_box").hide();
-                  }
-      });
-
-
-*/
-//******************
-   /*  
-      $("#idcat_posgrados_field_box").hide();
-      $("#field-nivel").change(function () 
-      {
-        if($("#field-nivel").val() == "Maestría"){ 
-                jQuery("#field-idcat_posgrados option").filter(function(){
-                return $.trim($(this).text()) == 'Doctorado en Ciencias de la Salud' }).show();         
-                jQuery("#field-idcat_posgrados option").filter(function(){
-                return $.trim($(this).text()) == 'Doctorado en Ciencias de la Salud' }).hide();
-     
-                $("#idcat_posgrados_field_box").show(); 
-        } 
-        else { 
-              if($("#field-nivel").val() == "Doctorado"){  
-                      jQuery("#field-idcat_posgrados option").filter(function(){
-                      return $.trim($(this).text()) == 'Doctorado en Ciencias de la Salud' }).show();
-
-                      jQuery("#field-idcat_posgrados option").filter(function(){
-                      return $.trim($(this).text()) == 'Maestría en Ciencias de la Salud'  }).hide();
-            
-                      $("#idcat_posgrados_field_box").show(); 
-                  }
-              else{
-                $("#idcat_posgrados_field_box").hide();
-               
-              }
-          }
-
-          $("#field-idcat_posgrados").trigger("liszt:updated");
-      });
-
-*/
-
- });
-</script>
-
-
-
-
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-responsive.min.css" >
+    <link rel="stylesheet" href="../assets/js/themes/smoothness/jquery-ui-1.8.16.custom.css" type="text/css">
+    <link rel="stylesheet" href="../assets/js/themes/base/jquery.ui.base.css" type="text/css">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
       body {
