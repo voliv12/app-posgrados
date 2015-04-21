@@ -27,6 +27,26 @@ class Usuarios_model extends CI_Model
         }
     }
 
+    function buscar_tabla_curso($idcurso)
+    {
+        $this->db->select('*');
+        $this->db->from('cursos');
+        $this->db->where('idcurso', $idcurso);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->row();
+        }
+    }
+
+
+
+
+
     function buscar_tabla_personal($usuario, $password)
     {
         $this->db->select('*');

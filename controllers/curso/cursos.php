@@ -52,7 +52,7 @@ class Cursos extends CI_Controller {
                                                             '202001' => 'Agosto 2019 - Enero 2020',
                                                             '202051' => 'Febrero - Julio 2020'
                                                             ));
-
+            $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/alumno_cursos/registro_alumnocurso');
             $crud->required_fields('periodo', 'codigo','horas','fecha_inicio','fecha_fin');
             $output = $crud->render();
 
@@ -90,6 +90,16 @@ class Cursos extends CI_Controller {
             redirect('login');
         }
     }
+
+
+
+        function just_a_test($primary_key , $row)
+    {
+        return site_url('curso/alumno_cursos/registro_alumnocurso').'?idcurso ='.$row->idcurso;
+    }  
+
+
+
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Programación de Cursos";

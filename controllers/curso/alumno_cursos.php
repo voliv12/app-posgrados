@@ -11,25 +11,31 @@ class Alumno_cursos extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
+
         //$this->matricula = $this->session->userdata('matricula');
+
     }
 
-    function registro_alumnocurso()
+    function registro_alumnocurso($idcurso)
     {
         if($this->session->userdata('logged_in'))
         {
+            //$this->session->set_flashdata('curso', $idcurso);
+            //$this->session->flashdata('idcurso');
             $crud = new grocery_CRUD();
             $crud->where('posgrado', $this->session->userdata('perfil'));
             $crud->set_table('alumno_cursos');
             $crud->set_subject('Alumno a curso');
             $crud->display_as('alumno_Matricula','Nombre del Alumno');
-            $crud->display_as('idcurso','Nombre del curso');
+            $crud->display_as('idcurso','Curso');
             $crud->set_relation('alumno_Matricula','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
-            $crud->set_relation('idcurso','cursos','{posgrado}  -  {nombre_curso}  -  {NRC}', array('posgrado' => $this->session->userdata('perfil')));
+            //$crud->set_relation('idcurso','cursos','{posgrado}  -  {nombre_curso}  -  {NRC}', array('posgrado' => $this->session->userdata('perfil')));
             $crud->columns('alumno_Matricula','idcurso');
-            
+            $crud->field_type('idcurso', 'hidden', $idcurso);
             $crud->unset_fields('priority');
-            $crud->required_fields('alumno_Matricula', 'idcurso');
+            $crud->required_fields('alumno_Matricula');
+            //$crud->callback_before_insert(array($this,'acciones_callback'));
+            //$crud->callback_before_update(array($this,'acciones_callback'));
             $crud->unset_print();
             $crud->unset_export();
 
@@ -58,7 +64,7 @@ class Alumno_cursos extends CI_Controller {
             $crud->columns('alumno_Matricula','idcurso');
             
             $crud->unset_fields('priority');
-            $crud->required_fields('alumno_Matricula', 'idcurso');
+            $crud->required_fields('alumno_Matricula');
             $crud->unset_print();
             $crud->unset_export();
 
@@ -68,6 +74,19 @@ class Alumno_cursos extends CI_Controller {
             redirect('login');
         }
     }
+
+
+    function acciones_callback($post_array)
+    {   
+        $post_array['idcurso'] =  $this->session->flashdata('curso');
+    }
+
+
+
+
+
+
+
 
     function _example_output($output = null)
     {
