@@ -53,7 +53,7 @@ class Cursos extends CI_Controller {
                                                             '202051' => 'Febrero - Julio 2020'
                                                             ));
 
-            $crud->required_fields('periodo', 'codigo','nombre_curso','horas','fecha_inicio','fecha_fin');
+            $crud->required_fields('periodo', 'codigo','horas','fecha_inicio','fecha_fin');
             $output = $crud->render();
 
             $this->_example_output($output);

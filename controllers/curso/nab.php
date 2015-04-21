@@ -32,14 +32,18 @@ class Nab extends CI_Controller {
             $this->_example_output($output);
         }else{
             redirect('login');
-    
+
     }}
 
     function _example_output($output = null)
 
     {
         $output->titulo_tabla = "Personal del Núcleo Académico Básico";
-        $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
+        if($this->session->userdata('perfil')== "Administrativo"){
+            $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
+        }else{
+            $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+        }
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);
     }
