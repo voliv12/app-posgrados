@@ -97,7 +97,7 @@ class Alumno_cursos extends CI_Controller {
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
 
-                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>   |  <li> <a href='alumno_cursos'> Menú CVU </a></li>";
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_directivo', $datos_plantilla);
                        }

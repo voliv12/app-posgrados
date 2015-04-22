@@ -56,9 +56,10 @@ class Cursos extends CI_Controller {
             $crud->unset_fields('alumnos');
             $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
             $crud->required_fields('periodo', 'codigo','horas','fecha_inicio','fecha_fin');
+             $barra = " <li><a href='directivo'>Menú principal</a></li>";
             $output = $crud->render();
 
-            $this->_example_output($output);
+            $this->_example_output($output,$barra);
         }else{
             redirect('login');
         }
@@ -86,10 +87,11 @@ class Cursos extends CI_Controller {
             $crud->field_type('codigo','readonly');
             $crud->field_type('NRC','readonly');
             $crud->field_type('nombre_curso','readonly');
-
+            $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso'>Cursos </a></li>";
             $output = $crud->render();
 
-            $this->_example_output($output);
+            $this->_example_output($output, $barra);
+            
         }else{
             redirect('login');
         }
@@ -110,13 +112,17 @@ class Cursos extends CI_Controller {
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
-
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
+            $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
+            $crud->columns('periodo','codigo','nrc','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
-            $crud->edit_fields('NRC');
-
+            $crud->edit_fields('NRC', 'academico_NAB', 'academico_externo','alumnos');
+            $crud->field_type('academico_NAB','readonly');
+            $crud->field_type('alumnos','readonly');
+            $crud->field_type('academico_externo','readonly');
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -130,8 +136,9 @@ class Cursos extends CI_Controller {
         return site_url('curso/alumno_cursos/registro_alumnocurso').'?idcurso ='.$row->idcurso;
     }
 
-    function _example_output($output = null)
+    function _example_output($output = null, $barra = null)
     {
+        
         $output->titulo_tabla = "Programación de Cursos";
         if($this->session->userdata('perfil') == 'Administrador')
         {
@@ -146,7 +153,8 @@ class Cursos extends CI_Controller {
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
 
-                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                        //$output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso'>Cursos </a></li>";
+                        $output->barra_navegacion = $barra;
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_directivo', $datos_plantilla);
                        }
