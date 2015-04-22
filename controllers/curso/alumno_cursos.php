@@ -16,7 +16,7 @@ class Alumno_cursos extends CI_Controller {
 
     }
 
-    function registro_alumnocurso($idcurso)
+    /*function registro_alumnocurso($idcurso)
     {
         if($this->session->userdata('logged_in'))
         {
@@ -26,10 +26,12 @@ class Alumno_cursos extends CI_Controller {
             $crud->where('posgrado', $this->session->userdata('perfil'));
             $crud->set_table('alumno_cursos');
             $crud->set_subject('Alumno a curso');
-            $crud->display_as('alumno_Matricula','Nombre del Alumno');
+            $crud->display_as('matricula','Alumno');
             $crud->display_as('idcurso','Curso');
-            $crud->set_relation('alumno_Matricula','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
+
+            //$crud->set_relation('matricula','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             //$crud->set_relation('idcurso','cursos','{posgrado}  -  {nombre_curso}  -  {NRC}', array('posgrado' => $this->session->userdata('perfil')));
+            $crud->set_relation_n_n('matricula', 'cat_posgrados_alumno', 'cursos', 'idcurso', 'matricula', 'idalumno', 'priority');
             $crud->columns('alumno_Matricula','idcurso');
             $crud->field_type('idcurso', 'hidden', $idcurso);
             $crud->unset_fields('priority');
@@ -44,10 +46,7 @@ class Alumno_cursos extends CI_Controller {
         }else{
             redirect('login');
         }
-    }
-
-
-
+    }*/
 
     function registro_alumnocurso_admin()
     {
@@ -62,7 +61,7 @@ class Alumno_cursos extends CI_Controller {
             $crud->set_relation('alumno_Matricula','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->set_relation('idcurso','cursos','{posgrado}  -  {nombre_curso}  -  {NRC}');
             $crud->columns('alumno_Matricula','idcurso');
-            
+
             $crud->unset_fields('priority');
             $crud->required_fields('alumno_Matricula');
             $crud->unset_print();
@@ -77,34 +76,27 @@ class Alumno_cursos extends CI_Controller {
 
 
     function acciones_callback($post_array)
-    {   
+    {
         $post_array['idcurso'] =  $this->session->flashdata('curso');
     }
-
-
-
-
-
-
-
 
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Ingresar Alumnos a Cursos";
         if($this->session->userdata('perfil') == 'Administrador')
         {
-        
+
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
         } else if($this->session->userdata('perfil') == 'Administrativo')
                 {
-                
+
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
                 $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
-                        
+
                         $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_directivo', $datos_plantilla);

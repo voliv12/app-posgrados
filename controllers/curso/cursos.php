@@ -28,7 +28,6 @@ class Cursos extends CI_Controller {
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
-
             $crud->unset_print();
             $crud->unset_export();
             //$crud->unset_edit_fields();
@@ -36,7 +35,8 @@ class Cursos extends CI_Controller {
             //$crud->field_type('nrc','invisible');
             $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
-            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', 'nompersonal', 'priority');
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
+            $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->field_type('periodo', 'dropdown',  array('201401' => 'Agosto 2013 - Enero 2014',
                                                             '201451' => 'Febrero - Julio 2014',
                                                             '201501' => 'Agosto 2014 - Enero 2015' ,
@@ -52,7 +52,9 @@ class Cursos extends CI_Controller {
                                                             '202001' => 'Agosto 2019 - Enero 2020',
                                                             '202051' => 'Febrero - Julio 2020'
                                                             ));
-            $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/alumno_cursos/registro_alumnocurso');
+            $crud->columns('periodo','codigo','nrc','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
+            $crud->unset_fields('alumnos');
+            $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
             $crud->required_fields('periodo', 'codigo','horas','fecha_inicio','fecha_fin');
             $output = $crud->render();
 
@@ -61,6 +63,38 @@ class Cursos extends CI_Controller {
             redirect('login');
         }
     }
+
+    function alumno_curso($idcurso)
+    {
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->where('posgrado', $this->session->userdata('perfil'));
+            $crud->where('idcurso', $idcurso);
+            $crud->set_table('cursos');
+            $crud->display_as('codigo','Experiencia Educativa');
+            $crud->display_as('nombre_curso','Nombre del Curso');
+            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+            $crud->unset_print();
+            $crud->unset_export();
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
+            $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
+            $crud->columns('codigo','NRC','nombre_curso','alumnos');
+            $crud->unset_fields('periodo','fecha_inicio','fecha_fin','horas','academico_NAB','academico_externo','posgrado');
+            $crud->unset_add();
+            $crud->unset_delete();
+            $crud->field_type('codigo','readonly');
+            $crud->field_type('NRC','readonly');
+            $crud->field_type('nombre_curso','readonly');
+
+            $output = $crud->render();
+
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
+    }
+
     function registrocurso_admin()
     {
         if($this->session->userdata('logged_in'))
@@ -91,14 +125,10 @@ class Cursos extends CI_Controller {
         }
     }
 
-
-
         function just_a_test($primary_key , $row)
     {
         return site_url('curso/alumno_cursos/registro_alumnocurso').'?idcurso ='.$row->idcurso;
-    }  
-
-
+    }
 
     function _example_output($output = null)
     {
