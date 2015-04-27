@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php //echo $titulo; ?>SIP Personal</title>
-    <meta charset="utf-8"></meta>
-    <title>Sistema de Información de Posgrado</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href= "<?php echo $this->config->item('base_url'); ?>"/>
+  <title><?php //echo $titulo; ?>SIP Personal</title>
+  <meta charset="utf-8"></meta>
+  <title>Sistema de Información de Posgrado</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href= "<?php echo $this->config->item('base_url'); ?>"/>
 
-    <script type='text/javascript' src="../assets/js/jquery-1.8.2.js"></script>
-    <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../assets/js/jquery.js"></script>
-    <script type="text/javascript" src="../assets/js/jquery.ui.draggable.js"></script>
-    <script type="text/javascript" src="../assets/js/DataTables-1.8.1/media/js/jquery.js"></script>
-    <script type="text/javascript" src="../assets/js/jquery.jeditable.js"></script>
-    <script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
-    <script type="text/javascript" src="../assets/js/jquery-ui-1.8.16.custom.min.js"></script>
-    <script type="text/javascript" src="../assets/js/jquery-ui-timepicker-addon.js"></script>
-    <script type="text/javascript" src="../assets/js/highcharts.js"></script>
-    <script type="text/javascript" src="../assets/js/exporting.js"></script>
-    <script type="text/javascript" src="../assets/js/exporting.src.js"></script>
+  <script type='text/javascript' src="../assets/js/jquery-1.8.2.js"></script>
+  <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery.ui.draggable.js"></script>
+  <script type="text/javascript" src="../assets/js/DataTables-1.8.1/media/js/jquery.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery.jeditable.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery.validate.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery-ui-1.8.16.custom.min.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="../assets/js/highcharts.js"></script>
+  <script type="text/javascript" src="../assets/js/exporting.js"></script>
+  <script type="text/javascript" src="../assets/js/exporting.src.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery-ui-timepicker-addon.js"></script>
 
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" media="screen">
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-responsive.min.css" >
-    <link rel="stylesheet" href="../assets/js/themes/smoothness/jquery-ui-1.8.16.custom.css" type="text/css">
-    <link rel="stylesheet" href="../assets/js/themes/base/jquery.ui.base.css" type="text/css">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="../assets/js/jquery.clockpick.js"></script>
+  <script type="text/javascript" src="../assets/js/jquery.clockpick.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/clockpick.css" type="text/css">
+
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-responsive.min.css" >
+  <link rel="stylesheet" href="../assets/js/themes/smoothness/jquery-ui-1.8.16.custom.css" type="text/css">
+  <link rel="stylesheet" href="../assets/js/themes/base/jquery.ui.base.css" type="text/css">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 
@@ -40,18 +47,22 @@
 <script type="text/javascript">
 $(document).ready(function()
   {
-
  //############## INGRESAR ALUMNOS A CURSO  ###############
-
-
-      $("#otra_beca_field_box").hide();
-      $("#field-beca").change(function ()
-      {
-        if($("#field-beca").val() == "Otra"){ $("#otra_beca_field_box").show(); }
-        else{ $("#otra_beca_field_box").hide(); }
-      });
-
+    $("#otra_beca_field_box").hide();
+    $("#field-beca").change(function ()
+    {
+      if($("#field-beca").val() == "Otra"){ $("#otra_beca_field_box").show(); }
+      else{ $("#otra_beca_field_box").hide(); }
+    });
 //****************************************************************
+  $("#otro_lugar_field_box").hide();
+    $("#field-lugar").change(function ()
+    {
+      if($("#field-lugar").val() == "Otro"){ $("#otro_lugar_field_box").show(); }
+      else{ $("#otro_lugar_field_box").hide(); }
+    });
+
+//$("#hora_inicio").timepicker();
 
  });
 </script>
