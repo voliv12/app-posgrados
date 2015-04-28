@@ -1,50 +1,100 @@
-<?php
-	$h = '<select name="hour" id="hour">';
-	$m = '<select name="minute" id="minute">';
-	for($i = 0; $i< 60; $i++){
-		if($i < 24){
-			$h .= '<option value="'.(($i > 9)? $i : "0$i").'">'.(($i > 9)? $i : "0$i").'</option>';
-		}
-		$m .= '<option value="'.(($i > 9)? $i : "0$i").'">'.(($i > 9)? $i : "0$i").'</option>';
-	}
-	$h .= '</select>';
-	$m .= '</select>';
-?>
-<div style="width:500px; height:135px; overflow:auto; color:#000000; margin-bottom:20px;" align="center">
-	<h4>Añadir evento para <?php echo "$day $month $year"?></h4>
-	<div class="spacer"></div>
-	<table>
-		<tr><td>Horario <span class="require">*</span></td><td>:</td><td><?php echo "$h&nbsp;:&nbsp;$m";?>&nbsp;:&nbsp;<select name="second" disabled><option value="00">00</option></select></td></tr>
-		<tr><td>Evento <span class="require">*</span></td><td>:</td><td><input type="text" name="event" id="event" maxlength="50" size="50" /></td></tr>
-		<tr><td colspan="2"></td><td><input type="button" name="cancel" value="Cancelar" class="cancel">&nbsp;&nbsp;
-									 <input type="button" name="save" value="Guardar" class="save"></td></tr>
-	</table>
-	<script>
-	$('.cancel').click(function(){
-		var data = false;
-		$.fn.colorbox.close(data);
-	});
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crear un nuevo evento</title>
+    <meta charset="utf-8">
+	<head>
+	  	<script src="<?php echo base_url() ?>bower_components/jquery/jquery.min.js"></script>
+	  	<script src="<?php echo base_url() ?>bower_components/moment/moment.js"></script>
+        <script src="./bower_components/eonasdan-bootstrap-datetimepicker/bootstrap/bootstrap.min.js"></script>
+	  	<script src="<?php echo base_url() ?>bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+	  	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	  	<link rel="stylesheet" href="<?php echo base_url() ?>bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+	   <script src="<?php echo base_url() ?>bower_components/eonasdan-bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.es.js"></script>
+    </head>
+</head>
+<body>
+<div class="container">
+    <ol class="breadcrumb">
+        <?php if ($this->session->userdata('perfil') == 'Administrativo') { ?>
+        <li><a href="<?php echo base_url() ?>administrativo">Menú Principal</a></li>
+        <?php } else { ?>
+        <li><a href="<?php echo base_url() ?>directivo">Menú Pricipal</a></li>
+        <?php } ?>
+        <li><a href="<?php echo base_url() ?>calendar">Calendario</a></li>
+        <li><a href="<?php echo base_url() ?>events">Añadir evento</a></li>
 
-	$('.save').click(function(){
-		if($('#event').val().length > 0){
-			$.ajax({
-				type: 'POST',
-				dataType: 'json',
-				url: "<?php echo site_url("evencal/do_add");?>",
-				data:{<?php echo "year:$year,mon:$mon,day:$day";?>, hour:$('#hour').val(), minute: $('#minute').val(), event:$('#event').val()},
-				success: function(data) {
-					if(data.status){
-						//$.fn.colorbox.close(data);
-						window.location = '<?php echo site_url("evencal/detail/$year/$mon/$day")?>';
-					}else{
-						$('.spacer').html(data.message);
-					}
-				}
-			});
-		}else{
-			$('.spacer').html('Llenar el campo')
-			$('#event').attr('class','error_require');
-		}
-	});
-	</script>
+    </ol>
+    <div class="row">
+    <h1 class="text-center heading">Añadir un nuevo evento</h1><hr>
+    <?php echo form_open(base_url('events/save')) ?>
+        <div class="col-sm-8 col-sm-offset-2" style="height:75px;">
+           <div class='col-md-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='from'>
+                        <input type='text' name="from" class="form-control" readonly />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='to'>
+                        <input type='text' name="to" class="form-control" readonly />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-sm-12 control-label">Enlace al evento</label>
+                <div class="col-sm-12">
+                  <input type="url" name="url" class="form-control" id="url" placeholder="Introduce una url o no :)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-12 control-label">Tipo de evento</label>
+                <div class="col-sm-12">
+                    <select class="form-control" name="class">
+                        <option value="event-info">Info</option>
+                        <option value="event-success">Success</option>
+                        <option value="event-inverse">Inverse</option>
+                        <option value="event-important">Important</option>
+                        <option value="event-warning">Warning</option>
+                        <option value="event-special">Special</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-12 control-label">Título</label>
+                <div class="col-sm-12">
+                  <input type="text" name="title" class="form-control" id="title" placeholder="Introduce un título">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="body" class="col-sm-12 control-label">Evento</label>
+                <div class="col-sm-12">
+                  <textarea id="body" name="event" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+
+             <input style="margin-top: 10px" type="submit" class="pull-right btn btn-success" value="Gurdar evento">
+            </div>
+        </div>
+    <?php echo form_close() ?>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#from').datetimepicker({
+                language: 'es',
+                minDate: new Date()
+            });
+            $('#to').datetimepicker({
+                language: 'es',
+                minDate: new Date()
+            });
+            
+        });
+    </script>
 </div>
+</body>
+</html>

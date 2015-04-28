@@ -13,7 +13,7 @@
     </div>
     <div class="row">
             <p>
-            <div class="span6"><a href="evencal" class="btn btn-block"><i class="icon-bullhorn"></i> Eventos</a></div>
+            <div class="span6"><a href="calendar" class="btn btn-block"><i class="icon-bullhorn"></i> Eventos</a></div>
 
             </p>
     </div>
