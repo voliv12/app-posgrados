@@ -27,6 +27,9 @@ class Nab extends CI_Controller {
             $crud->columns('numpersonal', 'nompersonal');
             $crud->field_type('priority','hidden');
             $crud->unset_export();
+            $crud->callback_before_insert(array($this,'acciones_callback'));
+            $crud->callback_before_update(array($this,'acciones_callback'));
+
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -46,6 +49,13 @@ class Nab extends CI_Controller {
         }
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);
+    }
+
+    function acciones_callback($post_array)
+    {
+        $post_array['nompersonal'] = strtoupper($post_array['nompersonal']);
+
+        return $post_array;
     }
 
 }
