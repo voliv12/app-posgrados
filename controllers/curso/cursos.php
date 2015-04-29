@@ -161,6 +161,7 @@ class Cursos extends CI_Controller {
     function acciones_callback($post_array)
     {
         $post_array['nombre_curso'] = strtoupper($post_array['nombre_curso']);
+        $post_array['personalext'] = strtoupper($post_array['personalext']);
 
         return $post_array;
     }
