@@ -53,7 +53,8 @@ class Nab extends CI_Controller {
 
     function acciones_callback($post_array)
     {
-        $post_array['nompersonal'] = strtoupper($post_array['nompersonal']);
+        //$post_array['nompersonal'] = strtoupper($post_array['nompersonal']);
+        $post_array['nompersonal'] = strtr(strtoupper($post_array['nompersonal']),"áéíóúñ","ÁÉÍÓÚÑ");
 
         return $post_array;
     }

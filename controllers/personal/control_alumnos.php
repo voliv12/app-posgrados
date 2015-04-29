@@ -29,7 +29,7 @@ class Control_alumnos extends CI_Controller {
                  ->display_as('curp','CURP')
                  ->display_as('Contrasenia', 'Contraseña')
                  ->change_field_type('Contrasenia', 'password')
-                
+
                  ->columns('NombreA','ApellidoPA','ApellidoMA','curp','correo')
                 ;
             //$crud->set_relation('posgrado','cat_posgrados','nombre_posgrado');
@@ -86,18 +86,18 @@ class Control_alumnos extends CI_Controller {
 */
 
     function acciones_callback($post_array)
-    {   
+    {
 
        /* if ($post_array['nivel'] == "Maestría" ){
 
             $gene = $post_array['inicio'] + 2;
-            
+
         }else{
             $gene = $post_array['inicio'] + 3;
         }
 
         $post_array['termino'] = $gene;
-        
+
 */
         ////////////////////////////////
         $this->load->library('encrypt');

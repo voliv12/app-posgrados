@@ -120,8 +120,8 @@ class Cursos extends CI_Controller {
                  ->display_as('nrc','NRC')
                  ->display_as('nomcurso','Nombre del Curso')
                  ->display_as('nab_numpersonal','Académico NAB')
-                 ->display_as('horas','Horas p/semana')
-                 ->display_as('personalext','Académico Externo');
+                 ->display_as('horas','Horas p/semana');
+                 //->display_as('personalext','Académico Externo');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
@@ -160,8 +160,9 @@ class Cursos extends CI_Controller {
 
     function acciones_callback($post_array)
     {
-        $post_array['nombre_curso'] = strtoupper($post_array['nombre_curso']);
-        $post_array['personalext'] = strtoupper($post_array['personalext']);
+        //$post_array['nombre_curso'] = strtoupper($post_array['nombre_curso']);
+        $post_array['nombre_curso'] = strtr(strtoupper($post_array['nombre_curso']),"áéíóúñ","ÁÉÍÓÚÑ");
+        $post_array['academico_externo'] = strtr(strtoupper($post_array['academico_externo']),"áéíóúñ","ÁÉÍÓÚÑ");
 
         return $post_array;
     }
