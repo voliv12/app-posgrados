@@ -21,10 +21,10 @@ class Nab extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('nab');
             $crud->set_subject('Personal');
-            $crud->display_as('numpersonal','Número de Personal')->display_as('nompersonal','Nombre del Personal');
-            $crud->required_fields('numpersonal', 'nompersonal');
+            $crud->display_as('numpersonal','Número Personal')->display_as('nompersonal','Nombre')->display_as('nab','Académico del NAB');
+            $crud->required_fields('numpersonal', 'nompersonal','apellidos','nab');
             $crud->unset_print();
-            $crud->columns('numpersonal', 'nompersonal');
+            $crud->columns('numpersonal', 'nompersonal','apellidos','nab');
             $crud->field_type('priority','hidden');
             $crud->unset_export();
             $crud->callback_before_insert(array($this,'acciones_callback'));
@@ -41,7 +41,7 @@ class Nab extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Personal del Núcleo Académico Básico";
+        $output->titulo_tabla = "Plantilla Académica";
         if($this->session->userdata('perfil')== "Administrativo"){
             $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         }else{
@@ -55,6 +55,7 @@ class Nab extends CI_Controller {
     {
         //$post_array['nompersonal'] = strtoupper($post_array['nompersonal']);
         $post_array['nompersonal'] = strtr(strtoupper($post_array['nompersonal']),"áéíóúñ","ÁÉÍÓÚÑ");
+        $post_array['apellidos'] = strtr(strtoupper($post_array['apellidos']),"áéíóúñ","ÁÉÍÓÚÑ");
 
         return $post_array;
     }

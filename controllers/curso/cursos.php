@@ -36,7 +36,7 @@ class Cursos extends CI_Controller {
             //$crud->field_type('nrc','invisible');
             $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
-            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal} {nab.apellidos}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->field_type('periodo', 'dropdown',  array(
                                                             '201301' => 'Agosto 2012 - Enero 2013',

@@ -28,10 +28,10 @@
 </div>
 
 <div class="container well">
-    <h4><a>Núcleo Académico Básico (NAB)</a></h4>
+    <h4><a>Académicos</a></h4>
         <div class="row">
             <p>
-            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Núcleo Académico Básico</a></div>
+            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Plantilla Académica</a></div>
             </p>
         </div>
 </div>
