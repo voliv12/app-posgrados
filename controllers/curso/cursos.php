@@ -65,6 +65,8 @@ class Cursos extends CI_Controller {
             $crud->callback_add_field('hora_inicio',array($this,'hora_inicio'));
             $crud->callback_add_field('hora_fin',array($this,'hora_fin'));
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
+            $crud->callback_before_insert(array($this,'acciones_callback'));
+            $crud->callback_before_update(array($this,'acciones_callback'));
 
             $output = $crud->render();
 
@@ -132,6 +134,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('academico_NAB','readonly');
             $crud->field_type('alumnos','readonly');
             $crud->field_type('academico_externo','readonly');
+
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -153,6 +156,13 @@ class Cursos extends CI_Controller {
     function hora_fin()
     {
         return '<span class="add-on"><i class="icon-time"></i></span><input type="text" maxlength="5" value="" id="hora_fin" name="hora_fin" style="width:50px"> (hh:mm) 0-23 hrs.';
+    }
+
+    function acciones_callback($post_array)
+    {
+        $post_array['nombre_curso'] = strtoupper($post_array['nombre_curso']);
+
+        return $post_array;
     }
 
     function _example_output($output = null, $barra = null)

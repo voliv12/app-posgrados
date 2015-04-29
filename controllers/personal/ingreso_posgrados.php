@@ -43,7 +43,7 @@ class Ingreso_posgrados extends CI_Controller {
                                                             ))
                  ->columns('idcat_posgrados','matricula','idalumno','estatus','inicio','termino');
 
-            
+
             $crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado',array('abrev_posgrado' => $this->perfil));
             //$crud->set_relation('idcat_posgradosD','cat_posgrados','nombre_posgrado',array('nivelp' => 'Doctorado'));
             $crud->set_relation('idalumno','alumno','{NombreA}  {ApellidoPA}  {ApellidoMA}');
@@ -54,7 +54,7 @@ class Ingreso_posgrados extends CI_Controller {
             $crud->callback_after_insert(array($this, 'crea_directorio'));
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
-            
+
 
             $output = $crud->render();
 
@@ -63,7 +63,6 @@ class Ingreso_posgrados extends CI_Controller {
             redirect('login');
         }
     }
-
 
 
 //*******************************************************************************************************************
@@ -96,7 +95,7 @@ class Ingreso_posgrados extends CI_Controller {
                                                             ))
                  ->columns('idcat_posgradosD','matricula','idalumno','estatus','inicio','termino');
 
-            
+
             //$crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado',array('nivelP' => 'Maestría'));
             $crud->set_relation('idcat_posgradosD','cat_posgrados','nombre_posgrado',array('abrev_posgrado' => $this->perfil));
             $crud->set_relation('idalumno','alumno','{NombreA} - {ApellidoPA} - {ApellidoMA}');
@@ -107,7 +106,7 @@ class Ingreso_posgrados extends CI_Controller {
             $crud->callback_after_insert(array($this, 'crea_directorio'));
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
-            
+
 
             $output = $crud->render();
 
@@ -116,7 +115,6 @@ class Ingreso_posgrados extends CI_Controller {
             redirect('login');
         }
     }
-
 
 //*******************************************************************************************************************
 
@@ -149,7 +147,7 @@ class Ingreso_posgrados extends CI_Controller {
                                                                 ))
                      ->columns('idcat_posgrados','idcat_posgradosD','matricula','idalumno','estatus','inicio','termino');
 
-                
+
                 $crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado',array('nivelp' => 'Maestría'));
                 $crud->set_relation('idcat_posgradosD','cat_posgrados','nombre_posgrado',array('nivelp' => 'Doctorado'));
                 $crud->set_relation('idalumno','alumno','{NombreA} - {ApellidoPA} - {ApellidoMA}');
@@ -160,7 +158,7 @@ class Ingreso_posgrados extends CI_Controller {
                 $crud->callback_after_insert(array($this, 'crea_directorio'));
                 $crud->callback_before_insert(array($this,'acciones_callback'));
                 $crud->callback_before_update(array($this,'acciones_callback'));
-                
+
 
                 $output = $crud->render();
 
@@ -172,9 +170,6 @@ class Ingreso_posgrados extends CI_Controller {
 
 
 //*********************************************************************************************************************
-
-
-
 
     function _example_output($output = null)
     {
@@ -215,11 +210,8 @@ class Ingreso_posgrados extends CI_Controller {
         }
 
 
-
-
-
     function acciones_callback($post_array)
-    {   
+    {
         if($this->perfil <> "DCS"){
             $post_array['nivel'] = "Maestría";
             $gene = $post_array['inicio'] + 2;
@@ -229,7 +221,7 @@ class Ingreso_posgrados extends CI_Controller {
         }
 
         $post_array['termino'] = $gene;
-        
+
         $post_array['matricula'] = strtoupper($post_array['matricula']); //Aprovecho éste callback para convertir a mayúsculas la Matricula
         return $post_array;
     }
