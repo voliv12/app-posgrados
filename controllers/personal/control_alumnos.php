@@ -29,39 +29,73 @@ class Control_alumnos extends CI_Controller {
                  ->display_as('curp','CURP')
                  ->display_as('Contrasenia', 'Contraseña')
                  ->change_field_type('Contrasenia', 'password')
-
-                 ->columns('NombreA','ApellidoPA','ApellidoMA','curp','correo')
-                ;
+                 ->columns('NombreA','ApellidoPA','ApellidoMA','curp','correo');
             $crud->unset_edit_fields('Contrasenia');
-
+            $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_alumnos/cambiar_password');
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
             $crud->callback_after_insert(array($this, 'crea_directorio'));
 
             $output = $crud->render();
-
+            $output->titulo_tabla = "Registro de Alumnos";
             $this->_example_output($output);
+
         }else{
             redirect('login');
         }
     }
 
+
+     function cambiar_password($noPersonal)
+        {
+             if ($this->session->userdata('logged_in') )
+            {
+                $crud = new grocery_CRUD();
+            $crud->set_table('alumno')
+                 ->set_subject('Alumno')
+                 ->required_fields('Contrasenia')
+                 ->display_as('NombreA','Nombre')
+                 ->display_as('ApellidoPA','A Paterno')
+                 ->display_as('ApellidoMA','A Materno')
+                 ->display_as('Contrasenia', 'Contraseña')
+                 ->change_field_type('Contrasenia', 'password')
+                 ->columns('NombreA','ApellidoPA','ApellidoMA','Contrasenia');
+                $crud->unset_edit_fields('NombreA','ApellidoPA','ApellidoMA','curp', 'rfc','Direccion',   'Telefono', 'Correo');
+                $crud->field_type('NombreA','readonly')->field_type('ApellidoPA','readonly')->field_type('ApellidoMA','readonly')->field_type('password','password');
+                $crud->unset_add();
+                $crud->unset_delete();
+                $crud->callback_before_insert(array($this,'acciones_callback'));
+                $crud->callback_before_update(array($this,'acciones_callback'));
+
+                $output = $crud->render();
+                $output->titulo_tabla = 'Contraseña del usuario';
+                $this->_example_output($output);
+            }else
+            {
+                redirect('login');
+            }
+        }
+
+
+
+
+
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Alumnos";
+        
         if($this->session->userdata('perfil') == 'Administrador')
         {
-        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
+        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
         } else if($this->session->userdata('perfil') == 'Administrativo')
                 {
-                $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
+                $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
                 $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
 
-                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_directivo', $datos_plantilla);
                        }
