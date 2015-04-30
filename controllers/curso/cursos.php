@@ -27,7 +27,8 @@ class Cursos extends CI_Controller {
                  ->display_as('nab_numpersonal','Académico NAB')
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo')
-                 ->display_as('dia','Dia(s)');
+                 ->display_as('dia','Dia(s)')
+                 ->display_as('generacion','Generación');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
             $crud->unset_print();
             $crud->unset_export();
@@ -36,30 +37,41 @@ class Cursos extends CI_Controller {
             //$crud->field_type('nrc','invisible');
             $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
+            $crud->field_type('generacion','dropdown',array('2012'=> '2012',
+                                                            '2013'=> '2013',
+                                                            '2014'=> '2014',
+                                                            '2015'=> '2015',
+                                                            '2016'=> '2016',
+                                                            '2017'=> '2017',
+                                                            '2018'=> '2018',
+                                                            '2019'=> '2019',
+                                                            '2020'=> '2020',
+                                                            '2021'=> '2021'
+                                                        ));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal} {nab.apellidos}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->field_type('periodo', 'dropdown',  array(
-                                                            '201301' => 'Agosto 2012 - Enero 2013',
-                                                            '201351' => 'Febrero - Julio 2013',
-                                                            '201401' => 'Agosto 2013 - Enero 2014',
-                                                            '201451' => 'Febrero - Julio 2014',
-                                                            '201501' => 'Agosto 2014 - Enero 2015' ,
-                                                            '201551' => 'Febrero - Julio 2015',
-                                                            '201601' => 'Agosto 2015 - Enero 2016',
-                                                            '201651' => 'Febrero - Julio 2016',
-                                                            '201701' => 'Agosto 2016 - Enero 2017',
-                                                            '201751' => 'Febrero - Julio 2017',
-                                                            '201801' => 'Agosto 2017 - Enero 2018',
-                                                            '201851' => 'Febrero - Julio 2018',
-                                                            '201901' => 'Agosto 2018 - Enero 2019',
-                                                            '201951' => 'Febrero - Julio 2019',
-                                                            '202001' => 'Agosto 2019 - Enero 2020',
-                                                            '202051' => 'Febrero - Julio 2020'
+                                                            '201301' => '201301: Ago 2012 - Ene 2013',
+                                                            '201351' => '201351: Feb - Jul 2013',
+                                                            '201401' => '201401: Ago 2013 - Ene 2014',
+                                                            '201451' => '201451: Feb - Jul 2014',
+                                                            '201501' => '201501: Ago 2014 - Ene 2015' ,
+                                                            '201551' => '201551: Feb - Jul 2015',
+                                                            '201601' => '201601: Ago 2015 - Ene 2016',
+                                                            '201651' => '201651: Feb - Jul 2016',
+                                                            '201701' => '201701: Ago 2016 - Ene 2017',
+                                                            '201751' => '201751: Feb - Jul 2017',
+                                                            '201801' => '201801: Ago 2017 - Ene 2018',
+                                                            '201851' => '201851: Feb - Jul 2018',
+                                                            '201901' => '201901: Ago 2018 - Ene 2019',
+                                                            '201951' => '201951: Feb - Jul 2019',
+                                                            '202001' => '202001: Ago 2019 - Ene 2020',
+                                                            '202051' => '202051: Feb - Jul 2020'
                                                             ));
-            $crud->columns('periodo','codigo','nrc','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
+            $crud->columns('generacion','periodo','codigo','nrc','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
             $crud->unset_fields('alumnos');
             $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
-            $crud->required_fields('periodo', 'codigo','horas','fecha_inicio','fecha_fin');
+            $crud->required_fields('generacion','periodo', 'codigo','horas','fecha_inicio','fecha_fin');
             $crud->field_type('dia','multiselect',
                     array( "Lunes"=>"Lunes","Martes"=>"Martes","Miércoles"=>"Miércoles","Jueves"=>"Jueves","Viernes"=>"Viernes","Sábado"=>"Sábado","Domingo"=>"Domingo"));
             $crud->callback_add_field('hora_inicio',array($this,'hora_inicio'));
@@ -116,24 +128,25 @@ class Cursos extends CI_Controller {
             //$crud->where('posgrado', $this->session->userdata('perfil'));
             $crud->set_table('cursos');
             $crud->set_subject('curso');
-            $crud->display_as('documentando_codigo','Experiencia Educativa')
-                 ->display_as('nrc','NRC')
+            $crud->display_as('codigo','Experiencia Educativa')
                  ->display_as('nomcurso','Nombre del Curso')
-                 ->display_as('nab_numpersonal','Académico NAB')
-                 ->display_as('horas','Horas p/semana');
-                 //->display_as('personalext','Académico Externo');
+                 ->display_as('academico_NAB','Académico NAB')
+                 ->display_as('horas','Horas p/semana')
+                 ->display_as('generacion','Generación');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
-            $crud->columns('periodo','codigo','nrc','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
+            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
-            $crud->edit_fields('NRC', 'academico_NAB', 'academico_externo','alumnos');
+            $crud->edit_fields('NRC','codigo','nomcurso','academico_NAB', 'academico_externo','alumnos');
             $crud->field_type('academico_NAB','readonly');
             $crud->field_type('alumnos','readonly');
             $crud->field_type('academico_externo','readonly');
+            $crud->field_type('codigo','readonly');
+            $crud->field_type('nomcurso','readonly');
 
             $output = $crud->render();
 
