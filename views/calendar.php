@@ -3,13 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>Calendario de eventos con bootstrap y php</title>
-	<!--link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"-->
-	<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url() ?>bower_components/bootstrap-calendar/css/calendar.css">
 	<script type="text/javascript" src="<?php echo base_url() ?>bower_components/jquery/jquery.min.js"></script>
-	<!--script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script-->
-	<script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url() ?>bower_components/bootstrap-calendar/js/language/es-ES.js"></script>
 </head>
 <body>
@@ -22,10 +19,9 @@
 	        <?php } else { ?>
 	        	<li><a href="<?php echo base_url() ?>directivo">Menú Principal</a></li>
 	        <?php } ?>
-	        	<li><a href="<?php echo base_url() ?>calendar">Calendario</a></li>
-
-	        <?php if ($this->session->userdata('tipo_usuario') != 'alumno'){ ?>
-	        	<li><a href="<?php echo base_url() ?>events">Añadir Evento</a></li>
+	        <li><a href="<?php echo base_url() ?>calendar">Calendario</a></li>
+	        <?php if ($this->session->userdata('tipo_usuario') <> 'alumno'){ ?>
+	        <li><a href="<?php echo base_url() ?>events">Añadir evento</a></li>
 	        <?php } ?>
 	    </ol>
 		<div class="row">
@@ -43,10 +39,10 @@
 						<button class="btn btn-warning" data-calendar-view="day">Día</button>
 					</div>
 				</div>
-			</div>
-			<!--label class="checkbox">
+			</div>	
+			<label class="checkbox">
 				<input type="checkbox" value="#events-modal" id="events-in-modal"> Abrir eventos en una ventana modal
-			</label-->
+			</label>	
 		</div><hr>
 		<div class="row">
 			<div id="calendar"></div>
@@ -71,7 +67,7 @@
 		    </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 	</div>
-
+    
     <script src="<?php echo base_url() ?>bower_components/underscore/underscore-min.js"></script>
     <script src="<?php echo base_url() ?>bower_components/bootstrap-calendar/js/calendar.js"></script>
     <script type="text/javascript">
@@ -81,6 +77,7 @@
 		var yyyy = date.getFullYear().toString();
 		var mm = (date.getMonth()+1).toString().length == 1 ? "0"+(date.getMonth()+1).toString() : (date.getMonth()+1).toString();
 		var dd  = (date.getDate()).toString().length == 1 ? "0"+(date.getDate()).toString() : (date.getDate()).toString();
+
 		//establecemos los valores del calendario
 		var options = {
 			events_source: '<?php echo base_url() ?>events/getAll',
@@ -92,24 +89,24 @@
 			time_start: '08:00',
 			time_end: '22:30',
 			time_split: '30',
-			width: '80%',
-			onAfterEventsLoad: function(events)
+			width: '100%',
+			onAfterEventsLoad: function(events) 
 			{
-				if(!events)
+				if(!events) 
 				{
 					return;
 				}
 				var list = $('#eventlist');
 				list.html('');
 
-				$.each(events, function(key, val)
+				$.each(events, function(key, val) 
 				{
 					$(document.createElement('li'))
 						.html('<a href="' + val.url + '">' + val.title + '</a>')
 						.appendTo(list);
 				});
 			},
-			onAfterViewLoad: function(view)
+			onAfterViewLoad: function(view) 
 			{
 				$('.page-header h3').text(this.getTitle());
 				$('.btn-group button').removeClass('active');
@@ -124,19 +121,19 @@
 
 		var calendar = $('#calendar').calendar(options);
 
-		$('.btn-group button[data-calendar-nav]').each(function()
+		$('.btn-group button[data-calendar-nav]').each(function() 
 		{
 			var $this = $(this);
-			$this.click(function()
+			$this.click(function() 
 			{
 				calendar.navigate($this.data('calendar-nav'));
 			});
 		});
 
-		$('.btn-group button[data-calendar-view]').each(function()
+		$('.btn-group button[data-calendar-view]').each(function() 
 		{
 			var $this = $(this);
-			$this.click(function()
+			$this.click(function() 
 			{
 				calendar.view($this.data('calendar-view'));
 			});
@@ -162,6 +159,5 @@
 		});
 	}(jQuery));
     </script>
-    <br><br><br><br>
 </body>
 </html>
