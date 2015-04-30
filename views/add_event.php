@@ -55,12 +55,13 @@
                 <label class="col-sm-12 control-label">Tipo de evento</label>
                 <div class="col-sm-12">
                     <select class="form-control" name="class">
-                        <option value="event-info">Info</option>
-                        <option value="event-success">Success</option>
-                        <option value="event-inverse">Inverse</option>
-                        <option value="event-important">Important</option>
-                        <option value="event-warning">Warning</option>
-                        <option value="event-special">Special</option>
+                        <option value="event-info">Curso</option>
+                        <option value="event-inverse">Exámen</option>
+                        <option value="event-success">Seminario</option>
+                        <option value="event-special">Conferencia</option>
+                        <option value="event-important">Reunión</option>
+                        <option value="event-warning">Aviso</option>
+
                     </select>
                 </div>
             </div>
@@ -92,7 +93,7 @@
                 language: 'es',
                 minDate: new Date()
             });
-            
+
         });
     </script>
 </div>

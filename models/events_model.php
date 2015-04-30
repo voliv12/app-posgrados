@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Events_model extends CI_Model 
+class Events_model extends CI_Model
 {
 	public function __construct()
 	{
 		parent::__construct();
-		date_default_timezone_set("Europe/Madrid"); 
+		date_default_timezone_set("America/Mexico_City");
 	}
 
 	/**

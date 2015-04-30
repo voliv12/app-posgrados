@@ -4,7 +4,13 @@ class Events extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view("add_event");
+		if(($this->session->userdata('logged_in')) && ($this->session->userdata('tipo_usuario') <> 'alumno'))
+        {
+        	$this->load->view("add_event");
+        }else
+        {
+        	redirect('login');
+        }
 	}
 
 	public function save()
