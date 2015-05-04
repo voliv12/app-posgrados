@@ -20,6 +20,7 @@ class Cursos extends CI_Controller {
         {
             $crud = new grocery_CRUD();
             $crud->where('posgrado', $this->session->userdata('perfil'));
+            $crud->where('generacion','2015');
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
