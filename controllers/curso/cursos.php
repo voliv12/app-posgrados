@@ -76,6 +76,7 @@ class Cursos extends CI_Controller {
                     array( "Lunes"=>"Lunes","Martes"=>"Martes","Miércoles"=>"Miércoles","Jueves"=>"Jueves","Viernes"=>"Viernes","Sábado"=>"Sábado","Domingo"=>"Domingo"));
             $crud->callback_add_field('hora_inicio',array($this,'hora_inicio'));
             $crud->callback_add_field('hora_fin',array($this,'hora_fin'));
+            $crud->order_by('generacion','DESC');
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
