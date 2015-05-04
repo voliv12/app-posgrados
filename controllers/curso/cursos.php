@@ -68,7 +68,7 @@ class Cursos extends CI_Controller {
                                                             '202001' => '202001: Ago 2019 - Ene 2020',
                                                             '202051' => '202051: Feb - Jul 2020'
                                                             ));
-            $crud->columns('generacion','periodo','codigo','nrc','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
+            $crud->columns('generacion','periodo','codigo','nrc','nombre_curso','academico_NAB');
             $crud->unset_fields('alumnos');
             $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
             $crud->required_fields('generacion','periodo', 'codigo','horas','fecha_inicio','fecha_fin');
@@ -137,7 +137,7 @@ class Cursos extends CI_Controller {
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}');
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
-            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
+            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();
@@ -152,6 +152,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('codigo','readonly');
             $crud->field_type('nombre_curso','readonly');
             $crud->field_type('posgrado','readonly');
+            $crud->order_by('generacion','DESC');
 
             $output = $crud->render();
 
