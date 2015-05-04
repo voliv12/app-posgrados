@@ -20,7 +20,7 @@ class Cursos extends CI_Controller {
         {
             $crud = new grocery_CRUD();
             $crud->where('posgrado', $this->session->userdata('perfil'));
-            $crud->where('generacion','2015');
+            //$crud->where('generacion','2015');
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
@@ -32,7 +32,7 @@ class Cursos extends CI_Controller {
                  ->display_as('generacion','Generación');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
             $crud->unset_print();
-            $crud->unset_export();
+            //$crud->unset_export();
             //$crud->unset_edit_fields();
             $crud->field_type('NRC', 'hidden');
             //$crud->field_type('nrc','invisible');
@@ -77,7 +77,7 @@ class Cursos extends CI_Controller {
                     array( "Lunes"=>"Lunes","Martes"=>"Martes","Miércoles"=>"Miércoles","Jueves"=>"Jueves","Viernes"=>"Viernes","Sábado"=>"Sábado","Domingo"=>"Domingo"));
             $crud->callback_add_field('hora_inicio',array($this,'hora_inicio'));
             $crud->callback_add_field('hora_fin',array($this,'hora_fin'));
-            $crud->order_by('generacion','DESC');
+            //$crud->order_by('generacion','DESC');
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
@@ -140,7 +140,7 @@ class Cursos extends CI_Controller {
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
             $crud->unset_print();
-            $crud->unset_export();
+            //$crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
             //$crud->edit_fields('NRC','codigo','nombre_curso','academico_NAB', 'academico_externo','alumnos');
@@ -153,7 +153,6 @@ class Cursos extends CI_Controller {
             $crud->field_type('codigo','readonly');
             $crud->field_type('nombre_curso','readonly');
             $crud->field_type('posgrado','readonly');
-            $crud->order_by('generacion','DESC');
 
             $output = $crud->render();
 
