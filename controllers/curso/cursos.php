@@ -129,11 +129,11 @@ class Cursos extends CI_Controller {
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
-                 ->display_as('nomcurso','Nombre del Curso')
+                 ->display_as('nombre_curso','Nombre del Curso')
                  ->display_as('academico_NAB','Académico NAB')
                  ->display_as('horas','Horas p/semana')
                  ->display_as('generacion','Generación');
-            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}');
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
@@ -141,12 +141,16 @@ class Cursos extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
-            $crud->edit_fields('NRC','codigo','nomcurso','academico_NAB', 'academico_externo','alumnos');
+            //$crud->edit_fields('NRC','codigo','nombre_curso','academico_NAB', 'academico_externo','alumnos');
+            $crud->unset_edit_fields('fecha_inicio','fecha_fin','horas','academico_externo','dia','hora_inicio','hora_fin','lugar','otro_lugar');
+            $crud->field_type('generacion','readonly');
+            $crud->field_type('periodo','readonly');
             $crud->field_type('academico_NAB','readonly');
             $crud->field_type('alumnos','readonly');
             $crud->field_type('academico_externo','readonly');
             $crud->field_type('codigo','readonly');
-            $crud->field_type('nomcurso','readonly');
+            $crud->field_type('nombre_curso','readonly');
+            $crud->field_type('posgrado','readonly');
 
             $output = $crud->render();
 
