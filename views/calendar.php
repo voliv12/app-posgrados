@@ -13,16 +13,18 @@
 	<div class="container">
 		<ol class="breadcrumb">
 			<?php if ($this->session->userdata('tipo_usuario') == 'alumno'){ ?>
-				<li><a href="<?php echo base_url() ?>principal">Menú Principal</a></li>
-			<?php } elseif ($this->session->userdata('perfil') == 'Administrativo') { ?>
-	       		<li><a href="<?php echo base_url() ?>administrativo">Menú Principal</a></li>
-	        <?php } else { ?>
-	        	<li><a href="<?php echo base_url() ?>directivo">Menú Principal</a></li>
-	        <?php } ?>
-	        <li><a href="<?php echo base_url() ?>calendar">Calendario</a></li>
-	        <?php if ($this->session->userdata('tipo_usuario') <> 'alumno'){ ?>
-	        <li><a href="<?php echo base_url() ?>events">Añadir evento</a></li>
-	        <?php } ?>
+			<li><a href="<?php echo base_url() ?>principal">Menú Principal</a></li>
+				<?php } elseif ($this->session->userdata('perfil') == 'Administrativo') { ?>
+		       		<li><a href="<?php echo base_url() ?>administrativo">Menú Principal</a></li>
+			       		<?php } elseif ($this->session->userdata('perfil') == 'Organizador') { ?>
+		       			<li><a href="<?php echo base_url() ?>salir">Cerrar Sesión</a></li>
+	        				<?php } else { ?>
+	        				<li><a href="<?php echo base_url() ?>directivo">Menú Principal</a></li>
+						    <?php } ?>
+						        <li><a href="<?php echo base_url() ?>calendar">Calendario</a></li>
+						        <?php if ($this->session->userdata('tipo_usuario') <> 'alumno'){ ?>
+						        <li><a href="<?php echo base_url() ?>events">Añadir evento</a></li>
+						        <?php } ?>
 	    </ol>
 		<div class="row">
 			<div class="page-header">

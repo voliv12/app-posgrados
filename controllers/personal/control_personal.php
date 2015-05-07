@@ -24,7 +24,8 @@ class Control_personal extends CI_Controller {
                  ->required_fields('NumPersonal', 'Nombre', 'perfil', 'contrasenia')
                  ->display_as('contrasenia', 'Contraseña')
                  ->columns('NumPersonal','Nombre','perfil');
-            $crud->unset_edit_fields('Contrasenia');
+            $crud->unset_edit_fields('contrasenia');
+            $crud->field_type('contrasenia', 'hidden');
             $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_personal/cambiar_password');
             $crud->set_relation('perfil','perfil','nomperfil');
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
@@ -39,11 +40,12 @@ class Control_personal extends CI_Controller {
         }
     }
 
-     function cambiar_password($noPersonal)
+     function cambiar_password($NumPersonal)
         {
              if ($this->session->userdata('logged_in') )
             {
                 $crud = new grocery_CRUD();
+                $crud->where('NumPersonal', $NumPersonal);
                 $crud->set_table('personal');
                 $crud->set_subject('Personal')
                  ->required_fields('contrasenia')

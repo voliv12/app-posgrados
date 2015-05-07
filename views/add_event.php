@@ -18,6 +18,8 @@
     <ol class="breadcrumb">
         <?php if ($this->session->userdata('perfil') == 'Administrativo') { ?>
         <li><a href="<?php echo base_url() ?>administrativo">Menú Principal</a></li>
+        <?php } elseif ($this->session->userdata('perfil') == 'Organizador') { ?>
+        <li><a href="<?php echo base_url() ?>salir">Cerrar Sesión</a></li>                   
         <?php } else { ?>
         <li><a href="<?php echo base_url() ?>directivo">Menú Pricipal</a></li>
         <?php } ?>

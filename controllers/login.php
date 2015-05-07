@@ -89,6 +89,10 @@ class Login extends CI_Controller {
                     elseif($row->perfil == "2")
                     {
                         redirect('administrativo');
+                    }
+                    elseif($row->perfil == "3")
+                    {
+                        redirect('calendar');
                     }else
                     {
                         redirect('directivo');

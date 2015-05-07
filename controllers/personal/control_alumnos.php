@@ -38,7 +38,18 @@ class Control_alumnos extends CI_Controller {
 
             $output = $crud->render();
             $output->titulo_tabla = "Registro de Alumnos";
-            $this->_example_output($output);
+
+            if($this->session->userdata('perfil') == 'Administrador')
+                {
+                $barra = " <li><a href='administrador'>Menú principal</a></li>";
+                } else if($this->session->userdata('perfil') == 'Administrativo')
+                        {
+                        $barra = " <li><a href='administrativo'>Menú principal</a></li>";
+                        } else {
+
+                                $barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                               }
+            $this->_example_output($output, $barra);
 
         }else{
             redirect('login');
@@ -46,12 +57,13 @@ class Control_alumnos extends CI_Controller {
     }
 
 
-     function cambiar_password($noPersonal)
+     function cambiar_password($idalumno)
         {
              if ($this->session->userdata('logged_in') )
             {
                 $crud = new grocery_CRUD();
-            $crud->set_table('alumno')
+                $crud->where('idalumno', $idalumno);
+                $crud->set_table('alumno')
                  ->set_subject('Alumno')
                  ->required_fields('Contrasenia')
                  ->display_as('NombreA','Nombre')
@@ -69,7 +81,17 @@ class Control_alumnos extends CI_Controller {
 
                 $output = $crud->render();
                 $output->titulo_tabla = 'Contraseña del usuario';
-                $this->_example_output($output);
+                if($this->session->userdata('perfil') == 'Administrador')
+                {
+                $barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                } else if($this->session->userdata('perfil') == 'Administrativo')
+                        {
+                        $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                        } else {
+
+                                $barra_navegacion = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                               }
+                $this->_example_output($output, $barra);
             }else
             {
                 redirect('login');
@@ -80,22 +102,22 @@ class Control_alumnos extends CI_Controller {
 
 
 
-    function _example_output($output = null)
+    function _example_output($output = null, $barra = null)
     {
         
         if($this->session->userdata('perfil') == 'Administrador')
         {
-        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+        $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
         } else if($this->session->userdata('perfil') == 'Administrativo')
                 {
-                $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                $output->barra_navegacion = $barra;
                 $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
 
-                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                        $output->barra_navegacion = $barra;
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_directivo', $datos_plantilla);
                        }
