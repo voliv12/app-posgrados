@@ -25,7 +25,7 @@ class Control_personal extends CI_Controller {
                  ->display_as('contrasenia', 'Contraseña')
                  ->columns('NumPersonal','Nombre','perfil');
             $crud->unset_edit_fields('contrasenia');
-            $crud->field_type('contrasenia', 'hidden');
+            //$crud->field_type('contrasenia', 'hidden');
             $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_personal/cambiar_password');
             $crud->set_relation('perfil','perfil','nomperfil');
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
@@ -74,8 +74,8 @@ class Control_personal extends CI_Controller {
     function _example_output($output = null)
 
     {
-        
-        
+
+
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
     }

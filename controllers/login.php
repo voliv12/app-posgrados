@@ -82,15 +82,15 @@ class Login extends CI_Controller {
                                     );
                     $this->session->set_userdata($newdata);
 
-                    if($row->perfil == "1")
+                    if($row->nomperfil == "Administrador")
                     {
                         redirect('administrador');
                     }
-                    elseif($row->perfil == "2")
+                    elseif($row->nomperfil == "Administrativo")
                     {
                         redirect('administrativo');
                     }
-                    elseif($row->perfil == "3")
+                    elseif($row->nomperfil == "Organizador")
                     {
                         redirect('calendar');
                     }else
