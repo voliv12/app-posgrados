@@ -47,7 +47,7 @@ class Control_alumnos extends CI_Controller {
                         $barra = " <li><a href='administrativo'>Menú principal</a></li>";
                         } else {
 
-                                $barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                                $barra = " <li><a href='directivo'>Menú principal</a></li>";
                                }
             $this->_example_output($output, $barra);
 
@@ -89,7 +89,7 @@ class Control_alumnos extends CI_Controller {
                         $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
                         } else {
 
-                                $barra_navegacion = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                                $barra = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
                                }
                 $this->_example_output($output, $barra);
             }else

@@ -90,10 +90,7 @@ class Login extends CI_Controller {
                     {
                         redirect('administrativo');
                     }
-                    elseif($row->nomperfil == "Organizador")
-                    {
-                        redirect('calendar');
-                    }else
+                    else
                     {
                         redirect('directivo');
                     }
