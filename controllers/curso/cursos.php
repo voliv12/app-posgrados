@@ -138,7 +138,7 @@ class Cursos extends CI_Controller {
             $crud->set_relation('codigo','documentando','{nivelacad} {codigo} - {descripcion}');
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
-            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
+            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','fecha_inicio','fecha_fin','academico_NAB');
             $crud->unset_print();
             //$crud->unset_export();
             $crud->unset_add();
