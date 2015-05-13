@@ -148,7 +148,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('generacion','readonly');
             $crud->field_type('periodo','readonly');
             //$crud->field_type('academico_NAB','readonly');
-            $crud->field_type('alumnos','readonly');
+            //$crud->field_type('alumnos','readonly');
             $crud->field_type('academico_externo','readonly');
             $crud->field_type('codigo','readonly');
             $crud->field_type('nombre_curso','readonly');
