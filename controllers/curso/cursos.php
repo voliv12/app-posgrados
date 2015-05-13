@@ -25,7 +25,7 @@ class Cursos extends CI_Controller {
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
                  ->display_as('nombre_curso','Nombre del Curso')
-                 ->display_as('nab_numpersonal','Académico NAB')
+                 ->display_as('nab_numpersonal','Académico')
                  ->display_as('horas','Horas p/semana')
                  ->display_as('personalext','Académico Externo')
                  ->display_as('dia','Dia(s)')
@@ -132,7 +132,7 @@ class Cursos extends CI_Controller {
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
                  ->display_as('nombre_curso','Nombre del Curso')
-                 ->display_as('academico_NAB','Académico NAB')
+                 ->display_as('academico_NAB','Académico')
                  ->display_as('horas','Horas p/semana')
                  ->display_as('generacion','Generación');
             $crud->set_relation('codigo','documentando','{nivelacad} {codigo} - {descripcion}');
