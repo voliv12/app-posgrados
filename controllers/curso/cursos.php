@@ -69,7 +69,7 @@ class Cursos extends CI_Controller {
                                                             '202001' => '202001: Ago 2019 - Ene 2020',
                                                             '202051' => '202051: Feb - Jul 2020'
                                                             ));
-            $crud->columns('generacion','periodo','codigo','nrc','nombre_curso','academico_NAB');
+            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
             $crud->unset_fields('alumnos');
             $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
             $crud->required_fields('generacion','periodo', 'codigo','horas','fecha_inicio','fecha_fin');
