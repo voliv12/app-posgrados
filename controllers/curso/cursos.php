@@ -144,7 +144,7 @@ class Cursos extends CI_Controller {
             $crud->unset_add();
             $crud->unset_delete();
             //$crud->edit_fields('NRC','codigo','nombre_curso','academico_NAB', 'academico_externo','alumnos');
-            $crud->unset_edit_fields('fecha_inicio','fecha_fin','horas','academico_externo','dia','hora_inicio','hora_fin','lugar','otro_lugar');
+            $crud->unset_edit_fields('horas','dia','hora_inicio','hora_fin','lugar','otro_lugar');
             $crud->field_type('generacion','readonly');
             $crud->field_type('periodo','readonly');
             $crud->field_type('academico_NAB','readonly');
@@ -153,6 +153,9 @@ class Cursos extends CI_Controller {
             $crud->field_type('codigo','readonly');
             $crud->field_type('nombre_curso','readonly');
             $crud->field_type('posgrado','readonly');
+            $crud->field_type('fecha_inicio','readonly');
+            $crud->field_type('fecha_fin','readonly');
+            $crud->field_type('academico_externo','readonly');
 
             $output = $crud->render();
 
