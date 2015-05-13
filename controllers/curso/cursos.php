@@ -30,7 +30,7 @@ class Cursos extends CI_Controller {
                  ->display_as('personalext','Académico Externo')
                  ->display_as('dia','Dia(s)')
                  ->display_as('generacion','Generación');
-            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+            $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
             $crud->unset_print();
             //$crud->unset_export();
             //$crud->unset_edit_fields();
