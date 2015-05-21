@@ -13,14 +13,12 @@ foreach($css_files as $file): ?>
 </head>
 
 <?php echo validation_errors(); ?>
-
-<div class="container-fluid">
-        <h3><a><?php echo $titulo_tabla; ?></a></h3>
-</div>
-
 <ol class="breadcrumb">
  	<?php echo $barra_navegacion; ?>
 </ol>
+<div class="container-fluid">
+        <h4><a><?php echo $titulo_tabla; ?></a></h4>
+</div>
 
     <div>
 		<?php echo $output; ?>

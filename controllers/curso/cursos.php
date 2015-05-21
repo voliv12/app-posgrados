@@ -18,9 +18,17 @@ class Cursos extends CI_Controller {
     {
         if($this->session->userdata('logged_in'))
         {
+            $gen = $this->input->post('generacion');
+            $per = $this->input->post('periodo');
+
             $crud = new grocery_CRUD();
-            $crud->where('posgrado', $this->session->userdata('perfil'));
-            //$crud->where('generacion','2015');
+            $crud->where('cursos.posgrado', $this->session->userdata('perfil'));
+            if($gen != "todas"){
+                $crud->where('cursos.generacion', $gen);
+            }
+            if($per != "todos"){
+                $crud->where('cursos.periodo', $per);
+            }
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
@@ -31,47 +39,17 @@ class Cursos extends CI_Controller {
                  ->display_as('dia','Dia(s)')
                  ->display_as('generacion','Generación');
             $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->set_relation('generacion','cat_generacion','generacion',null,'generacion DESC');
             $crud->unset_print();
-            //$crud->unset_export();
-            //$crud->unset_edit_fields();
             $crud->field_type('NRC', 'hidden');
-            //$crud->field_type('nrc','invisible');
             $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
             $crud->field_type('horas','dropdown',range(1,20));
-            $crud->field_type('generacion','dropdown',array('2012'=> '2012',
-                                                            '2013'=> '2013',
-                                                            '2014'=> '2014',
-                                                            '2015'=> '2015',
-                                                            '2016'=> '2016',
-                                                            '2017'=> '2017',
-                                                            '2018'=> '2018',
-                                                            '2019'=> '2019',
-                                                            '2020'=> '2020',
-                                                            '2021'=> '2021'
-                                                        ));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal} {nab.apellidos}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
-            $crud->field_type('periodo', 'dropdown',  array(
-                                                            '201301' => '201301: Ago 2012 - Ene 2013',
-                                                            '201351' => '201351: Feb - Jul 2013',
-                                                            '201401' => '201401: Ago 2013 - Ene 2014',
-                                                            '201451' => '201451: Feb - Jul 2014',
-                                                            '201501' => '201501: Ago 2014 - Ene 2015' ,
-                                                            '201551' => '201551: Feb - Jul 2015',
-                                                            '201601' => '201601: Ago 2015 - Ene 2016',
-                                                            '201651' => '201651: Feb - Jul 2016',
-                                                            '201701' => '201701: Ago 2016 - Ene 2017',
-                                                            '201751' => '201751: Feb - Jul 2017',
-                                                            '201801' => '201801: Ago 2017 - Ene 2018',
-                                                            '201851' => '201851: Feb - Jul 2018',
-                                                            '201901' => '201901: Ago 2018 - Ene 2019',
-                                                            '201951' => '201951: Feb - Jul 2019',
-                                                            '202001' => '202001: Ago 2019 - Ene 2020',
-                                                            '202051' => '202051: Feb - Jul 2020'
-                                                            ));
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
             $crud->unset_fields('alumnos');
-            $crud->add_action('Alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
+            $crud->add_action('Asignar alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
             $crud->required_fields('generacion','periodo', 'codigo','horas','fecha_inicio','fecha_fin');
             $crud->field_type('dia','multiselect',
                     array( "Lunes"=>"Lunes","Martes"=>"Martes","Miércoles"=>"Miércoles","Jueves"=>"Jueves","Viernes"=>"Viernes","Sábado"=>"Sábado","Domingo"=>"Domingo"));
@@ -79,12 +57,13 @@ class Cursos extends CI_Controller {
             $crud->callback_add_field('hora_fin',array($this,'hora_fin'));
             //$crud->order_by('generacion','DESC');
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
+            $action = 'action="curso/cursos/registrocurso"';
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
 
             $output = $crud->render();
 
-            $this->_example_output($output,$barra);
+            $this->_example_output($output,$barra,$action);
         }else{
             redirect('login');
         }
@@ -100,18 +79,22 @@ class Cursos extends CI_Controller {
             $crud->set_table('cursos');
             $crud->display_as('codigo','Experiencia Educativa');
             $crud->display_as('nombre_curso','Nombre del Curso');
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+             $crud->set_relation('generacion','cat_generacion','generacion',null,'generacion DESC');
             $crud->unset_print();
             $crud->unset_export();
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
-            $crud->columns('codigo','NRC','nombre_curso','alumnos');
-            $crud->unset_fields('periodo','fecha_inicio','fecha_fin','horas','academico_NAB','academico_externo','posgrado','dia','hora_inicio','hora_fin','lugar');
+            $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','alumnos');
+            $crud->unset_fields('fecha_inicio','fecha_fin','horas','academico_NAB','academico_externo','posgrado','dia','hora_inicio','hora_fin','lugar');
             $crud->unset_add();
             $crud->unset_delete();
             $crud->field_type('codigo','readonly');
             $crud->field_type('NRC','readonly');
             $crud->field_type('nombre_curso','readonly');
+            $crud->field_type('periodo','readonly');
+            $crud->field_type('generacion','readonly');
             $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso'>Cursos </a></li>";
             $output = $crud->render();
 
@@ -126,8 +109,21 @@ class Cursos extends CI_Controller {
     {
         if($this->session->userdata('logged_in'))
         {
-            $crud = new grocery_CRUD();
             //$crud->where('posgrado', $this->session->userdata('perfil'));
+            $gen = $this->input->post('generacion');
+            $per = $this->input->post('periodo');
+            $pos = $this->input->post('posgrado');
+
+            $crud = new grocery_CRUD();
+            //$crud->where('cursos.posgrado', $this->session->userdata('perfil'));
+            if($gen != "todas"){
+                $crud->where('cursos.generacion', $gen);
+            }
+            if($per != "todos"){
+                $crud->where('cursos.periodo', $per);
+            }
+
+            $crud->where('cursos.posgrado', $pos);
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
@@ -136,6 +132,8 @@ class Cursos extends CI_Controller {
                  ->display_as('horas','Horas p/semana')
                  ->display_as('generacion','Generación');
             $crud->set_relation('codigo','documentando','{nivelacad} {codigo} - {descripcion}');
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->set_relation('generacion','cat_generacion','generacion',null,'generacion DESC');
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal} {nab.apellidos}', 'priority');
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','horas','fecha_inicio','fecha_fin','academico_NAB');
@@ -162,10 +160,11 @@ class Cursos extends CI_Controller {
             $crud->field_type('hora_fin','readonly');
             $crud->field_type('lugar','readonly');
             $crud->field_type('otro_lugar','readonly');
+            $action = 'action="curso/cursos/registrocurso_admin"';
 
             $output = $crud->render();
 
-            $this->_example_output($output);
+            $this->_example_output($output,null,$action);
         }else{
             redirect('login');
         }
@@ -195,28 +194,23 @@ class Cursos extends CI_Controller {
         return $post_array;
     }
 
-    function _example_output($output = null, $barra = null)
+    function _example_output($output = null, $barra = null, $action = null)
     {
 
         $output->titulo_tabla = "Programación de Cursos";
+        $output->action = $action;
         if($this->session->userdata('perfil') == 'Administrador')
         {
-        $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
-        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_personal', $datos_plantilla);
+            $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         } else if($this->session->userdata('perfil') == 'Administrativo')
                 {
-
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
-                $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-                $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else {
-
-                        //$output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso'>Cursos </a></li>";
                         $output->barra_navegacion = $barra;
-                        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-                        $this->load->view('plantilla_directivo', $datos_plantilla);
                        }
+        //$datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+        $datos_plantilla['contenido'] =  $this->load->view('output_cursos_view', $output, TRUE);
+        $this->load->view('plantilla_directivo', $datos_plantilla);
     }
 
 }
