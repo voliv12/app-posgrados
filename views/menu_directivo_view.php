@@ -15,11 +15,8 @@
 
         <div class="row">
             <p>
-            <?php if ($this->session->userdata('perfil') <> 'DCS') { ?>
-                                <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdo" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Maestría</a></div>
-            <?php } else { ?>
-                            <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdod" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Doctorado</a></div>
-            <?php } ?>
+                <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrado" class="btn btn-block"><i class="icon-pencil"></i> Alumnos Posgrado</a></div>
+
             <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
             <div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-list"></i> Consulta de CVU de Alumnos</a></div>
             </p>

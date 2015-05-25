@@ -53,7 +53,7 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a><i class="icon-barcode"> </i> <?php echo "Perfil ".$this->session->userdata('perfil');?></a></li>
+              <li><a><i class="icon-barcode"> </i> <?php echo $this->session->userdata('perfil');?></a></li>
               <li class="divider"></li>
               <li><a data-toggle="modal" href="#myModal"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
               <li class="divider"></li>

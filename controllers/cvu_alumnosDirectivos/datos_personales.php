@@ -20,24 +20,20 @@ class Datos_personales extends CI_Controller {
         {
                 $crud = new grocery_CRUD();
                 //$crud->set_table('cat_posgrados_alumno');
+                $crud->where('nivel',$this->perfil);
                 $crud->set_table('alumnoscvu');
                 $crud->set_primary_key('matricula');
                 $crud->set_subject('cat_posgrados_alumno')
-                     ->display_as('idcat_posgrados','Maestría')
-                     ->display_as('idcat_posgradosD','Doctorado')
+                     ->display_as('nivel','Posgrado')
                      ->display_as('idalumno','Alumno')
                      ->display_as('inicio','Año de inicio')
                      ->display_as('NombreA','Nombre')
                      ->display_as('ApellidoPA','Apellido Paterno')
                      ->display_as('ApellidoMA','Apellido Materno');
-                     
-                if ( $this->perfil == 'DCS'){
-                $crud->columns('matricula','NombreA' , 'ApellidoPA','ApellidoMA','idcat_posgradosD','estatus','inicio','termino');
-                }else{
-                $crud->columns('matricula','NombreA' , 'ApellidoPA','ApellidoMA','idcat_posgrados','estatus','inicio','termino');   
-                }
-                $crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado');
-                $crud->set_relation('idcat_posgradosD','cat_posgrados','nombre_posgrado');
+
+
+                $crud->columns('matricula','nivel','NombreA','ApellidoPA','ApellidoMA','estatus','inicio','termino');
+
                 $crud->add_action('CVU', '../assets/css/images/folderr.png', 'alumnoscvu/menu');
                 $crud->unset_add ( ) ;
                 $crud->unset_delete();
@@ -47,10 +43,10 @@ class Datos_personales extends CI_Controller {
                 $output = $crud->render();
 
                 $this->_example_output($output);
-         } 
-        else { 
+         }
+        else {
                 redirect('login');
-                }    
+                }
     }
 
 
@@ -58,7 +54,7 @@ class Datos_personales extends CI_Controller {
     function just_a_test($primary_key , $row)
     {
         return site_url('alumnoscvu/menu').'?matricula='.$row->matricula;
-    }  
+    }
 
 
     function _example_output($output = null)
