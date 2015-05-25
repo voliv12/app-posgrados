@@ -34,7 +34,7 @@ class Catalogos extends CI_Controller {
         }
     }
 
-     function sub_conacyt() //Catálogo Subprograma CONACYT
+    function sub_conacyt() //Catálogo Subprograma CONACYT
     {
         if($this->session->userdata('logged_in'))
         {
@@ -53,9 +53,7 @@ class Catalogos extends CI_Controller {
         }
     }
 
-
-
-         function cat_posgrado() //Catálogo posgrados
+    function cat_posgrado() //Catálogo posgrados
     {
         if($this->session->userdata('logged_in'))
         {
@@ -77,9 +75,7 @@ class Catalogos extends CI_Controller {
         }
     }
 
-
-
-         function cat_perfil() //Catálogo perfil
+    function cat_perfil() //Catálogo perfil
     {
         if($this->session->userdata('logged_in'))
         {
@@ -88,7 +84,7 @@ class Catalogos extends CI_Controller {
                  ->set_subject('perfil')
                  ->display_as('nomperfil','Nombre del Perfil')
                  ->required_fields('nomperfil');
-           
+
 
             $output = $crud->render();
             $output->titulo_tabla = "Catálogo de perfil";
@@ -99,13 +95,7 @@ class Catalogos extends CI_Controller {
         }
     }
 
-
-
-
-
-
     function _example_output($output = null)
-
     {
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
