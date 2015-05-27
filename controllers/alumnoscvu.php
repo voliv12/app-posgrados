@@ -17,8 +17,10 @@ class Alumnoscvu extends CI_Controller {
         
     }
 
-    function menu($matricula)
-    {   $this->session->set_flashdata('matricula', $matricula);
+    function menu($matricula, $nombre)
+    {  
+       // $this->nombrec = $nombre;
+        $this->session->set_flashdata('matricula', $matricula);
         if($this->session->userdata('logged_in'))
         {   
             $datos_plantilla['titulo'] = "Información de Posgrados";
