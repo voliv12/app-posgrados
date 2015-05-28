@@ -55,9 +55,9 @@ class Congresos extends CI_Controller {
 
     function _example_output($output = null)
     {
-        $output->titulo_tabla = "Registro de Participación en Congresos";
+        $output->titulo_tabla = "Participación en Congresos";
         $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."/".$this->session->flashdata('nombre')."'> Menú CVU alumno </a></li>";
-        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+        $datos_plantilla['contenido'] =  $this->load->view('output_view_cvu', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }
 
