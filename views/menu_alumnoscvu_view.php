@@ -1,12 +1,18 @@
 <div class="row">
 <div class="container well">
-        <h1><a>Menú Currículum Vitae Único </a></h1>
+        <h3><a>Menú Currículum Vitae Único </a></h3>
 </div>
 
         <ol class="breadcrumb">
             <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>
+
         </ol>
 
+    <a><?php 
+    $nombre = $this->session->flashdata('nombre');
+    printf('%s',$nombre);
+
+    ?></a>
 <div class="container well">
 
 

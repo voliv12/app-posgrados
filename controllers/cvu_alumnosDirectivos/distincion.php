@@ -19,6 +19,7 @@ class Distincion extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
                 $this->session->keep_flashdata('matricula');
+                $this->session->keep_flashdata('nombre');
                 $crud = new grocery_CRUD();
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('premiodistincion');
@@ -54,7 +55,7 @@ class Distincion extends CI_Controller {
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Registro de Distinciones y Premios";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."'> Menú CVU alumno </a></li>";
+        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>  |  <li> <a href='alumnoscvu/menu/".$this->session->flashdata('matricula')."/".$this->session->flashdata('nombre')."'> Menú CVU alumno </a></li>";
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }
