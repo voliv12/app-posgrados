@@ -13,6 +13,7 @@ class Curriculum_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('alumno');
+        $this->db->join('cat_posgrados_alumno','alumno.idalumno = cat_posgrados_alumno.idalumno');
         $this->db->where('Matricula', $matricula);
         $query = $this->db->get();
 

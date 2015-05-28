@@ -12,7 +12,7 @@ class Cambiar_password extends CI_Controller {
         $this->load->library('form_validation');
         /* ------------------ */
         $this->numPersonal = $this->session->userdata('numPersonal');
-        $this->matricula   = $this->session->userdata('matricula');
+        $this->idalumno   = $this->session->userdata('idalumno');
     }
 
     function index()
@@ -51,7 +51,7 @@ class Cambiar_password extends CI_Controller {
                     }else //Cambio de contraseña a los alumnos
                     {
                         $nuevo_pass = array('Contrasenia' => $this->encrypt->sha1($password));
-                        $this->db->where('Matricula', $this->matricula);
+                        $this->db->where('idalumno', $this->idalumno);
                         $this->db->update('alumno', $nuevo_pass);
 
                         $this->load->view('plantilla_alumnos', $datos_plantilla);
