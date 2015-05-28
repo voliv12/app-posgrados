@@ -30,12 +30,8 @@ class Datos_personales extends CI_Controller {
                      ->display_as('NombreA','Nombre')
                      ->display_as('ApellidoPA','Apellido Paterno')
                      ->display_as('ApellidoMA','Apellido Materno');
-
-
                 $crud->columns('matricula','nivel','NombreA','ApellidoPA','ApellidoMA','estatus','inicio','termino');
-                //$crud->add_action('CVU', '', '','../assets/css/images/folderr.png',array($this,'just_a_test'));
-                //$crud->add_action('CVU', '../assets/css/images/folderr.png', 'alumnoscvu/menu');
-                $crud->add_action('CVU', 'NULL','NULL', '../assets/css/images/folderr.png',array($this,'just_a_test'));
+                $crud->add_action('CVU de alumno', '../assets/imagenes/folderr.png','', '',array($this,'just_a_test'));
                 $crud->unset_add ( ) ;
                 $crud->unset_delete();
                 $crud->unset_print();

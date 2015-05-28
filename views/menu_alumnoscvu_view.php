@@ -1,14 +1,11 @@
 <div class="row">
-<div class="container well">
-        <h4><a><?php echo "CVU - ".urldecode($nombre); ?></a></h4>
-</div>
-
         <ol class="breadcrumb">
             <li><a href='directivo'> Menú principal </a></li>  |  <li> <a href='cvu_alumnosDirectivos/datos_personales/registroAlumno'> Listado de alumnos </a></li>
 
         </ol>
-
-    
+<div class="container well">
+        <h4><a><?php echo "CVU - ".urldecode($nombre); ?></a></h4>
+</div>
 <div class="container well">
 
 

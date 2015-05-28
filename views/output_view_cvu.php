@@ -16,7 +16,7 @@ foreach($css_files as $file): ?>
 <ol class="breadcrumb">
  	<?php echo $barra_navegacion; ?>
 </ol>
-<a><?php echo urldecode($this->session->flashdata('nombre')); ?></a>
+<a><b><?php echo urldecode($this->session->flashdata('nombre')); ?></b></a>
 
 <div class="container-fluid">
         <h5><a><?php echo $titulo_tabla; ?></a></h5>
