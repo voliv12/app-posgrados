@@ -8,9 +8,8 @@
 
         </ol>
 
-    <a><?php 
-    $nombre = $this->session->flashdata('nombre');
-    printf('%s',$nombre);
+    <a><?php
+    echo "CVU - ".urldecode($nombre);
 
     ?></a>
 <div class="container well">

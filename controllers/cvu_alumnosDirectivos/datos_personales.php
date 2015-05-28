@@ -55,6 +55,8 @@ class Datos_personales extends CI_Controller {
     function just_a_test($primary_key , $row)
     {
         $nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
+        //$nombre = $row->NombreA;
+        //echo $nombre;
         return site_url('alumnoscvu/menu/'.$row->matricula.'/'.$nombre);
     }
 
