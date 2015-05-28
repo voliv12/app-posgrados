@@ -14,15 +14,17 @@ class Alumnoscvu extends CI_Controller {
         /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->load->model('usuarios_model');
-        
+
     }
 
     function menu($matricula, $nombre)
-    {  
-       // $this->nombrec = $nombre;
+    {
+        //$nombreA = $nombre;
         $this->session->set_flashdata('matricula', $matricula);
+        $this->session->set_flashdata('nombre', $nombre);
+
         if($this->session->userdata('logged_in'))
-        {   
+        {
             $datos_plantilla['titulo'] = "Información de Posgrados";
             $datos_plantilla['contenido'] = $this->load->view('menu_alumnoscvu_view',' ',TRUE);
             $this->load->view('plantilla_directivo', $datos_plantilla);
