@@ -41,7 +41,7 @@ class Ingreso_posgrados extends CI_Controller {
                                                             '2024' => '2024',
                                                             '2025' => '2025'
                                                             ))
-                 ->columns('matricula','nivel','idalumno','estatus','inicio','termino');
+                 ->columns('matricula','nivel','idalumno','estatus','inicio','termino','beca');
 
 
             //$crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado',array('abrev_posgrado' => $this->perfil));
