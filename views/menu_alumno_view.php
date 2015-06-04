@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
      <a href="<?php echo base_url() ?>principal">Menú Principal</a>
     </ol>
-       
+
 </div>
 
 
@@ -24,7 +24,7 @@
     <div class="row">
         <p>
         <div class="span6"><a href="cvu_alumnos/capitulos/registroCapitulos" class="btn btn-block"><i class="icon-calendar"></i> Capítulos de Libro</a></div>
-        <div class="span6"><a href="cvu_alumnos/certificacion/registroCertificacion" class="btn btn-block"><i class="icon-certificate"></i> Certificación médica</a></div>
+        <div class="span6"><a href="cvu_alumnos/certificacion/registro_certificacion" class="btn btn-block"><i class="icon-certificate"></i> Certificación médica</a></div>
     </p>
     </div>
     <div class="row">

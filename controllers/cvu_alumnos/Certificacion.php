@@ -14,7 +14,7 @@ class Certificacion extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroCertificacion()
+    function registro_certificacion()
     {
          if ($this->session->userdata('logged_in'))
         {
