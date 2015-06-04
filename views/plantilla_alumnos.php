@@ -33,6 +33,25 @@
         /*background-color: #f5f5f5;*/
       }
     </style>
+
+
+<script type="text/javascript">
+$(document).ready(function()
+  {
+ //############## INGRESAR ALUMNOS A CURSO  ###############
+    $("#CamRef_field_box").hide();
+    $("#field-Referencia").change(function ()
+    {
+      if($("#field-Referencia").val() == "Otra"){ $("#CamRef_field_box").show(); }
+      else{ $("#CamRef_field_box").hide(); }
+    });
+//****************************************************************
+
+ });
+</script>
+
+
+
 </head>
 <body>
 <div class="container">
