@@ -14,7 +14,7 @@ class Certificacion extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registroCertificacion()
+    function registro_certificacion()
     {
          if ($this->session->userdata('logged_in'))
         {
@@ -35,7 +35,7 @@ class Certificacion extends CI_Controller {
             $crud->required_fields('NumFolio','Referencia','Especialidad','TipoCert','ffin');
             $crud->set_field_upload('DocCertifiMedi','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_rules('DocCertifiMedi','Doc. comprobatorio','max_length[26]');
-            $crud->callback_add_field('CamRef',array($this,'add_field_Cometario'));
+            $crud->callback_add_field('CamRef',array($this,'add_field_Cometanrio'));
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -46,7 +46,7 @@ class Certificacion extends CI_Controller {
 
     }
 
-    function add_field_Cometario()
+    function add_field_Cometanrio()
         {
             return '<input type="text" maxlength="50" name="programa"> (solo si el campo anterior es igual: otra)';
         }
