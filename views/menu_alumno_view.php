@@ -4,6 +4,14 @@
         <i class="icon-arrow-down"></i> Seleccione una Opción.
 </div>
 
+<div class="container">
+    <ol class="breadcrumb">
+     <a href="<?php echo base_url() ?>principal">Menú Principal</a>
+    </ol>
+       
+</div>
+
+
 <div class="container well">
 
 
