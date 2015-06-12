@@ -21,9 +21,9 @@ class Control_personal extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('personal');
             $crud->set_subject('Personal')
-                 ->required_fields('NumPersonal', 'Nombre', 'perfil', 'contrasenia')
+                 ->required_fields('NumPersonal', 'Nombre','apellidos','tipo_personal','perfil','nab', 'contrasenia')
                  ->display_as('contrasenia', 'Contraseña')
-                 ->columns('NumPersonal','Nombre','perfil');
+                 ->columns('NumPersonal','Nombre','apellidos','tipo_personal','perfil','nab');
             $crud->unset_edit_fields('contrasenia');
             //$crud->field_type('contrasenia', 'hidden');
             $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_personal/cambiar_password');

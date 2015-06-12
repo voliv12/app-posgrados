@@ -95,6 +95,26 @@ class Catalogos extends CI_Controller {
         }
     }
 
+
+    function cat_lgac() //Catálogo Tipo de Divulgación
+    {
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('cat_lgac')
+                 ->set_subject('Liga')
+                 
+                ;
+
+            $output = $crud->render();
+            $output->titulo_tabla = "Catálogo Liga de Generación";
+
+            $this->_example_output($output);
+        }else{
+            redirect('login');
+        }
+    }
+
     function _example_output($output = null)
     {
         $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";

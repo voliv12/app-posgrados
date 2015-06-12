@@ -18,6 +18,12 @@
              <div class="span6"><a href="personal/catalogos/cat_perfil" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo de Perfil</a></div>
             </p>
         </div>
+         <div class="row">
+            <p>
+             <div class="span6"><a href="personal/catalogos/cat_lgac" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo de LGAC</a></div>
+             
+            </p>
+        </div>
 </div>
 
 
