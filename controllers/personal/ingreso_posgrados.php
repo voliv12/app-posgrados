@@ -11,7 +11,7 @@ class Ingreso_posgrados extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->perfil = $this->session->userdata('perfil');
+        $this->posgrado = $this->session->userdata('abrev_posgrado');
     }
 
     function alumno_posgrado()
@@ -19,7 +19,7 @@ class Ingreso_posgrados extends CI_Controller {
         if($this->session->userdata('logged_in') )
         {
             $crud = new grocery_CRUD();
-            $crud->where('nivel',$this->perfil);
+            $crud->where('nivel',$this->posgrado);
             $crud->set_table('cat_posgrados_alumno')
                  ->set_subject('Alumno a posgrado')
                  ->display_as('idalumno','Alumno')
@@ -160,7 +160,7 @@ class Ingreso_posgrados extends CI_Controller {
 
     function acciones_callback($post_array)
     {
-        if($this->perfil <> "DCS"){
+        if($this->posgrado <> "DCS"){
             //$post_array['nivel'] = "Maestría";
             $gene = $post_array['inicio'] + 2;
         }else {
@@ -168,7 +168,7 @@ class Ingreso_posgrados extends CI_Controller {
              $gene = $post_array['inicio'] + 3;
         }
 
-        $post_array['nivel'] = $this->perfil;
+        $post_array['nivel'] = $this->posgrado;
 
         $post_array['termino'] = $gene;
 

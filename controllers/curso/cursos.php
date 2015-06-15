@@ -14,12 +14,12 @@ class Cursos extends CI_Controller {
         //$this->matricula = $this->session->userdata('matricula');
     }
 
-    function registrocurso()
+    function registrocurso($gen=null, $per=null)
     {
         if($this->session->userdata('logged_in'))
         {
-            $gen = $this->input->post('generacion');
-            $per = $this->input->post('periodo');
+            /*$this->session->set_flashdata('gen',$gen);
+            $this->session->set_flashdata('per',$per);*/
 
             $crud = new grocery_CRUD();
             $crud->where('cursos.posgrado', $this->session->userdata('perfil'));
@@ -57,13 +57,12 @@ class Cursos extends CI_Controller {
             $crud->callback_add_field('hora_fin',array($this,'hora_fin'));
             //$crud->order_by('generacion','DESC');
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
-            $action = 'action="curso/cursos/registrocurso"';
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
 
             $output = $crud->render();
 
-            $this->_example_output($output,$barra,$action);
+            $this->_example_output($output,$barra);
         }else{
             redirect('login');
         }
@@ -95,7 +94,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('nombre_curso','readonly');
             $crud->field_type('periodo','readonly');
             $crud->field_type('generacion','readonly');
-            $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso'>Cursos </a></li>";
+            $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso/todas/todos'>Cursos </a></li>";
             $output = $crud->render();
 
             $this->_example_output($output, $barra);
@@ -164,13 +163,13 @@ class Cursos extends CI_Controller {
 
             $output = $crud->render();
 
-            $this->_example_output($output,null,$action);
+            $this->_example_output($output,null);
         }else{
             redirect('login');
         }
     }
 
-        function just_a_test($primary_key , $row)
+    function just_a_test($primary_key , $row)
     {
         return site_url('curso/alumno_cursos/registro_alumnocurso').'?idcurso ='.$row->idcurso;
     }
@@ -194,11 +193,10 @@ class Cursos extends CI_Controller {
         return $post_array;
     }
 
-    function _example_output($output = null, $barra = null, $action = null)
+    function _example_output($output = null, $barra = null)
     {
 
         $output->titulo_tabla = "Programación de Cursos";
-        $output->action = $action;
         if($this->session->userdata('perfil') == 'Administrador')
         {
             $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";

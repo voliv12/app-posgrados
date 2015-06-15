@@ -9,7 +9,7 @@
         <div class="row">
             <p>
                 <div class="span6"><a href="personal/control_alumnos/registrar_alumno" class="btn btn-block"><i class="icon-pencil"></i> Registro de Alumnos</a></div>
-                <div class="span6"><a href="curso/cursos/registrocurso" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
+                <div class="span6"><a href="curso/cursos/registrocurso/todas/todos" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
             </p>
         </div>
 

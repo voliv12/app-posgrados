@@ -72,23 +72,44 @@ class Login extends CI_Controller {
                     $this->load->view('login_view', $datos_plantilla);
                 }else
                 {
-                    //$nombre = $row->NombreA." ".$row->ApellidoPA;
-                    $newdata = array(
-                                     'numPersonal'  => $row->NumPersonal,
-                                     'nombre'       => $row->Nombre,
+                    //Pregunto si el personal que se logea es Coordinador de Posgrado
+                    if ($row->nomperfil == "Coordinador de Posgrado") {
+                        $row_c = $this->usuarios_model->buscar_coordinador($row->NumPersonal);
+                        $newdata = array(
+                                     'numPersonal'  => $row_c->NumPersonal,
+                                     'nombre'       => $row_c->Nombre." ".$row_c->apellidos,
                                      'tipo_usuario' => $tipo_usuario,
-                                     'perfil'       => $row->nomperfil,
+                                     'perfil'       => $row_c->nomperfil,
+                                     'tipo_personal'=> $row_c->tipo_personal,
+                                     'posgrado'     => $row_c->nombre_posgrado,
+                                     'abrev_posgrado'=> $row_c->abrev_posgrado,
                                      'logged_in'    => TRUE
                                     );
+                    }else{
+                        $newdata = array(
+                                     'numPersonal'  => $row->NumPersonal,
+                                     'nombre'       => $row->Nombre." ".$row->apellidos,
+                                     'tipo_usuario' => $tipo_usuario,
+                                     'perfil'       => $row->nomperfil,
+                                     'tipo_personal'=> $row->tipo_personal,
+                                     'logged_in'    => TRUE
+                                    );
+                    }
+
+
                     $this->session->set_userdata($newdata);
 
-                    if($row->nomperfil == "Administrador")
+                    if($row->nomperfil == "Administrador del Sistema")
                     {
                         redirect('administrador');
                     }
-                    elseif($row->nomperfil == "Administrativo")
+                    elseif($row->nomperfil == "Apoyo Administrativo")
                     {
                         redirect('administrativo');
+                    }
+                    elseif ($row->nomperfil == "Académico de Posgrado")
+                    {
+                         redirect('academico');
                     }
                     else
                     {

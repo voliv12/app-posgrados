@@ -47,17 +47,35 @@ foreach($css_files as $file): ?>
                 );
 ?>
 
+<a data-toggle="modal" href="#FiltroCursos"><i class="icon-search"></i> Filtro combinado</a>
+
+<!--#######################Modal para filtrar################################-->
+   <div id="FiltroCursos" class="modal hide fade in" style="display: none;">
+      <div class="modal-header">
+          <a data-dismiss="modal" class="close">×</a>
+          <h3>Filtrar Cursos</h3>
+       </div>
+       <div class="modal-body">
+           <form  role="form" action="curso/filtro_cursos/filtrar" method="POST">
+            <?php if(($this->session->userdata('perfil') == "Administrador") || ($this->session->userdata('perfil') == "Administrativo")){
+                echo "Posgrado: ".form_dropdown('posgrado', $opt_pos)."</br>";
+            } ?>
+            Generación: <?php echo form_dropdown('generacion', $opt_gen)."</br>"; ?>
+            Periodo:  <?php echo form_dropdown('periodo', $opt_per)."</br>"; ?>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Buscar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+      </div>
+  </div>
+<!--#######################################################-->
+
+
 <!--form  role="form" action="curso/cursos/registrocurso" method="POST"-->
-<form  role="form" <?php echo $action; ?> method="POST">
-    <?php if(($this->session->userdata('perfil') == "Administrador") || ($this->session->userdata('perfil') == "Administrativo")){
-            echo "Posgrado: ".form_dropdown('posgrado', $opt_pos);
-    } ?>
 
-    Generación: <?php echo form_dropdown('generacion', $opt_gen); ?>
-    Periodo:	<?php echo form_dropdown('periodo', $opt_per); ?>
 
-        <button type="submit" class="btn btn-default">Buscar</button>
-</form>
 </div>
 
     <div>

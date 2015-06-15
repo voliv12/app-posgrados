@@ -21,13 +21,14 @@ class Control_personal extends CI_Controller {
             $crud = new grocery_CRUD();
             $crud->set_table('personal');
             $crud->set_subject('Personal')
-                 ->required_fields('NumPersonal', 'Nombre','apellidos','tipo_personal','perfil','nab', 'contrasenia')
+                 ->required_fields('NumPersonal', 'Nombre','apellidos','tipo_personal','perfil','contrasenia')
                  ->display_as('contrasenia', 'Contraseña')
-                 ->columns('NumPersonal','Nombre','apellidos','tipo_personal','perfil','nab');
+                 ->columns('NumPersonal','Nombre','apellidos','tipo_personal','perfil','posgrado','nab');
             $crud->unset_edit_fields('contrasenia');
             //$crud->field_type('contrasenia', 'hidden');
             $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_personal/cambiar_password');
             $crud->set_relation('perfil','perfil','nomperfil');
+            $crud->set_relation('posgrado','cat_posgrados','nombre_posgrado');
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
             $crud->callback_before_update(array($this,'encrypt_password_callback'));
 
@@ -68,14 +69,8 @@ class Control_personal extends CI_Controller {
             }
         }
 
-
-
-
     function _example_output($output = null)
-
     {
-
-
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
     }

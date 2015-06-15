@@ -13,6 +13,7 @@ foreach($css_files as $file): ?>
 </head>
 
 <?php echo validation_errors(); ?>
+
 <ol class="breadcrumb">
  	<?php echo $barra_navegacion; ?>
 </ol>

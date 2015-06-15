@@ -33,6 +33,57 @@
         /*background-color: #f5f5f5;*/
       }
     </style>
+
+<script type="text/javascript">
+$(document).ready(function()
+  {
+ //############## Coordinado de posgrado  ###############
+    $("#posgrado_field_box").hide();
+    $("#field-perfil").change(function ()
+    {
+      if($("#field-perfil").val() == "3"){ $("#posgrado_field_box").show(); }
+      else{ $("#posgrado_field_box").hide(); }
+    });
+
+    $("#nab_field_box").hide();
+    $("#field-tipo_personal").change(function ()
+    {
+      if($("#field-tipo_personal").val() == "Académico"){ $("#nab_field_box").show(); }
+      else{ $("#nab_field_box").hide(); }
+    });
+
+    $('#save-and-go-back-button').on('click' ,function(){
+    if($("#field-tipo_personal").val() == "Administrativo" && $("#field-perfil").val() == "3"){
+      alert('Personal Administrativo no puede ser Coordinador de Posgrado');
+      window.history.reload();
+    }
+    });
+    $('#form-button-save').on('click' ,function(e){
+    if($("#field-tipo_personal").val() == "Administrativo" && $("#field-perfil").val() == "3"){
+      alert('Personal Administrativo no puede ser Coordinador de Posgrado');
+      e.preventDefault();
+      window.history.reload();
+    }
+    });
+
+    $('#save-and-go-back-button').on('click' ,function(){
+    if($("#field-tipo_personal").val() == "Administrativo" && $("#field-perfil").val() == "5"){
+      alert('Personal Administrativo no puede ser Académico de Posgrado');
+      window.history.reload();
+    }
+    });
+    $('#form-button-save').on('click' ,function(e){
+    if($("#field-tipo_personal").val() == "Administrativo" && $("#field-perfil").val() == "5"){
+      alert('Personal Administrativo no puede ser Académico de Posgrado');
+      e.preventDefault();
+      window.history.reload();
+    }
+    });
+
+
+ });
+</script>
+
 </head>
 <body>
 <div class="container">

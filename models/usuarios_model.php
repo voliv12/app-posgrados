@@ -43,17 +43,32 @@ class Usuarios_model extends CI_Model
         }
     }
 
-
-
-
-
     function buscar_tabla_personal($usuario, $password)
     {
         $this->db->select('*');
         $this->db->from('personal');
         $this->db->join('perfil','personal.perfil = perfil.idperfil');
+        //$this->db->join('cat_posgrados','personal.posgrado = cat_posgrados.idcat_posgrados');
         $this->db->where('NumPersonal', $usuario);
         $this->db->where('Contrasenia', $password);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->row();
+        }
+    }
+
+    function buscar_coordinador($usuario)
+    {
+        $this->db->select('*');
+        $this->db->from('personal');
+        $this->db->join('perfil','personal.perfil = perfil.idperfil');
+        $this->db->join('cat_posgrados','personal.posgrado = cat_posgrados.idcat_posgrados');
+        $this->db->where('NumPersonal', $usuario);
         $query = $this->db->get();
 
         if ($query->num_rows() == 0)
