@@ -18,7 +18,7 @@ class Filtro_cursos extends CI_Controller {
     {
         if($this->session->userdata('logged_in'))
         {
-            if($this->session->userdata('perfil') == "MCS")
+            if($this->session->userdata('abrev_posgrado') == "MCS")
             {
                 redirect('curso/cursos/registrocurso/'.$_POST['generacion']."/".$_POST['periodo']);
             }

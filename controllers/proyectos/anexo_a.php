@@ -14,16 +14,19 @@ class Anexo_a extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registro_Anexo_a()
+    function registro_Anexo_a($idproyecto)
     {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('Alumno_Matricula', $this->matricula);
+            $crud->where('idproyecto_alumno', $idproyecto);
             $crud->set_table('anexo_a');
             $crud->set_subject('Anexo A');
+            $crud->field_type('idproyecto_alumno', 'hidden',$idproyecto );
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->unset_texteditor('avances','full_text');
+            $crud->unset_texteditor('condiciones','full_text');
             $crud->display_as('avances','Determinar los avances que alacanzará en el desarrollo de sus actividades 
                                actividades académicas y/o proyectos de tesis durante el semestre actual:')
                  ->display_as('condiciones','Identificart las condiciones y actividades necesarias que requerirá el estudiante para logar los avances establecidos');

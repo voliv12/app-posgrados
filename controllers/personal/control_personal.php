@@ -77,6 +77,9 @@ class Control_personal extends CI_Controller {
 
     function encrypt_password_callback($post_array)
     {
+        $post_array['Nombre'] = strtr(strtoupper($post_array['Nombre']),"áéíóúñ","ÁÉÍÓÚÑ");
+        $post_array['apellidos'] = strtr(strtoupper($post_array['apellidos']),"áéíóúñ","ÁÉÍÓÚÑ");
+        
         $this->load->library('encrypt');
 
         $post_array['contrasenia'] = $this->encrypt->sha1($post_array['contrasenia']);

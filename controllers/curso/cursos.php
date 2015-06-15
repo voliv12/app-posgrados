@@ -22,7 +22,7 @@ class Cursos extends CI_Controller {
             $this->session->set_flashdata('per',$per);*/
 
             $crud = new grocery_CRUD();
-            $crud->where('cursos.posgrado', $this->session->userdata('perfil'));
+            $crud->where('cursos.posgrado', $this->session->userdata('abrev_posgrado'));
             if($gen != "todas"){
                 $crud->where('cursos.generacion', $gen);
             }
@@ -38,14 +38,15 @@ class Cursos extends CI_Controller {
                  ->display_as('personalext','Académico Externo')
                  ->display_as('dia','Dia(s)')
                  ->display_as('generacion','Generación');
-            $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+            $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('abrev_posgrado')));
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->set_relation('generacion','cat_generacion','generacion',null,'generacion DESC');
             $crud->unset_print();
             $crud->field_type('NRC', 'hidden');
-            $crud->field_type('posgrado','hidden', $this->session->userdata('perfil'));
+            $crud->field_type('posgrado','hidden', $this->session->userdata('abrev_posgrado'));
             $crud->field_type('horas','dropdown',range(1,20));
-            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal} {nab.apellidos}', 'priority');
+            //$crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'nab', 'idcurso', 'numpersonal', '{nab.numpersonal} - {nab.nompersonal} {nab.apellidos}', 'priority');
+            $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'personal', 'idcurso', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
             $crud->unset_fields('alumnos');
@@ -73,13 +74,13 @@ class Cursos extends CI_Controller {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('posgrado', $this->session->userdata('perfil'));
+            $crud->where('posgrado', $this->session->userdata('abrev_posgrado'));
             $crud->where('idcurso', $idcurso);
             $crud->set_table('cursos');
             $crud->display_as('codigo','Experiencia Educativa');
             $crud->display_as('nombre_curso','Nombre del Curso');
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('perfil')));
+            $crud->set_relation('codigo','documentando','{nivelacad}  -  {descripcion}',array('nivelacad' => $this->session->userdata('abrev_posgrado')));
              $crud->set_relation('generacion','cat_generacion','generacion',null,'generacion DESC');
             $crud->unset_print();
             $crud->unset_export();

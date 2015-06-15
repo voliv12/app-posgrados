@@ -14,16 +14,18 @@ class Anexo_c extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registro_Anexo_C()
+    function registro_Anexo_C($idproyecto)
     {
        if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('Alumno_Matricula', $this->matricula);
+            $crud->where('idproyecto_alumno', $idproyecto);
             $crud->set_table('anexo_c');
             $crud->set_subject('Anexo C');
+            $crud->field_type('idproyecto_alumno', 'hidden',$idproyecto );
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->unset_texteditor('motivo','full_text');
             //$crud->field_type('idproyecto_alumno', 'hidden',$idproyecto_alumno );
             $crud->display_as('desempeno_academico','desempeño académico')
                  ->display_as('plan_estudio','Cumplimiento del plan de estudios')
