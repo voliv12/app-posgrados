@@ -19,9 +19,13 @@ class Anexo_b extends CI_Controller {
        if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            
+            $crud->where('Alumno_Matricula', $this->matricula);
             $crud->set_table('anexo_b');
             $crud->set_subject('Anexo B');
+            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
+                 ;
 
 
             $output = $crud->render();

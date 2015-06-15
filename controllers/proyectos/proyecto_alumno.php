@@ -27,10 +27,17 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_export();
             $crud->unset_edit_fields ( 'Alumno_Matricula');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
+            $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
+            $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
+            $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
             //$crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
+            
             $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', 'proyectos/anexo_c/registro_Anexo_c');
             $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', 'proyectos/anexo_b/registro_Anexo_b');
             $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', 'proyectos/anexo_a/registro_Anexo_a');
+            //$crud->add_action('Anexo C', '../assets/imagenes/refresh.png', 'proyectos/anexo_c/registro_Anexo_C','',array($this,'just_a_test'));
+            /*$crud->add_action('Anexo B', '../assets/imagenes/refresh.png', 'proyectos/anexo_b/registro_Anexo_b');
+            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', 'proyectos/anexo_a/registro_Anexo_a');*/
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -39,7 +46,10 @@ class Proyecto_alumno extends CI_Controller {
              }
     }
 
-
+    function just_a_test($primary_key , $row)
+    {
+        return site_url('proyectos/anexo_c/registro_Anexo_C').'?Alumno_Matricula='.$row->Alumno_Matricula;
+    }
 
 
     function _example_output($output = null)

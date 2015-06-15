@@ -19,10 +19,20 @@ class Anexo_c extends CI_Controller {
        if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            
+            $crud->where('Alumno_Matricula', $this->matricula);
             $crud->set_table('anexo_c');
             $crud->set_subject('Anexo C');
-
+            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            //$crud->field_type('idproyecto_alumno', 'hidden',$idproyecto_alumno );
+            $crud->display_as('desempeno_academico','desempeño académico')
+                 ->display_as('plan_estudio','Cumplimiento del plan de estudios')
+                 ->display_as('obtencion_grado','Obtención del grado dentro del tiempo oficial del Plan de estudios ')
+                 ->display_as('avance_tesis','Cuál es el porcentage de avance de la tesis')
+                 ->display_as('beca_CONACYT','En caso de que el estudiante cuente con una beca de CONACYT, y considerando 
+                               las respuestas anteriores, así como, el art. 24 del reglamento de becas CONACYT sobre suspención, 
+                               cancelación y conclusión de la beca, recomienda')
+                 ->display_as('motivo','Describa el motivo');
 
             $output = $crud->render();
 
