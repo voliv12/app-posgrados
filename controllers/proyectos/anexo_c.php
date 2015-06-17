@@ -19,14 +19,15 @@ class Anexo_c extends CI_Controller {
        if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('idproyecto_alumno', $idproyecto);
+            $crud->where('idproyec_alum', $idproyecto);
             $crud->set_table('anexo_c');
             $crud->set_subject('Anexo C');
-            $crud->field_type('idproyecto_alumno', 'hidden',$idproyecto );
+            $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->set_relation('idproyec_alum','proyecto_alumno','titulo_proyecto');
             $crud->unset_texteditor('motivo','full_text');
-            //$crud->field_type('idproyecto_alumno', 'hidden',$idproyecto_alumno );
+            //$crud->field_type('idproyec_alum', 'hidden',$idproyec_alum );
             $crud->display_as('desempeno_academico','desempeño académico')
                  ->display_as('plan_estudio','Cumplimiento del plan de estudios')
                  ->display_as('obtencion_grado','Obtención del grado dentro del tiempo oficial del Plan de estudios ')
@@ -34,7 +35,44 @@ class Anexo_c extends CI_Controller {
                  ->display_as('beca_CONACYT','En caso de que el estudiante cuente con una beca de CONACYT, y considerando 
                                las respuestas anteriores, así como, el art. 24 del reglamento de becas CONACYT sobre suspención, 
                                cancelación y conclusión de la beca, recomienda')
-                 ->display_as('motivo','Describa el motivo');
+                 ->display_as('motivo','Describa el motivo')
+                 ->display_as('idproyec_alum','Titulo del Proyecto');
+
+            $output = $crud->render();
+
+            $this->_example_output($output);
+        }
+             else { redirect('login');
+             }
+    }
+
+
+    function registro_Anexo_c_dir($idproyecto)
+    {
+       if ($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->where('idproyec_alum', $idproyecto);
+            $crud->set_table('anexo_c');
+            $crud->set_subject('Anexo C');
+            $crud->unset_edit();
+            $crud->unset_add();
+            $crud->unset_delete();
+            $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
+            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->set_relation('idproyec_alum','proyecto_alumno','titulo_proyecto');
+            $crud->unset_texteditor('motivo','full_text');
+            //$crud->field_type('idproyec_alum', 'hidden',$idproyec_alum );
+            $crud->display_as('desempeno_academico','desempeño académico')
+                 ->display_as('plan_estudio','Cumplimiento del plan de estudios')
+                 ->display_as('obtencion_grado','Obtención del grado dentro del tiempo oficial del Plan de estudios ')
+                 ->display_as('avance_tesis','Cuál es el porcentage de avance de la tesis')
+                 ->display_as('beca_CONACYT','En caso de que el estudiante cuente con una beca de CONACYT, y considerando 
+                               las respuestas anteriores, así como, el art. 24 del reglamento de becas CONACYT sobre suspención, 
+                               cancelación y conclusión de la beca, recomienda')
+                 ->display_as('motivo','Describa el motivo')
+                 ->display_as('idproyec_alum','Titulo del Proyecto');
 
             $output = $crud->render();
 

@@ -198,10 +198,10 @@ class Cursos extends CI_Controller {
     {
 
         $output->titulo_tabla = "Programación de Cursos";
-        if($this->session->userdata('perfil') == 'Administrador')
+        if($this->session->userdata('perfil') == 'Administrador del Sistema')
         {
             $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
-        } else if($this->session->userdata('perfil') == 'Administrativo')
+        } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
                 {
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
                 } else {

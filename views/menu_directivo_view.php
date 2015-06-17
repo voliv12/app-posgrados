@@ -23,7 +23,16 @@
         </div>
 
 </div>
+<div class="container well">
+    <h4><a>Control de Proyectos</a></h4>
+    <div class="row">
+        <p>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyectos" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos</a></div>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-bullhorn"></i> Dirección  de Proyectos</a></div>
+        </p>
+    </div>
 
+</div>
 <div class="container well">
     <h4><a>Académicos</a></h4>
         <div class="row">
@@ -53,13 +62,5 @@
         </div>
 
 </div>
-<div class="container well">
-    <div class="row">
-        <p>
-        <!--div class="span6"><a href="curso/calificacion_alumno" class="btn btn-block"><i class="icon-ok"></i> Calificaciones </a></div-->
-        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos</a></div>
-        </p>
-    </div>
 
-</div>
 </div>
