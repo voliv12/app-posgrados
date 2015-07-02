@@ -21,7 +21,7 @@
          <div class="row">
             <p>
              <div class="span6"><a href="personal/catalogos/cat_lgac" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo de LGAC</a></div>
-             
+
             </p>
         </div>
 </div>
@@ -35,13 +35,18 @@
         <div class="span6"><a href="personal/control_personal/registrar_personal" class="btn btn-block"><i class="icon-pencil"></i> Registro de Personal</a></div>
         </p>
     </div>
+    <div class="row">
+            <p>
+                <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrado_admin" class="btn btn-block"><i class="icon-pencil"></i> Alumnos Posgrado</a></div>
+            </p>
+        </div>
 </div>
 
 <div class="container well">
     <h4><a>Administración de Cursos </a></h4>
         <div class="row">
             <p>
-                <div class="span6"><a href="curso/cursos/registrocurso_admin" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
+                <div class="span6"><a href="curso/cursos/registrocurso_admin/todas/todos" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
                 <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
             </p>
 
@@ -54,7 +59,7 @@
         <div class="row">
             <p>
                 <div class="span6"><a href="http://www.uv.mx/ics/general/agenda-ics/" class="btn btn-block"><i class="icon-list-alt"></i> Calendarización de Eventos</a></div>
-               
+
             </p>
 
         </div>

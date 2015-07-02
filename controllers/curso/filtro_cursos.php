@@ -21,9 +21,9 @@ class Filtro_cursos extends CI_Controller {
             if($this->session->userdata('perfil') == "Coordinador de Posgrado")
             {
                 redirect('curso/cursos/registrocurso/'.$_POST['generacion']."/".$_POST['periodo']);
+            }else{
+                redirect('curso/cursos/registrocurso_admin/'.$_POST['generacion']."/".$_POST['periodo']);
             }
-
-            //echo 'curso/cursos/registrocurso/'.$_POST['generacion']."/".$_POST['periodo'];
         }else{
             redirect('login');
         }

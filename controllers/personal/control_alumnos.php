@@ -39,10 +39,10 @@ class Control_alumnos extends CI_Controller {
             $output = $crud->render();
             $output->titulo_tabla = "Registro de Alumnos";
 
-            if($this->session->userdata('perfil') == 'Administrador')
+            if($this->session->userdata('perfil') == 'Administrador del Sistema')
                 {
                 $barra = " <li><a href='administrador'>Menú principal</a></li>";
-                } else if($this->session->userdata('perfil') == 'Administrativo')
+                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
                         {
                         $barra = " <li><a href='administrativo'>Menú principal</a></li>";
                         } else {
@@ -104,7 +104,7 @@ class Control_alumnos extends CI_Controller {
 
     function _example_output($output = null, $barra = null)
     {
-        
+
         if($this->session->userdata('perfil') == 'Administrador')
         {
         $output->barra_navegacion = $barra;
