@@ -42,6 +42,7 @@ foreach($css_files as $file): ?>
                 );
 
   $opt_pos = array(
+                'todos'=>'todos',
                 'DCS' => 'Doctorado',
                 'MCS' => 'Maestría',
                 );
