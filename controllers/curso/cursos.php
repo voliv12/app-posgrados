@@ -108,13 +108,13 @@ class Cursos extends CI_Controller {
     {
         if($this->session->userdata('logged_in'))
         {
+            $crud = new grocery_CRUD();
             if($gen != "todas"){
                 $crud->where('cursos.generacion', $gen);
             }
             if($per != "todos"){
                 $crud->where('cursos.periodo', $per);
             }
-            $crud = new grocery_CRUD();
             //$crud->where('cursos.posgrado', $this->session->userdata('perfil'));
             if($gen != "todas"){
                 $crud->where('cursos.generacion', $gen);
@@ -122,7 +122,6 @@ class Cursos extends CI_Controller {
             if($per != "todos"){
                 $crud->where('cursos.periodo', $per);
             }
-
             //$crud->where('cursos.posgrado', $pos);
             $crud->set_table('cursos');
             $crud->set_subject('curso');

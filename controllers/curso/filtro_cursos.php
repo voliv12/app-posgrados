@@ -22,7 +22,7 @@ class Filtro_cursos extends CI_Controller {
             {
                 redirect('curso/cursos/registrocurso/'.$_POST['generacion']."/".$_POST['periodo']);
             }else{
-                redirect('curso/cursos/registrocurso_admin/'.$_POST['generacion']."/".$_POST['periodo']);
+                redirect('curso/cursos/registrocurso_admin/'.$_POST['generacion']."/".$_POST['periodo']."/".$_POST['posgrado']);
             }
         }else{
             redirect('login');

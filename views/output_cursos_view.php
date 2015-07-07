@@ -57,7 +57,7 @@ foreach($css_files as $file): ?>
        </div>
        <div class="modal-body">
            <form  role="form" action="curso/filtro_cursos/filtrar" method="POST">
-            <?php if(($this->session->userdata('perfil') == "Administrador") || ($this->session->userdata('perfil') == "Administrativo")){
+            <?php if(($this->session->userdata('perfil') == "Administrador del Sistema") || ($this->session->userdata('perfil') == "Apoyo Administrativo")){
                 echo "Posgrado: ".form_dropdown('posgrado', $opt_pos)."</br>";
             } ?>
             Generación: <?php echo form_dropdown('generacion', $opt_gen)."</br>"; ?>
