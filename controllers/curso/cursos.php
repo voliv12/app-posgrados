@@ -104,7 +104,7 @@ class Cursos extends CI_Controller {
         }
     }
 
-    function registrocurso_admin($gen=null, $per=null)
+    function registrocurso_admin($gen=null, $per=null, $pos=null)
     {
         if($this->session->userdata('logged_in'))
         {
@@ -115,12 +115,8 @@ class Cursos extends CI_Controller {
             if($per != "todos"){
                 $crud->where('cursos.periodo', $per);
             }
-            //$crud->where('cursos.posgrado', $this->session->userdata('perfil'));
-            if($gen != "todas"){
-                $crud->where('cursos.generacion', $gen);
-            }
-            if($per != "todos"){
-                $crud->where('cursos.periodo', $per);
+            if($pos != "todos"){
+                $crud->where('cursos.posgrado', $pos);
             }
             //$crud->where('cursos.posgrado', $pos);
             $crud->set_table('cursos');
