@@ -134,7 +134,6 @@ class Cursos extends CI_Controller {
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'personal', 'idcurso', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('tipo_personal' => 'Académico'));
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','horas','fecha_inicio','fecha_fin','academico_NAB');
-            $crud->field_type('horas','dropdown',range(1,20));
             $crud->unset_print();
             //$crud->unset_export();
             $crud->unset_add();
@@ -158,6 +157,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('hora_fin','readonly');
             $crud->field_type('lugar','readonly');
             $crud->field_type('otro_lugar','readonly');
+            $crud->field_type('horas','dropdown',range(1,20));
             $action = 'action="curso/cursos/registrocurso_admin"';
 
             $output = $crud->render();
