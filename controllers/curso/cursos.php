@@ -134,6 +134,7 @@ class Cursos extends CI_Controller {
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'personal', 'idcurso', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('tipo_personal' => 'Académico'));
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','horas','fecha_inicio','fecha_fin','academico_NAB');
+            $crud->field_type('horas','dropdown',range(1,20));
             $crud->unset_print();
             //$crud->unset_export();
             $crud->unset_add();
