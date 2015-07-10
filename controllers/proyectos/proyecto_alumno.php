@@ -36,9 +36,9 @@ class Proyecto_alumno extends CI_Controller {
             $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','codirector_externo','LGAC');
             //$crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             
-            /*$crud->add_action('Anexo C', '../assets/imagenes/refresh.png', 'proyectos/anexo_c/registro_Anexo_c');
+            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', 'proyectos/anexo_c/registro_Anexo_c');
             $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', 'proyectos/anexo_b/registro_Anexo_b');
-            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', 'proyectos/anexo_a/registro_Anexo_a');*/
+            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', 'proyectos/anexo_a/registro_Anexo_a');
             $barra = " <li><a href='principal'> Menú principal </a></li>  ";
             $output = $crud->render();
 
@@ -56,25 +56,21 @@ class Proyecto_alumno extends CI_Controller {
             $crud->or_where('codirector_interno', $this->session->userdata('numPersonal'));
             $crud->set_table('proyecto_alumno');
             $crud->set_subject('proyecto');
-            //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->unset_print();
             $crud->unset_export();
             $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','codirector_externo','LGAC');
-            //$crud->unset_edit_fields ( 'Alumno_Matricula');
-            //$crud->set_relation('Alumno_Matricula','alumnoscvu','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
-            //$crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             
-            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_c'));
-            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_b'));
-            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_a'));
+            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_c_dir'));
+            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_b_dir'));
+            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_a_dir'));
             if ($this->session->userdata('perfil')=="Coordinador de Posgrado"){
                  $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
              }else if($this->session->userdata('perfil')=="Académico de Posgrado") {
-            $barra = " <li><a href='academico'> Menú principal </a></li>  ";}
+            $barra = " <li><a href='academico'> Menú principal </a></li>";}
             $output = $crud->render();
 
             $this->_example_output($output, $barra);
@@ -88,23 +84,20 @@ class Proyecto_alumno extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            //$crud->where('director_interno', $this->session->userdata('numPersonal'));
-            //$crud->or_where('codirector_interno', $this->session->userdata('numPersonal'));
             $crud->set_table('proyecto_alumno');
             $crud->set_subject('proyecto');
-            //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->unset_print();
             $crud->unset_export();
-            //$crud->set_relation('Alumno_Matricula','alumnoscvu','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
+            $crud->unset_add();
+            $crud->unset_delete();
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
-            //$crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','codirector_externo','LGAC');
-            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_c_dir'));
-            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_b_dir'));
-            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_a_dir'));
+            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_b'));
+            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_a'));
+            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_c'));
             
             $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
             $output = $crud->render();
@@ -149,7 +142,15 @@ class Proyecto_alumno extends CI_Controller {
         $output->titulo_tabla = "Registro de proyecto";
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_alumnos', $datos_plantilla);
+        if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+        {
+            $this->load->view('plantilla_directivo', $datos_plantilla);
+        } else if($this->session->userdata('perfil') == 'Académico de Posgrado')
+                {
+                 $this->load->view('plantilla_academico', $datos_plantilla);
+                } else {
+                        $this->load->view('plantilla_alumnos', $datos_plantilla);
+                       }
     }
 
 }
