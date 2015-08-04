@@ -48,8 +48,8 @@ class Cursos extends CI_Controller {
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'personal', 'idcurso', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('tipo_personal' => 'Académico'));
             $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
-            $crud->unset_fields('alumnos');
-            $crud->add_action('Asignar alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
+            //$crud->unset_fields('alumnos');
+            //$crud->add_action('Asignar alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
             $crud->required_fields('generacion','periodo', 'codigo','horas','fecha_inicio','fecha_fin');
             $crud->field_type('dia','multiselect',
                     array( "Lunes"=>"Lunes","Martes"=>"Martes","Miércoles"=>"Miércoles","Jueves"=>"Jueves","Viernes"=>"Viernes","Sábado"=>"Sábado","Domingo"=>"Domingo"));
@@ -68,7 +68,7 @@ class Cursos extends CI_Controller {
         }
     }
 
-    function alumno_curso($idcurso)
+    /*function alumno_curso($idcurso)
     {
         if($this->session->userdata('logged_in'))
         {
@@ -95,6 +95,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('nombre_curso','readonly');
             $crud->field_type('periodo','readonly');
             $crud->field_type('generacion','readonly');
+            $crud->field_type('horas','dropdown',range(1,20));
             $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li> <a href='curso/cursos/registrocurso/todas/todos'>Cursos </a></li>";
             $output = $crud->render();
 
@@ -103,7 +104,7 @@ class Cursos extends CI_Controller {
         }else{
             redirect('login');
         }
-    }
+    }*/
 
     function registrocurso_admin($gen=null, $per=null, $pos=null)
     {
