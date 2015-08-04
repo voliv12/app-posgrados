@@ -29,11 +29,15 @@ class Anexo_b extends CI_Controller {
             $crud->unset_texteditor('avances_academicos','full_text');
             $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
-
-
+            if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+            {
+                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyecto </a></li>";
+            } else {
+                $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";}
+            
             $output = $crud->render();
 
-            $this->_example_output($output);
+            $this->_example_output($output, $barra);
         }
              else { redirect('login');
              }
@@ -58,10 +62,15 @@ class Anexo_b extends CI_Controller {
             $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
 
-
+            if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+            {
+                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";
+            } else {
+                $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";}
+            
             $output = $crud->render();
 
-            $this->_example_output($output);
+            $this->_example_output($output, $barra);
         }
              else { redirect('login');
              }
@@ -70,12 +79,19 @@ class Anexo_b extends CI_Controller {
 
 
 
-    function _example_output($output = null)
+    function _example_output($output = null, $barra = null)
     {
-        $output->titulo_tabla = "Registro de proyecto";
-        $output->barra_navegacion = " <li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";
+        $output->titulo_tabla = "Anexo B";
+        $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_alumnos', $datos_plantilla);
+        if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+        {
+            $this->load->view('plantilla_directivo', $datos_plantilla);
+        } else if($this->session->userdata('perfil') == 'Académico de Posgrado')
+                {
+                 $this->load->view('plantilla_academico', $datos_plantilla);
+                } else {
+                        $this->load->view('plantilla_alumnos', $datos_plantilla);
+                       }
     }
-
 }
