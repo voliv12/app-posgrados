@@ -11,7 +11,7 @@ class Datos_personales extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->perfil = $this->session->userdata('perfil');
+        //$this->perfil = $this->session->userdata('perfil');
     }
 
     function registroAlumno()
@@ -20,7 +20,7 @@ class Datos_personales extends CI_Controller {
         {
                 $crud = new grocery_CRUD();
                 //$crud->set_table('cat_posgrados_alumno');
-                $crud->where('nivel',$this->perfil);
+                $crud->where('nivel',$this->session->userdata('abrev_posgrado'));
                 $crud->set_table('alumnoscvu');
                 $crud->set_primary_key('matricula');
                 $crud->set_subject('cat_posgrados_alumno')

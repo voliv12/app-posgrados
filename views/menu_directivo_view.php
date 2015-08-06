@@ -21,6 +21,11 @@
             <div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-list"></i> Consulta de CVU de Alumnos</a></div>
             </p>
         </div>
+         <div class="row">
+            <p>
+                <div class="span6"><a href="curso/cursos_alumno/alumnos" class="btn btn-block"><i class="icon-pencil"></i> Consultar Cursos por Alumno </a></div>
+            </p>
+        </div>
 
 </div>
 <div class="container well">
