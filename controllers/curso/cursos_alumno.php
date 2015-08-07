@@ -31,12 +31,13 @@ class Cursos_alumno extends CI_Controller {
                  ->unset_delete()
                  ->unset_export()
                  ->unset_edit();
+            $titulo = "Alumnos de Posgrado ICS";
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
             $crud->field_type('idalumno', 'hidden');
             $crud->unset_columns('idalumno');
-            $crud->add_action('Cursos de alumno', '../assets/imagenes/book.png','', '',array($this,'just_a_test'));
+            $crud->add_action('Consultar Cursos', '../assets/imagenes/book.png','', '',array($this,'just_a_test'));
             $output = $crud->render();
-            $this->_example_output($output, $barra);
+            $this->_example_output($output, $barra, $titulo);
         }else{
             redirect('login');
         }
@@ -44,13 +45,13 @@ class Cursos_alumno extends CI_Controller {
 
     function just_a_test($primary_key , $row)
     {
-        //$nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
+        $nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
 
-        return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno );//.'/'.$nombre);
+        return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno.'/'.$nombre);
     }
 
 
-    function alumno_curso($idalumno)
+    function alumno_curso($idalumno, $nombre)
     {
         if($this->session->userdata('logged_in'))
         {
@@ -68,15 +69,15 @@ class Cursos_alumno extends CI_Controller {
             $crud->unset_add()
                  ->unset_print()
                  ->unset_delete()
-                 ->unset_export()
                  ->unset_edit();
             $crud->field_type('idalumno', 'hidden');
             $crud->field_type('idcurso', 'hidden');
             $crud->unset_columns('idalumno', 'idcurso');
+            $titulo = "Cursos tomados por: ".urldecode($nombre);
             $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li><a href='curso/cursos_alumno/alumnos'> alumnos </a></li>";
             $output = $crud->render();
 
-            $this->_example_output($output, $barra);
+            $this->_example_output($output, $barra, $titulo);
 
         }else{
             redirect('login');
@@ -85,10 +86,10 @@ class Cursos_alumno extends CI_Controller {
 
 
 
-        function _example_output($output = null, $barra = null)
+        function _example_output($output = null, $barra = null, $titulo = null)
     {
 
-        $output->titulo_tabla = "Alumnos de Posgrado ICS";
+        $output->titulo_tabla = $titulo;//"Alumnos de Posgrado ICS";
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
