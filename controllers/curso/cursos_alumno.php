@@ -58,11 +58,12 @@ class Cursos_alumno extends CI_Controller {
             $crud->set_table('alum_cursos');
             $crud->set_primary_key('idalumno');
             $crud->where('idalumno', $idalumno);
+            $crud->where('posgrado', $this->session->userdata('abrev_posgrado'));
+
             $crud->set_subject('curso');
             $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('abrev_posgrado')));
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->display_as('codigo','Experiencia Educativa')
-                 ->display_as('nivel','Posgrado')
                  ->display_as('nombre_curso','Nombre del Curso');
             $crud->unset_add()
                  ->unset_print()
