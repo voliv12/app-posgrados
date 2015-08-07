@@ -18,12 +18,13 @@
                 <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrado" class="btn btn-block"><i class="icon-pencil"></i> Alumnos Posgrado</a></div>
 
             <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
-            <div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-list"></i> Consulta de CVU de Alumnos</a></div>
+            <div class="span6"><a href="curso/cursos_alumno/alumnos" class="btn btn-block"><i class="icon-search"></i> Consultar Cursos por Alumno </a></div>
+
             </p>
         </div>
          <div class="row">
             <p>
-                <div class="span6"><a href="curso/cursos_alumno/alumnos" class="btn btn-block"><i class="icon-pencil"></i> Consultar Cursos por Alumno </a></div>
+            <div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-search"></i> Consulta de CVU de Alumnos</a></div>  
             </p>
         </div>
 
