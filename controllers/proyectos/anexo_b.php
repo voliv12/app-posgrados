@@ -14,36 +14,7 @@ class Anexo_b extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registro_Anexo_b($idproyecto)
-    {
-       if ($this->session->userdata('logged_in'))
-        {
-            $crud = new grocery_CRUD();
-            $crud->where('idproyec_alum', $idproyecto);
-            $crud->set_table('anexo_b');
-            $crud->set_subject('Anexo B');
-            $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
-            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->set_relation('idproyec_alum','proyecto_alumno','titulo_proyecto');
-            $crud->unset_texteditor('avances_academicos','full_text');
-            $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
-                 ->display_as('idproyec_alum','Titulo del Proyecto');
-            if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
-            {
-                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyecto </a></li>";
-            } else {
-                $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";}
-            
-            $output = $crud->render();
-
-            $this->_example_output($output, $barra);
-        }
-             else { redirect('login');
-             }
-    }
-
-    function registro_Anexo_b_dir($idproyecto)
+    function registro_Anexo_b($idproyecto, $titulo)
     {
        if ($this->session->userdata('logged_in'))
         {
@@ -57,7 +28,37 @@ class Anexo_b extends CI_Controller {
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->set_relation('idproyec_alum','proyecto_alumno','titulo_proyecto');
+            $crud->unset_columns('idproyec_alum');
+            $crud->unset_texteditor('avances_academicos','full_text');
+            $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
+                 ->display_as('idproyec_alum','Titulo del Proyecto');
+            if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+            {
+                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyecto </a></li>";
+            } else {
+                $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";}
+            
+            $output = $crud->render();
+
+            $this->_example_output($output, $barra, $titulo);
+        }
+             else { redirect('login');
+             }
+    }
+
+    function registro_Anexo_b_dir($idproyecto, $titulo, $matricula)
+    {
+       if ($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->where('idproyec_alum', $idproyecto);
+            $crud->set_table('anexo_b');
+            $crud->set_subject('Anexo B');
+
+            $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
+            $crud->field_type('Alumno_Matricula', 'hidden',$matricula );
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('avances_academicos','full_text');
             $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
@@ -70,7 +71,7 @@ class Anexo_b extends CI_Controller {
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra);
+            $this->_example_output($output, $barra, $titulo);
         }
              else { redirect('login');
              }
@@ -79,9 +80,9 @@ class Anexo_b extends CI_Controller {
 
 
 
-    function _example_output($output = null, $barra = null)
+    function _example_output($output = null, $barra = null, $titulo = null)
     {
-        $output->titulo_tabla = "Anexo B";
+        $output->titulo_tabla = "Anexo B: ".urldecode($titulo);
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         if($this->session->userdata('perfil') == 'Coordinador de Posgrado')

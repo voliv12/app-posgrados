@@ -57,7 +57,7 @@ class Cursos_alumno extends CI_Controller {
         {
             $crud = new grocery_CRUD();
             $crud->set_table('alum_cursos');
-            $crud->set_primary_key('idalumno');
+            $crud->set_primary_key('NRC');
             $crud->where('idalumno', $idalumno);
             $crud->where('posgrado', $this->session->userdata('abrev_posgrado'));
 

@@ -23,22 +23,23 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_table('proyecto_alumno');
             $crud->set_subject('proyecto');
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_add();
-            //$crud->edit_fields('titulo_proyecto');
+            //$crud->set_relation('Posgrado','','{abreviacion} - {Nombre}');
             $crud->unset_delete();
             $crud->unset_edit_fields ( 'Alumno_Matricula');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
-            $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','codirector_externo','LGAC');
+            $crud->columns( 'Alumno_Matricula','titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
             //$crud->required_fields('AnioPublica','Volumen','Titulio','TipoArt','RevistaPublic','AutorArt');
             
-            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', 'proyectos/anexo_c/registro_Anexo_c');
-            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', 'proyectos/anexo_b/registro_Anexo_b');
-            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', 'proyectos/anexo_a/registro_Anexo_a');
+            $crud->add_action('Anexo C', '../assets/imagenes/c.png', 'proyectos/anexo_c/registro_Anexo_c');
+            $crud->add_action('Anexo B', '../assets/imagenes/b.png', 'proyectos/anexo_b/registro_Anexo_b');
+            $crud->add_action('Anexo A', '../assets/imagenes/a.png', 'proyectos/anexo_a/registro_Anexo_a');
             $barra = " <li><a href='principal'> Menú principal </a></li>  ";
             $output = $crud->render();
 
@@ -58,15 +59,16 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_subject('proyecto');
             $crud->unset_print();
             $crud->unset_export();
-            $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','codirector_externo','LGAC');
+            //$crud->set_relation_n_n('Alumno_Matricula.proyecto_alumno', 'cat_posgrados_alumno', 'Alumno_Matricula.', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
+            $crud->columns( 'Alumno_Matricula','titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
             
-            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_c_dir'));
-            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_b_dir'));
-            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_a_dir'));
+            $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
+            $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
+            $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
             if ($this->session->userdata('perfil')=="Coordinador de Posgrado"){
                  $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
              }else if($this->session->userdata('perfil')=="Académico de Posgrado") {
@@ -82,8 +84,9 @@ class Proyecto_alumno extends CI_Controller {
     function registro_proyectos()
     {
         if ($this->session->userdata('logged_in'))
-        {
+        {   
             $crud = new grocery_CRUD();
+            $crud->where('posgrado',  $this->session->userdata('abrev_posgrado'));
             $crud->set_table('proyecto_alumno');
             $crud->set_subject('proyecto');
             $crud->unset_print();
@@ -94,10 +97,11 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
-            $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','codirector_externo','LGAC');
-            $crud->add_action('Anexo B', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_b'));
-            $crud->add_action('Anexo A', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_a'));
-            $crud->add_action('Anexo C', '../assets/imagenes/refresh.png', '', '', array($this, 'anexo_c'));
+            $crud->columns( 'Alumno_Matricula','titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
+            $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
+            $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
+            $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
+            
             
             $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
             $output = $crud->render();
@@ -109,28 +113,31 @@ class Proyecto_alumno extends CI_Controller {
     }
 
     function anexo_a($primary_key , $row)
-    {
-        return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key);
+    {   $titulo = $row->titulo_proyecto;
+        return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$titulo);
     }
     function anexo_b($primary_key , $row)
-    {
-        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key);
+    {   $titulo = $row->titulo_proyecto;
+        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$titulo);
     }
     function anexo_c($primary_key , $row)
-    {
-        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key);
+    {   $titulo = $row->titulo_proyecto;
+        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$titulo);
     }
     function anexo_a_dir($primary_key , $row)
-    {
-        return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key);
+    {   $titulo = $row->titulo_proyecto;
+        $matricula = $row->Alumno_Matricula;
+        return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$titulo.'/'.$matricula);
     }
     function anexo_b_dir($primary_key , $row)
-    {
-        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key);
+    {   $titulo = $row->titulo_proyecto;
+        $matricula = $row->Alumno_Matricula;
+        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$titulo.'/'.$matricula);
     }
     function anexo_c_dir($primary_key , $row)
-    {
-        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key);
+    {   $titulo = $row->titulo_proyecto;
+        $matricula = $row->Alumno_Matricula;
+        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$titulo.'/'.$matricula);
     }
 
 

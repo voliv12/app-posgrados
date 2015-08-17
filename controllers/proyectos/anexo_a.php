@@ -14,7 +14,7 @@ class Anexo_a extends CI_Controller {
         $this->matricula = $this->session->userdata('matricula');
     }
 
-    function registro_Anexo_a($idproyecto)
+    function registro_Anexo_a($idproyecto, $titulo)
     {
         if ($this->session->userdata('logged_in'))
         {
@@ -25,11 +25,11 @@ class Anexo_a extends CI_Controller {
             $crud->unset_edit();
             $crud->unset_add();
             $crud->unset_delete();
-
+            
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
             $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->set_relation('idproyec_alum','proyecto_alumno','titulo_proyecto');
+            $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('avances','full_text');
             $crud->unset_texteditor('condiciones','full_text');
             $crud->display_as('avances','Determinar los avances que alacanzará en el desarrollo de sus actividades 
@@ -44,13 +44,13 @@ class Anexo_a extends CI_Controller {
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra);
+            $this->_example_output($output, $barra, $titulo);
         }
              else { redirect('login');
              }
     }
 
-    function registro_Anexo_a_dir($idproyecto)
+    function registro_Anexo_a_dir($idproyecto, $titulo, $matricula)
     {
         if ($this->session->userdata('logged_in'))
         {
@@ -60,15 +60,14 @@ class Anexo_a extends CI_Controller {
             $crud->set_subject('Anexo A');
 
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->field_type('Alumno_Matricula', 'hidden', $matricula );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->set_relation('idproyec_alum','proyecto_alumno','titulo_proyecto');
+            $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('avances','full_text');
             $crud->unset_texteditor('condiciones','full_text');
             $crud->display_as('avances','Determinar los avances que alacanzará en el desarrollo de sus actividades 
                                actividades académicas y/o proyectos de tesis durante el semestre actual:')
-                 ->display_as('condiciones','Identificart las condiciones y actividades necesarias que requerirá el estudiante para logar los avances establecidos')
-                 ->display_as('idproyec_alum','Titulo del Proyecto');
+                 ->display_as('condiciones','Identificart las condiciones y actividades necesarias que requerirá el estudiante para logar los avances establecidos');
             if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
             {
                 $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";
@@ -78,7 +77,7 @@ class Anexo_a extends CI_Controller {
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra);
+            $this->_example_output($output, $barra, $titulo);
         }
              else { redirect('login');
              }
@@ -88,9 +87,9 @@ class Anexo_a extends CI_Controller {
 
 
 
-    function _example_output( $output = null, $barra = null)
+    function _example_output( $output = null, $barra = null, $titulo = null)
     {
-        $output->titulo_tabla = "Anexo A";
+        $output->titulo_tabla = "Anexo A: ".urldecode($titulo);
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
