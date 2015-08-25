@@ -47,11 +47,11 @@ class Cursos_alumno extends CI_Controller {
     {
         $nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
 
-        return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno.'/'.$nombre);
+        return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula);
     }
 
 
-    function alumno_curso($idalumno, $nombre)
+    function alumno_curso($idalumno, $nombre, $matricula)
     {
         if($this->session->userdata('logged_in'))
         {
@@ -73,7 +73,7 @@ class Cursos_alumno extends CI_Controller {
             $crud->field_type('idalumno', 'hidden');
             $crud->field_type('idcurso', 'hidden');
             $crud->unset_columns('idalumno', 'idcurso');
-            $titulo = "Cursos tomados por: ".urldecode($nombre);
+            $titulo = "Cursos tomados por: ".urldecode($nombre).' - '.$matricula;
             $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li><a href='curso/cursos_alumno/alumnos'> alumnos </a></li>";
             $output = $crud->render();
 
