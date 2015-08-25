@@ -73,7 +73,7 @@ class Cursos_alumno extends CI_Controller {
             $crud->field_type('idalumno', 'hidden');
             $crud->field_type('idcurso', 'hidden');
             $crud->unset_columns('idalumno', 'idcurso');
-            $titulo = "Cursos tomados por: ".urldecode($nombre).' - '.$matricula;
+            $titulo = "Cursos tomados por: ".$matricula.' - '.urldecode($nombre);
             $barra = " <li><a href='directivo'>Menú principal</a></li>  |  <li><a href='curso/cursos_alumno/alumnos'> alumnos </a></li>";
             $output = $crud->render();
 
