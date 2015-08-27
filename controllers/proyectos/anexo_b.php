@@ -11,7 +11,7 @@ class Anexo_b extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->matricula = $this->session->userdata('matricula');
+        $this->idalumno = $this->session->userdata('idalumno');
     }
 
     function registro_Anexo_b($idproyecto, $titulo)
@@ -25,8 +25,9 @@ class Anexo_b extends CI_Controller {
             $crud->unset_edit();
             $crud->unset_add();
             $crud->unset_delete();
+            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('avances_academicos','full_text');
@@ -34,7 +35,7 @@ class Anexo_b extends CI_Controller {
                  ->display_as('idproyec_alum','Titulo del Proyecto');
             if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
             {
-                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyecto </a></li>";
+                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>";
             } else {
                 $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";}
             
@@ -46,7 +47,7 @@ class Anexo_b extends CI_Controller {
              }
     }
 
-    function registro_Anexo_b_dir($idproyecto, $titulo, $matricula)
+    function registro_Anexo_b_dir($idproyecto, $titulo, $idalumno)
     {
        if ($this->session->userdata('logged_in'))
         {
@@ -56,7 +57,7 @@ class Anexo_b extends CI_Controller {
             $crud->set_subject('Anexo B');
 
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->field_type('Alumno_Matricula', 'hidden',$matricula );
+            $crud->field_type('idalumno', 'hidden',$idalumno );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('avances_academicos','full_text');

@@ -11,7 +11,7 @@ class Anexo_c extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->matricula = $this->session->userdata('matricula');
+        $this->idalumno = $this->session->userdata('idalumno');
     }
 
     function registro_Anexo_C($idproyecto, $titulo)
@@ -26,7 +26,7 @@ class Anexo_c extends CI_Controller {
             $crud->unset_add();
             $crud->unset_delete();
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
+            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('motivo','full_text');
@@ -43,7 +43,7 @@ class Anexo_c extends CI_Controller {
 
            if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
             {
-                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyecto </a></li>";
+                $barra = "<li><a href=directivo> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>";
             } else {
                 $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";}
             
@@ -56,7 +56,7 @@ class Anexo_c extends CI_Controller {
     }
 
 
-    function registro_Anexo_c_dir($idproyecto, $titulo, $matricula)
+    function registro_Anexo_c_dir($idproyecto, $titulo, $idalumno)
     {
        if ($this->session->userdata('logged_in'))
         {
@@ -64,9 +64,9 @@ class Anexo_c extends CI_Controller {
             $crud->where('idproyec_alum', $idproyecto);
             $crud->set_table('anexo_c');
             $crud->set_subject('Anexo C');
-
+            
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->field_type('Alumno_Matricula', 'hidden',$matricula );
+            $crud->field_type('idalumno', 'hidden',$idalumno );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->unset_columns('idproyec_alum');
             $crud->unset_texteditor('motivo','full_text');
