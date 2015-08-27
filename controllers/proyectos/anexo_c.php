@@ -14,7 +14,7 @@ class Anexo_c extends CI_Controller {
         $this->idalumno = $this->session->userdata('idalumno');
     }
 
-    function registro_Anexo_C($idproyecto, $titulo)
+    function registro_Anexo_C($idproyecto, $titulo, $nombre)
     {
        if ($this->session->userdata('logged_in'))
         {
@@ -25,10 +25,8 @@ class Anexo_c extends CI_Controller {
             $crud->unset_edit();
             $crud->unset_add();
             $crud->unset_delete();
-            $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->unset_columns('idproyec_alum');
+            $crud->unset_columns('idproyec_alum', 'idalumno');
             $crud->unset_texteditor('motivo','full_text');
             
             $crud->display_as('desempeno_academico','desempeño académico')
@@ -49,14 +47,14 @@ class Anexo_c extends CI_Controller {
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra, $titulo);
+            $this->_example_output($output, $barra, $titulo, $nombre);
         }
              else { redirect('login');
              }
     }
 
 
-    function registro_Anexo_c_dir($idproyecto, $titulo, $idalumno)
+    function registro_Anexo_c_dir($idproyecto, $titulo, $idalumno, $nombre)
     {
        if ($this->session->userdata('logged_in'))
         {
@@ -68,7 +66,7 @@ class Anexo_c extends CI_Controller {
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
             $crud->field_type('idalumno', 'hidden',$idalumno );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->unset_columns('idproyec_alum');
+            $crud->unset_columns('idproyec_alum', 'idalumno');
             $crud->unset_texteditor('motivo','full_text');
             
             $crud->display_as('desempeno_academico','desempeño académico')
@@ -89,7 +87,7 @@ class Anexo_c extends CI_Controller {
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra, $titulo);
+            $this->_example_output($output, $barra, $titulo, $nombre);
         }
              else { redirect('login');
              }
@@ -98,9 +96,9 @@ class Anexo_c extends CI_Controller {
 
 
 
-    function _example_output($output = null, $barra = null, $titulo = null)
+    function _example_output( $output = null, $barra = null, $titulo = null, $idalum = null)
     {
-        $output->titulo_tabla = "Anexo C: ".urldecode($titulo);
+        $output->titulo_tabla = '<p>'."Anexo C ".'<br>'."Proyecto: ".urldecode($titulo).'<br>'."Alumno: ".urldecode($idalum).'<p>';
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         if($this->session->userdata('perfil') == 'Coordinador de Posgrado')

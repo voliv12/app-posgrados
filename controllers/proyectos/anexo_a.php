@@ -14,7 +14,7 @@ class Anexo_a extends CI_Controller {
         $this->idalumno = $this->session->userdata('idalumno');
     }
 
-    function registro_Anexo_a($idproyecto, $titulo)
+    function registro_Anexo_a($idproyecto, $titulo, $nombre)
     {
         if ($this->session->userdata('logged_in'))
         {
@@ -25,11 +25,8 @@ class Anexo_a extends CI_Controller {
             $crud->unset_edit();
             $crud->unset_add();
             $crud->unset_delete();
-            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
-            $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            //$crud->field_type('idalumno', 'hidden',$this->idalumno );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
-            $crud->unset_columns('idproyec_alum');
+            $crud->unset_columns('idproyec_alum', 'idalumno');
             $crud->unset_texteditor('avances','full_text');
             $crud->unset_texteditor('condiciones','full_text');
             $crud->display_as('avances','Determinar los avances que alacanzará en el desarrollo de sus actividades 
@@ -44,7 +41,7 @@ class Anexo_a extends CI_Controller {
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra, $titulo);
+            $this->_example_output($output, $barra, $titulo, $nombre);
         }
              else { redirect('login');
              }
@@ -53,7 +50,7 @@ class Anexo_a extends CI_Controller {
 
 
 
-    function registro_Anexo_a_dir($idproyecto, $titulo, $idalumno)
+    function registro_Anexo_a_dir($idproyecto, $titulo, $idalumno, $nombre)
     {
         if ($this->session->userdata('logged_in'))
         {
@@ -63,21 +60,17 @@ class Anexo_a extends CI_Controller {
             $crud->set_subject('Anexo A');
 
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
-            
+            $crud->field_type('idalumno', 'hidden',$idalumno );
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             
             $state_crud = $crud->getState();
 
-            if ($state_crud == 'edit' || $state_crud == 'update'|| $state_crud == 'read' ) {
+            /*if ($state_crud == 'edit' || $state_crud == 'update'|| $state_crud == 'read' ) {
                 $crud->callback_edit_field('idalumno',array($this,'edit_field_callback'));
             } else {
                 $crud->field_type('idalumno', 'hidden', $idalumno );
 
-            }
-
-
-
-
+            }*/
 
             $crud->unset_columns('idproyec_alum', 'idalumno');
             $crud->unset_texteditor('avances','full_text');
@@ -90,12 +83,11 @@ class Anexo_a extends CI_Controller {
                 $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";
             } else {
                 $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";}
-            //$crud->callback_before_insert(array($this,'acciones_callback'));
-            //$crud->callback_before_update(array($this,'acciones_callback'));
+
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra, $titulo);
+            $this->_example_output($output, $barra, $titulo, $nombre);
         }
              else { redirect('login');
              }
@@ -110,9 +102,9 @@ class Anexo_a extends CI_Controller {
      }
 
 
-    function _example_output( $output = null, $barra = null, $titulo = null)
+    function _example_output( $output = null, $barra = null, $titulo = null, $idalum = null)
     {
-        $output->titulo_tabla = "Anexo A: ".urldecode($titulo);
+        $output->titulo_tabla = '<p>'."Anexo A ".'<br>'."Proyecto: ".urldecode($titulo).'<br>'."Alumno: ".urldecode($idalum).'<p>';
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         if($this->session->userdata('perfil') == 'Coordinador de Posgrado')

@@ -116,30 +116,58 @@ class Proyecto_alumno extends CI_Controller {
 
     function anexo_a($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$titulo);
+        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $alumno = $this->db->get('alumno')->row();
+        $matri = $this->db->get('cat_posgrados_alumno')->row();
+        $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+        
+        return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$titulo.'/'.$nombre);
     }
     function anexo_b($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$titulo);
+        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $alumno = $this->db->get('alumno')->row();
+        $matri = $this->db->get('cat_posgrados_alumno')->row();
+        $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+        
+        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$titulo.'/'.$nombre);
     }
     function anexo_c($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$titulo);
+        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $alumno = $this->db->get('alumno')->row();
+        $matri = $this->db->get('cat_posgrados_alumno')->row();
+        $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+        
+        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$titulo.'/'.$nombre);
     }
     function anexo_a_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $matricula = $row->idalumno;
-        return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$titulo.'/'.$matricula);
+        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $alumno = $this->db->get('alumno')->row();
+        $matri = $this->db->get('cat_posgrados_alumno')->row();
+        //$matricula = $matri->matricula;
+        $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+        $idalumno = $row->idalumno;
+        return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$titulo.'/'.$idalumno.'/'.$nombre);
     }
     function anexo_b_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $matricula = $row->idalumno;
-        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$titulo.'/'.$matricula);
+        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $alumno = $this->db->get('alumno')->row();
+        $matri = $this->db->get('cat_posgrados_alumno')->row();
+        $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+        $idalumno = $row->idalumno;
+        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$titulo.'/'.$idalumno.'/'.$nombre);
     }
     function anexo_c_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $matricula = $row->idalumno;
-        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$titulo.'/'.$matricula);
+        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $alumno = $this->db->get('alumno')->row();
+        $matri = $this->db->get('cat_posgrados_alumno')->row();
+        $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+        $idalumno = $row->idalumno;
+        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$titulo.'/'.$idalumno.'/'.$nombre);
     }
 
 
