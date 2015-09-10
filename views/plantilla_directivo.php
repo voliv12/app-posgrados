@@ -29,12 +29,13 @@
   <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-responsive.min.css" >
   <link rel="stylesheet" href="../assets/js/themes/smoothness/jquery-ui-1.8.16.custom.css" type="text/css">
   <link rel="stylesheet" href="../assets/js/themes/base/jquery.ui.base.css" type="text/css">
-
+  <link rel="stylesheet" type="text/css" href="../assets/js/jGrowl-master/jquery.jgrowl.min.css" />
+  <script src="../assets/js/jGrowl-master/jquery.jgrowl.min.js"></script>
 
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+ 
 
     <style>
       body {
@@ -62,7 +63,51 @@ $(document).ready(function()
       else{ $("#otro_lugar_field_box").hide(); }
     });
 
-//$("#hora_inicio").timepicker();
+//******************PROYECTOS DE ALUMNOS ****************************
+    $('#field-director_interno').append('<option value="0">ACADÉMICO EXTERNO </option>');
+
+    $("#director_externo_field_box").hide();
+    $("#field-director_interno").change(function ()
+    {
+      if($("#field-director_interno").val() == "0"){ $("#director_externo_field_box").show(); }
+      else{ $("#director_externo_field_box").hide(); }
+    });
+
+
+//************************************************************
+    $('#field-codirector_interno').append('<option value="0">ACADÉMICO EXTERNO </option>');
+
+    $("#codirector_externo_field_box").hide();
+    $("#field-codirector_interno").change(function ()
+    {
+      if($("#field-codirector_interno").val() == "0"){ $("#codirector_externo_field_box").show(); }
+      else{ $("#codirector_externo_field_box").hide(); }
+    });
+
+
+
+
+//************************************************************************************
+$("#printBtn").click(function(){
+    //printcontent('<br/>' +'semestre'+$("#semestre_input_box").html() + '<br/>' + $(".form-div").html());
+    printcontent('<br/>' +$(".container-fluid").html() + '<b>Semestre: </b>'+ $("#field-semestre.readonly_label").html() + '<br/>' + '<b>Periodo:  </b>'
+                 + $("#field-periodo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_display_as_box").html() +'</b>' + $("#avances_input_box.form-input-box").html()+ '<br/><br/>' + '<b>'+$("#condiciones_display_as_box").html() +'</b>' + $("#condiciones_input_box.form-input-box").html() 
+                 + $("#firma.container-fluid").html()+ '<b>Fecha de Evaluación: </b>'+ $("#field-Fecha.readonly_label").html()
+                 );
+});
+
+function printcontent(content)
+{
+
+    document.write('<html><title>ICS-SIP</title><body>');
+    var image = 'logos';
+    document.write('<img src="/../assets/imagenes/' + image + '.jpg">');
+    document.write(content);
+    document.write('</body></html>');
+    print();
+    //return true;
+}
+
 
  });
 </script>
@@ -70,7 +115,10 @@ $(document).ready(function()
 
 </head>
 <body>
+
+
 <div class="container">
+
      <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -93,6 +141,7 @@ $(document).ready(function()
               <li><a data-toggle="modal" href="#myModal"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
               <li class="divider"></li>
               <li><a href="salir"><i class="icon-off"></i> Cerrar sesión</a></li>
+              
             </ul>
           </div>
         </div>
@@ -117,6 +166,7 @@ $(document).ready(function()
            <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Cambiar</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+               
            </div>
           </form>
       </div>

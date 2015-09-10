@@ -30,7 +30,7 @@ class Anexo_a extends CI_Controller {
             $crud->unset_texteditor('avances','full_text');
             $crud->unset_texteditor('condiciones','full_text');
             $crud->display_as('avances','Determinar los avances que alacanzará en el desarrollo de sus actividades 
-                               actividades académicas y/o proyectos de tesis durante el semestre actual:')
+                               actividades académicas y/o proyectos de tesis durante el semestre actual')
                  ->display_as('condiciones','Identificart las condiciones y actividades necesarias que requerirá el estudiante para logar los avances establecidos')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
             if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
@@ -50,8 +50,8 @@ class Anexo_a extends CI_Controller {
 
 
 
-    function registro_Anexo_a_dir($idproyecto, $titulo, $idalumno, $nombre)
-    {
+    function registro_Anexo_a_dir($idproyecto, $idalumno, $nombre, $nombreAlumno,$director, $titulo, $lgac, $coordina_posgrado )
+    {                       
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
@@ -73,40 +73,48 @@ class Anexo_a extends CI_Controller {
             }*/
 
             $crud->unset_columns('idproyec_alum', 'idalumno');
-            $crud->unset_texteditor('avances','full_text');
-            $crud->unset_texteditor('condiciones','full_text');
+            
+            //$crud->unset_texteditor('avances','full_text');
+            //$crud->unset_texteditor('condiciones','full_text');
             $crud->display_as('avances','Determinar los avances que alacanzará en el desarrollo de sus actividades 
-                               actividades académicas y/o proyectos de tesis durante el semestre actual:')
+                               actividades académicas y/o proyectos de tesis durante el semestre actual')
                  ->display_as('condiciones','Identificart las condiciones y actividades necesarias que requerirá el estudiante para logar los avances establecidos');
             if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
             {
-                $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";
+
+
+                if ($state_crud == 'read' ) {
+                $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li> |   <li class='text-align:right'><a id='printBtn'  class='easyui-linkbutton'>Imprimir</a> </li>";} 
+                   else { $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>"; }
+
+
             } else {
-                $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";}
+
+                if ($state_crud == 'read' ) {
+                $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>  |   <li class='text-align:right'><a id='printBtn'  class='easyui-linkbutton'>Imprimir</a> </li>";} 
+                   else { $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";}
+
+
+
+                
+                }
 
             
             $output = $crud->render();
 
-            $this->_example_output($output, $barra, $titulo, $nombre);
+            $this->_example_output($output, $barra, $nombre, $nombreAlumno,$director, $titulo, $lgac, $coordina_posgrado);
         }
              else { redirect('login');
              }
     }
 
-     function edit_field_callback($idalumno, $primary_key){
 
-        $this->db->where('idalumno',$idalumno); //Where id is the primary key for company table
-        $alumno = $this->db->get('alumno')->row();
-
-        return '<div id="field-idalumno" class="readonly_label">'.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA.'</div>';
-     }
-
-
-    function _example_output( $output = null, $barra = null, $titulo = null, $idalum = null)
+    function _example_output( $output = null, $barra = null,  $idalum = null, $nombreAlumno = null, $director = null, $titulo = null, $lgac = null, $coordina_posgrado = null)
     {
-        $output->titulo_tabla = '<p>'."Anexo A ".'<br>'."Proyecto: ".urldecode($titulo).'<br>'."Alumno: ".urldecode($idalum).'<p>';
+        $output->titulo_tabla = '<b>'."Anexo A. Programa de trabajo del tutor académico y/o director de tesis ".'<br>'."Matricula y nombre del estudiante: ".'</b>'.ucwords(mb_strtolower(urldecode($idalum))).'<br><b>'."Nombre del Tutor académico/Director de tesis: ".'</b>'.ucwords(mb_strtolower(urldecode($director))).'<br><b>'."Tema de tesis: ".'</b>'.urldecode($titulo).'<br><b>'."Linea de Generación y Aplicación del Conocimiento: ".'</b>'.urldecode($lgac).'<br>';
+        $output->firmas = '<p>'."Nombre y firma del tutorado: ".ucwords(mb_strtolower(urldecode($nombreAlumno))).'<br><br><br><br>'."Nombre y firma del Tutor Académico: ".ucwords(mb_strtolower(urldecode($director))).'<br><br><br><br>'."Vo. Bo. Del Coordinador de Posgrado del Programa Educativo: ".ucwords(mb_strtolower(urldecode($coordina_posgrado))).'<br><br><br><p>';
         $output->barra_navegacion = $barra;
-        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+        $datos_plantilla['contenido'] =  $this->load->view('output_view_anexos', $output, TRUE);
         if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
         {
             $this->load->view('plantilla_directivo', $datos_plantilla);

@@ -40,40 +40,53 @@
 $(document).ready(function()
   {
 
- //############## INGRESAR ALUMNOS A CURSO  ###############
+    //******************PROYECTOS DE ALUMNOS ****************************
+        $('#field-director_interno').append('<option value="0">ACADÉMICO EXTERNO </option>');
 
-
-      $("#otra_beca_field_box").hide();
-      $("#field-beca").change(function ()
-      {
-        if($("#field-beca").val() == "Otra"){ $("#otra_beca_field_box").show(); }
-        else{ $("#otra_beca_field_box").hide(); }
-      });
-//***************************************************************************************
-
-$("#idcat_posgrados_field_box").hide();
-$("#idcat_posgradosD_field_box").hide();
-      $("#field-nivel").change(function ()
-      {
-        if($("#field-nivel").val() == "Maestría")
+        $("#director_externo_field_box").hide();
+        $("#field-director_interno").change(function ()
         {
-          $("#idcat_posgradosD_field_box").hide();
-          $("#idcat_posgrados_field_box").show();
-        }
-          else if($("#field-nivel").val() == "Doctorado")
-            {
-              $("#idcat_posgrados_field_box").hide();
-              $("#idcat_posgradosD_field_box").show();
-            }
-            else
-                  {
-                    $("#idcat_posgrados_field_box").hide();
-                    $("#idcat_posgradosD_field_box").hide();
-                  }
-      });
+          if($("#field-director_interno").val() == "0"){ $("#director_externo_field_box").show(); }
+          else{ $("#director_externo_field_box").hide(); }
+        });
 
 
- });
+    //************************************************************
+        $('#field-codirector_interno').append('<option value="0">ACADÉMICO EXTERNO </option>');
+
+        $("#codirector_externo_field_box").hide();
+        $("#field-codirector_interno").change(function ()
+        {
+          if($("#field-codirector_interno").val() == "0"){ $("#codirector_externo_field_box").show(); }
+          else{ $("#codirector_externo_field_box").hide(); }
+        });
+
+
+
+
+    //************************************************************************************
+    $("#printBtn").click(function(){
+        //printcontent('<br/>' +'semestre'+$("#semestre_input_box").html() + '<br/>' + $(".form-div").html());
+        printcontent('<br/>' +$(".container-fluid").html() + '<b>Semestre: </b>'+ $("#field-semestre.readonly_label").html() + '<br/>' + '<b>Periodo:  </b>'
+                     + $("#field-periodo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_display_as_box").html() +'</b>' + $("#avances_input_box.form-input-box").html()+ '<br/><br/>' + '<b>'+$("#condiciones_display_as_box").html() +'</b>' + $("#condiciones_input_box.form-input-box").html() 
+                     + $("#firma.container-fluid").html()+ '<b>Fecha de Evaluación: </b>'+ $("#field-Fecha.readonly_label").html()
+                     );
+    });
+
+    function printcontent(content)
+    {
+
+        document.write('<html><title>ICS-SIP</title><body>');
+        var image = 'logos';
+        document.write('<img src="/../assets/imagenes/' + image + '.jpg">');
+        document.write(content);
+        document.write('</body></html>');
+        print();
+        //return true;
+    }
+
+
+});
 </script>
 
 

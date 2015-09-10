@@ -17,11 +17,14 @@ foreach($css_files as $file): ?>
  	<?php echo $barra_navegacion; ?>
 </ol>
 <div id= "titulo" class="container-fluid">
-        <h4><a><?php echo $titulo_tabla; ?></a></h4>
+        <a><?php echo $titulo_tabla; ?></a>
 </div>
 
     <div>
 		<?php echo $output; ?>
+    </div>
+    <div id= "firma" class="container-fluid" style="visibility:hidden" >
+    	<h4><a><?php echo $firmas; ?></a></h4>
     </div>
 
 </html>

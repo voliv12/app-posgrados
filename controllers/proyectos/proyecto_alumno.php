@@ -30,6 +30,8 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->unset_delete();
             $crud->unset_edit_fields ( 'idalumno');
+            $crud->display_as('idalumno','Nombre del alumno')
+                 ->display_as('titulo_proyecto','Titulo del proyecto');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
@@ -59,6 +61,8 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_subject('proyecto');
             $crud->unset_print();
             $crud->unset_export();
+            $crud->display_as('idalumno','Nombre del alumno')
+                 ->display_as('titulo_proyecto','Titulo del proyecto');
             //$crud->set_relation_n_n('idalumno', 'cat_posgrados_alumno', 'alumno', 'cat_posgrados_alumno.idalumno', 'alumno.idalumno', '{NombreA}');
             $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
@@ -94,6 +98,8 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
+            $crud->display_as('idalumno','Nombre del alumno')
+                 ->display_as('titulo_proyecto','Titulo del proyecto');
             $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
@@ -116,7 +122,7 @@ class Proyecto_alumno extends CI_Controller {
 
     function anexo_a($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
@@ -125,7 +131,7 @@ class Proyecto_alumno extends CI_Controller {
     }
     function anexo_b($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
@@ -134,7 +140,7 @@ class Proyecto_alumno extends CI_Controller {
     }
     function anexo_c($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
@@ -143,17 +149,36 @@ class Proyecto_alumno extends CI_Controller {
     }
     function anexo_a_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $this->db->where('idcat_LGAC',$row->LGAC); 
+        $BLGAC = $this->db->get('cat_lgac')->row();        
+        $lgac = $BLGAC->nombre;
+        if ($row->director_interno == '0' ){$director = $row->director_externo;}
+            else{ $this->db->where('NumPersonal',$row->director_interno);
+                  $academic = $this->db->get('personal')->row();
+                  $director = $academic->Nombre.' '.$academic->apellidos;
+
+            }
+        $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
-        //$matricula = $matri->matricula;
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $idalumno = $row->idalumno;
-        return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$titulo.'/'.$idalumno.'/'.$nombre);
+        $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+            if ($row->posgrado=='MCS'){
+                $this->db->where('posgrado',1);
+                $coordina = $this->db->get('personal')->row();
+                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+            } else if ($row->posgrado=='DCS'){
+                       $this->db->where('posgrado',2);
+                       $coordina = $this->db->get('personal')->row();
+                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+                       }
+
+        return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
     function anexo_b_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
@@ -162,7 +187,7 @@ class Proyecto_alumno extends CI_Controller {
     }
     function anexo_c_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
-        $this->db->where('idalumno',$row->idalumno); //Where id is the primary key for company table
+        $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
