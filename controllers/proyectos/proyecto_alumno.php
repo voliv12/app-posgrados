@@ -122,30 +122,83 @@ class Proyecto_alumno extends CI_Controller {
 
     function anexo_a($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
+        $this->db->where('idcat_LGAC',$row->LGAC); 
+        $BLGAC = $this->db->get('cat_lgac')->row();        
+        $lgac = $BLGAC->nombre;
+        if ($row->director_interno == '0' ){$director = $row->director_externo;}
+            else{ $this->db->where('NumPersonal',$row->director_interno);
+                  $academic = $this->db->get('personal')->row();
+                  $director = $academic->Nombre.' '.$academic->apellidos;
+
+                }
         $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         
-        return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$titulo.'/'.$nombre);
+        $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+            if ($row->posgrado=='MCS'){
+                $this->db->where('posgrado',1);
+                $coordina = $this->db->get('personal')->row();
+                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+            } else if ($row->posgrado=='DCS'){
+                       $this->db->where('posgrado',2);
+                       $coordina = $this->db->get('personal')->row();
+                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+                       }
+        return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
     function anexo_b($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
+
+        if ($row->director_interno == '0' ){$director = $row->director_externo;}
+            else{ $this->db->where('NumPersonal', $row->director_interno);
+                  $academic = $this->db->get('personal')->row();
+                  $director = $academic->Nombre.' '.$academic->apellidos;
+                }
+
         $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        
-        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$titulo.'/'.$nombre);
+        $idalumno = $row->idalumno;
+        $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+            if ($row->posgrado=='MCS'){
+                $this->db->where('posgrado',1);
+                $coordina = $this->db->get('personal')->row();
+                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+            } else if ($row->posgrado=='DCS'){
+                       $this->db->where('posgrado',2);
+                       $coordina = $this->db->get('personal')->row();
+                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+                       }
+        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
     }
     function anexo_c($primary_key , $row)
-    {   $titulo = $row->titulo_proyecto;
+    {  $titulo = $row->titulo_proyecto;
+
+        if ($row->director_interno == '0' ){$director = $row->director_externo;}
+            else{ $this->db->where('NumPersonal', $row->director_interno);
+                  $academic = $this->db->get('personal')->row();
+                  $director = $academic->Nombre.' '.$academic->apellidos;
+                }
+
         $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        
-        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$titulo.'/'.$nombre);
+        $idalumno = $row->idalumno;
+        $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+            if ($row->posgrado=='MCS'){
+                $this->db->where('posgrado',1);
+                $coordina = $this->db->get('personal')->row();
+                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+            } else if ($row->posgrado=='DCS'){
+                       $this->db->where('posgrado',2);
+                       $coordina = $this->db->get('personal')->row();
+                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+                       }
+        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
     }
     function anexo_a_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
@@ -157,7 +210,7 @@ class Proyecto_alumno extends CI_Controller {
                   $academic = $this->db->get('personal')->row();
                   $director = $academic->Nombre.' '.$academic->apellidos;
 
-            }
+                }
         $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
@@ -178,21 +231,57 @@ class Proyecto_alumno extends CI_Controller {
     }
     function anexo_b_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
+
+        if ($row->director_interno == '0' ){$director = $row->director_externo;}
+            else{ $this->db->where('NumPersonal', $row->director_interno);
+                  $academic = $this->db->get('personal')->row();
+                  $director = $academic->Nombre.' '.$academic->apellidos;
+                }
+
         $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $idalumno = $row->idalumno;
-        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$titulo.'/'.$idalumno.'/'.$nombre);
+        $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+            if ($row->posgrado=='MCS'){
+                $this->db->where('posgrado',1);
+                $coordina = $this->db->get('personal')->row();
+                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+            } else if ($row->posgrado=='DCS'){
+                       $this->db->where('posgrado',2);
+                       $coordina = $this->db->get('personal')->row();
+                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+                       }
+
+        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
     }
     function anexo_c_dir($primary_key , $row)
     {   $titulo = $row->titulo_proyecto;
+
+        if ($row->director_interno == '0' ){$director = $row->director_externo;}
+            else{ $this->db->where('NumPersonal', $row->director_interno);
+                  $academic = $this->db->get('personal')->row();
+                  $director = $academic->Nombre.' '.$academic->apellidos;
+                }
+
         $this->db->where('idalumno',$row->idalumno); 
         $alumno = $this->db->get('alumno')->row();
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $idalumno = $row->idalumno;
-        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$titulo.'/'.$idalumno.'/'.$nombre);
+        $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
+            if ($row->posgrado=='MCS'){
+                $this->db->where('posgrado',1);
+                $coordina = $this->db->get('personal')->row();
+                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+            } else if ($row->posgrado=='DCS'){
+                       $this->db->where('posgrado',2);
+                       $coordina = $this->db->get('personal')->row();
+                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
+                       }
+
+        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
     }
 
 

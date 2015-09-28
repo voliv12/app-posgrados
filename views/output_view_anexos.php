@@ -15,6 +15,11 @@ foreach($css_files as $file): ?>
 <?php echo validation_errors(); ?>
 <ol class="breadcrumb">
  	<?php echo $barra_navegacion; ?>
+
+</ol>
+<ol style="float:right;" class="breadcrumb"  >
+    <?php echo $boton_imprimir; ?>
+
 </ol>
 <div id= "titulo" class="container-fluid">
         <a><?php echo $titulo_tabla; ?></a>
