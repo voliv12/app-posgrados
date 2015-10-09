@@ -115,5 +115,21 @@ class Usuarios_model extends CI_Model
     }
 
 
+    function buscar_idproyectos($acade)
+    {
+        $this->db->select('idproyecto_alumno');
+        $this->db->from('proyecto_alumno_personal');
+        $this->db->where('NumPersonal', $acade);
+        $query = $this->db->get();
+            if ($query->num_rows() == 0)
+            {
+                return FALSE;
+            }else
+            {
+                return $query->result_array();
+            }
+
+    }
+
 }
 

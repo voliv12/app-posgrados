@@ -37,16 +37,21 @@
         <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-bullhorn"></i> Dirección  de Proyectos</a></div>
         </p>
     </div>
+        <div class="row">
+        <p>
+        <div class="span6"><a href="proyectos/busqueda/academico_proyecto" class="btn btn-block"><i class="icon-bullhorn"></i> Dirección  de Proyectos</a></div>
+        </p>
+    </div>
 
 </div>
-<div class="container well">
+<!--div class="container well">
     <h4><a>Académicos</a></h4>
         <div class="row">
             <p>
             <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Plantilla Académica</a></div>
             </p>
         </div>
-</div>
+</div-->
 
 <div class="container well">
     <h4><a>Calendario</a></h4>

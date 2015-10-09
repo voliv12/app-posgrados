@@ -133,6 +133,30 @@ function printcontent(content)
     //return true;
 }
 
+//***************************************************************************************
+
+    $("#idalumno_field_box").hide();
+    $("#field-posgrado").change(function ()
+    {
+      if($("#field-posgrado").val()){ 
+        var valor= $('#field-posgrado').val();
+        $("#idalumno_field_box").show();
+        $("#field-idalumno.option").remove(":contains('MCS')");
+        
+        /*$('#field-idalumno').change(function() {
+    if ($(this).find(':selected').text().indexOf($("#field-posgrado").val()) > -1) {
+           
+    }
+});*/
+         }
+        else{ $("#idalumno_field_box").hide(); }
+    });
+
+
+
+
+
+
 
  });
 </script>

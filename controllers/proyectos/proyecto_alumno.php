@@ -63,6 +63,7 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_export();
             $crud->display_as('idalumno','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
+            $crud->required_fields('titulo_proyecto','LGAC','posgrado','idalumno','director_interno');
             //$crud->set_relation_n_n('idalumno', 'cat_posgrados_alumno', 'alumno', 'cat_posgrados_alumno.idalumno', 'alumno.idalumno', '{NombreA}');
             $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
@@ -70,10 +71,11 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
             //$crud->set_relation('idalumno','cat_posgrados_alumno','{matricula}');
-            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
+            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} - {posgrado}');
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
+
             if ($this->session->userdata('perfil')=="Coordinador de Posgrado"){
                  $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
              }else if($this->session->userdata('perfil')=="Académico de Posgrado") {
@@ -85,6 +87,12 @@ class Proyecto_alumno extends CI_Controller {
              else { redirect('login');
              }
     }
+
+
+
+
+
+
 
     function registro_proyectos()
     {
