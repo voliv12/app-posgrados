@@ -135,28 +135,26 @@ function printcontent(content)
 
 //***************************************************************************************
 
-    $("#idalumno_field_box").hide();
+
+
+
+
+    
+   $("#idalumno_field_box").hide();
     $("#field-posgrado").change(function ()
     {
       if($("#field-posgrado").val()){ 
-        var valor= $('#field-posgrado').val();
+        var valor = $('#field-posgrado').val();
+        $('#field-idalumno').find('option:not(:contains('+valor+'))').hide();
         $("#idalumno_field_box").show();
-        $("#field-idalumno.option").remove(":contains('MCS')");
-        
-        /*$('#field-idalumno').change(function() {
-    if ($(this).find(':selected').text().indexOf($("#field-posgrado").val()) > -1) {
-           
-    }
-});*/
+        $('#field-idalumno').trigger("liszt:updated");
          }
-        else{ $("#idalumno_field_box").hide(); }
+        else{ 
+          $('#field-idalumno').find('option:not(:contains('+valor+'))').show();
+          $("#idalumno_field_box").hide(); }
     });
 
-
-
-
-
-
+  
 
  });
 </script>
