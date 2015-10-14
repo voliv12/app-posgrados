@@ -19,7 +19,7 @@ class Proyecto_alumno extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            $crud->where('proyecto_alumno.idalumno', $this->idalumno);
+            $crud->where('proyecto_alumno.idalumn', $this->idalumno);
             $crud->set_table('proyecto_alumno');
             $crud->set_subject('proyecto');
             //$crud->field_type('idalumno', 'hidden',$this->idalumno );
@@ -27,10 +27,10 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_edit();
-            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
+            $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->unset_delete();
-            $crud->unset_edit_fields ( 'idalumno');
-            $crud->display_as('idalumno','Nombre del alumno')
+            $crud->unset_edit_fields ( 'idalumn');
+            $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
@@ -61,17 +61,17 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_subject('proyecto');
             $crud->unset_print();
             $crud->unset_export();
-            $crud->display_as('idalumno','Nombre del alumno')
+            $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
-            $crud->required_fields('titulo_proyecto','LGAC','posgrado','idalumno','director_interno');
+            $crud->required_fields('titulo_proyecto','LGAC','posgrado','idalumn','director_interno');
             //$crud->set_relation_n_n('idalumno', 'cat_posgrados_alumno', 'alumno', 'cat_posgrados_alumno.idalumno', 'alumno.idalumno', '{NombreA}');
             $crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
-            $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
-            $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
-            $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('nab' => 1));
+            $crud->set_relation('director_interno','personal','{Nombre} {apellidos} - {NumPersonal}', array('nab' => 1) );
+            $crud->set_relation('codirector_interno','personal','{Nombre} {apellidos} - {NumPersonal}', array('nab' => 1) );
+            $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority',array('nab' => 1));
             //$crud->set_relation('idalumno','cat_posgrados_alumno','{matricula}');
-            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} - {posgrado}');
+            $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} - {posgrado}');
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
@@ -106,9 +106,9 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
-            $crud->display_as('idalumno','Nombre del alumno')
+            $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
-            $crud->set_relation('idalumno','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
+            $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
             $crud->set_relation('LGAC','cat_lgac','{abreviacion} - {Nombre}');
             $crud->set_relation('director_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
@@ -139,8 +139,9 @@ class Proyecto_alumno extends CI_Controller {
                   $director = $academic->Nombre.' '.$academic->apellidos;
 
                 }
-        $this->db->where('idalumno',$row->idalumno); 
+        $this->db->where('idalumno',$row->idalumn); 
         $alumno = $this->db->get('alumno')->row();
+        $this->db->where('idalumno',$row->idalumn); 
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         
@@ -165,11 +166,12 @@ class Proyecto_alumno extends CI_Controller {
                   $director = $academic->Nombre.' '.$academic->apellidos;
                 }
 
-        $this->db->where('idalumno',$row->idalumno); 
+        $this->db->where('idalumno',$row->idalumn); 
         $alumno = $this->db->get('alumno')->row();
+        $this->db->where('idalumno',$row->idalumn); 
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumno;
+        $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);
@@ -191,11 +193,12 @@ class Proyecto_alumno extends CI_Controller {
                   $director = $academic->Nombre.' '.$academic->apellidos;
                 }
 
-        $this->db->where('idalumno',$row->idalumno); 
+        $this->db->where('idalumno',$row->idalumn); 
         $alumno = $this->db->get('alumno')->row();
+        $this->db->where('idalumno',$row->idalumn); 
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumno;
+        $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);
@@ -219,11 +222,12 @@ class Proyecto_alumno extends CI_Controller {
                   $director = $academic->Nombre.' '.$academic->apellidos;
 
                 }
-        $this->db->where('idalumno',$row->idalumno); 
+        $this->db->where('idalumno',$row->idalumn); 
         $alumno = $this->db->get('alumno')->row();
+        $this->db->where('idalumno',$row->idalumn); 
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumno;
+        $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);
@@ -246,11 +250,12 @@ class Proyecto_alumno extends CI_Controller {
                   $director = $academic->Nombre.' '.$academic->apellidos;
                 }
 
-        $this->db->where('idalumno',$row->idalumno); 
+        $this->db->where('idalumno',$row->idalumn); 
         $alumno = $this->db->get('alumno')->row();
+        $this->db->where('idalumno',$row->idalumn); 
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumno;
+        $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);
@@ -273,11 +278,12 @@ class Proyecto_alumno extends CI_Controller {
                   $director = $academic->Nombre.' '.$academic->apellidos;
                 }
 
-        $this->db->where('idalumno',$row->idalumno); 
+        $this->db->where('idalumno',$row->idalumn); 
         $alumno = $this->db->get('alumno')->row();
+        $this->db->where('idalumno',$row->idalumn); 
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumno;
+        $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);

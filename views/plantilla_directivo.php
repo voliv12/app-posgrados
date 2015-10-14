@@ -140,18 +140,18 @@ function printcontent(content)
 
 
     
-   $("#idalumno_field_box").hide();
+   $("#idalumn_field_box").hide();
     $("#field-posgrado").change(function ()
     {
       if($("#field-posgrado").val()){ 
         var valor = $('#field-posgrado').val();
-        $('#field-idalumno').find('option:not(:contains('+valor+'))').hide();
-        $("#idalumno_field_box").show();
-        $('#field-idalumno').trigger("liszt:updated");
+        $('#field-idalumn').find('option:not(:contains('+valor+'))').hide();
+        $("#idalumn_field_box").show();
+        $('#field-idalumn').trigger("liszt:updated");
          }
         else{ 
-          $('#field-idalumno').find('option:not(:contains('+valor+'))').show();
-          $("#idalumno_field_box").hide(); }
+          $('#field-idalumn').find('option:not(:contains('+valor+'))').show();
+          $("#idalumn_field_box").hide(); }
     });
 
   

@@ -46,7 +46,7 @@ class Cursos extends CI_Controller {
             $crud->field_type('posgrado','hidden', $this->session->userdata('abrev_posgrado'));
             $crud->field_type('horas','dropdown',range(1,20));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'personal', 'idcurso', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('tipo_personal' => 'Académico'));
-            $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority');
+            $crud->set_relation_n_n('alumnos', 'alumno_cursos', 'alumno', 'idcurso', 'idalumno', '{NombreA} {ApellidoPA} {ApellidoMA}', 'priority',array('posgrado' => $this->session->userdata('abrev_posgrado')));
             $crud->columns('generacion','periodo','codigo','NRC','nombre_curso','academico_NAB');
             //$crud->unset_fields('alumnos');
             //$crud->add_action('Asignar alumnos', '../assets/css/images/alumnos.png', 'curso/cursos/alumno_curso');
