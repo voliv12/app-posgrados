@@ -24,7 +24,7 @@
         </div>
          <div class="row">
             <p>
-            <div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-search"></i> Consulta de CVU de Alumnos</a></div>  
+            <div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-search"></i> Consulta de CVU de Alumnos</a></div>
             </p>
         </div>
 
@@ -33,13 +33,13 @@
     <h4><a>Control de Proyectos</a></h4>
     <div class="row">
         <p>
-        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyectos" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos</a></div>
-        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-bullhorn"></i> Dirección  de Proyectos</a></div>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyectos" class="btn btn-block"><i class="icon-bullhorn"></i> Consulta de Proyectos</a></div>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos personales</a></div>
         </p>
     </div>
         <div class="row">
         <p>
-        <div class="span6"><a href="proyectos/busqueda/academico_proyecto" class="btn btn-block"><i class="icon-bullhorn"></i> Dirección  de Proyectos</a></div>
+        <div class="span6"><a href="proyectos/busqueda/academico_proyecto" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos por Académico</a></div>
         </p>
     </div>
 
