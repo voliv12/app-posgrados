@@ -114,6 +114,22 @@ class Usuarios_model extends CI_Model
         }
     }
 
+       function buscar_fechas($anexo)
+    {
+        $this->db->select('*');
+        $this->db->from('fecha_anexos');
+        $this->db->where('nombre_anexo', $anexo);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->row();
+        }
+
+    }
+
 
     function buscar_idproyectos($acade)
     {

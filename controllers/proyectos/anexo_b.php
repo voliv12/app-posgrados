@@ -12,6 +12,7 @@ class Anexo_b extends CI_Controller {
         /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->idalumno = $this->session->userdata('idalumno');
+        $this->load->model('usuarios_model');
     }
 
     function registro_Anexo_b($idproyecto, $nombre, $nombreAlumno,$director, $titulo, $coordina_posgrado )
@@ -74,6 +75,14 @@ class Anexo_b extends CI_Controller {
             //$crud->unset_texteditor('avances_academicos','full_text');
             $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
+
+            $anexo = "Anexo B";
+            $fecha_actual = strftime( "%Y-%m-%d", time() );
+            $row = $this->usuarios_model->buscar_fechas($anexo);
+            if ($fecha_actual < $row->fecha_inicio || $fecha_actual > $row->fecha_fin){
+                $crud->unset_add();
+            }
+            
 
             $state_crud = $crud->getState();
             if($this->session->userdata('perfil') == 'Coordinador de Posgrado')

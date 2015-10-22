@@ -8,7 +8,7 @@
     <div class="row">
         <p>
         <div class="span6"><a href="curso/calificacion_alumno" class="btn btn-block"><i class="icon-ok"></i> Calificaciones </a></div>
-        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_alumno" class="btn btn-block"><i class="icon-bullhorn"></i> Proyecto</a></div>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_alumno" class="btn btn-block"><i class="icon-briefcase"></i> Proyecto</a></div>
         </p>
     </div>
     <div class="row">

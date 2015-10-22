@@ -46,7 +46,7 @@ class Ingreso_posgrados extends CI_Controller {
 
             //$crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado',array('abrev_posgrado' => $this->perfil));
             //$crud->set_relation('idcat_posgradosD','cat_posgrados','nombre_posgrado',array('nivelp' => 'Doctorado'));
-            $crud->set_relation('idalumno','alumno','{NombreA}  {ApellidoPA}  {ApellidoMA}',array('posgrado' => $this->posgrado));
+            $crud->set_relation('idalumno','alumno','{NombreA}  {ApellidoPA}  {ApellidoMA}');
             $crud->field_type('termino', 'hidden');
             $crud->field_type('nivel', 'hidden');
             //$crud->field_type('idcat_posgradosD', 'hidden');
@@ -167,6 +167,11 @@ class Ingreso_posgrados extends CI_Controller {
         $post_array['termino'] = $gene;
 
         $post_array['matricula'] = strtoupper($post_array['matricula']); //Aprovecho éste callback para convertir a mayúsculas la Matricula
+        
+        $data = array('posgrado' => $this->posgrado );
+        $this->db->where('idalumno', $post_array['idalumno'])->update('alumno',$data);
+
+
         return $post_array;
     }
 

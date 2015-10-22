@@ -31,6 +31,7 @@ class Control_alumnos extends CI_Controller {
                  ->change_field_type('Contrasenia', 'password')
                  ->columns('NombreA','ApellidoPA','ApellidoMA','curp','correo');
             $crud->unset_edit_fields('Contrasenia');
+            $crud->field_type('posgrado','hidden');
             $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_alumnos/cambiar_password');
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));

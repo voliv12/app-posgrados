@@ -83,16 +83,18 @@ $("#printBtn3").click(function(){
 //**************************************************************************************
 function printcontent(content)
 {
-
-    document.write('<html><title>ICS-SIP</title><body>');
+    var w = window.open();
+    w.document.open();
+    w.document.write('<html><title>ICS-SIP</title><body>');
     var image = 'logos';
-    document.write('<img src="/../assets/imagenes/' + image + '.jpg">');
-    document.write(content);
-    document.write('</body></html>');
-    print();
+    w.document.write('<img src="/../assets/imagenes/' + image + '.jpg">');
+    w.document.write(content);
+    w.document.write('</body></html>');
+    w.print();
+    w.document.close();
+
     //return true;
 }
-
 
 
 //****************************************************************

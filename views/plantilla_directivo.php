@@ -156,7 +156,7 @@ function printcontent(content)
           $('#field-idalumn').find('option:not(:contains('+valor+'))').show();
           $("#idalumn_field_box").hide(); }
     });
-
+//*****************************************************************************
 
 
  });

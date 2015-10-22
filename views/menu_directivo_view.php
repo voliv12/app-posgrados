@@ -33,13 +33,14 @@
     <h4><a>Control de Proyectos</a></h4>
     <div class="row">
         <p>
-        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyectos" class="btn btn-block"><i class="icon-bullhorn"></i> Consulta de Proyectos</a></div>
-        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos personales</a></div>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyectos" class="btn btn-block"><i class="icon-search"></i> Consulta de Proyectos del Posgrado</a></div>
+        <div class="span6"><a href="proyectos/fecha_anexos/registro_fechas" class="btn btn-block"><i class="icon-calendar"></i>  Establecer Fecha  de Anexos</a></div>
         </p>
     </div>
         <div class="row">
         <p>
-        <div class="span6"><a href="proyectos/busqueda/academico_proyecto" class="btn btn-block"><i class="icon-bullhorn"></i> Proyectos por Académico</a></div>
+        <div class="span6"><a href="proyectos/proyectos_academico/academicos" class="btn btn-block"><i class="icon-briefcase"></i> Proyectos por Académico</a></div>
+        <div class="span6"><a href="proyectos/proyecto_alumno/registro_proyecto_direccion" class="btn btn-block"><i class="icon-briefcase"></i> Proyectos Personales</a></div>
         </p>
     </div>
 

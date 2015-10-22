@@ -12,6 +12,7 @@ class Anexo_a extends CI_Controller {
         /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->idalumno = $this->session->userdata('idalumno');
+        $this->load->model('usuarios_model');
     }
 
     function registro_Anexo_a($idproyecto, $nombre, $nombreAlumno,$director, $titulo, $lgac, $coordina_posgrado)
@@ -23,8 +24,11 @@ class Anexo_a extends CI_Controller {
             $crud->set_table('anexo_a');
             $crud->set_subject('Anexo A');
             $crud->unset_edit();
-            $crud->unset_add();
+            $crud->unset_print();
+            $crud->unset_export();
             $crud->unset_delete();
+
+            $crud->unset_add();
             $crud->field_type('idproyec_alum', 'hidden');
             $crud->field_type('idalumno', 'hidden');
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
@@ -68,6 +72,17 @@ class Anexo_a extends CI_Controller {
             $crud->where('idproyec_alum', $idproyecto);
             $crud->set_table('anexo_a');
             $crud->set_subject('Anexo A');
+            $crud->unset_edit();
+            $crud->unset_delete();
+            
+            $anexo = "Anexo A";
+            $fecha_actual = strftime( "%Y-%m-%d", time() );
+            $row = $this->usuarios_model->buscar_fechas($anexo);
+            if ($fecha_actual < $row->fecha_inicio || $fecha_actual > $row->fecha_fin){
+                $crud->unset_add();
+            }
+            
+
             $crud->field_type('idproyec_alum', 'hidden',$idproyecto );
             $crud->field_type('idalumno', 'hidden',$idalumno );
             $crud->required_fields('semestre','periodo','avances','condiciones','fecha');
