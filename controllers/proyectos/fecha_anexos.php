@@ -24,6 +24,7 @@ class Fecha_anexos extends CI_Controller {
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_delete();
+            $crud->unset_edit_fields('nombre_anexo');
             $output = $crud->render();
 
             $this->_example_output($output);
@@ -35,7 +36,7 @@ class Fecha_anexos extends CI_Controller {
     function _example_output($output = null)
 
     {
-        $output->titulo_tabla = "Plantilla Académica";
+        $output->titulo_tabla = "Fecha de Anexos";
         if($this->session->userdata('perfil')== "Administrativo"){
             $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         }else{

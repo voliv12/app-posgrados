@@ -67,14 +67,14 @@ class Proyecto_alumno extends CI_Controller {
             $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('comite_interno','Comite interno UV')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
-            $crud->required_fields('titulo_proyecto','LGAC','posgrado','idalumn','director_interno');
+            $crud->required_fields('titulo_proyecto','LGAC','posgrado','idalumn','director_interno', 'estatus');
             //$crud->set_relation_n_n('idalumno', 'cat_posgrados_alumno', 'alumno', 'cat_posgrados_alumno.idalumno', 'alumno.idalumno', '{NombreA}');
             $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
             $crud->set_relation('LGAC','cat_lgac','{Nombre}');
             $crud->set_relation('director_interno','personal','{Nombre} {apellidos} - {NumPersonal}', array('tipo_personal' => 'Académico') );
             $crud->set_relation('codirector_interno','personal','{Nombre} {apellidos} - {NumPersonal}', array('tipo_personal' => 'Académico'));
             $crud->set_relation_n_n('comite_interno_NAB', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('nab' => 1));
-            $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'noNab', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
+            $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
             //$crud->set_relation('idalumno','cat_posgrados_alumno','{matricula}');
             $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} - {posgrado}');
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
