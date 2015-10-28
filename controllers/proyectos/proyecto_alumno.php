@@ -81,10 +81,12 @@ class Proyecto_alumno extends CI_Controller {
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
             
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
-            if ($this->session->userdata('perfil')=="Coordinador de Posgrado"){
-                 $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
-             }else if($this->session->userdata('perfil')=="Académico de Posgrado") {
-            $barra = " <li><a href='academico'> Menú principal </a></li>";}
+            if ($this->session->userdata('perfil')=="Coordinador de Posgrado")
+                {$barra = " <li><a href='directivo'> Menú principal </a></li>  ";}
+                else if($this->session->userdata('perfil')=="Director Instituto") 
+                       {$barra = " <li><a href='director'> Menú principal </a></li>";}
+                        else{$barra = " <li><a href='academico'> Menú principal </a></li>";}
+
             $output = $crud->render();
 
             $this->_example_output($output, $barra);
@@ -104,7 +106,15 @@ class Proyecto_alumno extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
+            if ($this->session->userdata('perfil') != "Director Instituto"){
             $crud->where('proyecto_alumno.posgrado',  $this->session->userdata('abrev_posgrado'));
+            $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
+            $barra = " <li><a href='directivo'> Menú principal </a></li>  ";    
+            }else {
+                  $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus','posgrado');
+                  $barra = " <li><a href='director'> Menú principal </a></li>  "; 
+                  }
+            
             $crud->set_table('proyecto_alumno');
             $crud->set_subject('proyecto');
             $crud->unset_print();
@@ -119,14 +129,12 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
             $crud->set_relation_n_n('comite_interno_NAB', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('nab' => 1));
-            $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
+            //$crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
             
             $crud->unset_edit();
-
-            $barra = " <li><a href='directivo'> Menú principal </a></li>  ";
             $output = $crud->render();
 
             $this->_example_output($output, $barra);
@@ -335,9 +343,12 @@ class Proyecto_alumno extends CI_Controller {
         } else if($this->session->userdata('perfil') == 'Académico de Posgrado')
                 {
                  $this->load->view('plantilla_academico', $datos_plantilla);
-                } else {
-                        $this->load->view('plantilla_alumnos', $datos_plantilla);
-                       }
+                } else if($this->session->userdata('perfil') == 'Director Instituto')
+                        {
+                         $this->load->view('plantilla_director', $datos_plantilla);
+                        } else {
+                                $this->load->view('plantilla_alumnos', $datos_plantilla);
+                               }
     }
 
 }

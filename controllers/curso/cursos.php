@@ -121,6 +121,10 @@ class Cursos extends CI_Controller {
                 $crud->where('cursos.posgrado', $pos);
             }
             //$crud->where('cursos.posgrado', $pos);
+            if ($this->session->userdata('perfil') == "Director Instituto"){
+                $crud->unset_edit();
+            }
+
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
@@ -203,9 +207,14 @@ class Cursos extends CI_Controller {
         } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
                 {
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
-                } else {
-                        $output->barra_navegacion = $barra;
-                       }
+                } 
+                    else if($this->session->userdata('perfil') == 'Director Instituto')
+                    {
+                    $output->barra_navegacion = " <li><a href='director'>Menú principal</a></li>";
+                    }
+                        else {
+                                $output->barra_navegacion = $barra;
+                               }
         //$datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $datos_plantilla['contenido'] =  $this->load->view('output_cursos_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);

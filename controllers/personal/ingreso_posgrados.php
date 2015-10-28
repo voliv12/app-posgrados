@@ -20,6 +20,11 @@ class Ingreso_posgrados extends CI_Controller {
         {
             $crud = new grocery_CRUD();
             $crud->where('nivel',$this->posgrado);
+            if($this->session->userdata('perfil') == 'Director Instituto'){
+                $crud->unset_add();
+                $crud->unset_edit();
+                $crud->unset_delete();
+            }
             $crud->set_table('cat_posgrados_alumno')
                  ->set_subject('Alumno a posgrado')
                  ->display_as('idalumno','Alumno')
@@ -127,11 +132,18 @@ class Ingreso_posgrados extends CI_Controller {
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
                 $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
-                } else {
-                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                } else if($this->session->userdata('perfil') == 'Director Instituto')
+                        {
+
+                        $output->barra_navegacion = " <li><a href='director'>Menú principal</a></li>";
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-                        $this->load->view('plantilla_directivo', $datos_plantilla);
-                       }
+                        $this->load->view('plantilla_director', $datos_plantilla);
+                        } 
+                        else {
+                                $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                                $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+                                $this->load->view('plantilla_directivo', $datos_plantilla);
+                               }
     }
 
 

@@ -59,10 +59,20 @@ class Datos_personales extends CI_Controller {
 
     function _example_output($output = null)
 
-    {
-        $output->titulo_tabla = "Alumnos de Posgrado ICS";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>";
-        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_directivo', $datos_plantilla);
+    {   $output->titulo_tabla = "Alumnos de Posgrado ICS";
+
+        if($this->session->userdata('perfil') == 'Director Instituto')
+            {
+
+            $output->barra_navegacion = " <li><a href='director'>Menú principal</a></li>";
+            $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+            $this->load->view('plantilla_director', $datos_plantilla);
+            } 
+                else {
+                        $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+                        $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
+                        $this->load->view('plantilla_directivo', $datos_plantilla);
+                       }
+
     }
 }

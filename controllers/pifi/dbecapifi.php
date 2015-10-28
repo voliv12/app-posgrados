@@ -33,8 +33,15 @@ class Dbecapifi extends CI_Controller {
            // $crud->callback_field('PProna',array($this,'porcentaje'));
             //$crud->callback_field('POtra',array($this,'porcentaje'));
             $crud->field_type('AnioBP','dropdown',range(2000, 2030));
+
+            if ($this->session->userdata('perfil') != "Director Instituto"){
+            $barra = " <li><a href='directivo'> Menú principal </a></li>  "; 
+            }else {
+                  $barra = " <li><a href='director'> Menú principal </a></li>  "; 
+                  }
+            
             $output = $crud->render();
-            $this->_example_output($output);
+            $this->_example_output($output, $barra);
         }
              else { redirect('login');
              }
@@ -47,10 +54,10 @@ class Dbecapifi extends CI_Controller {
         return '<input type="text" value="'.$value.'" name="porcentaje" >%';
     }
 
-    function _example_output($output = null)
+    function _example_output($output = null, $barra = null )
     {
         $output->titulo_tabla = "Becas";
-        $output->barra_navegacion = " <li><a href='directivo'> Menú principal </a></li>";
+        $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }

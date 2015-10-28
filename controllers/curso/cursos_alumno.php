@@ -32,7 +32,11 @@ class Cursos_alumno extends CI_Controller {
                  ->unset_export()
                  ->unset_edit();
             $titulo = "Alumnos de Posgrado ICS";
-            $barra = " <li><a href='directivo'>Menú principal</a></li>";
+
+             if ($this->session->userdata('perfil') == "Director Instituto"){
+                $barra = " <li><a href='director'>Menú principal</a></li>";
+                }else {$barra = " <li><a href='directivo'>Menú principal</a></li>";}
+
             $crud->field_type('idalumno', 'hidden');
             $crud->unset_columns('idalumno');
             $crud->add_action('Consultar Cursos', '../assets/imagenes/book.png','', '',array($this,'just_a_test'));

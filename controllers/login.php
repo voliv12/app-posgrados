@@ -111,6 +111,10 @@ class Login extends CI_Controller {
                     {
                          redirect('academico');
                     }
+                    elseif ($row->nomperfil == "Director Instituto")
+                    {
+                         redirect('director');
+                    }
                     else
                     {
                         redirect('directivo');
