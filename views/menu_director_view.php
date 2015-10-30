@@ -19,17 +19,27 @@
             <p>
             <div class="span6"><a href="curso/cursos/registrocurso_admin/todas/todos" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
             <div class="span6"><a href="curso/cursos_alumno/alumnos" class="btn btn-block"><i class="icon-search"></i> Consultar Cursos por Alumno </a></div>
-
+            <!--div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-search"></i> Consulta de CVU de Alumnos</a></div-->
             <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
             </p>
         </div>
-         <div class="row">
+</div>
+
+
+<div class="container well">
+    <h4><a>Posgrados</a></h4>
+        <div class="row">
             <p>
-            <!--div class="span6"><a href="cvu_alumnosDirectivos/datos_personales/registroAlumno" class="btn btn-block"><i class="icon-search"></i> Consulta de CVU de Alumnos</a></div-->
+            <div class="span6"><a data-toggle="modal" href="#myModal2"  class="btn btn-block"><i class="icon-ok"></i> Eficiencia Terminal</a></div>            
             </p>
         </div>
 
 </div>
+
+
+
+
+
 <div class="container well">
     <h4><a>Control de Proyectos</a></h4>
     <div class="row">
@@ -75,5 +85,54 @@
         </div>
 
 </div>
+
+<?php
+  $opt_pos = array(
+                'MCS' => 'Maestría en Ciencias de la Salud',
+                'DCS' => 'Doctorado en Ciencias de la Salud',
+                'MPICD'=>'Maestría en Prevención Integral del Consumo de Drogas',
+                );
+
+  $opt_gen = array(
+                  
+                  '2015' => '2015',
+                  '2014' => '2014',
+                  '2013' => '2013',
+                  '2012' => '2012',
+                );
+
+?>
+
+
+
+
+
+   <div id="myModal2" class="modal hide fade in" style="display: none;">
+      <div class="modal-header">
+          <a data-dismiss="modal" class="close">×</a>
+          <h3>Calcular Eficiencia Terminal</h3>
+       </div>
+       <div class="modal-body">
+           <form action="calcular_et" method="POST">
+               
+            <?php if(($this->session->userdata('perfil') == "Administrador del Sistema") || ($this->session->userdata('perfil') == "Apoyo Administrativo") || ($this->session->userdata('perfil') == "Director Instituto")){
+                echo "Posgrado: ".form_dropdown('posgrado', $opt_pos)."</br>";
+            } ?>
+            Generación: <?php echo form_dropdown('generacion', $opt_gen)."</br>"; ?>
+            
+
+
+
+           <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Calcular</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+           </div>
+          </form>
+      </div>
+  </div>
+
+
+
 
 </div>

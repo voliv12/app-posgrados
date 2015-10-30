@@ -131,6 +131,35 @@ class Usuarios_model extends CI_Model
     }
 
 
+    function numero_alumno($gen, $pos)
+    {
+        $this->db->select('*');
+        $this->db->from('cat_posgrados_alumno');
+        $this->db->where('inicio', $gen);
+        $this->db->where('nivel', $pos);
+        //$query = $this->db->get();
+        return $this->db->count_all_results();;
+            
+
+    }
+
+    function numero_alumno_grado($gen, $pos)
+    {
+        $this->db->select('*');
+        $this->db->from('cat_posgrados_alumno');
+        $this->db->where('inicio', $gen);
+        $this->db->where('nivel', $pos);
+        $this->db->where('estatus', 'Graduado');
+
+        //$query = $this->db->get();
+        return $this->db->count_all_results();;
+            
+
+    }
+
+
+
+
     function buscar_idproyectos($acade)
     {
         $this->db->select('idproyecto_alumno');

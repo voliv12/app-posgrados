@@ -59,7 +59,7 @@ class Datos_personales extends CI_Controller {
 
     function _example_output($output = null)
 
-    {   $output->titulo_tabla = "Alumnos de Posgrado ICS";
+    {   $output->titulo_tabla = "Consulta de CVU de Alumnos";
 
         if($this->session->userdata('perfil') == 'Director Instituto')
             {

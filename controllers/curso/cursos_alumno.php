@@ -50,8 +50,11 @@ class Cursos_alumno extends CI_Controller {
     function just_a_test($primary_key , $row)
     {
         $nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
+        if ($this->session->userdata('perfil') != "Director Instituto")
+            {return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula);}
+            else {return site_url('curso/cursos_alumno/alumno_curso_director/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula.'/'.$row->nivel);}
 
-        return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula);
+        
     }
 
 
@@ -89,12 +92,50 @@ class Cursos_alumno extends CI_Controller {
     }
 
 
+    function alumno_curso_director($idalumno, $nombre, $matricula, $nivel)
+    {
+        if($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+            $crud->set_table('alum_cursos');
+            $crud->set_primary_key('NRC');
+            $crud->where('idalumno', $idalumno);
+            $crud->where('posgrado', $nivel);
 
-        function _example_output($output = null, $barra = null, $titulo = null)
+            $crud->set_subject('curso');
+            $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('abrev_posgrado')));
+            $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
+            $crud->display_as('codigo','Experiencia Educativa')
+                 ->display_as('nombre_curso','Nombre del Curso');
+            $crud->unset_add()
+                 ->unset_print()
+                 ->unset_delete()
+                 ->unset_edit();
+            $crud->field_type('idalumno', 'hidden');
+            $crud->field_type('idcurso', 'hidden');
+            $crud->unset_columns('idalumno', 'idcurso');
+            $titulo = "Cursos tomados por: ".$matricula.' - '.urldecode($nombre);
+            $barra = " <li><a href='director'>Menú principal</a></li>  |  <li><a href='curso/cursos_alumno/alumnos'> alumnos </a></li>";
+            $output = $crud->render();
+
+            $this->_example_output($output, $barra, $titulo);
+
+        }else{
+            redirect('login');
+        }
+    }
+
+
+    function _example_output($output = null, $barra = null, $titulo = null)
     {
 
         $output->titulo_tabla = $titulo;//"Alumnos de Posgrado ICS";
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
-        $this->load->view('plantilla_directivo', $datos_plantilla);
-    }}
+        if ($this->session->userdata('perfil') != "Director Instituto")
+            {$this->load->view('plantilla_directivo', $datos_plantilla);}
+            else {$this->load->view('plantilla_director', $datos_plantilla);}
+    }
+
+
+}
