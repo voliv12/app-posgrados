@@ -25,7 +25,7 @@ class Calificaciones extends CI_Controller {
             $crud->unset_export();
             $crud->display_as('Alumno_Matricula','Nombre del Alumno')
                  ->display_as('boletacalific','Boleta de Calificación');
-            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  -  {ApellidoPA}  -  {ApellidoMA}');
+            $crud->set_relation('Alumno_Matricula','alumno','{NombreA}  {ApellidoPA}  {ApellidoMA} - {posgrado}');
             $crud->field_type('periodo', 'dropdown',  array('201401' => 'Agosto 2013 - Enero 2014',
                                                             '201451' => 'Febrero - Julio 2014',
                                                             '201501' => 'Agosto 2014 - Enero 2015' ,

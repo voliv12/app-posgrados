@@ -34,8 +34,18 @@ class Control_personal extends CI_Controller {
 
             $output = $crud->render();
             $output->titulo_tabla = "Registro de Personal";
-            $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li>";
-            $this->_example_output($output);
+            if($this->session->userdata('perfil') == 'Administrador del Sistema')
+                {
+                $barra = " <li><a href='administrador'>Menú principal</a></li>";
+                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
+                        {
+                        $barra = " <li><a href='administrativo'>Menú principal</a></li>";
+                        } else {
+
+                                $barra = " <li><a href='directivo'>Menú principal</a></li>";
+                               }
+
+            $this->_example_output($output, $barra);
         }else{
             redirect('login');
         }
@@ -61,16 +71,31 @@ class Control_personal extends CI_Controller {
 
                 $output = $crud->render();
                 $output->titulo_tabla = 'Contraseña del usuario';
-                $output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
-                $this->_example_output($output);
+                if($this->session->userdata('perfil') == 'Administrador del Sistema')
+                {
+                $barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
+                        {
+                        $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                        } else {
+
+                                $barra = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                               }
+
+
+
+
+                //$output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                $this->_example_output($output, $barra);
             }else
             {
                 redirect('login');
             }
         }
 
-    function _example_output($output = null)
+    function _example_output($output = null, $barra = null)
     {
+        $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_personal', $datos_plantilla);
     }

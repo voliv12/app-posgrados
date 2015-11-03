@@ -31,12 +31,12 @@ class Degresadopifi extends CI_Controller {
                  ->display_as('NSatisfaEmpleador','Número de satisfacción de los empleadores sobre el desempeño de los egresados de PE')->display_as('PSatisfaEmpleador','Porcentaje de satisfacción de los empleadores sobre el desempeño de los egresados de PE');
             $crud->unset_print();
             $crud->unset_export();
-           // $crud->callback_field('PEgresado',array($this,'porcentaje'));
-           // $crud->callback_field('PTitulado',array($this,'porcentaje'));
-           // $crud->callback_field('PorceSatisfaEgresado',array($this,'porcentaje'));
-           // $crud->callback_field('POpinion',array($this,'porcentaje'));
-           // $crud->callback_field('PSatisfaEmpleador',array($this,'porcentaje'));
-            
+
+            $crud->callback_field('PEgresado',array($this,'field_callback_1'));
+            $crud->callback_field('PTitulado',array($this,'field_callback_2'));
+            $crud->callback_field('PorceSatisfaEgresado',array($this,'field_callback_3'));
+            $crud->callback_field('POpinion',array($this,'field_callback_4'));
+            $crud->callback_field('PSatisfaEmpleador',array($this,'field_callback_5'));
             $crud->field_type('AnioPifi','dropdown',range(2000, 2030));
             if ($this->session->userdata('perfil') != "Director Instituto"){
             $barra = " <li><a href='directivo'> Menú principal </a></li>  "; 
@@ -50,10 +50,27 @@ class Degresadopifi extends CI_Controller {
              }
     }
 
-    function porcentaje($value = '', $primary_key = null)
-    {
-        return '<input type="text" value="'.$value.'" name="porcentaje" >%';
-    }
+        function field_callback_1($value = '', $primary_key = null)
+        {
+            return '<input type="text" maxlength="50" value="'.$value.'" name="PEgresado" >%';
+        }
+        function field_callback_2($value = '', $primary_key = null)
+        {
+            return '<input type="text" maxlength="50" value="'.$value.'" name="PTitulado" >%';
+        }
+        function field_callback_3($value = '', $primary_key = null)
+        {
+            return '<input type="text" maxlength="50" value="'.$value.'" name="PorceSatisfaEgresado" >%';
+        }
+
+        function field_callback_4($value = '', $primary_key = null)
+        {
+            return '<input type="text" maxlength="50" value="'.$value.'" name="POpinion" >%';
+        }
+        function field_callback_5($value = '', $primary_key = null)
+        {
+            return '<input type="text" maxlength="50" value="'.$value.'" name="PSatisfaEmpleador" >%';
+        }
 
 
 

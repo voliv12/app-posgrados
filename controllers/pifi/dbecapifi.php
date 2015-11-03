@@ -29,9 +29,9 @@ class Dbecapifi extends CI_Controller {
                  ->display_as('NumOtra','Número de becas otorgadas por otros programas o instituciones')->display_as('POtra','Porcentaje de becas otorgadas por otros programas o instituciones');
             $crud->unset_print();
             $crud->unset_export();
-           // $crud->callback_field('PInstitu',array($this,'porcentaje'));
-           // $crud->callback_field('PProna',array($this,'porcentaje'));
-            //$crud->callback_field('POtra',array($this,'porcentaje'));
+            $crud->callback_field('PInstitu',array($this,'field_callback_1'));
+            $crud->callback_field('POtra',array($this,'field_callback_2'));
+            $crud->callback_field('PProna',array($this,'field_callback_3'));
             $crud->field_type('AnioBP','dropdown',range(2000, 2030));
 
             if ($this->session->userdata('perfil') != "Director Instituto"){
@@ -48,11 +48,18 @@ class Dbecapifi extends CI_Controller {
     }
 
 
-
-    function porcentaje($value = '', $primary_key = null)
-    {
-        return '<input type="text" value="'.$value.'" name="porcentaje" >%';
-    }
+function field_callback_1($value = '', $primary_key = null)
+{
+    return '<input type="text" maxlength="50" value="'.$value.'" name="PInstitu" >%';
+}
+function field_callback_2($value = '', $primary_key = null)
+{
+    return '<input type="text" maxlength="50" value="'.$value.'" name="PProna" >%';
+}
+function field_callback_3($value = '', $primary_key = null)
+{
+    return '<input type="text" maxlength="50" value="'.$value.'" name="POtra" >%';
+}
 
     function _example_output($output = null, $barra = null )
     {

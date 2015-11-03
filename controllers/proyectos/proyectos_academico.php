@@ -165,7 +165,7 @@ class Proyectos_academico extends CI_Controller {
         $crud = new grocery_CRUD();
         if ($this->session->userdata('perfil') != "Director Instituto"){
             $barra = " <li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyectos_academico/academicos'> Proyectos por Académico </a></li>  "; 
-             $crud->where('proyecto_alumno.posgrado',  $this->session->userdata('abrev_posgrado'));
+             $crud->where('proyectos_asesor.posgrado',  $this->session->userdata('abrev_posgrado'));
              $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
             }else {
                   $barra = " <li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyectos_academico/academicos'> Proyectos por Académico </a></li>  ";

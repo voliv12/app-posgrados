@@ -33,6 +33,12 @@ class Becapifi extends CI_Controller {
             //$crud->callback_field('PProna',array($this,'porcentaje'));
             //$crud->callback_field('POtra',array($this,'porcentaje'));
             $crud->field_type('AnioBP','dropdown',range(2000, 2030));
+
+            $crud->callback_field('PInstitu',array($this,'field_callback_1'));
+            $crud->callback_field('POtra',array($this,'field_callback_2'));
+            $crud->callback_field('PProna',array($this,'field_callback_3'));
+
+
             $output = $crud->render();
             $this->_example_output($output);
         }
@@ -41,11 +47,19 @@ class Becapifi extends CI_Controller {
     }
 
 
+function field_callback_1($value = '', $primary_key = null)
+{
+    return '<input type="text" maxlength="50" value="'.$value.'" name="PInstitu" >%';
+}
+function field_callback_2($value = '', $primary_key = null)
+{
+    return '<input type="text" maxlength="50" value="'.$value.'" name="PProna" >%';
+}
+function field_callback_3($value = '', $primary_key = null)
+{
+    return '<input type="text" maxlength="50" value="'.$value.'" name="POtra" >%';
+}
 
-    function porcentaje($value = '', $primary_key = null)
-    {
-        return '<input type="text" value="'.$value.'" name="porcentaje" >%';
-    }
 
     function _example_output($output = null)
     {

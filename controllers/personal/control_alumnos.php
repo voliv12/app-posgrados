@@ -85,7 +85,7 @@ class Control_alumnos extends CI_Controller {
                 if($this->session->userdata('perfil') == 'Administrador')
                 {
                 $barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
-                } else if($this->session->userdata('perfil') == 'Administrativo')
+                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
                         {
                         $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
                         } else {

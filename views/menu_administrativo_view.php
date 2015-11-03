@@ -8,7 +8,7 @@
     <h4><a>Plantilla Académica y Documentado </a></h4>
         <div class="row">
             <p>
-            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Plantilla Académica</a></div>
+            <div class="span6"><a href="personal/control_personal/registrar_personal" class="btn btn-block"><i class="icon-user"></i> Plantilla Académica</a></div>
             <div class="span6"><a href="curso/documentando/registrodoc" class="btn btn-block"><i class="icon-pencil"></i> Documentando</a></div>
             </p>
         </div>
