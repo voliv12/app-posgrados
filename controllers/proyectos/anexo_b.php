@@ -84,6 +84,8 @@ class Anexo_b extends CI_Controller {
             $crud->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
 
+            $crud->unset_edit();
+            $crud->unset_delete();
             $anexo = "Anexo B";
             $fecha_actual = strftime( "%Y-%m-%d", time() );
             $row = $this->usuarios_model->buscar_fechas($anexo);

@@ -100,6 +100,8 @@ class Anexo_c extends CI_Controller {
                  ->display_as('motivo','Describa el motivo')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
 
+            $crud->unset_edit();
+            $crud->unset_delete();
             $anexo = "Anexo C";
             $fecha_actual = strftime( "%Y-%m-%d", time() );
             $row = $this->usuarios_model->buscar_fechas($anexo);

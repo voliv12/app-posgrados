@@ -48,6 +48,33 @@
 <script type="text/javascript">
 $(document).ready(function()
   {
+//*******************  ANEXOS **********************************************************
+
+  $('#save-and-go-back-button').on('click', function()
+  {
+    if ($("#avances_input_box").html()<>"" || $("#avances_academicos_input_box").html()<>"" || $("#motivo_input_box").html()<>"")
+    {
+      if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
+        { window.history.reload();}
+    }
+  });
+
+
+
+ $('#form-button-save').on('click', function(e)
+ {
+   if ($("#avances_input_box").html()<>"" || $("#avances_academicos_input_box").html()<>"" || $("#motivo_input_box").html()<>"")
+    {
+      if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
+        { e.preventDefault();
+          window.history.reload();
+        }
+    }
+ });
+
+
+
+
  //############## INGRESAR ALUMNOS A CURSO  ###############
     $("#otra_beca_field_box").hide();
     $("#field-beca").change(function ()
@@ -136,7 +163,7 @@ function printcontent(content)
     //return true;
 }
 
-//***************************************************************************************
+//************************** PROYECTOS *************************************************************
 
 
 
@@ -156,7 +183,12 @@ function printcontent(content)
           $('#field-idalumn').find('option:not(:contains('+valor+'))').show();
           $("#idalumn_field_box").hide(); }
     });
+
+
+
 //*****************************************************************************
+
+
 
 
  });
