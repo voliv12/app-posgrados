@@ -114,7 +114,7 @@ $(document).ready(function()
 
 
 
-//************************************************************************************
+//***************************boton 1*********************************************************
 $("#printBtn").click(function(){
     //printcontent('<br/>' +'semestre'+$("#semestre_input_box").html() + '<br/>' + $(".form-div").html());
     printcontent('<br/>' +$(".container-fluid").html() + '<b>Semestre: </b>'+ $("#field-semestre.readonly_label").html() + '<br/>' + '<b>Periodo:  </b>'
@@ -126,7 +126,7 @@ $("#printBtn").click(function(){
 
 
 
-//*************************************************************************************
+//****************************boton 2*********************************************************
 $("#printBtn2").click(function(){
     printcontent('<br/>' +$(".container-fluid").html() + '<br/>' + '<b>Periodo:  </b>'
                  + $("#field-periodo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_academicos_display_as_box").html() +'</b>'+$("#avances_academicos_input_box").html()
@@ -135,7 +135,9 @@ $("#printBtn2").click(function(){
 });
 
 
-//**************************************************************************************
+
+
+//***************************Boton 3***********************************************************
 
 $("#printBtn3").click(function(){
     printcontent('<br/>' +$(".container-fluid").html() + '<br/>' + '<b>Periodo:  </b>'
