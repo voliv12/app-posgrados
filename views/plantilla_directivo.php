@@ -52,7 +52,7 @@ $(document).ready(function()
 
   $('#save-and-go-back-button').on('click', function()
   {
-    if ($("#avances_input_box").html()<>"" || $("#avances_academicos_input_box").html()<>"" || $("#motivo_input_box").html()<>"")
+    if ($("#field-periodo_anexo").val() != null )
     {
       if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
         { window.history.reload();}
@@ -63,7 +63,7 @@ $(document).ready(function()
 
  $('#form-button-save').on('click', function(e)
  {
-   if ($("#avances_input_box").html()<>"" || $("#avances_academicos_input_box").html()<>"" || $("#motivo_input_box").html()<>"")
+   if ($("#field-periodo_anexo").val() != null)
     {
       if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
         { e.preventDefault();

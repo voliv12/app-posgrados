@@ -143,6 +143,8 @@ class Proyecto_alumno extends CI_Controller {
              }
     }
 
+
+
     function anexo_a($primary_key , $row)
     {   $this->db->where('idproyecto_alumno',$primary_key);
         $tituloR = $this->db->get('proyecto_alumno')->row();
@@ -178,23 +180,28 @@ class Proyecto_alumno extends CI_Controller {
                            } 
         return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
+
+
+
     function anexo_b($primary_key , $row)
     {   $this->db->where('idproyecto_alumno',$primary_key);
         $tituloR = $this->db->get('proyecto_alumno')->row();
         $titulo = $tituloR->titulo_proyecto;
-
+        $this->db->where('idcat_LGAC',$row->LGAC);
+        $BLGAC = $this->db->get('cat_lgac')->row();
+        $lgac = $BLGAC->nombre;
         if ($row->director_interno == '0' ){$director = $row->director_externo;}
-            else{ $this->db->where('NumPersonal', $row->director_interno);
+            else{ $this->db->where('NumPersonal',$row->director_interno);
                   $academic = $this->db->get('personal')->row();
                   $director = $academic->Nombre.' '.$academic->apellidos;
-                }
 
+                }
         $this->db->where('idalumno',$row->idalumn);
         $alumno = $this->db->get('alumno')->row();
         $this->db->where('idalumno',$row->idalumn);
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumn;
+
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);
@@ -209,25 +216,31 @@ class Proyecto_alumno extends CI_Controller {
                            $coordina = $this->db->get('personal')->row();
                            $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
                            } 
-        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
+        return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
+
+
+
+
     function anexo_c($primary_key , $row)
     {   $this->db->where('idproyecto_alumno',$primary_key);
         $tituloR = $this->db->get('proyecto_alumno')->row();
         $titulo = $tituloR->titulo_proyecto;
-
+        $this->db->where('idcat_LGAC',$row->LGAC);
+        $BLGAC = $this->db->get('cat_lgac')->row();
+        $lgac = $BLGAC->nombre;
         if ($row->director_interno == '0' ){$director = $row->director_externo;}
-            else{ $this->db->where('NumPersonal', $row->director_interno);
+            else{ $this->db->where('NumPersonal',$row->director_interno);
                   $academic = $this->db->get('personal')->row();
                   $director = $academic->Nombre.' '.$academic->apellidos;
-                }
 
+                }
         $this->db->where('idalumno',$row->idalumn);
         $alumno = $this->db->get('alumno')->row();
         $this->db->where('idalumno',$row->idalumn);
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-        $idalumno = $row->idalumn;
+
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
             if ($row->posgrado=='MCS'){
                 $this->db->where('posgrado',1);
@@ -242,8 +255,11 @@ class Proyecto_alumno extends CI_Controller {
                            $coordina = $this->db->get('personal')->row();
                            $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
                            } 
-        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
+        return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
+
+
+
     function anexo_a_dir($primary_key , $row)
     {   $this->db->where('idproyecto_alumno',$primary_key);
         $tituloR = $this->db->get('proyecto_alumno')->row();
@@ -281,17 +297,22 @@ class Proyecto_alumno extends CI_Controller {
 
         return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
+
+
+
     function anexo_b_dir($primary_key , $row)
     {   $this->db->where('idproyecto_alumno',$primary_key);
         $tituloR = $this->db->get('proyecto_alumno')->row();
         $titulo = $tituloR->titulo_proyecto;
-
+        $this->db->where('idcat_LGAC',$row->LGAC);
+        $BLGAC = $this->db->get('cat_lgac')->row();
+        $lgac = $BLGAC->nombre;
         if ($row->director_interno == '0' ){$director = $row->director_externo;}
-            else{ $this->db->where('NumPersonal', $row->director_interno);
+            else{ $this->db->where('NumPersonal',$row->director_interno);
                   $academic = $this->db->get('personal')->row();
                   $director = $academic->Nombre.' '.$academic->apellidos;
-                }
 
+                }
         $this->db->where('idalumno',$row->idalumn);
         $alumno = $this->db->get('alumno')->row();
         $this->db->where('idalumno',$row->idalumn);
@@ -314,19 +335,21 @@ class Proyecto_alumno extends CI_Controller {
                            $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
                            } 
 
-        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
+        return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
     function anexo_c_dir($primary_key , $row)
     {   $this->db->where('idproyecto_alumno',$primary_key);
         $tituloR = $this->db->get('proyecto_alumno')->row();
         $titulo = $tituloR->titulo_proyecto;
-
+        $this->db->where('idcat_LGAC',$row->LGAC);
+        $BLGAC = $this->db->get('cat_lgac')->row();
+        $lgac = $BLGAC->nombre;
         if ($row->director_interno == '0' ){$director = $row->director_externo;}
-            else{ $this->db->where('NumPersonal', $row->director_interno);
+            else{ $this->db->where('NumPersonal',$row->director_interno);
                   $academic = $this->db->get('personal')->row();
                   $director = $academic->Nombre.' '.$academic->apellidos;
-                }
 
+                }
         $this->db->where('idalumno',$row->idalumn);
         $alumno = $this->db->get('alumno')->row();
         $this->db->where('idalumno',$row->idalumn);
@@ -349,7 +372,7 @@ class Proyecto_alumno extends CI_Controller {
                            $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
                            } 
 
-        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$coordina_posgrado);
+        return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
 
 
@@ -358,7 +381,7 @@ class Proyecto_alumno extends CI_Controller {
 
     function _example_output($output = null, $barra = null)
     {
-        $output->titulo_tabla = "Registro de proyecto";
+        $output->titulo_tabla = "Registro de proyectos";
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         if($this->session->userdata('perfil') == 'Coordinador de Posgrado')

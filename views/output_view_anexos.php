@@ -24,6 +24,7 @@ foreach($css_files as $file): ?>
 <div id= "titulo" class="container-fluid">
         <a><?php echo $titulo_tabla; ?></a>
 </div>
+<div class="alert alert-danger" role="alert" ><?php echo $nota; ?></div>
 
     <div>
 		<?php echo $output; ?>

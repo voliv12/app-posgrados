@@ -48,6 +48,33 @@
 <script type="text/javascript">
 $(document).ready(function()
   {
+//*******************  ANEXOS **********************************************************
+
+  $('#save-and-go-back-button').on('click', function()
+  {
+    if ($("#field-periodo_anexo").val() != null )
+    {
+      if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
+        { window.history.reload();}
+    }
+  });
+
+
+
+ $('#form-button-save').on('click', function(e)
+ {
+   if ($("#field-periodo_anexo").val() != null)
+    {
+      if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
+        { e.preventDefault();
+          window.history.reload();
+        }
+    }
+ });
+
+
+
+
  //############## INGRESAR ALUMNOS A CURSO  ###############
     $("#otra_beca_field_box").hide();
     $("#field-beca").change(function ()
@@ -91,7 +118,7 @@ $(document).ready(function()
 $("#printBtn").click(function(){
     //printcontent('<br/>' +'semestre'+$("#semestre_input_box").html() + '<br/>' + $(".form-div").html());
     printcontent('<br/>' +$(".container-fluid").html() + '<b>Semestre: </b>'+ $("#field-semestre.readonly_label").html() + '<br/>' + '<b>Periodo:  </b>'
-                 + $("#field-periodo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_display_as_box").html() +'</b>' + $("#avances_input_box.form-input-box").html()+ '<br/><br/>' + '<b>'+$("#condiciones_display_as_box").html() +'</b>' + $("#condiciones_input_box.form-input-box").html()
+                 + $("#field-periodo_anexo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_display_as_box").html() +'</b>' + $("#avances_input_box.form-input-box").html()+ '<br/><br/>' + '<b>'+$("#condiciones_display_as_box").html() +'</b>' + $("#condiciones_input_box.form-input-box").html()
                  + $("#firma.container-fluid").html()+ '<b>Fecha de Evaluación: </b>'+ $("#field-fecha.readonly_label").html()
                  );
 });
@@ -112,7 +139,7 @@ $("#printBtn2").click(function(){
 
 $("#printBtn3").click(function(){
     printcontent('<br/>' +$(".container-fluid").html() + '<br/>' + '<b>Periodo:  </b>'
-                 + $("#field-periodo.readonly_label").html() + '<br/><br/>' + '<P ALIGN=center><b>Evaluación de las actividades realizadas por el estudiante </b></P>'+'<b>Desempeño Acedémico: </b>'+$("#field-desempeno_academico.readonly_label").html() +'<br/><br/><b>Cumplimiento del plan de estudios: </b>'+$("#field-plan_estudio.readonly_label").html()
+                 + $("#field-periodo_anexo.readonly_label").html() + '<br/><br/>' + '<P ALIGN=center><b>Evaluación de las actividades realizadas por el estudiante </b></P>'+'<b>Desempeño Acedémico: </b>'+$("#field-desempeno_academico.readonly_label").html() +'<br/><br/><b>Cumplimiento del plan de estudios: </b>'+$("#field-plan_estudio.readonly_label").html()
                  +'<br/><br/><b>Obtención del grado dentro del tiempo oficial del Plan de estudios: </b>'+$("#field-obtencion_grado.readonly_label").html()+'<br/><br/><b>Cuál es el porcentaje de avance de la tesis: </b>'+$("#field-avance_tesis.readonly_label").html()
                  +'<br/><br/><b>En caso de que el estudiante cuente con una beca de CONACYT, y considerando las respuestas anteriores, así como, el art. 24 del reglamento de becas CONACYT sobre suspención, cancelación y conclusión de la beca, recomienda:  </b>'+ $("#field-beca_CONACYT.readonly_label").html() +'<br/><br/><b>'+$("#motivo_display_as_box").html() +'</b>'+$("#motivo_input_box").html()
                  + $("#firma.container-fluid").html()+ '<b>Fecha de Evaluación: </b>'+ $("#field-fecha.readonly_label").html()
@@ -136,7 +163,7 @@ function printcontent(content)
     //return true;
 }
 
-//***************************************************************************************
+//************************** PROYECTOS *************************************************************
 
 
 
@@ -156,11 +183,17 @@ function printcontent(content)
           $('#field-idalumn').find('option:not(:contains('+valor+'))').show();
           $("#idalumn_field_box").hide(); }
     });
+
+
+
 //*****************************************************************************
+
+
 
 
  });
 </script>
+
 
 
 </head>
