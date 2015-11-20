@@ -49,7 +49,7 @@ class Cambiar_password extends CI_Controller {
                 }else
                 {   extract($_POST);
 
-                    $datos['mensaje'] = "La contraseña ha sido cambiada con éxito.".$num_alum;
+                    $datos['mensaje'] = "La contraseña ha sido cambiada con éxito.";
                     $datos_plantilla['contenido'] = $this->load->view('success_cambio_pass', $datos, true);
 
                     if ($this->session->userdata('perfil') == "Administrador del Sistema")

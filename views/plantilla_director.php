@@ -129,7 +129,7 @@ $("#printBtn").click(function(){
 //****************************boton 2*********************************************************
 $("#printBtn2").click(function(){
     printcontent('<br/>' +$(".container-fluid").html() + '<br/>' + '<b>Periodo:  </b>'
-                 + $("#field-periodo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_academicos_display_as_box").html() +'</b>'+$("#avances_academicos_input_box").html()
+                 + $("#field-periodo_anexo.readonly_label").html() + '<br/><br/>' + '<b>'+$("#avances_academicos_display_as_box").html() +'</b>'+$("#avances_academicos_input_box").html()
                  + $("#firma.container-fluid").html()+ '<b>Fecha de Evaluación: </b>'+ $("#field-fecha.readonly_label").html()
                  );
 });
