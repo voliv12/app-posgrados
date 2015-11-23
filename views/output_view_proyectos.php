@@ -20,7 +20,7 @@ foreach($css_files as $file): ?>
         <h4><a><?php echo $titulo_tabla; ?></a></h4>
 </div>
 
-<div class="alert alert-warning" role="alert" ><?php echo $nota; ?></div>
+<div class="alert alert-danger" role="alert" ><?php echo $nota; ?></div>
 
     <div>
 		<?php echo $output; ?>

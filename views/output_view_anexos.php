@@ -13,14 +13,18 @@ foreach($css_files as $file): ?>
 </head>
 
 <?php echo validation_errors(); ?>
-<ol class="breadcrumb">
- 	<?php echo $barra_navegacion; ?>
+    <ol class="breadcrumb">
+     	<?php echo $barra_navegacion; ?>
+    </ol>
 
-</ol>
-<ol style="float:right;" class="breadcrumb"  >
-    <?php echo $boton_imprimir; ?>
+    <ol style="float:right;" class="breadcrumb">
+        <?php echo $boton_imprimir; ?>
+    </ol>
 
-</ol>
+    <ol style="float:right;" class="breadcrumb">
+        <?php echo $barra_anexos; ?>
+    </ol>
+
 <div id= "titulo" class="container-fluid">
         <a><?php echo $titulo_tabla; ?></a>
 </div>

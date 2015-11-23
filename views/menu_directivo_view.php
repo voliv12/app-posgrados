@@ -54,6 +54,17 @@
         </div>
 </div-->
 
+
+<div class="container well">
+    <h4><a>Posgrado</a></h4>
+        <div class="row">
+            <p>
+            <div class="span6"><a data-toggle="modal" href="#myModal2"  class="btn btn-block"><i class="icon-ok"></i> Eficiencia Terminal</a></div>            
+            </p>
+        </div>
+</div>
+
+
 <div class="container well">
     <h4><a>Calendario</a></h4>
     <div class="row">
@@ -74,5 +85,57 @@
         </div>
 
 </div>
+
+
+        <?php
+          $opt_gen = array(
+                          
+                          '2015' => '2015',
+                          '2014' => '2014',
+                          '2013' => '2013',
+                          '2012' => '2012',
+                        );
+
+        ?>
+
+
+
+
+
+           <div id="myModal2" class="modal hide fade in" style="display: none;">
+              <div class="modal-header">
+                  <a data-dismiss="modal" class="close">×</a>
+                  <h3>Calcular Eficiencia Terminal</h3>
+               </div>
+               <div class="modal-body">
+                   <form action="calcular_et" method="POST">
+                       
+                    <?php if(($this->session->userdata('perfil') == "Coordinador de Posgrado")){
+                        $data = array('name'=> 'posgrado',
+                                      'id' => 'posgrado',
+                                      'value'=> $this->session->userdata('abrev_posgrado') ,
+                                      'maxlength' => '10',
+                                      'size'          => '10',
+                                      'style'         => 'width:20%',
+                                      'readonly'=>'true'
+                                     );
+
+
+
+                        echo "Posgrado: ".form_input($data);
+                    } ?>
+                    Generación: <?php echo form_dropdown('generacion', $opt_gen)."</br>"; ?>
+                    
+
+
+
+                   <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Calcular</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                   </div>
+                  </form>
+              </div>
+          </div>
 
 </div>

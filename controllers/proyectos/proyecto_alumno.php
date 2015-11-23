@@ -38,11 +38,9 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
             $crud->set_relation_n_n('comite_interno_NAB', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('nab' => 1));
             $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
-            
-
-            $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
+            $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
             
             $barra = " <li><a href='principal'> Menú principal </a></li>  ";
             $output = $crud->render();
@@ -82,15 +80,16 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
             //$crud->set_relation('idalumno','cat_posgrados_alumno','{matricula}');
             $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} - {posgrado}');
+            $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
             
             $state_crud = $crud->getState();
             if ($state_crud == 'add' ){
-                $nota = "Nota: Para realizar modificaciones acerca de la información del proyecto, favor de realizar los trámites necesarios con el coordinador del posgrado.";
+                $nota = "Nota: Una vez guardada la información ya no será posible su modificación, de ser necesario favor de realizar los trámites con el coordinador del posgrado.";
             }else{$nota = null;}
 
-            $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
+            
             if ($this->session->userdata('perfil')=="Coordinador de Posgrado")
                 {$barra = " <li><a href='directivo'> Menú principal </a></li>  ";}
                 else if($this->session->userdata('perfil')=="Director Instituto") 
@@ -142,9 +141,9 @@ class Proyecto_alumno extends CI_Controller {
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
             $crud->set_relation_n_n('comite_interno_NAB', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('nab' => 1));
             //$crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
-            $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
+            $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
             
             
             $output = $crud->render();
