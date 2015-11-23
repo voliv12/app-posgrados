@@ -38,6 +38,14 @@
 $(document).ready(function()
   {
  //############## Coordinado de posgrado  ###############
+        $("#fecha_graduacion_field_box").hide();
+    $("#field-estatus").change(function ()
+    {
+      if($("#field-estatus").val() == "Graduado"){ $("#fecha_graduacion_field_box").show(); }
+      else{ $("#fecha_graduacion_field_box").hide(); }
+    });
+
+
     $("#posgrado_field_box").hide();
     $("#field-perfil").change(function ()
     {

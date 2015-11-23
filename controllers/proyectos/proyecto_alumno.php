@@ -64,9 +64,14 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_print();
             $crud->unset_export();
             $crud->unset_delete();
+            $crud->unset_edit();
+            $crud->order_by('estatus','asc');
             $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('comite_interno','Comite interno UV')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
+            $crud->field_type('comite_interno','readonly');
+            $crud->field_type('comite_interno_NAB','readonly');
+            $crud->field_type('comite_externo','readonly');
             $crud->required_fields('titulo_proyecto','LGAC','posgrado','idalumn','director_interno', 'estatus');
             //$crud->set_relation_n_n('idalumno', 'cat_posgrados_alumno', 'alumno', 'cat_posgrados_alumno.idalumno', 'alumno.idalumno', '{NombreA}');
             $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
@@ -80,6 +85,11 @@ class Proyecto_alumno extends CI_Controller {
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
             
+            $state_crud = $crud->getState();
+            if ($state_crud == 'add' ){
+                $nota = "Nota: Para realizar modificaciones acerca de la información del proyecto, favor de realizar los trámites necesarios con el coordinador del posgrado.";
+            }else{$nota = null;}
+
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
             if ($this->session->userdata('perfil')=="Coordinador de Posgrado")
                 {$barra = " <li><a href='directivo'> Menú principal </a></li>  ";}
@@ -89,7 +99,7 @@ class Proyecto_alumno extends CI_Controller {
 
             $output = $crud->render();
 
-            $this->_example_output($output, $barra);
+            $this->_example_output2($output, $barra, $nota);
         }
              else { redirect('login');
              }
@@ -112,7 +122,8 @@ class Proyecto_alumno extends CI_Controller {
             $barra = " <li><a href='directivo'> Menú principal </a></li>  ";    
             }else {
                   $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus','posgrado');
-                  $barra = " <li><a href='director'> Menú principal </a></li>  "; 
+                  $barra = " <li><a href='director'> Menú principal </a></li>  ";
+                  $crud->unset_edit(); 
                   }
             
             $crud->set_table('proyecto_alumno');
@@ -121,6 +132,7 @@ class Proyecto_alumno extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
+            $crud->order_by('estatus','asc');
             $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
             $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
@@ -134,7 +146,7 @@ class Proyecto_alumno extends CI_Controller {
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
             
-            $crud->unset_edit();
+            
             $output = $crud->render();
 
             $this->_example_output($output, $barra);
@@ -397,6 +409,28 @@ class Proyecto_alumno extends CI_Controller {
                                 $this->load->view('plantilla_alumnos', $datos_plantilla);
                                }
     }
+
+
+    function _example_output2($output = null, $barra = null, $nota = null)
+    {   $output->nota =  $nota;
+        $output->titulo_tabla = "Registro de proyectos";
+        $output->barra_navegacion = $barra;
+        $datos_plantilla['contenido'] =  $this->load->view('output_view_proyectos', $output, TRUE);
+        if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+        {
+            $this->load->view('plantilla_directivo', $datos_plantilla);
+        } else if($this->session->userdata('perfil') == 'Académico de Posgrado')
+                {
+                 $this->load->view('plantilla_academico', $datos_plantilla);
+                } else if($this->session->userdata('perfil') == 'Director Instituto')
+                        {
+                         $this->load->view('plantilla_director', $datos_plantilla);
+                        } else {
+                                $this->load->view('plantilla_alumnos', $datos_plantilla);
+                               }
+    }
+
+
 
 }
 

@@ -84,6 +84,7 @@ class Proyectos_academico extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
+            $crud->order_by('estatus','asc');
             $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
             $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
@@ -131,6 +132,7 @@ class Proyectos_academico extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete();
+            $crud->order_by('estatus','asc');
             $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
             $crud->set_relation('idalumn','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
@@ -182,6 +184,7 @@ class Proyectos_academico extends CI_Controller {
             $crud->unset_export();
             $crud->unset_add();
             $crud->unset_delete(); 
+            $crud->order_by('estatus','asc');
             $crud->unset_fields('idproyecto_alumno_nab','NumPersonal','priority');  
             $crud->display_as('idalumn','Nombre del alumno')
                  ->display_as('titulo_proyecto','Titulo del proyecto');
