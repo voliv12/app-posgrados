@@ -42,7 +42,7 @@ $(document).ready(function()
 
   $('#save-and-go-back-button').on('click', function()
   {
-    if ($("#field-periodo_anexo").val() != null )
+    if (($("#field-periodo_anexo").val() != null) || ($("#field-director_interno").val() != null))
     {
       if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
         { window.history.reload();}
@@ -53,7 +53,7 @@ $(document).ready(function()
 
  $('#form-button-save').on('click', function(e)
  {
-   if ($("#field-periodo_anexo").val() != null)
+   if (($("#field-periodo_anexo").val() != null) || ($("#field-director_interno").val() != null))
     {
       if (!window.confirm("Una vez guardada la información ya no será posible su modificación. ¿Está seguro(a) de guardar los datos?"))
         { e.preventDefault();
