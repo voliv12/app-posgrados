@@ -9,7 +9,6 @@ class Estancias extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -31,7 +30,7 @@ class Estancias extends CI_Controller {
 
                 $crud->unset_print();
                 $crud->unset_export();
-                $crud-> unset_edit_fields ( 'Alumno_Matricula');
+                $crud->unset_edit_fields( 'Alumno_Matricula');
                 $crud->required_fields('Sector','Organizacion','Titulo','LineaInvestiga','Logros');
                 $crud->set_field_upload('DocEstancia','assets/uploads/alumnos/'.$this->matricula);
 

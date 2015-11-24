@@ -9,7 +9,6 @@ class Congresos extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -43,9 +42,7 @@ class Congresos extends CI_Controller {
                 $output = $crud->render();
                 $this->_example_output($output);
         }
-        else {
-                redirect('login');
-                }
+            else {redirect('login');}
     }
 
 

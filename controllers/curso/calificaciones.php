@@ -11,7 +11,6 @@ class Calificaciones extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->matricula = $this->session->userdata('matricula');
     }
 
     function index()
@@ -42,8 +41,6 @@ class Calificaciones extends CI_Controller {
                                                             '202051' => 'Febrero - Julio 2020'
                                                             ));
 
-            //$crud->set_relation('Alumno_Matricula','alumnoscvu','NombreA');
-            //$crud->set_relation('Alumno_Matricula','alumnoscvu','{matricula}  -  {NombreA}  -  {ApellidoPA}  -  {ApellidoMA}', array('estatus' => 'Activo'));
             $crud->set_field_upload('boletacalific','assets/uploads/alumnos/Boletas');
             $crud->set_rules('boletacalific','Boleta de Calificación','max_length[40]');
             $crud->required_fields('Alumno_Matricula', 'boletacalific','periodo');

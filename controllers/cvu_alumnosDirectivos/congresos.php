@@ -9,7 +9,6 @@ class Congresos extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -24,8 +23,6 @@ class Congresos extends CI_Controller {
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('congresos');
                 $crud->set_subject('Congreso');
-
-                //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'Titulo_trab','NomCongreso','AutoresCon','AnioCon','DocCongre');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('Titulo_trab','Titulo del Trabajo')->display_as('NomCongreso','Nombre del Congreso')->display_as('AutoresCon','Autor/es')
                      ->display_as('TipoTrabajo','Tipo de Trabajo')->display_as('tipo','Tipo')->display_as('Pais','País')
@@ -60,11 +57,6 @@ class Congresos extends CI_Controller {
         $datos_plantilla['contenido'] =  $this->load->view('output_view_cvu', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }
-
-
-
-
-
 
 }
 

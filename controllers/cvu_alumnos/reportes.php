@@ -9,7 +9,6 @@ class Reportes extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -29,21 +28,16 @@ class Reportes extends CI_Controller {
                      ->display_as('NumpagRepor','No. Páginas')->display_as('fechaReport','Fecha')
                      ->display_as('Objetivoreport','Objetivo del reporte')
                      ->display_as('Autores','Autor/es')->display_as('DocRecTec','Doc. comprobatorio');
-
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('TituloRepor','Instancia','Objetivoreport','fechaReport');
                 $crud->set_field_upload('DocRecTec','assets/uploads/alumnos/'.$this->matricula);
-
                 $crud->unset_texteditor('RDescripcion','full_text');
                 $crud->unset_texteditor('Objetivoreport','full_text');
                 $crud->unset_texteditor('Autores','full_text');
-
                 $crud->set_rules('DocRecTec','Doc. comprobatorio','max_length[26]');
-
                 $output = $crud->render();
-
                 $this->_example_output($output);
         } 
         else { 

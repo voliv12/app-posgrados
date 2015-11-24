@@ -9,7 +9,6 @@ class Distincion extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -26,7 +25,6 @@ class Distincion extends CI_Controller {
                 $crud->columns( 'Titulos','Pais','Otorgante','Institucion-otorgante','AnioP','DocPremio');
                 $crud->display_as('Titulos','Titulo de la Distinción')->display_as('AnioP','Año')->display_as('Pais','País')->display_as('Otorgante','Otorgante')
                      ->display_as('Institucion-otorgante','Institución Otorgante')->display_as('PDescripcion','Descripción de la Distinción')->display_as('DocPremio','Doc. comprobatorio');
-
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->field_type('AnioP','dropdown',range(2000, 2030));

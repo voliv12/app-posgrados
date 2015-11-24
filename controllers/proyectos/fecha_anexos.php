@@ -9,9 +9,7 @@ class Fecha_anexos extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->matricula = $this->session->userdata('matricula');
     }
 
     function registro_fechas()
@@ -26,12 +24,9 @@ class Fecha_anexos extends CI_Controller {
             $crud->unset_delete();
             $crud->unset_edit_fields('nombre_anexo');
             $output = $crud->render();
-
             $this->_example_output($output);
-        }else{
-            redirect('login');
-
-    }}
+        }else{ redirect('login');}
+    }
 
     function _example_output($output = null)
 
@@ -40,8 +35,8 @@ class Fecha_anexos extends CI_Controller {
         if($this->session->userdata('perfil')== "Administrativo"){
             $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
         }else{
-            $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
-        }
+               $output->barra_navegacion = " <li><a href='directivo'>Menú principal</a></li>";
+             }
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         $this->load->view('plantilla_administrativo', $datos_plantilla);
     }

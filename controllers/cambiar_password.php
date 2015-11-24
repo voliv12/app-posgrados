@@ -10,7 +10,6 @@ class Cambiar_password extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('encrypt');
         $this->load->library('form_validation');
-        /* ------------------ */
         $this->numPersonal = $this->session->userdata('numPersonal');
         $this->idalumno   = $this->session->userdata('idalumno');
     }
@@ -47,47 +46,47 @@ class Cambiar_password extends CI_Controller {
                                                         $this->load->view('plantilla_alumnos', $datos_plantilla);
                                                     }
                 }else
-                {   extract($_POST);
+                    {   extract($_POST);
 
-                    $datos['mensaje'] = "La contraseña ha sido cambiada con éxito.";
-                    $datos_plantilla['contenido'] = $this->load->view('success_cambio_pass', $datos, true);
+                        $datos['mensaje'] = "La contraseña ha sido cambiada con éxito.";
+                        $datos_plantilla['contenido'] = $this->load->view('success_cambio_pass', $datos, true);
 
-                    if ($this->session->userdata('perfil') == "Administrador del Sistema")
-                    {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
-                        $this->db->where('NumPersonal', $this->numPersonal);
-                        $this->db->update('personal', $nuevo_pass);
-                        $this->load->view('plantilla_personal', $datos_plantilla);
-                    }else  if ($this->session->userdata('perfil') == "Coordinador de Posgrado")
-                            {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
-                                $this->db->where('NumPersonal', $this->numPersonal);
-                                $this->db->update('personal', $nuevo_pass);
-                                $this->load->view('plantilla_directivo', $datos_plantilla);
-                            } else  if ($this->session->userdata('perfil') == "Director Instituto")
-                                    {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
-                                        $this->db->where('NumPersonal', $this->numPersonal);
-                                        $this->db->update('personal', $nuevo_pass);
-                                        $this->load->view('plantilla_director', $datos_plantilla);
-                                    }
-                                    else  if ($this->session->userdata('perfil') == "Apoyo Administrativo")
+                        if ($this->session->userdata('perfil') == "Administrador del Sistema")
+                        {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
+                            $this->db->where('NumPersonal', $this->numPersonal);
+                            $this->db->update('personal', $nuevo_pass);
+                            $this->load->view('plantilla_personal', $datos_plantilla);
+                        }else  if ($this->session->userdata('perfil') == "Coordinador de Posgrado")
+                                {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
+                                    $this->db->where('NumPersonal', $this->numPersonal);
+                                    $this->db->update('personal', $nuevo_pass);
+                                    $this->load->view('plantilla_directivo', $datos_plantilla);
+                                } else  if ($this->session->userdata('perfil') == "Director Instituto")
                                         {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
                                             $this->db->where('NumPersonal', $this->numPersonal);
                                             $this->db->update('personal', $nuevo_pass);
-                                            $this->load->view('plantilla_administrativo', $datos_plantilla);
-                                        }  else  if ($this->session->userdata('perfil') == "Académico de Posgrado")
-                                                {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
-                                                    $this->db->where('NumPersonal', $this->numPersonal);
-                                                    $this->db->update('personal', $nuevo_pass);
-                                                    $this->load->view('plantilla_academico', $datos_plantilla);
-                                                } else
-                                                    {   $nuevo_pass = array('Contrasenia' => $this->encrypt->sha1($password));
-                                                        $this->db->where('idalumno', $this->idalumno);
-                                                        $this->db->update('alumno', $nuevo_pass);
-                                                        $this->load->view('plantilla_alumnos', $datos_plantilla);
-                                                    }
+                                            $this->load->view('plantilla_director', $datos_plantilla);
+                                        }
+                                        else  if ($this->session->userdata('perfil') == "Apoyo Administrativo")
+                                            {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
+                                                $this->db->where('NumPersonal', $this->numPersonal);
+                                                $this->db->update('personal', $nuevo_pass);
+                                                $this->load->view('plantilla_administrativo', $datos_plantilla);
+                                            }  else  if ($this->session->userdata('perfil') == "Académico de Posgrado")
+                                                    {   $nuevo_pass = array('contrasenia' => $this->encrypt->sha1($password));
+                                                        $this->db->where('NumPersonal', $this->numPersonal);
+                                                        $this->db->update('personal', $nuevo_pass);
+                                                        $this->load->view('plantilla_academico', $datos_plantilla);
+                                                    } else
+                                                        {   $nuevo_pass = array('Contrasenia' => $this->encrypt->sha1($password));
+                                                            $this->db->where('idalumno', $this->idalumno);
+                                                            $this->db->update('alumno', $nuevo_pass);
+                                                            $this->load->view('plantilla_alumnos', $datos_plantilla);
+                                                        }
 
 
-                    
-                }
+                        
+                    }
         }else
             {
                 redirect('login');

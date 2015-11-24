@@ -12,48 +12,14 @@ class Alumno_cursos extends CI_Controller {
         /* ------------------ */
         $this->load->library('grocery_CRUD');
 
-        //$this->matricula = $this->session->userdata('matricula');
-
     }
 
-    /*function registro_alumnocurso($idcurso)
-    {
-        if($this->session->userdata('logged_in'))
-        {
-            //$this->session->set_flashdata('curso', $idcurso);
-            //$this->session->flashdata('idcurso');
-            $crud = new grocery_CRUD();
-            $crud->where('posgrado', $this->session->userdata('perfil'));
-            $crud->set_table('alumno_cursos');
-            $crud->set_subject('Alumno a curso');
-            $crud->display_as('matricula','Alumno');
-            $crud->display_as('idcurso','Curso');
-
-            //$crud->set_relation('matricula','alumno','{NombreA} {ApellidoPA} {ApellidoMA} ');
-            //$crud->set_relation('idcurso','cursos','{posgrado}  -  {nombre_curso}  -  {NRC}', array('posgrado' => $this->session->userdata('perfil')));
-            $crud->set_relation_n_n('matricula', 'cat_posgrados_alumno', 'cursos', 'idcurso', 'matricula', 'idalumno', 'priority');
-            $crud->columns('alumno_Matricula','idcurso');
-            $crud->field_type('idcurso', 'hidden', $idcurso);
-            $crud->unset_fields('priority');
-            $crud->required_fields('alumno_Matricula');
-            //$crud->callback_before_insert(array($this,'acciones_callback'));
-            //$crud->callback_before_update(array($this,'acciones_callback'));
-            $crud->unset_print();
-            $crud->unset_export();
-
-            $output = $crud->render();
-            $this->_example_output($output);
-        }else{
-            redirect('login');
-        }
-    }*/
 
     function registro_alumnocurso_admin()
     {
         if($this->session->userdata('logged_in'))
         {
             $crud = new grocery_CRUD();
-            //$crud->where('posgrado', $this->session->userdata('perfil'));
             $crud->set_table('alumno_cursos');
             $crud->set_subject('Alumno a curso');
             $crud->display_as('alumno_Matricula','Nombre del Alumno');

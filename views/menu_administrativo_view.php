@@ -25,10 +25,7 @@
 
         <div class="row">
             <p>
-         <!--   <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrdodi" class="btn btn-block"><i class="icon-pencil"></i> Ingresar alumnos a Posgrado</a></div>  -->
             <div class="span6"><a href="curso/cursos/registrocurso_admin" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
-            <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso_admin" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
-
             </p>
         </div>
 

@@ -9,9 +9,7 @@ class Datos_personales extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->perfil = $this->session->userdata('perfil');
     }
 
     function registroAlumno()
@@ -19,7 +17,6 @@ class Datos_personales extends CI_Controller {
         if ($this->session->userdata('logged_in'))
         {
                 $crud = new grocery_CRUD();
-                //$crud->set_table('cat_posgrados_alumno');
                 $crud->where('nivel',$this->session->userdata('abrev_posgrado'));
                 $crud->set_table('alumnoscvu');
                 $crud->set_primary_key('matricula');
@@ -51,8 +48,6 @@ class Datos_personales extends CI_Controller {
     function just_a_test($primary_key , $row)
     {
         $nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
-        //$nombre = $row->NombreA;
-        //echo $nombre;
         return site_url('alumnoscvu/menu/'.$row->matricula.'/'.$nombre);
     }
 

@@ -15,9 +15,7 @@
 
         <div class="row">
             <p>
-                <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrado" class="btn btn-block"><i class="icon-pencil"></i> Alumnos Posgrado</a></div>
-
-            <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
+            <div class="span6"><a href="personal/ingreso_posgrados/alumno_posgrado" class="btn btn-block"><i class="icon-pencil"></i> Alumnos Posgrado</a></div>
             <div class="span6"><a href="curso/cursos_alumno/alumnos" class="btn btn-block"><i class="icon-search"></i> Consultar Cursos por Alumno </a></div>
 
             </p>
@@ -45,15 +43,6 @@
     </div>
 
 </div>
-<!--div class="container well">
-    <h4><a>Académicos</a></h4>
-        <div class="row">
-            <p>
-            <div class="span6"><a href="curso/nab/registroNab" class="btn btn-block"><i class="icon-user"></i> Plantilla Académica</a></div>
-            </p>
-        </div>
-</div-->
-
 
 <div class="container well">
     <h4><a>Posgrado</a></h4>
@@ -103,7 +92,7 @@
 
 
            <div id="myModal2" class="modal hide fade in" style="display: none;">
-              <div class="modal-header">
+               <div class="modal-header">
                   <a data-dismiss="modal" class="close">×</a>
                   <h3>Calcular Eficiencia Terminal</h3>
                </div>

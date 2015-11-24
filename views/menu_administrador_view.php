@@ -47,7 +47,6 @@
         <div class="row">
             <p>
                 <div class="span6"><a href="curso/cursos/registrocurso_admin/todas/todos" class="btn btn-block"><i class="icon-list-alt"></i> Programación de Cursos</a></div>
-                <!--div class="span6"><a href="curso/alumno_cursos/registro_alumnocurso" class="btn btn-block"><i class="icon-list-alt"></i> Ingresar alumnos a Cursos</a></div-->
             </p>
 
         </div>

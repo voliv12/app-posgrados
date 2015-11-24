@@ -29,7 +29,6 @@ class Capitulos extends CI_Controller {
                      ->display_as('EditoresCL','Editores')->display_as('EditorialCL','Editorial')->display_as('VolumCL','Volumen')
                      ->display_as('NumPagCL','No. Páginas')->display_as('NumCitas','No. Citas')->display_as('AutorCL','Autor/es')
                      ->display_as('Resumen','Resumen')->display_as('DocCapLibro','Doc. comprobatorio');
-
                 $crud->unset_print();
                 $crud->unset_export();
                 $crud->unset_add();
@@ -39,14 +38,10 @@ class Capitulos extends CI_Controller {
                 $crud->field_type('Anio','dropdown',range(2000, 2030));
                 $crud->required_fields('TituloLibCP','TituloCap','Anio','AutorCL','Resumen');
                 $crud->set_field_upload('DocCapLibro','assets/uploads/alumnos/'.$this->session->flashdata('matricula'));
-
                 $crud->unset_texteditor('AutorCL','full_text');
                 $crud->unset_texteditor('Resumen','full_text');
-
                 $crud->set_rules('DocCapLibro','Doc. comprobatorio','max_length[26]');
-
                 $output = $crud->render();
-
                 $this->_example_output($output);
         }
         else {

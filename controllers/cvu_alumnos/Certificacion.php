@@ -9,7 +9,6 @@ class Certificacion extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -45,11 +44,6 @@ class Certificacion extends CI_Controller {
                 }
 
     }
-
-    /*function add_field_Cometanrio()
-        {
-            return '<input type="text" maxlength="50" name="programa"> (Especifica la referencia)';
-        }*/
 
     function _example_output($output = null)
     {

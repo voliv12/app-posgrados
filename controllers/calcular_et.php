@@ -16,18 +16,12 @@ class Calcular_et extends CI_Controller {
         {           extract($_POST);
 
                     $this->load->model('usuarios_model');
-                    ///$gen = 2012;
-                    //$pos  = 'MCS';
-                    //$num_alum = $this->usuarios_model->numero_alumno($gen, $pos);  
                     $num_alum = $this->usuarios_model->numero_alumno($_POST['generacion'],$_POST['posgrado']);
                     $num_alum_grad = $this->usuarios_model->numero_alumno_grado($_POST['generacion'],$_POST['posgrado']);
-                    if($num_alum_grad == 0){
-                        $ET = 0;
-                    }else{
-                    $ET = $num_alum / $num_alum_grad;}   
-
                     
-
+                    if($num_alum_grad == 0)
+                    { $ET = 0;
+                    } else{ $ET = $num_alum / $num_alum_grad;}   
 
                     $datos['genera'] = $_POST['generacion'];                    
                     $datos['mensaje'] = "Total de alumnos = ".$num_alum.'<br>'.
@@ -48,9 +42,7 @@ class Calcular_et extends CI_Controller {
                                     else if ($this->session->userdata('perfil') == "Apoyo Administrativo")
                                         {
                                             $this->load->view('plantilla_administrativo', $datos_plantilla);
-                                        } 
-
-                
+                                        }                 
         }else
         {
             redirect('login');

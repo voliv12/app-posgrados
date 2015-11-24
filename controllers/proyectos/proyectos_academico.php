@@ -9,7 +9,6 @@ class Proyectos_academico extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         
     }
@@ -32,9 +31,7 @@ class Proyectos_academico extends CI_Controller {
                  ->display_as('contrasenia', 'Contraseña')
                  ->columns('NumPersonal','Nombre','apellidos','tipo_personal','perfil','posgrado','nab');
             $crud->unset_edit_fields('contrasenia');
-            //$crud->field_type('contrasenia', 'hidden');
             $crud->add_action('Proyectos como asesor', '../assets/imagenes/tres.png', 'proyectos/proyectos_academico/proyectos_asesor_academico');
-            //$crud->add_action('Proyectos como asesor-UV', '../assets/imagenes/refresh.png', 'proyectos/proyectos_academico/proyectos_asesor_academico_nonab');
             $crud->add_action('Proyectos como codirector', '../assets/imagenes/dos.png', 'proyectos/proyectos_academico/proyectos_codireccion_academico');
             $crud->add_action('Proyectos como director', '../assets/imagenes/uno.png', 'proyectos/proyectos_academico/proyectos_direccion_academico');
             $crud->set_relation('perfil','perfil','nomperfil');
@@ -47,14 +44,11 @@ class Proyectos_academico extends CI_Controller {
                   $barra = " <li><a href='director'> Menú principal </a></li>  "; 
                   }
 
-
-
             $titulo = "Proyectos por academico";
             $output = $crud->render();
 
             $this->_example_output($output, $barra, $titulo);
             
-
         }
              else { redirect('login');
              }
@@ -93,14 +87,7 @@ class Proyectos_academico extends CI_Controller {
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno_NAB', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('nab' => 1));
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
-
-            /*$crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
-            $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
-            $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
-            */
             $crud->unset_edit();
-
-         
             $titulo = "Proyectos Como Director";
             $output = $crud->render();
 
@@ -165,8 +152,9 @@ class Proyectos_academico extends CI_Controller {
     function proyectos_asesor_academico($primary_key)
     {
         $crud = new grocery_CRUD();
-        if ($this->session->userdata('perfil') != "Director Instituto"){
-            $barra = " <li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyectos_academico/academicos'> Proyectos por Académico </a></li>  "; 
+        if ($this->session->userdata('perfil') != "Director Instituto")
+            {
+             $barra = " <li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyectos_academico/academicos'> Proyectos por Académico </a></li>  "; 
              $crud->where('proyectos_asesor.posgrado',  $this->session->userdata('abrev_posgrado'));
              $crud->columns( 'titulo_proyecto','idalumn','director_interno','director_externo','estatus');
             }else {
@@ -194,14 +182,7 @@ class Proyectos_academico extends CI_Controller {
             $crud->set_relation('codirector_interno','personal','{NumPersonal} - {Nombre} {apellidos}', array('nab' => 1) );
             $crud->set_relation_n_n('comite_interno_NAB', 'proyecto_alumno_nab', 'personal', 'idproyecto_alumno', 'NumPersonal', '{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('nab' => 1));
             $crud->set_relation_n_n('comite_interno', 'proyecto_alumno_personal', 'personal', 'idproyecto_alumno','NumPersonal','{personal.Nombre} {personal.apellidos} - {personal.NumPersonal}','priority', array('tipo_personal' => 'Académico','nab' => 0));
-            //$crud->columns( 'titulo_proyecto','director_interno','director_externo','codirector_interno','LGAC');
-            /*$crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a'));
-            $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c'));
-            $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b'));
-            */
             $crud->unset_edit();
-
-            //$barra = " <li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyectos_academico/academicos'> Proyectos por Académico </a></li>  ";
             $titulo = "Proyectos Como Asesor";
             $output = $crud->render();
 

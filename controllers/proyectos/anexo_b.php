@@ -9,7 +9,6 @@ class Anexo_b extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->idalumno = $this->session->userdata('idalumno');
         $this->load->model('usuarios_model');
@@ -34,41 +33,39 @@ class Anexo_b extends CI_Controller {
             $crud->field_type('idalumno', 'hidden' );
             $crud->set_relation('periodo_anexo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->unset_columns('idproyec_alum', 'idalumno');
-            //$crud->unset_texteditor('avances_academicos','full_text');
             $crud->display_as('periodo_anexo','Periodo')
                  ->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
             $state_crud = $crud->getState();
-            if ($state_crud == 'add' ){
-                $nota = "Nota: Una vez guardada la información ya no será posible su modificación";
-            }else{$nota = null;}
+                if ($state_crud == 'add' )
+                {
+                    $nota = "Nota: Una vez guardada la información ya no será posible su modificación";
+                }else{$nota = null;}
 
-            if($this->session->userdata('perfil') == 'Director Instituto')
-            {
-                if ($state_crud == 'read' ) {
-                $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li> ";
-                $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>";}
-                   else { $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>";
-                          $imprimir = null; }
-            } else if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
-                    {
-                        if ($state_crud == 'read' ) {
-                        $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>  ";
-                        $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>";}
-                           else { $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>";
-                                  $imprimir = null; }
+                if($this->session->userdata('perfil') == 'Director Instituto')
+                {
+                    if ($state_crud == 'read' ) {
+                    $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li> ";
+                    $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>";}
+                       else { $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>";
+                              $imprimir = null; }
+                } else if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+                        {
+                            if ($state_crud == 'read' ) {
+                            $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>  ";
+                            $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>";}
+                               else { $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyectos'> Proyectos </a></li>";
+                                      $imprimir = null; }
 
-                    } else {
-                                if ($state_crud == 'read' ) {
-                                $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";
-                                $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
-                                   else { $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>  ";
-                                          $imprimir = null; }
-                            }
+                        } else {
+                                    if ($state_crud == 'read' ) {
+                                    $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>";
+                                    $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
+                                       else { $barra = "<li><a href='principal'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_alumno'> Proyecto </a></li>  ";
+                                              $imprimir = null; }
+                                }
             $barra2 ="<li><a href='proyectos/anexo_a/registro_Anexo_a/".$idproyecto."/".$nombre."/".$nombreAlumno."/".$director."/".$titulo."/".$lgac."/".$coordina_posgrado."'> Anexo A</a></li>  |  <li><a href='proyectos/anexo_c/registro_Anexo_c/".$idproyecto."/".$nombre."/".$nombreAlumno."/".$director."/".$titulo."/".$lgac."/".$coordina_posgrado."'> Anexo C</a></li>";
-
             $output = $crud->render();
-
             $this->_example_output($output, $barra, $barra2, $imprimir,$nombre, $nombreAlumno,$director, $titulo, $lgac, $coordina_posgrado, $nota);
         }
            else { redirect('login');
@@ -88,11 +85,9 @@ class Anexo_b extends CI_Controller {
             $crud->field_type('idalumno', 'hidden',$idalumno );
             $crud->set_relation('periodo_anexo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->unset_columns('idproyec_alum', 'idalumno');
-            //$crud->unset_texteditor('avances_academicos','full_text');
             $crud->display_as('periodo_anexo','Periodo')
                  ->display_as('avances_academicos','Describa los avances académicos presentados por el estudiante durante el periodo, así como los acuerdos y las estrategias de apoyo establecidas durante las sesiones de Tutoría')
                  ->display_as('idproyec_alum','Titulo del Proyecto');
-
             $crud->unset_edit();
             $crud->unset_delete();
             $crud->unset_print();
@@ -100,43 +95,46 @@ class Anexo_b extends CI_Controller {
             $anexo = "Anexo B";
             $fecha_actual = strftime( "%Y-%m-%d", time() );
             $row = $this->usuarios_model->buscar_fechas($anexo);
-            if ($fecha_actual < $row->fecha_inicio || $fecha_actual > $row->fecha_fin){
-                $crud->unset_add();
-            }
             
-
+                if ($fecha_actual < $row->fecha_inicio || $fecha_actual > $row->fecha_fin)
+                {
+                    $crud->unset_add();
+                }
+            
             $state_crud = $crud->getState();
-            if ($state_crud == 'add' ){
-                $nota = "Nota: Una vez guardada la información ya no será posible su modificación";
-            }else{$nota = null;}
-            if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
-            {
-                if ($state_crud == 'read' ) {
-                $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyectos </a></li> ";
-                $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
-                   else { $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyectos </a></li>  ";
-                          $imprimir = null;  }
+            
+                if ($state_crud == 'add' )
+                {
+                    $nota = "Nota: Una vez guardada la información ya no será posible su modificación";
+                }else{$nota = null;}
 
-
-            } else if($this->session->userdata('perfil') == 'Director Instituto') 
-                    {
-
+                if($this->session->userdata('perfil') == 'Coordinador de Posgrado')
+                {
                     if ($state_crud == 'read' ) {
-                    $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>  ";
+                    $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyectos </a></li> ";
                     $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
-                       else { $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";
+                       else { $barra = "<li><a href='directivo'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyectos </a></li>  ";
                               $imprimir = null;  }
-                    }else{
-                            if ($state_crud == 'read' ) {
-                            $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li> ";
-                            $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
-                            else { $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>  ";
-                                   $imprimir = null;  }
-                        }
+
+
+                } else if($this->session->userdata('perfil') == 'Director Instituto') 
+                        {
+
+                        if ($state_crud == 'read' ) {
+                        $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>  ";
+                        $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
+                           else { $barra = "<li><a href='director'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>";
+                                  $imprimir = null;  }
+                        }else{
+                                if ($state_crud == 'read' ) {
+                                $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li> ";
+                                $imprimir = "<li class='text-align:right'><a id='printBtn2'  class='easyui-linkbutton'><img src='../assets/imagenes/print.png' alt='Imprimir' title='Imprimir'></a> </li>" ;}
+                                else { $barra = "<li><a href='academico'> Menú principal </a></li>  |  <li><a href='proyectos/proyecto_alumno/registro_proyecto_direccion'> Proyecto </a></li>  ";
+                                       $imprimir = null;  }
+                            }
 
             $barra2 ="<li><a href='proyectos/anexo_a/registro_Anexo_a_dir/".$idproyecto."/".$idalumno."/".$nombre."/".$nombreAlumno."/".$director."/".$titulo."/".$lgac."/".$coordina_posgrado."'> Anexo A</a></li>  |  <li><a href='proyectos/anexo_c/registro_Anexo_c_dir/".$idproyecto."/".$idalumno."/".$nombre."/".$nombreAlumno."/".$director."/".$titulo."/".$lgac."/".$coordina_posgrado."'> Anexo C</a></li>";
             $output = $crud->render();
-
             $this->_example_output($output, $barra, $barra2, $imprimir, $nombre, $nombreAlumno, $director, $titulo, $lgac, $coordina_posgrado, $nota);
         }
              else { redirect('login');

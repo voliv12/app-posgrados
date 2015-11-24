@@ -9,7 +9,6 @@ class Gradonivel extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -24,7 +23,6 @@ class Gradonivel extends CI_Controller {
             $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
             $crud->set_table('nivelacademic');
             $crud->set_subject('Nivel o Grado Académico');
-            //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->columns( 'Cedula','TituloNivel','DocTitulo','DocCedula');
             $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('NivelAc','Nivel/Grado Académico')->display_as('Cedula','No. Cédula')->display_as('TituloNivel','Titulo de Nivel/Grado')
                  ->display_as('NFecha','Fecha de Obtención')->display_as('Estatus','Estatus')->display_as('TituloTesis','Titulo de la Tesis')
@@ -43,7 +41,6 @@ class Gradonivel extends CI_Controller {
             $crud->set_rules('DocCedula','Doc. comprobatorio','max_length[26]');
             $crud->set_rules('DocTitulo','Doc. comprobatorio','max_length[26]');
             $output = $crud->render();
-
             $this->_example_output($output);
         }
              else { redirect('login');

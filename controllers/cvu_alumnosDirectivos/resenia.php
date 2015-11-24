@@ -9,7 +9,6 @@ class Resenia extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -24,8 +23,6 @@ class Resenia extends CI_Controller {
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('resenia');
                 $crud->set_subject('Reseña');
-
-                //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns('TituloRese','TituloObra','TituloPublica','DocRese');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('TituloRese','Titulo de la Reseña')->display_as('TituloObra','Titulo de la Obra')->display_as('TipoPublica','Tipo de Publicación')
                      ->display_as('AnioRe','Año')->display_as('pagInc',' De la Pag')->display_as('pagFin','A la Pag')->display_as('TituloPublica','Titulo de la Publicación')
@@ -40,11 +37,9 @@ class Resenia extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields( 'TituloRese','TipoPublica','autorRese');
                 $crud->set_field_upload('DocRese','assets/uploads/alumnos/'.$this->session->flashdata('matricula'));
-
                 $crud->unset_texteditor('autorRese','full_text');
                 $crud->set_rules('DocRese','Doc. comprobatorio','max_length[26]');
                 $crud->set_relation('Pais','paises','nombre');
-
                 $output = $crud->render();
                 $this->_example_output($output);
         }

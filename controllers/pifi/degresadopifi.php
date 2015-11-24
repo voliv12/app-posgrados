@@ -9,7 +9,6 @@ class Degresadopifi extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         
     }
@@ -50,27 +49,30 @@ class Degresadopifi extends CI_Controller {
              }
     }
 
-        function field_callback_1($value = '', $primary_key = null)
-        {
-            return '<input type="text" maxlength="50" value="'.$value.'" name="PEgresado" >%';
-        }
-        function field_callback_2($value = '', $primary_key = null)
-        {
-            return '<input type="text" maxlength="50" value="'.$value.'" name="PTitulado" >%';
-        }
-        function field_callback_3($value = '', $primary_key = null)
-        {
-            return '<input type="text" maxlength="50" value="'.$value.'" name="PorceSatisfaEgresado" >%';
-        }
+    function field_callback_1($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="PEgresado" >%';
+    }
 
-        function field_callback_4($value = '', $primary_key = null)
-        {
-            return '<input type="text" maxlength="50" value="'.$value.'" name="POpinion" >%';
-        }
-        function field_callback_5($value = '', $primary_key = null)
-        {
-            return '<input type="text" maxlength="50" value="'.$value.'" name="PSatisfaEmpleador" >%';
-        }
+    function field_callback_2($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="PTitulado" >%';
+    }
+
+    function field_callback_3($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="PorceSatisfaEgresado" >%';
+    }
+
+    function field_callback_4($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="POpinion" >%';
+    }
+
+    function field_callback_5($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="PSatisfaEmpleador" >%';
+    }
 
 
 

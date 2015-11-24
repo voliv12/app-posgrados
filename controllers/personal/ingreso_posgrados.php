@@ -9,7 +9,6 @@ class Ingreso_posgrados extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->posgrado = $this->session->userdata('abrev_posgrado');
     }
@@ -20,11 +19,12 @@ class Ingreso_posgrados extends CI_Controller {
         {
             $crud = new grocery_CRUD();
             $crud->where('nivel',$this->posgrado);
-            if($this->session->userdata('perfil') == 'Director Instituto'){
-                $crud->unset_add();
-                $crud->unset_edit();
-                $crud->unset_delete();
-            }
+                if($this->session->userdata('perfil') == 'Director Instituto')
+                {
+                    $crud->unset_add();
+                    $crud->unset_edit();
+                    $crud->unset_delete();
+                }
             $crud->set_table('cat_posgrados_alumno')
                  ->set_subject('Alumno a posgrado')
                  ->display_as('idalumno','Alumno')
@@ -47,22 +47,14 @@ class Ingreso_posgrados extends CI_Controller {
                                                             '2025' => '2025'
                                                             ))
                  ->columns('matricula','nivel','idalumno','estatus','inicio','termino','beca');
-
-
-            //$crud->set_relation('idcat_posgrados','cat_posgrados','nombre_posgrado',array('abrev_posgrado' => $this->perfil));
-            //$crud->set_relation('idcat_posgradosD','cat_posgrados','nombre_posgrado',array('nivelp' => 'Doctorado'));
             $crud->set_relation('idalumno','alumno','{NombreA}  {ApellidoPA}  {ApellidoMA}');
             $crud->field_type('termino', 'hidden');
             $crud->field_type('nivel', 'hidden');
-            //$crud->field_type('idcat_posgradosD', 'hidden');
             $crud->required_fields('idalumno', 'matricula','estatus','inicio','beca');
             $crud->callback_after_insert(array($this, 'crea_directorio'));
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
-
-
             $output = $crud->render();
-
             $this->_example_output($output);
         }else{
             redirect('login');
@@ -74,7 +66,6 @@ class Ingreso_posgrados extends CI_Controller {
         if($this->session->userdata('logged_in') )
         {
             $crud = new grocery_CRUD();
-            //$crud->where('nivel',$this->posgrado);
             $crud->set_table('cat_posgrados_alumno')
                  ->set_subject('Alumno a posgrado')
                  ->display_as('idalumno','Alumno')
@@ -100,7 +91,6 @@ class Ingreso_posgrados extends CI_Controller {
             $crud->set_relation('idalumno','alumno','{NombreA}  {ApellidoPA}  {ApellidoMA}');
             $crud->field_type('termino', 'hidden');
             $crud->field_type('nivel', 'hidden');
-            //$crud->field_type('idcat_posgradosD', 'hidden');
             $crud->required_fields('idalumno', 'matricula','estatus','inicio','beca');
             $crud->callback_after_insert(array($this, 'crea_directorio'));
             $crud->callback_before_insert(array($this,'acciones_callback'));
@@ -108,9 +98,7 @@ class Ingreso_posgrados extends CI_Controller {
             $crud->unset_add();
             $crud->unset_edit();
             $crud->unset_delete();
-
             $output = $crud->render();
-
             $this->_example_output($output);
         }else{
             redirect('login');
@@ -128,13 +116,11 @@ class Ingreso_posgrados extends CI_Controller {
         $this->load->view('plantilla_personal', $datos_plantilla);
         } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
                 {
-
                 $output->barra_navegacion = " <li><a href='administrativo'>Menú principal</a></li>";
                 $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                 $this->load->view('plantilla_administrativo', $datos_plantilla);
                 } else if($this->session->userdata('perfil') == 'Director Instituto')
                         {
-
                         $output->barra_navegacion = " <li><a href='director'>Menú principal</a></li>";
                         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
                         $this->load->view('plantilla_director', $datos_plantilla);
@@ -151,15 +137,12 @@ class Ingreso_posgrados extends CI_Controller {
         {
             $this->load->helper('path');
             $dir = 'assets/uploads/alumnos/'.$post_array['matricula'];
-
             if(!is_dir($dir))
             {
               mkdir($dir, 0777);
-            }else
-            {
-              echo "Error: El Directorio ya existe.";
-            }
-
+            }else{
+                  echo "Error: El Directorio ya existe.";
+                 }
             return TRUE;
         }
 
@@ -167,12 +150,10 @@ class Ingreso_posgrados extends CI_Controller {
     function acciones_callback($post_array)
     {
         if($this->posgrado <> "DCS"){
-            //$post_array['nivel'] = "Maestría";
             $gene = $post_array['inicio'] + 2;
         }else {
-             //$post_array['nivel'] = "Doctorado";
-             $gene = $post_array['inicio'] + 3;
-        }
+                $gene = $post_array['inicio'] + 3;
+              }
 
         $post_array['nivel'] = $this->posgrado;
 
@@ -182,8 +163,6 @@ class Ingreso_posgrados extends CI_Controller {
         
         $data = array('posgrado' => $this->posgrado );
         $this->db->where('idalumno', $post_array['idalumno'])->update('alumno',$data);
-
-
         return $post_array;
     }
 

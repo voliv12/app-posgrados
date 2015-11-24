@@ -9,10 +9,8 @@ class Dbecapifi extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->matricula = $this->session->userdata('matricula');
-        
+
     }
 
     function registrobeca()
@@ -34,11 +32,11 @@ class Dbecapifi extends CI_Controller {
             $crud->callback_field('PProna',array($this,'field_callback_3'));
             $crud->field_type('AnioBP','dropdown',range(2000, 2030));
 
-            if ($this->session->userdata('perfil') != "Director Instituto"){
-            $barra = " <li><a href='directivo'> Menú principal </a></li>  "; 
-            }else {
-                  $barra = " <li><a href='director'> Menú principal </a></li>  "; 
-                  }
+                if ($this->session->userdata('perfil') != "Director Instituto"){
+                $barra = " <li><a href='directivo'> Menú principal </a></li>  "; 
+                }else {
+                      $barra = " <li><a href='director'> Menú principal </a></li>  "; 
+                      }
             
             $output = $crud->render();
             $this->_example_output($output, $barra);
@@ -48,18 +46,20 @@ class Dbecapifi extends CI_Controller {
     }
 
 
-function field_callback_1($value = '', $primary_key = null)
-{
-    return '<input type="text" maxlength="50" value="'.$value.'" name="PInstitu" >%';
-}
-function field_callback_2($value = '', $primary_key = null)
-{
-    return '<input type="text" maxlength="50" value="'.$value.'" name="PProna" >%';
-}
-function field_callback_3($value = '', $primary_key = null)
-{
-    return '<input type="text" maxlength="50" value="'.$value.'" name="POtra" >%';
-}
+    function field_callback_1($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="PInstitu" >%';
+    }
+
+    function field_callback_2($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="PProna" >%';
+    }
+
+    function field_callback_3($value = '', $primary_key = null)
+    {
+        return '<input type="text" maxlength="50" value="'.$value.'" name="POtra" >%';
+    }
 
     function _example_output($output = null, $barra = null )
     {

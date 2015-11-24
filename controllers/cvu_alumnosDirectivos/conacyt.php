@@ -9,7 +9,6 @@ class Conacyt extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -24,7 +23,6 @@ class Conacyt extends CI_Controller {
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('apoyoconacyt');
                 $crud->set_subject('Apoyo CONACYT');
-                //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns('idSubProgCONACYT','TipoApoyo','NumApoyo','CFechaFin');
                 $crud->set_relation('idSubProgCONACYT','subprogconacyt','Nombre');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('idSubProgCONACYT','Subprograma CONACYT')->display_as('NumApoyo','No. de Apoyo')->display_as('TipoApoyo','Tipo de Apoyo')
@@ -38,7 +36,6 @@ class Conacyt extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('idSubProgCONACYT','TipoApoyo','NumApoyo','CFechaFin');
                 $output = $crud->render();
-
                 $this->_example_output($output);
         }
         else {

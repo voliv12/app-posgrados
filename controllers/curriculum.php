@@ -8,7 +8,6 @@ Class Curriculum extends CI_controller{
         /* Standard Libraries */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->matricula = $this->session->userdata('matricula');
     }
 
@@ -36,7 +35,6 @@ Class Curriculum extends CI_controller{
         $datos['articulos']     = $this->curriculum_model->get_tabla('articulos', $this->matricula);
         $datos['capitulos']     = $this->curriculum_model->get_tabla('caplibros', $this->matricula);
 
-        // print_r($datos);
 
         $filename = "CVU-".$this->matricula."-".date('dmY').".doc";
         header("Content-Type: application/xml; charset=UTF-8");

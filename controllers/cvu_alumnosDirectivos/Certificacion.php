@@ -9,7 +9,6 @@ class Certificacion extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -24,8 +23,6 @@ class Certificacion extends CI_Controller {
             $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
             $crud->set_table('certifimedica');
             $crud->set_subject('Certificaciones Medicas');
-
-            //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
             $crud->columns( 'Referencia','Especialidad','TipoCert','DocCertifiMedi');
             $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('NumFolio','No. de Folio')->display_as('Referencia','Referencia')->display_as('CamRef','Otra Referencia')
                  ->display_as('Especialidad','Especialidad')->display_as('consejo','Consejo que Otorga la Certificación')->display_as('finicio','Fecha de Inicio')
@@ -52,9 +49,10 @@ class Certificacion extends CI_Controller {
     }
 
     function add_field_Cometario()
-        {
-            return '<input type="text" maxlength="50" name="programa"> (solo si el campo anterior es igual: otra)';
-        }
+    {
+        return '<input type="text" maxlength="50" name="programa"> (solo si el campo anterior es igual: otra)';
+    }
+    
     function _example_output($output = null)
     {
         $output->titulo_tabla = "Certificación";

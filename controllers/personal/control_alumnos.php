@@ -9,9 +9,7 @@ class Control_alumnos extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->matricula = $this->session->userdata('matricula');
     }
 
     function registrar_alumno()
@@ -80,18 +78,18 @@ class Control_alumnos extends CI_Controller {
                 $crud->callback_before_insert(array($this,'acciones_callback'));
                 $crud->callback_before_update(array($this,'acciones_callback'));
 
-                $output = $crud->render();
-                $output->titulo_tabla = 'Contraseña del usuario';
-                if($this->session->userdata('perfil') == 'Administrador')
-                {
-                $barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
-                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
-                        {
-                        $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
-                        } else {
+                    if($this->session->userdata('perfil') == 'Administrador')
+                    {
+                    $barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                    } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
+                            {
+                            $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                            } else {
+                                    $barra = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
+                                   }
 
-                                $barra = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_alumnos/registrar_alumno'>Registro de Alumnos</a></li>";
-                               }
+                $output->titulo_tabla = 'Contraseña del usuario';
+                $output = $crud->render();
                 $this->_example_output($output, $barra);
             }else
             {
@@ -123,35 +121,15 @@ class Control_alumnos extends CI_Controller {
                         $this->load->view('plantilla_directivo', $datos_plantilla);
                        }
     }
-/*
-    function crea_directorio($post_array, $primary_key)
-    {
-        $this->load->helper('path');
-        $dir = 'assets/uploads/alumnos/'.$post_array['Matricula'];
 
-        if(!is_dir($dir))
-        {
-          mkdir($dir, 0777);
-        }else
-        {
-          echo "Error: El Directorio ya existe.";
-        }
-
-        return TRUE;
-    }
-
-*/
 
     function acciones_callback($post_array)
     {
         $this->load->library('encrypt');
-
         $post_array['NombreA'] = strtr(strtoupper($post_array['NombreA']),"áéíóúñ","ÁÉÍÓÚÑ");
         $post_array['ApellidoPA'] = strtr(strtoupper($post_array['ApellidoPA']),"áéíóúñ","ÁÉÍÓÚÑ");
         $post_array['ApellidoMA'] = strtr(strtoupper($post_array['ApellidoMA']),"áéíóúñ","ÁÉÍÓÚÑ");
-
         $post_array['Contrasenia'] = $this->encrypt->sha1($post_array['Contrasenia']);
-
         return $post_array;
     }
 

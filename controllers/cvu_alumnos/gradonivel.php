@@ -9,7 +9,6 @@ class Gradonivel extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -32,8 +31,6 @@ class Gradonivel extends CI_Controller {
             $crud->required_fields('NivelAc','TituloNivel','NSector','NOrganizacion');
             $crud->set_field_upload('DocTitulo','assets/uploads/alumnos/'.$this->matricula);
             $crud->set_field_upload('DocCedula','assets/uploads/alumnos/'.$this->matricula);
-
-
             $crud->unset_print();
             $crud->unset_export();
              $crud->set_relation('Pais','paises','nombre');

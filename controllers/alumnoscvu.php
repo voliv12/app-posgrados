@@ -11,7 +11,6 @@ class Alumnoscvu extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('encrypt');
         $this->load->library('form_validation');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->load->model('usuarios_model');
 
@@ -30,9 +29,9 @@ class Alumnoscvu extends CI_Controller {
             $this->load->view('plantilla_directivo', $datos_plantilla);
 
         }else
-        {
-            redirect('login');
-        }
+            {
+                redirect('login');
+            }
 
     }
 

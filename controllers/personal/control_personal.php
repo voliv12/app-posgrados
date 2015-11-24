@@ -9,9 +9,7 @@ class Control_personal extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->matricula = $this->session->userdata('matricula');
     }
 
     function registrar_personal()
@@ -25,30 +23,27 @@ class Control_personal extends CI_Controller {
                  ->display_as('contrasenia', 'Contraseña')
                  ->columns('NumPersonal','Nombre','apellidos','tipo_personal','perfil','posgrado','nab');
             $crud->unset_edit_fields('contrasenia');
-            //$crud->field_type('contrasenia', 'hidden');
             $crud->add_action('Actualizar contraseña', '../assets/imagenes/refresh.png', 'personal/control_personal/cambiar_password');
             $crud->set_relation('perfil','perfil','nomperfil');
             $crud->set_relation('posgrado','cat_posgrados','nombre_posgrado');
             $crud->callback_before_insert(array($this,'encrypt_password_callback'));
             $crud->callback_before_update(array($this,'encrypt_password_callback'));
-
             $output = $crud->render();
             $output->titulo_tabla = "Registro de Personal";
-            if($this->session->userdata('perfil') == 'Administrador del Sistema')
-                {
-                $barra = " <li><a href='administrador'>Menú principal</a></li>";
-                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
-                        {
-                        $barra = " <li><a href='administrativo'>Menú principal</a></li>";
-                        } else {
-
-                                $barra = " <li><a href='directivo'>Menú principal</a></li>";
-                               }
+                if($this->session->userdata('perfil') == 'Administrador del Sistema')
+                    {
+                    $barra = " <li><a href='administrador'>Menú principal</a></li>";
+                    } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
+                            {
+                            $barra = " <li><a href='administrativo'>Menú principal</a></li>";
+                            } else {
+                                    $barra = " <li><a href='directivo'>Menú principal</a></li>";
+                                   }
 
             $this->_example_output($output, $barra);
         }else{
-            redirect('login');
-        }
+                redirect('login');
+             }
     }
 
      function cambiar_password($NumPersonal)
@@ -68,29 +63,17 @@ class Control_personal extends CI_Controller {
                 $crud->unset_delete();
                 $crud->callback_before_insert(array($this,'encrypt_password_callback'));
                 $crud->callback_before_update(array($this,'encrypt_password_callback'));
-
+                    if($this->session->userdata('perfil') == 'Administrador del Sistema')
+                    {$barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                    } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
+                            {$barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                            } else {$barra = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
+                                   }
                 $output = $crud->render();
                 $output->titulo_tabla = 'Contraseña del usuario';
-                if($this->session->userdata('perfil') == 'Administrador del Sistema')
-                {
-                $barra = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
-                } else if($this->session->userdata('perfil') == 'Apoyo Administrativo')
-                        {
-                        $barra = " <li><a href='administrativo'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
-                        } else {
-
-                                $barra = " <li><a href='directivo'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
-                               }
-
-
-
-
-                //$output->barra_navegacion = " <li><a href='administrador'>Menú principal</a></li> | <li><a href='personal/control_personal/registrar_personal'>Registro de Personal</a></li> ";
                 $this->_example_output($output, $barra);
-            }else
-            {
-                redirect('login');
-            }
+
+            }else{redirect('login');}
         }
 
     function _example_output($output = null, $barra = null)
@@ -104,11 +87,8 @@ class Control_personal extends CI_Controller {
     {
         $post_array['Nombre'] = strtr(strtoupper($post_array['Nombre']),"áéíóúñ","ÁÉÍÓÚÑ");
         $post_array['apellidos'] = strtr(strtoupper($post_array['apellidos']),"áéíóúñ","ÁÉÍÓÚÑ");
-        
         $this->load->library('encrypt');
-
         $post_array['contrasenia'] = $this->encrypt->sha1($post_array['contrasenia']);
-
         return $post_array;
     }
 

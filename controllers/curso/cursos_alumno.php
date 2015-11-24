@@ -11,15 +11,12 @@ class Cursos_alumno extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        //$this->matricula = $this->session->userdata('matricula');
     }
 
     function alumnos($gen=null, $per=null)
     {
         if($this->session->userdata('logged_in'))
         {
-            /*$this->session->set_flashdata('gen',$gen);
-            $this->session->set_flashdata('per',$per);*/
 
             $crud = new grocery_CRUD();
             $crud->where('nivel', $this->session->userdata('abrev_posgrado'));
@@ -52,9 +49,7 @@ class Cursos_alumno extends CI_Controller {
         $nombre = $row->NombreA." ".$row->ApellidoPA." ".$row->ApellidoMA;
         if ($this->session->userdata('perfil') != "Director Instituto")
             {return site_url('curso/cursos_alumno/alumno_curso/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula);}
-            else {return site_url('curso/cursos_alumno/alumno_curso_director/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula.'/'.$row->nivel);}
-
-        
+                else {return site_url('curso/cursos_alumno/alumno_curso_director/'.$row->idalumno.'/'.$nombre.'/'.$row->matricula.'/'.$row->nivel);} 
     }
 
 
@@ -86,9 +81,7 @@ class Cursos_alumno extends CI_Controller {
 
             $this->_example_output($output, $barra, $titulo);
 
-        }else{
-            redirect('login');
-        }
+        } else { redirect('login');}
     }
 
 
@@ -101,7 +94,6 @@ class Cursos_alumno extends CI_Controller {
             $crud->set_primary_key('NRC');
             $crud->where('idalumno', $idalumno);
             $crud->where('posgrado', $nivel);
-
             $crud->set_subject('curso');
             $crud->set_relation('codigo','documentando','{codigo}  -  {descripcion}',array('nivelacad' => $this->session->userdata('abrev_posgrado')));
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
@@ -120,9 +112,7 @@ class Cursos_alumno extends CI_Controller {
 
             $this->_example_output($output, $barra, $titulo);
 
-        }else{
-            redirect('login');
-        }
+        } else {redirect('login');}
     }
 
 
@@ -133,8 +123,8 @@ class Cursos_alumno extends CI_Controller {
         $output->barra_navegacion = $barra;
         $datos_plantilla['contenido'] =  $this->load->view('output_view', $output, TRUE);
         if ($this->session->userdata('perfil') != "Director Instituto")
-            {$this->load->view('plantilla_directivo', $datos_plantilla);}
-            else {$this->load->view('plantilla_director', $datos_plantilla);}
+           {$this->load->view('plantilla_directivo', $datos_plantilla);}
+                else {$this->load->view('plantilla_director', $datos_plantilla);}
     }
 
 

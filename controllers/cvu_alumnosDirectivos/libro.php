@@ -9,7 +9,6 @@ class Libro extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->matricula = $this->session->userdata('matricula');
     }
@@ -25,7 +24,6 @@ class Libro extends CI_Controller {
                 $crud->where('Alumno_Matricula', $this->session->flashdata('matricula'));
                 $crud->set_table('libros');
                 $crud->set_subject('Libros');
-                //$crud->field_type('Alumno_Matricula', 'hidden',$this->matricula );
                 $crud->columns( 'NumISBN' , 'TituloLib','AutorLib','VolumenLib','DocLibro');
                 $crud->display_as('Alumno_Matricula','Nombre del alumno')->display_as('NumISBN','Número ISBN')->display_as('IdentLib','Indentificador Libro')->display_as('VolumenLib', 'Volumen')
                      ->display_as('EditoriaLib','Editorial')->display_as('NumPagLib','No. Páginas')->display_as('AutorLib', 'Autor/es')
@@ -40,13 +38,10 @@ class Libro extends CI_Controller {
                 $crud-> unset_edit_fields ( 'Alumno_Matricula');
                 $crud->required_fields('NumISBN' , 'TituloLib','AutorLib','IdentLib','VolumenLib','EditoriaLib');
                 $crud->set_field_upload('DocLibro','assets/uploads/alumnos/'.$this->session->flashdata('matricula'));
-
                 $crud->unset_texteditor('AutorLib','full_text');
                 $crud->set_rules('NumISBN','Número ISBN','max_length[17]');
                 $crud->set_rules('DocLibro','Doc. comprobatorio','max_length[26]');
-
                 $output = $crud->render();
-
                 $this->_example_output($output);
         }
         else {

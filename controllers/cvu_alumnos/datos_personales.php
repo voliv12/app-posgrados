@@ -9,7 +9,6 @@ class Datos_personales extends CI_Controller {
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
-        /* ------------------ */
         $this->load->library('grocery_CRUD');
         $this->idalumno = $this->session->userdata('idalumno');
     }
@@ -34,7 +33,6 @@ class Datos_personales extends CI_Controller {
                 $crud->set_rules('Correo','Correo','valid_email');
                 $crud->set_rules('curp','CURP','max_length[18]');
                 $crud->set_rules('rfc','RFC','max_length[13]');
-                //$crud-> field_type ( 'Contrasenia' , 'password' ) ;
                 $output = $crud->render();
 
                 $this->_example_output($output);
