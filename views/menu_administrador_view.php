@@ -21,6 +21,7 @@
          <div class="row">
             <p>
              <div class="span6"><a href="personal/catalogos/cat_lgac" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo de LGAC</a></div>
+             <div class="span6"><a href="personal/catalogos/periodos" class="btn btn-block"><i class="icon-list-alt"></i> Catálogo de Periodos</a></div>
 
             </p>
         </div>

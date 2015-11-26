@@ -32,6 +32,7 @@ foreach($css_files as $file): ?>
 
 	$opt_per = array(
 				        'todos'  => 'Todos los periodos',
+                '201651' => '201651: Febrero - Julio 2016',
 				        '201601' => '201601: Ago 2015 - Ene 2016',
 				        '201551' => '201551: Febrero - Julio 2015',
                 '201501' => '201501: Ago 2014 - Ene 2015',
