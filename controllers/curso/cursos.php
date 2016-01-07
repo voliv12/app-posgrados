@@ -11,6 +11,7 @@ class Cursos extends CI_Controller {
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
+        $this->load->model('usuarios_model');
     }
 
     function registrocurso($gen=null, $per=null)
@@ -28,6 +29,7 @@ class Cursos extends CI_Controller {
             }
             $crud->set_table('cursos');
             $crud->set_subject('curso');
+           
             $crud->display_as('codigo','Experiencia Educativa')
                  ->display_as('nombre_curso','Nombre del Curso')
                  ->display_as('academico_NAB','Académico')
@@ -146,9 +148,11 @@ class Cursos extends CI_Controller {
         return $post_array;
     }
 
-    function _example_output($output = null, $barra = null)
+    function _example_output($output = null, $barra = null )
     {
-
+        $output->generaciones = $this->usuarios_model->buscar_generacion();
+        $output->periodos = $this->usuarios_model->buscar_periodos();
+        $output->posgrados = $this->usuarios_model->buscar_posgrados();
         $output->titulo_tabla = "Programación de Cursos";
         if($this->session->userdata('perfil') == 'Administrador del Sistema')
         {

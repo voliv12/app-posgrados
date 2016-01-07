@@ -77,13 +77,10 @@
 
 
         <?php
-          $opt_gen = array(
-                          
-                          '2015' => '2015',
-                          '2014' => '2014',
-                          '2013' => '2013',
-                          '2012' => '2012',
-                        );
+         foreach ($generaciones as $row)
+          { 
+              $opt_gen[$row->generacion] = $row->generacion;
+          }
 
         ?>
 

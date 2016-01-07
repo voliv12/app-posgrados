@@ -158,6 +158,56 @@ class Usuarios_model extends CI_Model
     }
 
 
+    function buscar_generacion()
+    {
+        $this->db->select('*');
+        $this->db->from('cat_generacion');
+        $this->db->order_by('id_cat_generacion', 'DESC');
+        $query = $this->db->get();
+            if ($query->num_rows() == 0)
+            {
+                return FALSE;
+            }else
+            {
+                return $query->result();
+            }
+
+    }
+
+    function buscar_periodos()
+    {
+        $this->db->select('*');
+        $this->db->from('cat_periodos');
+        $this->db->order_by('codigo', 'DESC');
+        $query = $this->db->get();
+            if ($query->num_rows() == 0)
+            {
+                return FALSE;
+            }else
+            {
+                return $query->result();
+            }
+
+    }
+
+    function buscar_posgrados()
+    {
+        $this->db->select('*');
+        $this->db->from('cat_posgrados');
+        $query = $this->db->get();
+            if ($query->num_rows() == 0)
+            {
+                return FALSE;
+            }else
+            {
+                return $query->result();
+            }
+
+    }
+
+
+
+
 
 
     function buscar_idproyectos($acade)

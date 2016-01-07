@@ -75,19 +75,18 @@
 </div>
 
     <?php
-      $opt_pos = array(
-                    'MCS' => 'Maestría en Ciencias de la Salud',
-                    'DCS' => 'Doctorado en Ciencias de la Salud',
-                    'MPICD'=>'Maestría en Prevención Integral del Consumo de Drogas',
-                    );
+    //****************************
 
-      $opt_gen = array(
-                      
-                      '2015' => '2015',
-                      '2014' => '2014',
-                      '2013' => '2013',
-                      '2012' => '2012',
-                    );
+    foreach ($posgrados as $row)
+    { 
+        $opt_pos[$row->abrev_posgrado] = $row->nombre_posgrado;  
+    }
+
+    //***************************************
+    foreach ($generaciones as $row)
+    { 
+        $opt_gen[$row->generacion] = $row->generacion;
+    }
 
     ?>
 

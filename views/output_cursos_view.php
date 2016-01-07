@@ -22,31 +22,30 @@ foreach($css_files as $file): ?>
 
 <div style="width:100%;text-align:center;margin-left:0%;margin-top:0%">
 <?php
-	$opt_gen = array(
-                  'todas' => "Todas",
-                  '4' => '2015',
-                  '3' => '2014',
-                  '2' => '2013',
-                  '1' => '2012',
-                );
+	//*************************************
+  
+  $opt_gen['todas' ] = 'Todas';
+  foreach ($generaciones as $row)
+  { 
+      $opt_gen[$row->id_cat_generacion] = $row->generacion;
+  }
 
-	$opt_per = array(
-				        'todos'  => 'Todos los periodos',
-                '201651' => '201651: Febrero - Julio 2016',
-				        '201601' => '201601: Ago 2015 - Ene 2016',
-				        '201551' => '201551: Febrero - Julio 2015',
-                '201501' => '201501: Ago 2014 - Ene 2015',
-				        '201451' => '201451: Febrero - Julio 2014',
-                '201401' => '201401: Ago 2013 - Ene 2014',
-                '201351' => '201351: Febrero - Julio 2013',
-                '201301' => '201301: Ago 2012 - Ene 2013',
-                );
+//*************************************     
+  $opt_per['todos'] ='Todos los periodos';
+  foreach ($periodos as $row)
+  { 
+      $opt_per[$row->codigo] = $row->descripcion;
+  }
 
-  $opt_pos = array(
-                'todos'=>'todos',
-                'DCS' => 'Doctorado',
-                'MCS' => 'Maestría',
-                );
+//*****************************************
+  $opt_pos['todos'] = 'Todos';
+  foreach ($posgrados as $row)
+  { 
+      $opt_pos[$row->abrev_posgrado] = $row->nombre_posgrado;  
+  }
+
+
+
 ?>
 
 <a data-toggle="modal" href="#FiltroCursos"><i class="icon-search"></i> Filtro combinado</a>
@@ -60,9 +59,9 @@ foreach($css_files as $file): ?>
        <div class="modal-body">
            <form  role="form" action="curso/filtro_cursos/filtrar" method="POST">
             <?php if(($this->session->userdata('perfil') == "Administrador del Sistema") || ($this->session->userdata('perfil') == "Apoyo Administrativo") || ($this->session->userdata('perfil') == "Director Instituto")){
-                echo "Posgrado: ".form_dropdown('posgrado', $opt_pos)."</br>";
+                echo "Posgrado: ".form_dropdown('posgrado',$opt_pos)."</br>";
             } ?>
-            Generación: <?php echo form_dropdown('generacion', $opt_gen)."</br>"; ?>
+            Generación: <?php echo form_dropdown('generacion', $opt_gen )."</br>"; ?>
             Periodo:  <?php echo form_dropdown('periodo', $opt_per)."</br>"; ?>
 
             <div class="modal-footer">

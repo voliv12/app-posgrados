@@ -18,9 +18,10 @@ class Director extends CI_Controller {
     function index()
     {
         if($this->session->userdata('logged_in'))
-        {
+        {   $menu_director->generaciones = $this->usuarios_model->buscar_generacion();
+            $menu_director->posgrados = $this->usuarios_model->buscar_posgrados();
             $datos_plantilla['titulo'] = "Información de Posgrados";
-            $datos_plantilla['contenido'] = $this->load->view('menu_director_view',' ',TRUE);
+            $datos_plantilla['contenido'] = $this->load->view('menu_director_view', $menu_director,TRUE);
             $this->load->view('plantilla_director', $datos_plantilla);
 
         }else
