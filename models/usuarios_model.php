@@ -206,6 +206,37 @@ class Usuarios_model extends CI_Model
     }
 
 
+    function buscar_posg($posg)
+    {
+        $this->db->select('idcat_posgrados');
+        $this->db->from('cat_posgrados');
+        $this->db->where('abrev_posgrado', $posg);
+        $query = $this->db->get();
+            if ($query->num_rows() == 0)
+            {
+                return FALSE;
+            }else
+            {
+                return $query->row_array();
+            }
+
+    }
+
+    function nombre_coordinador($idp)
+    {
+        $this->db->select('Nombre, apellidos');
+        $this->db->from('personal');
+        $this->db->where('posgrado', $idp);
+        $query = $this->db->get();
+            if ($query->num_rows() == 0)
+            {
+                return FALSE;
+            }else
+            {
+                return $query->row_array();
+            }
+
+    }
 
 
 

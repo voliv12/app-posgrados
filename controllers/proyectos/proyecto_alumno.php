@@ -11,6 +11,7 @@ class Proyecto_alumno extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
         $this->idalumno = $this->session->userdata('idalumno');
+        $this->load->model('usuarios_model');
     }
 
     function registro_proyecto_alumno()
@@ -76,6 +77,15 @@ class Proyecto_alumno extends CI_Controller {
             $crud->add_action('Anexo C', '../assets/imagenes/c.png', '', '', array($this, 'anexo_c_dir'));
             $crud->add_action('Anexo B', '../assets/imagenes/b.png', '', '', array($this, 'anexo_b_dir'));
             $crud->add_action('Anexo A', '../assets/imagenes/a.png', '', '', array($this, 'anexo_a_dir'));
+            
+            $posgrados = $this->usuarios_model->buscar_posgrados();
+            foreach ($posgrados as $row)
+            { 
+                $opt_pos[$row->abrev_posgrado] = $row->nombre_posgrado;  
+            }
+
+            $crud->field_type('posgrado','dropdown', $opt_pos);
+
             $state_crud = $crud->getState();
                 if ($state_crud == 'add' )
                 {
@@ -163,19 +173,13 @@ class Proyecto_alumno extends CI_Controller {
         $matri = $this->db->get('cat_posgrados_alumno')->row();
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-            if ($row->posgrado=='MCS'){
-                $this->db->where('posgrado',1);
-                $coordina = $this->db->get('personal')->row();
-                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-            } else if ($row->posgrado=='DCS'){
-                       $this->db->where('posgrado',2);
-                       $coordina = $this->db->get('personal')->row();
-                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                       }else if($row->posgrado=='MPICD'){
-                           $this->db->where('posgrado',3);
-                           $coordina = $this->db->get('personal')->row();
-                           $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                           } 
+
+        $idposg = $this->usuarios_model->buscar_posg($row->posgrado);
+        $idposgra = end($idposg);
+        $coordina = $this->usuarios_model->nombre_coordinador($idposgra);
+        $coordina_posgrado = implode(' ', $coordina);
+
+
         return site_url('proyectos/anexo_a/registro_Anexo_a/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
 
@@ -199,19 +203,12 @@ class Proyecto_alumno extends CI_Controller {
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
 
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-            if ($row->posgrado=='MCS'){
-                $this->db->where('posgrado',1);
-                $coordina = $this->db->get('personal')->row();
-                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-            } else if ($row->posgrado=='DCS'){
-                       $this->db->where('posgrado',2);
-                       $coordina = $this->db->get('personal')->row();
-                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                       }else if($row->posgrado=='MPICD'){
-                           $this->db->where('posgrado',3);
-                           $coordina = $this->db->get('personal')->row();
-                           $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                           } 
+
+        $idposg = $this->usuarios_model->buscar_posg($row->posgrado);
+        $idposgra = end($idposg);
+        $coordina = $this->usuarios_model->nombre_coordinador($idposgra);
+        $coordina_posgrado = implode(' ', $coordina);
+
         return site_url('proyectos/anexo_b/registro_Anexo_b/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
 
@@ -236,19 +233,12 @@ class Proyecto_alumno extends CI_Controller {
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
 
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-            if ($row->posgrado=='MCS'){
-                $this->db->where('posgrado',1);
-                $coordina = $this->db->get('personal')->row();
-                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-            } else if ($row->posgrado=='DCS'){
-                       $this->db->where('posgrado',2);
-                       $coordina = $this->db->get('personal')->row();
-                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                       }else if($row->posgrado=='MPICD'){
-                           $this->db->where('posgrado',3);
-                           $coordina = $this->db->get('personal')->row();
-                           $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                           } 
+        
+        $idposg = $this->usuarios_model->buscar_posg($row->posgrado);
+        $idposgra = end($idposg);
+        $coordina = $this->usuarios_model->nombre_coordinador($idposgra);
+        $coordina_posgrado = implode(' ', $coordina);
+
         return site_url('proyectos/anexo_c/registro_Anexo_c/'.$primary_key.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
 
@@ -274,19 +264,14 @@ class Proyecto_alumno extends CI_Controller {
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-            if ($row->posgrado=='MCS'){
-                $this->db->where('posgrado',1);
-                $coordina = $this->db->get('personal')->row();
-                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-            } else if ($row->posgrado=='DCS'){
-                       $this->db->where('posgrado',2);
-                       $coordina = $this->db->get('personal')->row();
-                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                       }else if($row->posgrado=='MPICD'){
-                           $this->db->where('posgrado',3);
-                           $coordina = $this->db->get('personal')->row();
-                           $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                           } 
+
+        $idposg = $this->usuarios_model->buscar_posg($row->posgrado);
+        $idposgra = end($idposg);
+        $coordina = $this->usuarios_model->nombre_coordinador($idposgra);
+        $coordina_posgrado = implode(' ', $coordina);
+
+
+
 
         return site_url('proyectos/anexo_a/registro_Anexo_a_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
@@ -314,19 +299,11 @@ class Proyecto_alumno extends CI_Controller {
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-            if ($row->posgrado=='MCS'){
-                $this->db->where('posgrado',1);
-                $coordina = $this->db->get('personal')->row();
-                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-            } else if ($row->posgrado=='DCS'){
-                       $this->db->where('posgrado',2);
-                       $coordina = $this->db->get('personal')->row();
-                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                       }else if($row->posgrado=='MPICD'){
-                           $this->db->where('posgrado',3);
-                           $coordina = $this->db->get('personal')->row();
-                           $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                           } 
+
+        $idposg = $this->usuarios_model->buscar_posg($row->posgrado);
+        $idposgra = end($idposg);
+        $coordina = $this->usuarios_model->nombre_coordinador($idposgra);
+        $coordina_posgrado = implode(' ', $coordina);
 
         return site_url('proyectos/anexo_b/registro_Anexo_b_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
@@ -351,20 +328,11 @@ class Proyecto_alumno extends CI_Controller {
         $nombre =  $matri->matricula.' - '.$alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
         $idalumno = $row->idalumn;
         $nombreAlumno =  $alumno->NombreA.' '.$alumno->ApellidoPA.' '.$alumno->ApellidoMA;
-            if ($row->posgrado=='MCS'){
-                $this->db->where('posgrado',1);
-                $coordina = $this->db->get('personal')->row();
-                $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-            } else if ($row->posgrado=='DCS'){
-                       $this->db->where('posgrado',2);
-                       $coordina = $this->db->get('personal')->row();
-                       $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                       }else if($row->posgrado=='MPICD'){
-                           $this->db->where('posgrado',3);
-                           $coordina = $this->db->get('personal')->row();
-                           $coordina_posgrado = $coordina->Nombre.' '.$coordina->apellidos;
-                           } 
 
+        $idposg = $this->usuarios_model->buscar_posg($row->posgrado);
+        $idposgra = end($idposg);
+        $coordina = $this->usuarios_model->nombre_coordinador($idposgra);
+        $coordina_posgrado = implode(' ', $coordina);
         return site_url('proyectos/anexo_c/registro_Anexo_c_dir/'.$primary_key.'/'.$idalumno.'/'.$nombre.'/'.$nombreAlumno.'/'.$director.'/'.$titulo.'/'.$lgac.'/'.$coordina_posgrado);
     }
 
