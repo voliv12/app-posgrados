@@ -1,19 +1,23 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Cursos extends CI_Controller {
+
     function __construct()
     {
         parent::__construct();
+
         /* Standard Libraries of codeigniter are required */
         $this->load->database();
         $this->load->helper('url');
         /* ------------------ */
         $this->load->library('grocery_CRUD');
-        $this->load->model('usuarios_model');
     }
+
     function registrocurso($gen=null, $per=null)
     {
         if($this->session->userdata('logged_in'))
         {
+
             $crud = new grocery_CRUD();
             $crud->where('cursos.posgrado', $this->session->userdata('abrev_posgrado'));
             if($gen != "todas"){
@@ -24,7 +28,6 @@ class Cursos extends CI_Controller {
             }
             $crud->set_table('cursos');
             $crud->set_subject('curso');
-
             $crud->display_as('codigo','Experiencia Educativa')
                  ->display_as('nombre_curso','Nombre del Curso')
                  ->display_as('academico_NAB','Académico')
@@ -36,7 +39,7 @@ class Cursos extends CI_Controller {
             $crud->set_relation('periodo','cat_periodos','{codigo}: {descripcion}',null,'codigo DESC');
             $crud->set_relation('generacion','cat_generacion','generacion',null,'generacion DESC');
             $crud->unset_print();
-            $crud->field_type('NRC', 'readonly');
+            //$crud->field_type('NRC', 'readonly');
             $crud->field_type('posgrado','hidden', $this->session->userdata('abrev_posgrado'));
             $crud->field_type('horas','dropdown',range(1,20));
             $crud->set_relation_n_n('academico_NAB', 'nab_cursos', 'personal', 'idcurso', 'NumPersonal', '{personal.NumPersonal} - {personal.Nombre} {personal.apellidos}','priority',array('tipo_personal' => 'Académico'));
@@ -50,12 +53,15 @@ class Cursos extends CI_Controller {
             $barra = " <li><a href='directivo'>Menú principal</a></li>";
             $crud->callback_before_insert(array($this,'acciones_callback'));
             $crud->callback_before_update(array($this,'acciones_callback'));
+
             $output = $crud->render();
+
             $this->_example_output($output,$barra);
         }else{
             redirect('login');
         }
     }
+
 
     function registrocurso_admin($gen=null, $per=null, $pos=null)
     {
@@ -74,6 +80,7 @@ class Cursos extends CI_Controller {
             if ($this->session->userdata('perfil') == "Director Instituto"){
                 $crud->unset_edit();
             }
+
             $crud->set_table('cursos');
             $crud->set_subject('curso');
             $crud->display_as('codigo','Experiencia Educativa')
@@ -107,7 +114,9 @@ class Cursos extends CI_Controller {
             $crud->field_type('otro_lugar','readonly');
             $crud->field_type('horas','dropdown',range(1,20));
             $action = 'action="curso/cursos/registrocurso_admin"';
+
             $output = $crud->render();
+
             $this->_example_output($output,null);
         }else{
             redirect('login');
@@ -133,14 +142,13 @@ class Cursos extends CI_Controller {
     {
         $post_array['nombre_curso'] = strtr(strtoupper($post_array['nombre_curso']),"áéíóúñ","ÁÉÍÓÚÑ");
         $post_array['academico_externo'] = strtr(strtoupper($post_array['academico_externo']),"áéíóúñ","ÁÉÍÓÚÑ");
+
         return $post_array;
     }
 
-    function _example_output($output = null, $barra = null )
+    function _example_output($output = null, $barra = null)
     {
-        $output->generaciones = $this->usuarios_model->buscar_generacion();
-        $output->periodos = $this->usuarios_model->buscar_periodos();
-        $output->posgrados = $this->usuarios_model->buscar_posgrados();
+
         $output->titulo_tabla = "Programación de Cursos";
         if($this->session->userdata('perfil') == 'Administrador del Sistema')
         {
@@ -159,4 +167,5 @@ class Cursos extends CI_Controller {
         $datos_plantilla['contenido'] =  $this->load->view('output_cursos_view', $output, TRUE);
         $this->load->view('plantilla_directivo', $datos_plantilla);
     }
+
 }
