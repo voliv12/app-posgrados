@@ -100,6 +100,23 @@ class Catalogos extends CI_Controller {
         }
     }
 
+    function generaciones()
+    {
+        if ($this->session->userdata('logged_in'))
+        {
+            $crud = new grocery_CRUD();
+
+            $crud->set_table('cat_generacion');
+            $crud->order_by('generacion','DESC');
+
+            $output = $crud->render();
+            $output->titulo_tabla = "Catálogo de Generaciones";
+            $this->_example_output($output);
+        }else
+        {
+            redirect('login');
+        }
+    }
 
     function cat_lgac() //Catálogo Tipo de Divulgación
     {
